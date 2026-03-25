@@ -1,0 +1,449 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Caliperworks - Precision AI for Small Business" 
+  description="The Technical Artisan: Fusing high-precision engineering with custom AI solutions to automate your business operations."
+>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+  <style is:global>
+    :root {
+      --bg-linen: #FDFCFB;
+      --primary-slate: #1E293B;
+      --cta-indigo: #4F46E5;
+      --blueprint-line: rgba(30, 41, 59, 0.1);
+      --blueprint-line-heavy: rgba(30, 41, 59, 0.2);
+    }
+
+    body {
+      font-family: 'Geist', sans-serif;
+      background-color: var(--bg-linen);
+      color: var(--primary-slate);
+    }
+
+    .font-serif { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'Geist Mono', monospace; }
+
+    .blueprint-border {
+      border: 0.5px solid var(--blueprint-line);
+    }
+
+    .corner-accent::before,
+    .corner-accent::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border: 0.5px solid var(--primary-slate);
+      opacity: 0.4;
+    }
+
+    .corner-tl::before { top: -0.5px; left: -0.5px; border-right: 0; border-bottom: 0; }
+    .corner-tr::after { top: -0.5px; right: -0.5px; border-left: 0; border-bottom: 0; }
+    .corner-bl::before { bottom: -0.5px; left: -0.5px; border-right: 0; border-top: 0; }
+    .corner-br::after { bottom: -0.5px; right: -0.5px; border-left: 0; border-top: 0; }
+
+    .gauge-marking {
+      background: linear-gradient(to right, var(--primary-slate) 1px, transparent 1px);
+      background-size: 10px 100%;
+    }
+
+    @keyframes pulse-indigo {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-indigo 3s ease-in-out infinite;
+    }
+  </style>
+
+  <main class="min-h-screen">
+    <!-- Navigation (V2 Foundation) -->
+    <nav class="fixed top-0 z-50 w-full bg-[#FDFCFB]/80 backdrop-blur-sm border-b-[0.5px] border-[#1E293B]/10">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 bg-[#4F46E5] rounded-full animate-pulse-subtle"></div>
+          <a href="/" class="text-xl font-serif font-bold tracking-tight">Caliperworks</a>
+        </div>
+        
+        <div class="hidden md:flex gap-8 text-[11px] font-mono uppercase tracking-[0.2em] opacity-60">
+          <a href="#problem" class="hover:opacity-100 transition-opacity">01/The.Problem</a>
+          <a href="#solutions" class="hover:opacity-100 transition-opacity">02/Solutions</a>
+          <a href="#expertise" class="hover:opacity-100 transition-opacity">03/Expertise</a>
+          <a href="#faq" class="hover:opacity-100 transition-opacity">04/FAQ</a>
+        </div>
+
+        <a href="#audit" class="px-5 py-2 bg-[#1E293B] text-white text-[11px] font-mono uppercase tracking-widest hover:bg-[#4F46E5] transition-colors duration-500">
+          Init Audit_
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section (V1 Asymmetric Energy) -->
+    <section class="relative pt-40 pb-24 overflow-hidden">
+      <!-- Background Grid Elements -->
+      <div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
+        <div class="h-full w-full bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 relative z-10">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center gap-4 mb-8">
+            <span class="text-[10px] font-mono uppercase tracking-[0.3em] px-2 py-1 border-[0.5px] border-[#1E293B]/20">Version 5.0 // Technical Artisan</span>
+          </div>
+          
+          <h1 class="text-6xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.85] tracking-tighter mb-10">
+            AI that does <br/>
+            <span class="text-[#4F46E5] inline-block -rotate-1 origin-left">the work</span>, <br/>
+            <span class="opacity-40 italic font-light">so you don't.</span>
+          </h1>
+
+          <p class="text-lg md:text-xl text-[#1E293B]/70 max-w-xl leading-relaxed mb-12 font-light">
+            We help small businesses integrate AI into their daily operations. Not just as a chatbot, but as a team member that books calls, qualifies leads, and optimizes your marketing.
+          </p>
+
+          <a href="#audit" class="group relative inline-flex items-center justify-center px-10 py-6 bg-[#4F46E5] text-white overflow-hidden transition-all duration-500 hover:scale-[1.02]">
+            <span class="relative z-10 text-xl font-serif font-bold tracking-tight">Get an AI Audit_</span>
+            <div class="absolute inset-0 bg-[#1E293B] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            <!-- Blueprint Corner Accents inside Button -->
+            <div class="absolute top-1 left-1 w-2 h-2 border-t-[0.5px] border-l-[0.5px] border-white/40"></div>
+            <div class="absolute bottom-1 right-1 w-2 h-2 border-b-[0.5px] border-r-[0.5px] border-white/40"></div>
+          </a>
+        </div>
+
+        <div class="lg:col-span-4 relative hidden lg:block">
+          <div class="blueprint-border aspect-[3/4] p-8 relative corner-accent corner-tl corner-tr corner-bl corner-br overflow-hidden">
+            <div class="absolute top-4 left-4 text-[10px] font-mono opacity-30">REF. HERO_VISUAL_01</div>
+            <div class="absolute bottom-4 right-4 text-[10px] font-mono opacity-30">SCALE 1:1</div>
+            
+            <div class="h-full flex flex-col justify-center gap-12 border-l-[0.5px] border-[#1E293B]/10 pl-8">
+              <div class="space-y-4">
+                <div class="h-[0.5px] w-full bg-[#1E293B]/20"></div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full border-[0.5px] border-[#4F46E5] flex items-center justify-center">
+                    <div class="w-2 h-2 bg-[#4F46E5] rounded-full"></div>
+                  </div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-1 w-24 bg-[#1E293B]/10"></div>
+                    <div class="h-1 w-16 bg-[#1E293B]/5"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="text-4xl font-serif italic text-[#1E293B]/40">Precision.</div>
+                <div class="flex items-end gap-1 h-32">
+                  <div class="w-1 bg-[#4F46E5]/20 h-[30%]"></div>
+                  <div class="w-1 bg-[#4F46E5]/40 h-[60%]"></div>
+                  <div class="w-1 bg-[#4F46E5] h-[90%]"></div>
+                  <div class="w-1 bg-[#4F46E5]/60 h-[50%]"></div>
+                  <div class="w-1 bg-[#4F46E5]/20 h-[40%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section (Technical Detail Focus) -->
+    <section id="problem" class="py-32 bg-white border-y-[0.5px] border-[#1E293B]/10">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-4">
+          <div class="sticky top-24">
+            <span class="text-[10px] font-mono uppercase tracking-[0.4em] text-[#4F46E5] mb-4 block">01/Diagnostics</span>
+            <h2 class="text-4xl font-serif font-bold leading-tight">The <br/> Gap.</h2>
+          </div>
+        </div>
+        <div class="md:col-span-8 border-l-[0.5px] border-[#1E293B]/10 pl-12">
+          <p class="text-3xl md:text-4xl font-serif text-[#1E293B] mb-12 italic leading-snug">
+            "Most business owners know AI exists, but don't know how to use it beyond a basic chat interface."
+          </p>
+          <div class="space-y-8 text-[#1E293B]/70 font-light text-lg max-w-2xl leading-relaxed">
+            <p>
+              You're busy running your business—HVAC, dental practice, or real estate agency. You don't have time to be an AI researcher. 
+            </p>
+            <p>
+              We bridge that gap by building tools that handle the repetitive work for you, engineered with the same precision you bring to your own craft.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section (The Grid: Technical Spec Layout) -->
+    <section id="solutions" class="py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-[0.4em] text-[#4F46E5] mb-4 block">02/Core.Logic</span>
+            <h2 class="text-5xl md:text-7xl font-serif font-bold tracking-tight">Engineered Solutions.</h2>
+          </div>
+          <div class="md:w-1/3 p-6 blueprint-border relative">
+            <div class="absolute -top-1 -left-1 text-[8px] font-mono opacity-50">PARAM: OUTPUT</div>
+            <p class="text-sm text-[#1E293B]/60 leading-relaxed font-light">
+              We move beyond prompts and focus on outcomes. Real growth, measurable time saved, and systems that scale with your ambition.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-0 border-[0.5px] border-[#1E293B]/10">
+          <!-- Solution 01 -->
+          <div class="p-10 md:p-16 border-b-[0.5px] md:border-b-0 md:border-r-[0.5px] border-[#1E293B]/10 hover:bg-[#1E293B]/[0.02] transition-colors group relative overflow-hidden">
+            <div class="absolute top-4 right-4 text-[10px] font-mono opacity-20">MOD_01</div>
+            <span class="text-[11px] font-mono text-[#4F46E5] mb-8 block">[ IDENTIFY ]</span>
+            <h3 class="text-3xl font-serif font-bold mb-6">AI Audits: <br/> Find the Wins</h3>
+            <p class="text-[#1E293B]/60 font-light leading-relaxed mb-10">
+              We look at your current processes—how you handle leads, how you schedule, and how you market. Then, we identify exactly where AI can save you time.
+            </p>
+            <div class="flex items-center gap-2 group-hover:gap-4 transition-all text-[11px] font-mono uppercase tracking-widest text-[#1E293B]">
+              Explore Params <span class="h-[1px] w-8 bg-[#1E293B]/20"></span>
+            </div>
+          </div>
+
+          <!-- Solution 02 -->
+          <div class="p-10 md:p-16 border-b-[0.5px] md:border-b-0 md:border-r-[0.5px] border-[#1E293B]/10 hover:bg-[#1E293B]/[0.02] transition-colors group relative overflow-hidden">
+            <div class="absolute top-4 right-4 text-[10px] font-mono opacity-20">MOD_02</div>
+            <span class="text-[11px] font-mono text-[#4F46E5] mb-8 block">[ AUTOMATE ]</span>
+            <h3 class="text-3xl font-serif font-bold mb-6">Voice Agents: <br/> 24/7 Front Desk</h3>
+            <p class="text-[#1E293B]/60 font-light leading-relaxed mb-10">
+              Stop missing calls. Our voice agents answer the phone at any time, qualify prospects, and book appointments directly into your calendar.
+            </p>
+            <div class="flex items-center gap-2 group-hover:gap-4 transition-all text-[11px] font-mono uppercase tracking-widest text-[#1E293B]">
+              Explore Params <span class="h-[1px] w-8 bg-[#1E293B]/20"></span>
+            </div>
+          </div>
+
+          <!-- Solution 03 -->
+          <div class="p-10 md:p-16 hover:bg-[#1E293B]/[0.02] transition-colors group relative overflow-hidden">
+            <div class="absolute top-4 right-4 text-[10px] font-mono opacity-20">MOD_03</div>
+            <span class="text-[11px] font-mono text-[#4F46E5] mb-8 block">[ OPTIMIZE ]</span>
+            <h3 class="text-3xl font-serif font-bold mb-6">Marketing Engine: <br/> Real Growth</h3>
+            <p class="text-[#1E293B]/60 font-light leading-relaxed mb-10">
+              Our SEO and SEM automation tools don't just "increase visibility." We help you rank in ChatGPT and Google AI Overviews while generating leads.
+            </p>
+            <div class="flex items-center gap-2 group-hover:gap-4 transition-all text-[11px] font-mono uppercase tracking-widest text-[#1E293B]">
+              Explore Params <span class="h-[1px] w-8 bg-[#1E293B]/20"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section (Precision Gauges) -->
+    <section class="py-32 bg-[#1E293B] text-white relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="h-full w-full bg-[radial-gradient(#4F46E5_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <!-- Stat 01 -->
+          <div class="space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-[0.3em] opacity-50">Metric_01: Engagement</div>
+            <div class="flex items-end gap-2">
+              <span class="text-6xl font-serif font-bold">+200%</span>
+            </div>
+            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
+              <div class="absolute inset-0 gauge-marking opacity-20"></div>
+              <div class="h-full bg-[#4F46E5] w-[85%]"></div>
+            </div>
+            <p class="text-xs font-mono uppercase opacity-40">Monthly engaged visitors increased</p>
+          </div>
+
+          <!-- Stat 02 -->
+          <div class="space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-[0.3em] opacity-50">Metric_02: Authority</div>
+            <div class="flex items-end gap-2">
+              <span class="text-6xl font-serif font-bold">P1</span>
+            </div>
+            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
+              <div class="absolute inset-0 gauge-marking opacity-20"></div>
+              <div class="h-full bg-[#4F46E5] w-[95%]"></div>
+            </div>
+            <p class="text-xs font-mono uppercase opacity-40">Page 1 Ranking Secured</p>
+          </div>
+
+          <!-- Stat 03 -->
+          <div class="space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-[0.3em] opacity-50">Metric_03: Reliability</div>
+            <div class="flex items-end gap-2">
+              <span class="text-6xl font-serif font-bold">24/7</span>
+            </div>
+            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
+              <div class="absolute inset-0 gauge-marking opacity-20"></div>
+              <div class="h-full bg-[#4F46E5] w-full"></div>
+            </div>
+            <p class="text-xs font-mono uppercase opacity-40">Automated Reception Coverage</p>
+          </div>
+
+          <!-- Stat 04 -->
+          <div class="space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-[0.3em] opacity-50">Metric_04: Yield</div>
+            <div class="flex items-end gap-2">
+              <span class="text-6xl font-serif font-bold">+20%</span>
+            </div>
+            <div class="h-2 w-full bg-white/10 relative overflow-hidden">
+              <div class="absolute inset-0 gauge-marking opacity-20"></div>
+              <div class="h-full bg-[#4F46E5] w-[60%]"></div>
+            </div>
+            <p class="text-xs font-mono uppercase opacity-40">More leads from optimized spend</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise Section (Asymmetric Craft) -->
+    <section id="expertise" class="py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 items-start">
+          <div class="lg:col-span-4">
+            <span class="text-[10px] font-mono uppercase tracking-[0.4em] text-[#4F46E5] mb-4 block">03/Domain.Knowledge</span>
+            <h2 class="text-5xl font-serif font-bold leading-tight mb-8">Customized for your craft.</h2>
+            <p class="text-[#1E293B]/60 font-light leading-relaxed">
+              We've built custom solutions for diverse industries, ensuring the AI understands the nuances of your specific business flow.
+            </p>
+          </div>
+
+          <div class="lg:col-span-8 grid md:grid-cols-2 gap-px bg-[#1E293B]/10 border-[0.5px] border-[#1E293B]/10">
+            {[
+              { id: "01", name: "Home Care Agencies", desc: "Managing caregiver schedules and client inquiries." },
+              { id: "02", name: "HVAC & Plumbing", desc: "Handling emergency calls and booking service windows." },
+              { id: "03", name: "Laundromats", desc: "Optimizing pick-up and delivery logistics." },
+              { id: "04", name: "Dentists", desc: "Reducing no-shows and automating reminders." },
+              { id: "05", name: "Real Estate", desc: "Qualifying buyer and seller leads instantly." }
+            ].map((industry) => (
+              <div class="bg-[#FDFCFB] p-12 group hover:bg-white transition-all relative overflow-hidden">
+                <div class="absolute top-4 right-4 text-[10px] font-mono opacity-10">REF_{industry.id}</div>
+                <h3 class="text-2xl font-serif font-bold mb-4 group-hover:text-[#4F46E5] transition-colors">{industry.name}</h3>
+                <p class="text-sm text-[#1E293B]/50 font-light leading-relaxed">{industry.desc}</p>
+              </div>
+            ))}
+            <div class="bg-[#4F46E5] p-12 flex flex-col justify-between text-white">
+              <p class="text-xl font-serif italic">"Building the bridges between human expertise and machine efficiency."</p>
+              <a href="#audit" class="text-xs font-mono uppercase tracking-widest border-b border-white/40 pb-1 w-fit hover:border-white transition-colors">Apply_Logic_</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section (Minimal Blueprint) -->
+    <section id="faq" class="py-32 bg-white border-y-[0.5px] border-[#1E293B]/10">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-24">
+          <span class="text-[10px] font-mono uppercase tracking-[0.4em] text-[#4F46E5] mb-4 block">04/Queries</span>
+          <h2 class="text-5xl font-serif font-bold">Inquiries & Answers_</h2>
+        </div>
+
+        <div class="space-y-12">
+          {[
+            { 
+              q: "How is this different from ChatGPT?", 
+              a: "ChatGPT is a tool you talk to. We build systems that do work. Whether it's answering your phones or managing your SEO, our tools are integrated into your existing business flow." 
+            },
+            { 
+              q: "Is it hard to set up?", 
+              a: "No. We handle the technical integration. You just tell us how your business works, and we build the AI to match it." 
+            },
+            { 
+              q: "Is AI expensive?", 
+              a: "We focus on ROI. Most of our tools pay for themselves by saving hours of manual work or capturing leads that would otherwise be lost." 
+            },
+            { 
+              q: "Will my customers know they're talking to an AI?", 
+              a: "Our voice and text agents are designed to be helpful and professional. We prioritize accuracy and a smooth experience over 'trying to trick' the customer." 
+            }
+          ].map((item, i) => (
+            <div class="grid md:grid-cols-12 gap-6 group">
+              <div class="md:col-span-1 text-[10px] font-mono opacity-20 pt-2">Q_0{i+1}</div>
+              <div class="md:col-span-11 border-l-[0.5px] border-[#1E293B]/10 pl-8 pb-8 group-last:pb-0">
+                <h3 class="text-xl font-serif font-bold mb-4">{item.q}</h3>
+                <p class="text-[#1E293B]/60 font-light leading-relaxed">{item.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section (Artisan Blueprint) -->
+    <section id="audit" class="py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="relative blueprint-border p-12 md:p-24 overflow-hidden corner-accent corner-tl corner-tr corner-bl corner-br bg-white">
+          <!-- Decorative Background Elements -->
+          <div class="absolute top-0 left-0 w-full h-8 bg-[linear-gradient(to_right,#1E293B/10_1px,transparent_1px)] bg-[size:20px_100%] opacity-20"></div>
+          
+          <div class="relative z-10 max-w-3xl">
+            <span class="text-[10px] font-mono uppercase tracking-[0.4em] text-[#4F46E5] mb-6 block">EXECUTE: SYSTEM_OPTIMIZATION</span>
+            <h2 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-10">
+              Ready to <span class="text-[#4F46E5] italic">calibrate</span> your operations?
+            </h2>
+            <p class="text-xl text-[#1E293B]/60 mb-12 font-light leading-relaxed">
+              Book a session to identify high-impact AI opportunities in your business. No fluff, just a clear roadmap for automation and growth.
+            </p>
+            
+            <a href="#" class="inline-flex items-center gap-8 bg-[#1E293B] text-white px-12 py-6 hover:bg-[#4F46E5] transition-all duration-500 group">
+              <span class="text-xl font-serif font-bold">Schedule AI Audit_</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform duration-500"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+
+          <!-- Technical Specs Floating -->
+          <div class="absolute bottom-12 right-12 hidden lg:block text-[10px] font-mono opacity-20 space-y-1 text-right">
+            <div>SYS_VER: 5.0.0</div>
+            <div>STATUS: READY_FOR_DEPLOY</div>
+            <div>LATENCY: 0.002ms</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer (Precision Finish) -->
+    <footer class="py-24 border-t-[0.5px] border-[#1E293B]/10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+          <div class="space-y-6">
+            <div class="text-3xl font-serif font-bold tracking-tighter">Caliperworks</div>
+            <p class="max-w-xs text-sm text-[#1E293B]/50 font-light leading-relaxed">
+              AI for the real world. Elevating small businesses through refined integration and surgical precision.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-16">
+            <div class="space-y-6">
+              <span class="text-[10px] font-mono uppercase tracking-widest opacity-40">Navigation</span>
+              <ul class="space-y-4 text-xs font-mono uppercase tracking-wider">
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Process_</a></li>
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Tools_</a></li>
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Impact_</a></li>
+              </ul>
+            </div>
+            <div class="space-y-6">
+              <span class="text-[10px] font-mono uppercase tracking-widest opacity-40">System</span>
+              <ul class="space-y-4 text-xs font-mono uppercase tracking-wider">
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Support_</a></li>
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Contact_</a></li>
+                <li><a href="#" class="hover:text-[#4F46E5] transition-colors">Privacy_</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pt-12 border-t-[0.5px] border-[#1E293B]/10 flex flex-col md:flex-row justify-between gap-6">
+          <div class="text-[10px] font-mono opacity-30 uppercase tracking-[0.2em]">
+            &copy; 2025 Caliperworks // All protocols observed.
+          </div>
+          <div class="flex gap-8 text-[10px] font-mono opacity-30 uppercase tracking-[0.2em]">
+            <span>LAT: 37.7749&deg; N</span>
+            <span>LNG: 122.4194&deg; W</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

@@ -1,0 +1,426 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Caliperworks | Structured Elegance" description="AI integration with architectural precision. We build systems that handle the repetitive work for you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/font/sans.css">
+
+  <style is:global>
+    :root {
+      --color-alabaster: #F9F8F6;
+      --color-deep-indigo: #1A1E2E;
+      --color-muted-slate: #64748B;
+      --color-architectural-line: rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      font-family: 'Geist Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--color-alabaster);
+      color: var(--color-deep-indigo);
+      overflow-x: hidden;
+    }
+
+    .font-serif {
+      font-family: 'Fraunces', serif;
+    }
+
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .architectural-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, var(--color-architectural-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-architectural-line) 1px, transparent 1px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+  </style>
+
+  <div class="grain-overlay"></div>
+
+  <main class="min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-[100] bg-[#F9F8F6]/80 backdrop-blur-sm border-b border-black/[0.06]">
+      <div class="max-w-[1440px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+        <a href="/" class="text-2xl font-serif font-semibold tracking-tight group">
+          Caliper<span class="italic font-light text-muted-slate group-hover:text-deep-indigo transition-colors">works</span>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-12 text-[11px] font-medium tracking-[0.2em] uppercase text-muted-slate">
+          <a href="#problem" class="hover:text-deep-indigo transition-colors">Problem</a>
+          <a href="#solutions" class="hover:text-deep-indigo transition-colors">Solutions</a>
+          <a href="#expertise" class="hover:text-deep-indigo transition-colors">Expertise</a>
+          <a href="#faq" class="hover:text-deep-indigo transition-colors">FAQ</a>
+        </div>
+
+        <a href="#audit" class="px-7 py-3 bg-[#1A1E2E] text-white text-[12px] font-bold uppercase tracking-wider hover:bg-neutral-800 transition-all active:scale-95">
+          Get an AI Audit
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-48 pb-32 md:pb-48 px-6 md:px-12 border-b border-black/[0.06]">
+      <div class="max-w-[1440px] mx-auto grid lg:grid-cols-12 gap-20 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-4 mb-8">
+            <span class="w-12 h-px bg-muted-slate/30"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-slate">The Curated Architect</span>
+          </div>
+          <h1 class="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.9] tracking-tighter mb-10">
+            AI that does <br/> the <span class="italic font-light">work</span>, so <br/> you don't <br class="hidden md:block"/> have to.
+          </h1>
+          <p class="text-xl md:text-2xl text-muted-slate max-w-xl leading-relaxed font-normal mb-12">
+            We help small businesses integrate AI into their daily operations. Not just as a chatbot, but as a team member that books calls, qualifies leads, and optimizes your marketing.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-6">
+            <a href="#audit" class="px-10 py-5 bg-[#1A1E2E] text-white text-lg font-bold hover:shadow-[0_20px_40px_-10px_rgba(26,30,46,0.3)] transition-all inline-flex items-center justify-center gap-4 group">
+              Get an AI Audit
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 hidden lg:block">
+          <!-- Technical Drawing Style Module -->
+          <div class="aspect-[4/5] border border-black/[0.08] relative p-10 overflow-hidden bg-white/40 group">
+            <div class="absolute inset-0 architectural-grid opacity-[0.4]"></div>
+            
+            <div class="relative h-full flex flex-col justify-between border-l border-t border-black/[0.06] p-8">
+              <div class="space-y-1">
+                <div class="text-[10px] font-bold text-muted-slate uppercase tracking-widest">Protocol v4.0</div>
+                <div class="text-4xl font-serif italic text-muted-slate/40">Efficiency Metrics</div>
+              </div>
+
+              <div class="space-y-12">
+                <div class="space-y-4">
+                  <div class="flex justify-between items-end">
+                    <span class="text-[10px] font-bold uppercase tracking-widest">Lead Response</span>
+                    <span class="text-2xl font-serif italic tracking-tighter text-[#1A1E2E]">Instant</span>
+                  </div>
+                  <div class="w-full h-px bg-black/[0.08] relative">
+                    <div class="absolute top-0 left-0 w-[95%] h-px bg-[#1A1E2E]"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="flex justify-between items-end">
+                    <span class="text-[10px] font-bold uppercase tracking-widest">Coverage</span>
+                    <span class="text-2xl font-serif italic tracking-tighter text-[#1A1E2E]">24 / 7 / 365</span>
+                  </div>
+                  <div class="w-full h-px bg-black/[0.08] relative">
+                    <div class="absolute top-0 left-0 w-full h-px bg-[#1A1E2E]"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="flex justify-between items-end">
+                    <span class="text-[10px] font-bold uppercase tracking-widest">Human Error</span>
+                    <span class="text-2xl font-serif italic tracking-tighter text-[#1A1E2E]">Minimised</span>
+                  </div>
+                  <div class="w-full h-px bg-black/[0.08] relative">
+                    <div class="absolute top-0 left-0 w-[15%] h-px bg-red-500/50"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center pt-8 border-t border-black/[0.06]">
+                <div class="text-[8px] font-bold uppercase tracking-[0.3em] text-muted-slate">Caliperworks Architectural Studio</div>
+                <div class="w-8 h-8 rounded-full border border-black/[0.06] flex items-center justify-center">
+                  <div class="w-1.5 h-1.5 bg-[#1A1E2E] rounded-full"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Architectural Compass Rose (Minimal) -->
+            <div class="absolute bottom-4 right-4 opacity-10">
+              <div class="w-32 h-32 border border-black rounded-full flex items-center justify-center">
+                <div class="w-px h-full bg-black"></div>
+                <div class="h-px w-full bg-black absolute"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section (Editorial) -->
+    <section id="problem" class="py-32 md:py-48 px-6 md:px-12 border-b border-black/[0.06] bg-white/20">
+      <div class="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-24 items-start">
+        <div class="reveal">
+          <h2 class="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-slate mb-12">The Context</h2>
+          <p class="text-3xl md:text-5xl font-serif leading-[1.2] italic tracking-tight">
+            "Most business owners know AI exists, but don't know how to use it beyond a basic chat interface."
+          </p>
+        </div>
+        <div class="reveal stagger-1 space-y-10 text-xl md:text-2xl text-muted-slate leading-relaxed font-light">
+          <p>
+            You're busy running your business—HVAC, dental practice, or real estate agency. You don't have time to be an AI researcher. 
+          </p>
+          <p>
+            We bridge that gap by building tools that handle the repetitive work for you. We don't just provide a tool; we design a system that breathes with your operations.
+          </p>
+          <div class="pt-8 flex items-center gap-6">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-deep-indigo">Read the Full Approach</span>
+            <span class="w-24 h-px bg-black/[0.08]"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section (Structured Grid) -->
+    <section id="solutions" class="py-32 md:py-48 px-6 md:px-12 border-b border-black/[0.06]">
+      <div class="max-w-[1440px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-24">
+          <div class="max-w-2xl">
+            <h2 class="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-slate mb-8">Integrated Systems</h2>
+            <p class="text-5xl md:text-7xl font-serif tracking-tighter leading-tight">Curated solutions for <br/> complex problems.</p>
+          </div>
+          <div class="text-muted-slate text-lg font-light max-w-xs border-l border-black/[0.06] pl-8">
+            Each system is custom-fitted to your existing workflow, ensuring zero friction and maximum ROI.
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-px bg-black/[0.06] border border-black/[0.06]">
+          <!-- AI Audits -->
+          <div class="bg-[#F9F8F6] p-12 lg:p-16 flex flex-col justify-between group reveal">
+            <div>
+              <div class="text-4xl font-serif italic text-muted-slate/30 mb-12">01</div>
+              <h3 class="text-3xl font-serif mb-8 leading-tight">AI Audits: <br/> Find the Wins</h3>
+              <p class="text-muted-slate leading-relaxed mb-12 font-light text-lg">
+                We look at your current processes—how you handle leads, how you schedule, and how you market. Then, we identify exactly where AI can save you time.
+              </p>
+            </div>
+            <a href="#" class="inline-flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1A1E2E] group-hover:gap-6 transition-all duration-300">
+              Audit Protocol
+              <span class="w-8 h-px bg-[#1A1E2E]"></span>
+            </a>
+          </div>
+
+          <!-- Voice Agents -->
+          <div class="bg-[#F9F8F6] p-12 lg:p-16 flex flex-col justify-between group reveal stagger-1">
+            <div>
+              <div class="text-4xl font-serif italic text-muted-slate/30 mb-12">02</div>
+              <h3 class="text-3xl font-serif mb-8 leading-tight">Voice Agents: <br/> 24/7 Front Desk</h3>
+              <p class="text-muted-slate leading-relaxed mb-12 font-light text-lg">
+                Stop missing calls. Our voice agents answer the phone at any time, qualify prospects, and book appointments directly into your calendar.
+              </p>
+            </div>
+            <a href="#" class="inline-flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1A1E2E] group-hover:gap-6 transition-all duration-300">
+              Agent Specifications
+              <span class="w-8 h-px bg-[#1A1E2E]"></span>
+            </a>
+          </div>
+
+          <!-- Marketing Engine -->
+          <div class="bg-[#F9F8F6] p-12 lg:p-16 flex flex-col justify-between group reveal stagger-2">
+            <div>
+              <div class="text-4xl font-serif italic text-muted-slate/30 mb-12">03</div>
+              <h3 class="text-3xl font-serif mb-8 leading-tight">Marketing Engine: <br/> Real Growth</h3>
+              <p class="text-muted-slate leading-relaxed mb-12 font-light text-lg">
+                Our SEO and SEM automation tools don't just "increase visibility." We help you rank in ChatGPT and Google AI Overviews while generating 20% more leads.
+              </p>
+            </div>
+            <a href="#" class="inline-flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#1A1E2E] group-hover:gap-6 transition-all duration-300">
+              Engine Performance
+              <span class="w-8 h-px bg-[#1A1E2E]"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Section (Architectural Drawing Style) -->
+    <section class="py-32 px-6 md:px-12 border-b border-black/[0.06] bg-[#1A1E2E] text-white/90 overflow-hidden relative">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none architectural-grid"></div>
+      <div class="max-w-[1440px] mx-auto relative z-10">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-20">
+          <div class="reveal">
+            <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-4">Lead Velocity</div>
+            <div class="text-6xl md:text-8xl font-serif italic leading-none">+200%</div>
+            <div class="w-full h-px bg-white/10 mt-8 relative">
+               <div class="absolute top-0 left-0 w-3/4 h-px bg-white/40"></div>
+            </div>
+          </div>
+          <div class="reveal stagger-1">
+            <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-4">Market Authority</div>
+            <div class="text-6xl md:text-8xl font-serif italic leading-none">P.01</div>
+            <div class="w-full h-px bg-white/10 mt-8 relative">
+               <div class="absolute top-0 left-0 w-full h-px bg-white/40"></div>
+            </div>
+          </div>
+          <div class="reveal stagger-2">
+            <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-4">Agent Uptime</div>
+            <div class="text-6xl md:text-8xl font-serif italic leading-none">24/7</div>
+            <div class="w-full h-px bg-white/10 mt-8 relative">
+               <div class="absolute top-0 left-0 w-full h-px bg-white/40"></div>
+            </div>
+          </div>
+          <div class="reveal stagger-3">
+            <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-4">Efficiency Gain</div>
+            <div class="text-6xl md:text-8xl font-serif italic leading-none">20%</div>
+            <div class="w-full h-px bg-white/10 mt-8 relative">
+               <div class="absolute top-0 left-0 w-1/2 h-px bg-white/40"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industry Expertise (Asymmetric Editorial) -->
+    <section id="expertise" class="py-32 md:py-48 px-6 md:px-12 border-b border-black/[0.06] bg-white/10">
+      <div class="max-w-[1440px] mx-auto">
+        <div class="grid lg:grid-cols-12 gap-24 items-start mb-32">
+          <div class="lg:col-span-4 reveal">
+            <h2 class="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-slate mb-8">Niche Implementation</h2>
+            <p class="text-5xl font-serif leading-tight">Field-tested <br/> architectures.</p>
+          </div>
+          <div class="lg:col-span-8 grid md:grid-cols-2 gap-x-20 gap-y-16">
+            {[
+              { name: "Home Care Agencies", desc: "Managing caregiver schedules and client inquiries." },
+              { name: "HVAC & Plumbing", desc: "Handling emergency calls and booking service windows." },
+              { name: "Laundromats", desc: "Optimizing pick-up and delivery logistics." },
+              { name: "Dentists", desc: "Reducing no-shows and automating appointment reminders." },
+              { name: "Real Estate", desc: "Qualifying buyer and seller leads instantly." }
+            ].map((industry, i) => (
+              <div class={`reveal stagger-${(i % 3) + 1} border-b border-black/[0.06] pb-10 group`}>
+                <h3 class="text-2xl font-serif mb-4 group-hover:italic transition-all duration-300">{industry.name}</h3>
+                <p class="text-muted-slate font-light leading-relaxed">{industry.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ (Technical Specification Style) -->
+    <section id="faq" class="py-32 md:py-48 px-6 md:px-12 border-b border-black/[0.06]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-slate mb-24 text-center">Inquiry & Documentation</h2>
+        <div class="space-y-20">
+          {[
+            { 
+              q: "How is this different from ChatGPT?", 
+              a: "ChatGPT is a tool you talk to. We build systems that do work. Whether it's answering your phones or managing your SEO, our tools are integrated into your existing business flow." 
+            },
+            { 
+              q: "Is it hard to set up?", 
+              a: "No. We handle the technical integration. You just tell us how your business works, and we build the AI to match it." 
+            },
+            { 
+              q: "Is AI expensive?", 
+              a: "We focus on ROI. Most of our tools pay for themselves by saving hours of manual work or capturing leads that would otherwise be lost." 
+            },
+            { 
+              q: "Will my customers know they're talking to an AI?", 
+              a: "Our voice and text agents are designed to be helpful and professional. We prioritize accuracy and a smooth experience over 'trying to trick' the customer." 
+            }
+          ].map((item, i) => (
+            <div class={`reveal stagger-${(i % 2) + 1}`}>
+              <div class="flex flex-col md:flex-row gap-8 md:gap-20">
+                <h3 class="text-2xl font-serif italic text-deep-indigo md:w-1/2">{item.q}</h3>
+                <p class="text-lg text-muted-slate font-light leading-relaxed md:w-1/2">
+                  {item.a}
+                </p>
+              </div>
+              <div class="w-full h-px bg-black/[0.06] mt-12"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA (The Anchor) -->
+    <section id="audit" class="py-32 md:py-64 px-6 md:px-12 bg-white relative overflow-hidden">
+      <div class="absolute inset-0 architectural-grid opacity-[0.02]"></div>
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <h2 class="text-5xl md:text-8xl font-serif leading-tight tracking-tighter mb-16">
+          Ready to <span class="italic font-light">restructure</span> your growth?
+        </h2>
+        <p class="text-xl md:text-2xl text-muted-slate mb-20 max-w-2xl mx-auto font-light leading-relaxed">
+          Book a session to identify high-impact AI opportunities in your business. No fluff, just a clear architectural roadmap for automation.
+        </p>
+        <a href="#" class="inline-flex items-center gap-6 px-16 py-8 bg-[#1A1E2E] text-white text-xl font-bold hover:shadow-[0_40px_80px_-20px_rgba(26,30,46,0.4)] transition-all hover:-translate-y-1 active:scale-95 group">
+          Schedule Your AI Audit
+          <span class="w-12 h-px bg-white/30 group-hover:w-16 transition-all duration-500"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-24 px-6 md:px-12 bg-[#1A1E2E] text-white/40 border-t border-white/5">
+      <div class="max-w-[1440px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-20 mb-32">
+          <div>
+            <div class="text-3xl font-serif text-white/90 mb-8 font-semibold tracking-tight">
+              Caliper<span class="italic font-light text-white/40">works</span>
+            </div>
+            <p class="max-w-xs font-light leading-relaxed text-sm">
+              AI for the real world. Elevating small businesses through refined integration and surgical precision.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-16 text-[10px] font-bold tracking-[0.4em] uppercase">
+            <a href="#" class="hover:text-white transition-colors">Get Started</a>
+            <a href="#" class="hover:text-white transition-colors">Contact</a>
+            <a href="#" class="hover:text-white transition-colors">Privacy</a>
+          </div>
+        </div>
+        <div class="pt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-8 text-[9px] font-medium tracking-[0.3em] uppercase">
+          <span>&copy; 2025 Caliperworks Architectural Studio.</span>
+          <div class="flex gap-12">
+            <span>Stable</span>
+            <span>Professional</span>
+            <span>Proven</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </main>
+</Layout>
