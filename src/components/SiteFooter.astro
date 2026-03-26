@@ -1,0 +1,60 @@
+---
+import {
+  caseStudies,
+  caseStudyHref,
+  createMailto,
+  industries,
+  industryHref,
+  services,
+  serviceHref,
+  siteConfig,
+} from '../data/site';
+
+const auditMailto = createMailto();
+---
+
+<footer class="border-t-2 border-slate-800 bg-slate-900 px-6 py-20 text-slate-300">
+  <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <div>
+      <div class="mb-4 text-3xl font-black tracking-tighter text-white">{siteConfig.name.toUpperCase()}</div>
+      <p class="max-w-md text-lg leading-relaxed text-slate-400">{siteConfig.tagline}</p>
+    </div>
+    <div>
+      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Services</div>
+      <div class="space-y-3 text-sm font-semibold">
+        {services.map((service) => (
+          <a href={serviceHref(service.slug)} class="block transition-colors hover:text-white">
+            {service.name}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div>
+      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Industries</div>
+      <div class="space-y-3 text-sm font-semibold">
+        {industries.slice(0, 4).map((industry) => (
+          <a href={industryHref(industry.slug)} class="block transition-colors hover:text-white">
+            {industry.name}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div>
+      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Proof</div>
+      <div class="space-y-3 text-sm font-semibold">
+        <a href="/case-studies/" class="block transition-colors hover:text-white">All case studies</a>
+        {caseStudies.map((caseStudy) => (
+          <a href={caseStudyHref(caseStudy.slug)} class="block transition-colors hover:text-white">
+            {caseStudy.title}
+          </a>
+        ))}
+        <a href={auditMailto} class="block transition-colors hover:text-white">
+          {siteConfig.email}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mx-auto mt-16 max-w-7xl border-t border-slate-800 pt-8 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+    <div>&copy; 2026 {siteConfig.name}. Purposeful automation for the real world.</div>
+  </div>
+</footer>

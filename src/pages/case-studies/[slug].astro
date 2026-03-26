@@ -1,0 +1,170 @@
+---
+import type { CaseStudy } from '../../data/site';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SectionCta from '../../components/SectionCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+import {
+  caseStudies,
+  caseStudyHref,
+  industryHref,
+  industryMap,
+  serviceHref,
+  serviceMap,
+} from '../../data/site';
+import { breadcrumbSchema, caseStudyArticleSchema } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return caseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+    props: { caseStudy },
+  }));
+}
+
+const { caseStudy }: { caseStudy: CaseStudy } = Astro.props;
+const industry = industryMap[caseStudy.industrySlug];
+const relatedServices = caseStudy.serviceSlugs.map((slug) => serviceMap[slug]);
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Case Studies', path: '/case-studies/' },
+    { name: caseStudy.title, path: caseStudyHref(caseStudy.slug) },
+  ]),
+  caseStudyArticleSchema(caseStudy),
+];
+---
+
+<Layout
+  title={caseStudy.metaTitle}
+  description={caseStudy.metaDescription}
+  canonicalPath={caseStudyHref(caseStudy.slug)}
+  structuredData={structuredData}
+  ogType="article"
+>
+  <SiteHeader />
+  <main class="bg-white text-slate-900">
+    <article>
+      <section class="border-b-2 border-slate-100 px-6 py-20">
+        <div class="mx-auto max-w-6xl">
+          <Breadcrumbs
+            items={[
+              { href: '/', label: 'Home' },
+              { href: '/case-studies/', label: 'Case Studies' },
+              { href: caseStudyHref(caseStudy.slug), label: caseStudy.title },
+            ]}
+          />
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">
+            {caseStudy.clientLabel} · {caseStudy.location}
+          </div>
+          <h1 class="mt-6 max-w-4xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
+            {caseStudy.heroTitle}
+          </h1>
+          <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">{caseStudy.heroDescription}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href={industryHref(industry.slug)}
+              class="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-black uppercase tracking-[0.2em] text-blue-800"
+            >
+              {industry.name}
+            </a>
+            {relatedServices.map((service) => (
+              <a
+                href={serviceHref(service.slug)}
+                class="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-black uppercase tracking-[0.2em] text-blue-800"
+              >
+                {service.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="px-6 py-20">
+        <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="rounded-[2rem] border-4 border-slate-900 bg-slate-900 p-8 text-white">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-emerald-300">Headline results</div>
+            <div class="mt-8 grid gap-4">
+              {caseStudy.results.map((result) => (
+                <div class="rounded-2xl border-2 border-slate-700 bg-slate-800 p-5">
+                  <div class="text-4xl font-black text-emerald-300">{result.value}</div>
+                  <div class="mt-2 text-xs font-black uppercase tracking-[0.3em] text-slate-400">
+                    {result.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <blockquote class="mt-8 border-l-4 border-emerald-300 pl-5 text-lg leading-relaxed text-slate-200">
+              “{caseStudy.quote}”
+            </blockquote>
+          </div>
+          <div class="space-y-8">
+            <section class="rounded-[2rem] border-4 border-slate-200 bg-white p-8">
+              <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Challenge</div>
+              <ul class="mt-6 space-y-4 text-lg leading-relaxed text-slate-700">
+                {caseStudy.challenge.map((challenge) => (
+                  <li>{challenge}</li>
+                ))}
+              </ul>
+            </section>
+            <section class="rounded-[2rem] border-4 border-slate-200 bg-slate-50 p-8">
+              <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">What Caliperworks changed</div>
+              <ul class="mt-6 space-y-4 text-lg leading-relaxed text-slate-700">
+                {caseStudy.solution.map((solution) => (
+                  <li>{solution}</li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
+        <div class="mx-auto max-w-6xl">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">What transfers</div>
+          <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">
+            Lessons other small businesses can use
+          </h2>
+          <div class="mt-10 grid gap-8 md:grid-cols-3">
+            {caseStudy.takeaways.map((takeaway) => (
+              <div class="rounded-[2rem] border-4 border-slate-200 bg-white p-8 text-lg leading-relaxed text-slate-700">
+                {takeaway}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="px-6 py-20">
+        <div class="mx-auto max-w-6xl">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Related services</div>
+          <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">The services behind the outcome</h2>
+          <div class="mt-10 grid gap-8 md:grid-cols-2">
+            {relatedServices.map((service) => (
+              <article class="rounded-[2rem] border-4 border-slate-200 bg-white p-8">
+                <h3 class="text-3xl font-black text-slate-900">{service.name}</h3>
+                <p class="mt-4 text-lg leading-relaxed text-slate-600">{service.teaser}</p>
+                <a
+                  href={serviceHref(service.slug)}
+                  class="mt-6 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+                >
+                  Explore {service.name}
+                  <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionCta
+        headline="Want a similar result in your business?"
+        body="Request an audit and we’ll show where your current marketing, lead capture, and operational flow can be tightened first."
+        buttonText="Request My Free Audit"
+        subject={`Caliperworks Case Study Inquiry - ${caseStudy.title}`}
+      />
+    </article>
+  </main>
+  <SiteFooter />
+</Layout>

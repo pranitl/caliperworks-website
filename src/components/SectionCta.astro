@@ -1,0 +1,32 @@
+---
+import { createMailto } from '../data/site';
+
+interface Props {
+  headline: string;
+  body: string;
+  buttonText?: string;
+  subject?: string;
+}
+
+const {
+  headline,
+  body,
+  buttonText = 'Request My Free Audit',
+  subject = 'Caliperworks Inquiry - Request a Free Audit',
+} = Astro.props;
+
+const href = createMailto(subject);
+---
+
+<section class="border-t-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
+  <div class="mx-auto max-w-5xl text-center">
+    <h2 class="font-serif text-4xl font-black italic tracking-tight md:text-6xl">{headline}</h2>
+    <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">{body}</p>
+    <a
+      href={href}
+      class="mt-10 inline-block rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-transform hover:scale-105 hover:bg-slate-100"
+    >
+      {buttonText}
+    </a>
+  </div>
+</section>

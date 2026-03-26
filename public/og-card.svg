@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Caliperworks</title>
+  <desc id="desc">AI automation, voice agents, and SEO for small businesses.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#dbeafe" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="56" y="56" width="1088" height="518" rx="40" fill="#ffffff" stroke="#0f172a" stroke-width="8" />
+  <circle cx="156" cy="132" r="16" fill="#2563eb" />
+  <text x="192" y="144" fill="#0f172a" font-family="Geist Sans, Arial, sans-serif" font-size="42" font-weight="800" letter-spacing="2">
+    CALIPERWORKS
+  </text>
+  <text x="96" y="268" fill="#0f172a" font-family="Fraunces, Georgia, serif" font-size="86" font-weight="800">
+    AI automation for
+  </text>
+  <text x="96" y="360" fill="#0f172a" font-family="Fraunces, Georgia, serif" font-size="86" font-weight="800">
+    small businesses.
+  </text>
+  <text x="96" y="452" fill="#334155" font-family="Geist Sans, Arial, sans-serif" font-size="34" font-weight="600">
+    Voice agents, process audits, and SEO systems that turn
+  </text>
+  <text x="96" y="500" fill="#334155" font-family="Geist Sans, Arial, sans-serif" font-size="34" font-weight="600">
+    manual work and missed calls into qualified leads.
+  </text>
+  <rect x="96" y="528" width="340" height="18" rx="9" fill="#2563eb" />
+</svg>
