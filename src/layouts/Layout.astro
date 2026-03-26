@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import CalEmbed from '../components/CalEmbed.astro';
 import { absoluteUrl, siteConfig } from '../data/site';
 
 interface Props {
@@ -64,6 +65,7 @@ const structuredDataItems = Array.isArray(structuredData)
 	</head>
 	<body class="antialiased text-neutral-900 bg-white selection:bg-neutral-200 selection:text-neutral-900">
 		<slot />
+		<CalEmbed />
 	</body>
 </html>
 

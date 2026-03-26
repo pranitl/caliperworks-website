@@ -69,6 +69,22 @@ export const siteConfig = {
     'AI process audits and implementation for service businesses that need clearer workflows, stronger follow-up, and better operational leverage.',
 } as const;
 
+export const calEmbed = {
+  namespace: '30min',
+  link: 'caliperworks/30min',
+  origin: 'https://app.cal.com',
+  config: {
+    layout: 'month_view',
+    useSlotsViewOnSmallScreen: 'true',
+  },
+  ui: {
+    hideEventTypeDetails: false,
+    layout: 'month_view',
+  },
+  floatingButtonId: 'cal-discovery-floating-button',
+  floatingButtonText: 'Schedule Discovery Call',
+} as const;
+
 export const mainNav = [
   { href: '/services/', label: 'Services' },
   { href: '/industries/', label: 'Industries' },

@@ -1,7 +1,8 @@
 ---
+import CalTriggerButton from './CalTriggerButton.astro';
 import { createMailto, mainNav } from '../data/site';
 
-const auditMailto = createMailto();
+const contactMailto = createMailto();
 ---
 
 <header class="sticky top-0 z-50 border-b-2 border-slate-900 bg-white/95 backdrop-blur-md">
@@ -15,12 +16,19 @@ const auditMailto = createMailto();
           {item.label}
         </a>
       ))}
-      <a
-        href={auditMailto}
-        class="rounded-full bg-slate-900 px-6 py-3 text-white transition-all hover:bg-blue-800"
-      >
-        Start with an Audit
-      </a>
     </nav>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <CalTriggerButton
+        label="Schedule Discovery Call"
+        mobileLabel="Schedule"
+        class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-all hover:bg-blue-800 sm:px-5 sm:py-3 sm:text-sm"
+      />
+      <a
+        href={contactMailto}
+        class="rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-5 sm:py-3 sm:text-sm"
+      >
+        Contact Us
+      </a>
+    </div>
   </div>
 </header>

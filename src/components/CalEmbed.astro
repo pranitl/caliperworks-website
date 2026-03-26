@@ -1,0 +1,89 @@
+---
+import { calEmbed } from '../data/site';
+---
+
+<script
+  is:inline
+  define:vars={{
+    calEmbed,
+  }}
+>
+  (function (C, A, L) {
+    let p = function (a, ar) {
+      a.q.push(ar);
+    };
+    let d = C.document;
+    C.Cal =
+      C.Cal ||
+      function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement('script')).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () {
+            p(api, arguments);
+          };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === 'string') {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ['initNamespace', namespace]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+  })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+  Cal('init', calEmbed.namespace, { origin: calEmbed.origin });
+  Cal.ns[calEmbed.namespace]('ui', calEmbed.ui);
+  Cal.ns[calEmbed.namespace]('preload', { calLink: calEmbed.link, type: 'modal' });
+
+  const floatingThreshold = document.querySelector('[data-cal-floating-threshold]');
+
+  if (floatingThreshold) {
+    Cal.ns[calEmbed.namespace]('floatingButton', {
+      calLink: calEmbed.link,
+      buttonText: calEmbed.floatingButtonText,
+      buttonPosition: 'bottom-right',
+      attributes: { id: calEmbed.floatingButtonId },
+      buttonColor: 'rgb(15, 23, 42)',
+      buttonTextColor: 'rgb(255, 255, 255)',
+      config: calEmbed.config,
+    });
+
+    let shouldShowFloatingButton = false;
+
+    const syncFloatingButtonState = () => {
+      const floatingButton = document.getElementById(calEmbed.floatingButtonId);
+
+      if (floatingButton instanceof HTMLElement) {
+        floatingButton.dataset.toggleOff = shouldShowFloatingButton ? 'false' : 'true';
+      }
+    };
+
+    const thresholdObserver = new IntersectionObserver(
+      ([entry]) => {
+        shouldShowFloatingButton = !(entry && entry.isIntersecting);
+        syncFloatingButtonState();
+      },
+      { threshold: 0.01 },
+    );
+
+    const floatingButtonObserver = new MutationObserver(() => {
+      syncFloatingButtonState();
+    });
+
+    thresholdObserver.observe(floatingThreshold);
+    floatingButtonObserver.observe(document.body, { childList: true, subtree: true });
+    syncFloatingButtonState();
+  }
+</script>

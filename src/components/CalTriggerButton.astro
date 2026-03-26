@@ -1,0 +1,32 @@
+---
+import { calEmbed } from '../data/site';
+
+interface Props {
+  label: string;
+  mobileLabel?: string;
+  class?: string;
+  id?: string;
+}
+
+const { label, mobileLabel, class: className = '', id } = Astro.props;
+const calConfig = JSON.stringify(calEmbed.config);
+---
+
+<button
+  type="button"
+  id={id}
+  data-cal-link={calEmbed.link}
+  data-cal-namespace={calEmbed.namespace}
+  data-cal-config={calConfig}
+  aria-haspopup="dialog"
+  class={className}
+>
+  {mobileLabel ? (
+    <>
+      <span class="sm:hidden">{mobileLabel}</span>
+      <span class="hidden sm:inline">{label}</span>
+    </>
+  ) : (
+    label
+  )}
+</button>

@@ -1,4 +1,5 @@
 ---
+import CalTriggerButton from '../components/CalTriggerButton.astro';
 import Layout from './Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { createMailto, industryHref, serviceHref } from '../data/site';
@@ -14,7 +15,7 @@ const hero = {
   headline: 'AI process audits that show where automation actually fits.',
   subheadline:
     'Caliperworks maps the gaps across intake, phone coverage, search visibility, ad workflows, and follow-up so service businesses can prioritize the right next move instead of buying isolated AI tools.',
-  cta: 'Start with a Process Audit',
+  cta: 'Schedule Discovery Call',
 };
 
 const auditAreas = [
@@ -183,7 +184,10 @@ const faqs = [
   <div class="font-sans overflow-x-hidden bg-white text-xl leading-relaxed text-slate-900">
     <SiteHeader />
 
-    <section class="relative border-b-2 border-slate-100 bg-white px-6 pb-24 pt-12 md:pt-20">
+    <section
+      data-cal-floating-threshold
+      class="relative border-b-2 border-slate-100 bg-white px-6 pb-24 pt-12 md:pt-20"
+    >
       <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="relative z-10">
           <div class="mb-8 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-4 py-2">
@@ -197,19 +201,24 @@ const faqs = [
             {hero.subheadline}
           </p>
           <div class="mt-10 flex flex-wrap gap-4">
+            <CalTriggerButton
+              label={hero.cta}
+              class="rounded-2xl bg-blue-800 px-10 py-5 text-xl font-black text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-slate-900"
+            />
             <a
               href={inquiryMailto}
-              class="rounded-2xl bg-blue-800 px-10 py-5 text-xl font-black text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-slate-900"
-            >
-              {hero.cta}
-            </a>
-            <a
-              href="/services/"
               class="rounded-2xl border-2 border-slate-900 px-8 py-5 text-lg font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
             >
-              Explore Services
+              Contact Us
             </a>
           </div>
+          <a
+            href="/services/"
+            class="mt-6 inline-flex items-center gap-3 text-lg font-black text-slate-900 transition-colors hover:text-blue-800"
+          >
+            Explore Services
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
 
         <div class="relative">
@@ -465,12 +474,18 @@ const faqs = [
           We can review your intake, phone coverage, follow-up, search visibility, and current
           marketing system with you, then outline the changes worth making first.
         </p>
-        <a
-          href={inquiryMailto}
-          class="inline-block rounded-3xl bg-white px-20 py-10 text-3xl font-black text-blue-900 shadow-[0_30px_90px_rgba(0,0,0,0.3)] transition-transform hover:scale-105 hover:bg-slate-100 active:scale-95 md:text-4xl"
-        >
-          Start with a Process Audit
-        </a>
+        <div class="flex flex-wrap justify-center gap-4">
+          <CalTriggerButton
+            label="Schedule Discovery Call"
+            class="rounded-3xl bg-white px-12 py-7 text-2xl font-black text-blue-900 shadow-[0_30px_90px_rgba(0,0,0,0.3)] transition-transform hover:scale-105 hover:bg-slate-100 active:scale-95 md:px-20 md:py-10 md:text-4xl"
+          />
+          <a
+            href={inquiryMailto}
+            class="rounded-3xl border-2 border-white/70 px-12 py-7 text-2xl font-black text-white transition-colors hover:border-white hover:bg-white/10 md:px-20 md:py-10 md:text-4xl"
+          >
+            Contact Us
+          </a>
+        </div>
         <div class="mt-10 flex flex-wrap justify-center gap-4 text-sm font-black uppercase tracking-[0.2em] text-blue-100">
           <a href="/services/" class="transition-colors hover:text-white">Services</a>
           <a href="/industries/" class="transition-colors hover:text-white">Industries</a>
@@ -505,7 +520,19 @@ const faqs = [
           </div>
           <div class="space-y-4">
             <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Contact</div>
-            <a href={inquiryMailto} class="block transition-colors hover:text-white">Start with an audit</a>
+            <div class="flex flex-wrap gap-3">
+              <CalTriggerButton
+                label="Schedule Discovery Call"
+                class="rounded-full bg-white px-5 py-3 text-sm font-black text-slate-900 transition-colors hover:bg-blue-100"
+              />
+              <a
+                href={inquiryMailto}
+                class="rounded-full border border-slate-600 px-5 py-3 text-sm font-black text-white transition-colors hover:border-blue-400 hover:text-blue-300"
+              >
+                Contact Us
+              </a>
+            </div>
+            <a href={inquiryMailto} class="block transition-colors hover:text-white">pranit@caliperworks.com</a>
           </div>
         </div>
       </div>
