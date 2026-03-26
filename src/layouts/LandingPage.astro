@@ -1,81 +1,86 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from './Layout.astro';
 
 // Date Awareness Logic
 const now = new Date();
 const currentYear = now.getFullYear();
 const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
-const availabilityString = `Accepting Q${currentQuarter} ${currentYear} Audit Requests`;
+const availabilityString = `Accepting Q${currentQuarter} ${currentYear} Discovery Calls`;
 
 // Content Integration
 const hero = {
-  headline: "AI that does the work, so you don't have to.",
-  subheadline: "We help small businesses integrate AI into their daily operations. Not just as a chatbot, but as a team member that books calls, qualifies leads, and optimizes your marketing.",
-  cta: "Get My Free Audit"
+  headline: "AI systems that support your team and keep work moving.",
+  subheadline: "Caliperworks helps service businesses add reliable AI coverage for calls, intake, follow-up, and marketing tasks without losing control of the workflow. We build collaboratively around the way your team already works.",
+  cta: "Schedule a Discovery Call"
 };
 
 const inquiryMailto =
-  "mailto:pranit@caliperworks.com?subject=Caliperworks%20Inquiry%20-%20Request%20a%20Free%20Audit";
+  "mailto:pranit@caliperworks.com?subject=Caliperworks%20Inquiry%20-%20Discovery%20Call";
 
 const problem = {
-  text: "Most business owners know AI exists, but don't know how to use it beyond a basic chat interface. You're busy running your business—HVAC, dental practice, or real estate agency. You don't have time to be an AI researcher. We bridge that gap by building tools that handle the repetitive work for you."
+  text: "Most owners do not need more software to babysit. They need dependable coverage when the phone rings during lunch, after hours, or while the team is stretched thin. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate."
 };
 
 const solutions = [
   {
-    title: "Process Audits",
-    subtitle: "Identify your opportunities",
-    description: "We map your workflow to find the exact points where AI saves time and cuts costs. It's a clear roadmap for automation."
+    title: "Workflow Review",
+    subtitle: "Find the right starting points",
+    description: "We review your intake, follow-up, and handoff process with your team and identify the places where automation will actually help. You get a rollout plan grounded in your day-to-day operations."
   },
   {
-    title: "Voice Agents",
-    subtitle: "Your 24/7 front desk",
-    description: "A digital receptionist that picks up when you're busy, qualifies leads, and books appointments directly into your calendar."
+    title: "Voice Coverage",
+    subtitle: "Coverage when staff are busy or offline",
+    description: "We can answer routine calls during lunch breaks, after hours, or peak periods, capture the right details, and route or book the next step so your staff starts from a clean follow-up list."
   },
   {
-    title: "Growth Engine",
-    subtitle: "Automated SEO & Ads",
-    description: "An AI pipeline that puts you on Page 1 and hyper-optimizes your existing ad budget, tweaking bids 24/7 to get more leads for every dollar spent."
+    title: "Search & Ads Support",
+    subtitle: "Measured automation, clear reporting",
+    description: "We support SEO and ad workflows with measured automation, human review, and reporting your team can actually use. The goal is more qualified demand without creating another system to monitor all day."
   }
 ];
 
 const testimonials = [
   {
-    quote: "Our monthly engaged visitors shot up by 199% and we're finally holding Page 1 rankings for our top keywords. The automated lead qualification has transformed how we handle new client intake.",
+    quote: "A home care agency used Caliperworks to improve search visibility and lead qualification. Monthly engaged visitors increased 199%, and the team had a much cleaner intake process for new inquiries.",
     author: "Home Care Agency in Boston",
-    metrics: ["199% Visitor Increase", "Page 1 Visibility", "Voice Agent Qualified"]
+    metrics: ["199% Visitor Growth", "Page 1 for Key Terms", "Cleaner Intake Handoffs"]
   },
   {
-    quote: "The ad automation hyper-optimized the budget I was already spending. I saw 25% more leads without increasing my ad spend, and the lead conversion rate jumped by 30%.",
+    quote: "A dental practice wanted dependable phone coverage during lunch and after hours without asking staff to hover over missed calls. Caliperworks helped create a workflow that captured patient requests, closed coverage gaps, and let the front desk follow up from a clear queue.",
+    author: "Dental Practice",
+    metrics: ["Lunch-Break Coverage", "After-Hours Intake", "Staff-Led Follow-Up"]
+  },
+  {
+    quote: "An HVAC business used Caliperworks to automate parts of its ad workflow and lead handling. The result was 25% more leads on the same spend and a 30% lift in lead conversion, with less day-to-day babysitting from the team.",
     author: "HVAC Business Owner in Austin, TX",
-    metrics: ["25% More Leads", "30% Conversion Boost", "Budget Optimized"]
+    metrics: ["25% More Leads", "30% Conversion Lift", "Same Budget"]
   }
 ];
 
 const industries = [
   { 
     name: "Home Care Agencies", 
-    detail: "SEO-driven growth and automated lead qualification to help you scale caregiver recruitment and client intake seamlessly.",
+    detail: "SEO, intake, and qualification workflows that help your team respond faster to new client and caregiver inquiries.",
     tags: ["SEO", "Ads Automation", "Voice Agent"]
   },
   { 
     name: "Dentists", 
-    detail: "Ensure no appointment request or emergency call goes unanswered, even when your front desk is at capacity.",
+    detail: "Coverage for calls during lunch, after hours, or peak chair time, with patient requests logged so staff can return to a clear follow-up list.",
     tags: ["Voice Agent"]
   },
   { 
     name: "Laundromats", 
-    detail: "Dominate your neighborhood's pick-up and delivery market by hyper-optimizing local ad spend and search visibility.",
+    detail: "Local search and ad support for pickup and delivery services, with practical reporting and steadier follow-up.",
     tags: ["Local SEO", "Ad Budget Optimization"]
   },
   { 
     name: "HVAC & Plumbing", 
-    detail: "Handling emergency calls 24/7 and booking service windows while getting more leads from your existing ad budget.",
+    detail: "Reliable call coverage for urgent service windows and marketing support that helps the team respond without staying glued to the phone.",
     tags: ["Voice Agent", "SEO", "Ads Automation"]
   },
   { 
     name: "Real Estate", 
-    detail: "Qualifying buyer and seller leads instantly, ensuring you only spend time on your most serious prospects.",
+    detail: "Lead qualification and routing that helps agents focus on serious buyer and seller conversations instead of sorting every inquiry by hand.",
     tags: ["Voice Agent"]
   }
 ];
@@ -83,24 +88,35 @@ const industries = [
 const faqs = [
   {
     q: "How is this different from ChatGPT?",
-    a: "ChatGPT is a tool you talk to. We build systems that do work. Whether it's answering your phones or managing your SEO, our tools are integrated into your existing business flow."
+    a: "ChatGPT is a general-purpose interface. We design workflow-specific systems that plug into the way your business already handles calls, follow-up, and marketing."
   },
   {
-    q: "Is it hard to set up?",
-    a: "No. We handle the technical integration. You just tell us how your business works, and we build the AI to match it."
+    q: "How involved is my team in the setup?",
+    a: "Very involved. We build collaboratively: your team helps define scripts, escalation rules, booking logic, and review points. Nothing gets dropped into your business as a black box."
   },
   {
-    q: "Is AI expensive?",
-    a: "We focus on ROI. Most of our tools pay for themselves—for example, by getting more leads from the same ad budget or capturing calls that would otherwise be lost."
+    q: "Will this replace my staff?",
+    a: "No. The goal is to remove repetitive coverage and admin work so your staff can focus on patients, customers, and higher-value follow-up. In most cases it makes the existing team more effective."
   },
   {
-    q: "Will my customers know they're talking to an AI?",
-    a: "Our voice and text agents are designed to be helpful and professional. We prioritize accuracy and a smooth experience over 'trying to trick' the customer."
+    q: "What happens when the office is closed or staff are at lunch?",
+    a: "That is one of the clearest use cases. We can help you maintain coverage during lunch breaks, after hours, or busy periods so inquiries are captured, routed, or booked instead of slipping through."
+  },
+  {
+    q: "How much control do we keep?",
+    a: "You keep control of the workflow. We define guardrails, escalation paths, booking rules, and review steps with you so the system supports your process rather than taking it over."
+  },
+  {
+    q: "How do you measure success?",
+    a: "We look at the operational outcome that matters: fewer missed calls, cleaner follow-up, more qualified leads, better use of staff time, and stronger marketing performance where it applies."
   }
 ];
 ---
 
-<Layout title="Caliperworks | Purposeful AI for Small Business">
+<Layout
+  title="Caliperworks | AI Systems for Service Businesses"
+  description="Caliperworks builds practical AI systems for service businesses, helping teams keep calls covered, reduce routine admin, and stay in control of the workflow."
+>
   <div class="font-sans text-xl leading-relaxed text-slate-900 overflow-x-hidden bg-white">
     
     <!-- Navigation (Sticky & Clear) -->
@@ -108,10 +124,10 @@ const faqs = [
       <div class="text-2xl font-black tracking-tighter">CALIPERWORKS</div>
       <div class="hidden lg:flex items-center space-x-10 font-bold text-base">
         <a href="#solutions" class="hover:text-blue-800 transition-colors">How We Help</a>
-        <a href="#results" class="hover:text-blue-800 transition-colors">Success Stories</a>
+        <a href="#results" class="hover:text-blue-800 transition-colors">Use Cases</a>
         <a href="#expertise" class="hover:text-blue-800 transition-colors">Industries</a>
         <a href="#faq" class="hover:text-blue-800 transition-colors">FAQ</a>
-        <a href={inquiryMailto} class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-blue-800 transition-all hover:scale-105 active:scale-95 shadow-lg">Get My Free Audit</a>
+        <a href={inquiryMailto} class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-blue-800 transition-all hover:scale-105 active:scale-95 shadow-lg">Schedule a Discovery Call</a>
       </div>
     </nav>
 
@@ -168,7 +184,7 @@ const faqs = [
                       <span class="text-xs font-black uppercase tracking-widest text-slate-400">Inbound Call</span>
                     </div>
                     <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Qualifying...</span>
+                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Capturing Details</span>
                       <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                       </div>
@@ -180,7 +196,7 @@ const faqs = [
                     </div>
                     <div>
                       <div class="text-[10px] font-black uppercase text-emerald-600 tracking-widest">Lead Result</div>
-                      <div class="text-xl font-serif font-black italic text-slate-800 leading-tight">Confirmed Booking</div>
+                      <div class="text-xl font-serif font-black italic text-slate-800 leading-tight">Booked or Routed</div>
                     </div>
                   </div>
                 </div>
@@ -195,7 +211,7 @@ const faqs = [
                       <span class="text-xs font-black uppercase tracking-widest text-slate-400">Current Budget</span>
                     </div>
                     <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Optimizing...</span>
+                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Reviewing Spend</span>
                       <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                       </div>
@@ -232,7 +248,7 @@ const faqs = [
     <section class="bg-slate-100 py-32 px-6 border-y-2 border-slate-900">
       <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
         <div>
-          <h2 class="font-serif text-5xl font-black mb-8 leading-tight">You run the business.<br/><span class="text-blue-800">We run the AI.</span></h2>
+          <h2 class="font-serif text-5xl font-black mb-8 leading-tight">Keep the work moving.<br/><span class="text-blue-800">Without tying up your staff.</span></h2>
           <div class="h-2 w-32 bg-blue-800"></div>
         </div>
         <div class="text-2xl text-slate-700 leading-relaxed border-l-4 border-blue-800 pl-8 font-medium italic">
@@ -245,8 +261,8 @@ const faqs = [
     <section id="solutions" class="bg-white py-32 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="mb-20 text-center">
-          <h2 class="font-serif text-6xl font-black mb-6 italic">Solutions that work for you</h2>
-          <p class="text-2xl text-slate-500 font-medium">No jargon. Just tools that help you do more in less time.</p>
+          <h2 class="font-serif text-6xl font-black mb-6 italic">Built around the way your team works</h2>
+          <p class="text-2xl text-slate-500 font-medium">Collaborative systems for coverage, follow-up, and growth.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-10">
@@ -257,7 +273,7 @@ const faqs = [
               <p class="text-slate-600 text-xl leading-relaxed font-medium mb-10">{s.description}</p>
               
               <div class="pt-8 border-t-2 border-slate-100">
-                <a href="#audit" class="inline-flex items-center gap-3 font-black text-slate-900 group-hover:text-blue-800 transition-colors">
+                <a href="#contact" class="inline-flex items-center gap-3 font-black text-slate-900 group-hover:text-blue-800 transition-colors">
                   Learn more
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
@@ -272,11 +288,11 @@ const faqs = [
     <section id="results" class="bg-slate-900 text-white py-32 px-6 overflow-hidden relative border-y-2 border-slate-900">
       <div class="max-w-7xl mx-auto relative z-10">
         <div class="text-center mb-24">
-          <h2 class="font-serif text-5xl md:text-7xl font-black mb-6 text-emerald-400 italic">Success Stories</h2>
-          <p class="text-2xl text-slate-400 font-medium">Verifiable growth through purposeful automation.</p>
+          <h2 class="font-serif text-5xl md:text-7xl font-black mb-6 text-emerald-400 italic">Recent Use Cases</h2>
+          <p class="text-2xl text-slate-400 font-medium">Selected outcomes from prior client work. Scope and results vary by business.</p>
         </div>
         
-        <div class="grid lg:grid-cols-2 gap-12">
+        <div class="grid xl:grid-cols-3 gap-12">
           {testimonials.map((t) => (
             <div class="p-12 border-4 border-slate-800 rounded-[3rem] bg-slate-800/40 backdrop-blur-md relative">
               <p class="text-3xl font-serif font-black mb-10 leading-snug italic text-slate-100">
@@ -298,19 +314,19 @@ const faqs = [
         <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t-4 border-slate-800 pt-20">
           <div class="text-center">
             <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">199%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Traffic Increase</div>
+            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Visitor Growth in One Engagement</div>
           </div>
           <div class="text-center">
             <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">Page 1</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Search Visibility</div>
+            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Search Visibility on Target Terms</div>
           </div>
           <div class="text-center">
             <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">25%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">More Leads</div>
+            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Lead Growth on Existing Spend</div>
           </div>
           <div class="text-center">
             <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">30%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Conversion Boost</div>
+            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Lead Conversion Lift</div>
           </div>
         </div>
       </div>
@@ -321,8 +337,8 @@ const faqs = [
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
-            <h2 class="font-serif text-6xl font-black mb-6 italic">Expertise by Industry</h2>
-            <p class="text-2xl text-slate-600 max-w-2xl font-medium leading-relaxed">Tailored systems for businesses that live in the physical world.</p>
+            <h2 class="font-serif text-6xl font-black mb-6 italic">Where this tends to fit best</h2>
+            <p class="text-2xl text-slate-600 max-w-2xl font-medium leading-relaxed">Service businesses with real phones, real schedules, and real handoffs.</p>
           </div>
         </div>
 
@@ -346,7 +362,7 @@ const faqs = [
     <!-- FAQ Section -->
     <section id="faq" class="bg-white py-32 px-6">
       <div class="max-w-4xl mx-auto">
-        <h2 class="font-serif text-6xl font-black text-center mb-24 italic">Common Inquiries</h2>
+        <h2 class="font-serif text-6xl font-black text-center mb-24 italic">Common Questions</h2>
         <div class="space-y-10">
           {faqs.map((faq) => (
             <div class="border-4 border-slate-900 rounded-[2rem] overflow-hidden shadow-[12px_12px_0_0_rgba(15,23,42,1)] hover:shadow-none transition-all duration-300">
@@ -363,12 +379,12 @@ const faqs = [
     </section>
 
     <!-- Final CTA -->
-    <section id="audit" class="bg-blue-800 text-white py-32 px-6 text-center border-t-2 border-slate-900 relative overflow-hidden">
+    <section id="contact" class="bg-blue-800 text-white py-32 px-6 text-center border-t-2 border-slate-900 relative overflow-hidden">
       <div class="max-w-4xl mx-auto relative z-10">
-        <h2 class="font-serif text-6xl md:text-9xl font-black mb-12 tracking-tighter italic">Ready to automate?</h2>
-        <p class="text-3xl mb-16 text-blue-100 font-medium leading-relaxed">Let's find the high-impact wins in your business processes and start scaling today.</p>
+        <h2 class="font-serif text-6xl md:text-9xl font-black mb-12 tracking-tighter italic">See where this fits.</h2>
+        <p class="text-3xl mb-16 text-blue-100 font-medium leading-relaxed">We can review your intake, phone coverage, and follow-up process with you, identify the gaps worth solving, and outline a rollout your team can actually run.</p>
         <a href={inquiryMailto} class="inline-block bg-white text-blue-900 text-4xl font-black px-20 py-10 rounded-3xl hover:scale-105 transition-transform shadow-[0_30px_90px_rgba(0,0,0,0.3)] hover:bg-slate-100 active:scale-95">
-          Request My Free Audit
+          Schedule a Discovery Call
         </a>
       </div>
       <!-- Decorative Background Text -->
@@ -380,13 +396,13 @@ const faqs = [
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
         <div>
           <div class="text-white text-4xl font-black tracking-tighter mb-6">CALIPERWORKS</div>
-          <p class="text-2xl font-medium text-slate-500 italic max-w-sm leading-snug">Purposeful automation for the real world.</p>
+          <p class="text-2xl font-medium text-slate-500 italic max-w-sm leading-snug">Practical AI systems for teams that want better coverage and cleaner follow-up.</p>
         </div>
         <div class="flex flex-wrap gap-16 text-xl font-bold">
           <div class="space-y-6">
             <div class="text-xs font-black text-blue-500 uppercase tracking-[0.3em] mb-4">Navigation</div>
             <a href="#solutions" class="block hover:text-white transition-colors">How We Help</a>
-            <a href="#results" class="block hover:text-white transition-colors">Success Stories</a>
+            <a href="#results" class="block hover:text-white transition-colors">Use Cases</a>
             <a href="#expertise" class="block hover:text-white transition-colors">Expertise</a>
           </div>
           <div class="space-y-6">
