@@ -60,12 +60,13 @@ export const siteConfig = {
   name: 'Caliperworks',
   siteUrl: 'https://caliperworks.com',
   email: 'pranit@caliperworks.com',
-  defaultSubject: 'Caliperworks Inquiry - Request a Free Audit',
-  defaultTitle: 'AI Automation, Voice Agents, and SEO for Small Businesses | Caliperworks',
+  defaultSubject: 'Caliperworks Inquiry - AI Process Audit',
+  defaultTitle: 'AI Process Audits, Voice Agents, and SEO for Service Businesses | Caliperworks',
   defaultDescription:
-    'Caliperworks helps small businesses deploy AI process audits, voice agents, and SEO or ads automation that turns missed calls and manual work into qualified leads.',
+    'Caliperworks helps service businesses run AI process audits to uncover where voice agents, SEO, ad automation, and workflow improvements will have the most impact.',
   defaultOgImagePath: '/og-card.svg',
-  tagline: 'Purposeful AI systems for small businesses that need booked jobs, qualified leads, and less manual work.',
+  tagline:
+    'AI process audits and implementation for service businesses that need clearer workflows, stronger follow-up, and better operational leverage.',
 } as const;
 
 export const mainNav = [
@@ -80,15 +81,16 @@ export const services: Service[] = [
     slug: 'ai-process-audits',
     name: 'AI Process Audits',
     shortLabel: 'Process audits',
-    teaser: 'Find the manual work, lead leaks, and response delays that should be automated first.',
+    teaser:
+      'Map the workflow first, then prioritize the voice, SEO, ad, and operational changes worth implementing.',
     metaTitle: 'AI Process Audits for Small Businesses | Caliperworks',
     metaDescription:
       'Caliperworks runs AI process audits for small businesses to map workflows, uncover revenue leaks, and prioritize the highest-impact automation opportunities.',
     heroTitle: 'AI process audits for small businesses',
     heroDescription:
-      'Map the busywork, missed handoffs, and slow lead response points inside your business, then turn them into a practical automation roadmap.',
+      'Review intake, marketing, handoffs, and follow-up to uncover the automation opportunities that actually fit your business.',
     summary:
-      'A process audit shows where AI can save time, tighten operations, and create faster lead handling before you buy tools blindly.',
+      'The audit is the discovery layer. It shows whether voice handling, search growth, ad automation, or workflow cleanup should come first.',
     problems: [
       'Teams spend too much time on repetitive intake, quoting, follow-up, and admin work.',
       'Lead handoffs break between phone, inbox, CRM, and scheduling tools.',
@@ -96,13 +98,13 @@ export const services: Service[] = [
     ],
     deliverables: [
       'A workflow map of the steps that create the most friction or delay.',
-      'A prioritized automation roadmap tied to lead volume, labor cost, and response time.',
-      'Implementation recommendations for AI agents, forms, CRM routing, and reporting.',
+      'A prioritized roadmap tied to operational drag, visibility gaps, follow-up friction, and revenue impact.',
+      'Implementation recommendations across voice agents, SEO, ad automation, routing, and reporting.',
     ],
     outcomes: [
-      'Reduce manual admin load before adding headcount.',
-      'Cut lead-response lag that costs appointments and booked jobs.',
-      'Focus implementation on the few automations most likely to pay back first.',
+      'Reduce manual admin load and disconnected handoffs before adding more tools.',
+      'Clarify which use cases deserve implementation first and which should wait.',
+      'Give the team a rollout order it can actually execute.',
     ],
     relatedIndustries: ['home-care-agencies', 'hvac-and-plumbing', 'real-estate-teams'],
     relatedCaseStudies: ['home-care-agency-seo-growth', 'hvac-lead-automation'],
@@ -337,15 +339,15 @@ export const industries: Industry[] = [
   {
     slug: 'hvac-and-plumbing',
     name: 'HVAC and Plumbing',
-    teaser: 'Cover emergency calls, improve response speed, and make ad spend work harder.',
+    teaser: 'Coordinate urgent calls, qualification, and marketing without letting operations get fragmented.',
     metaTitle: 'AI Automation for HVAC and Plumbing Companies | Caliperworks',
     metaDescription:
       'Caliperworks helps HVAC and plumbing businesses use voice agents, process automation, and SEO or ads systems to capture more qualified service leads.',
     heroTitle: 'AI automation for HVAC and plumbing teams',
     heroDescription:
-      'Capture more emergency calls, speed up dispatch qualification, and turn existing marketing spend into more booked jobs.',
+      'Tighten dispatch intake, qualification, and marketing workflows so emergency demand does not create operational chaos.',
     summary:
-      'Trades businesses win on speed. The faster you answer, qualify, and book the right call, the more revenue you keep.',
+      'Trades businesses need fast execution, but the bigger issue is usually workflow coordination across calls, qualification, dispatch, and demand generation.',
     painPoints: [
       'Emergency calls come in after hours, during jobs, or when dispatch is overloaded.',
       'Lead quality varies, but teams still spend time qualifying everyone manually.',
@@ -374,15 +376,15 @@ export const industries: Industry[] = [
   {
     slug: 'real-estate-teams',
     name: 'Real Estate Teams',
-    teaser: 'Qualify buyer and seller leads faster so agents spend more time on serious prospects.',
+    teaser: 'Qualify buyer and seller leads earlier so agents spend more time on serious prospects.',
     metaTitle: 'AI Automation for Real Estate Teams | Caliperworks',
     metaDescription:
       'Caliperworks helps real estate teams use AI voice agents and lead-qualification systems to respond faster and focus on serious buyers and sellers.',
     heroTitle: 'AI systems for real estate teams',
     heroDescription:
-      'Respond to buyer and seller inquiries faster, qualify seriousness earlier, and keep agents focused on the leads most likely to close.',
+      'Build a cleaner lead-qualification and follow-up system so agents stay focused on the buyers and sellers most likely to move.',
     summary:
-      'Real estate teams live or die on speed to lead. AI can handle the first layer of response and qualification so agents do not lose momentum.',
+      'Real estate teams need cleaner qualification, routing, and follow-up so agents are not forced to manually sort every inquiry.',
     painPoints: [
       'Leads go cold when they sit in a form inbox or voicemail too long.',
       'Agents waste time on low-intent prospects who should have been screened earlier.',
@@ -496,7 +498,7 @@ export const homeFaqs: FaqEntry[] = [
   {
     question: 'Do small businesses really need an AI process audit first?',
     answer:
-      'Usually yes. The audit prevents random tool buying and shows where automation will actually improve response time, lead handling, or labor efficiency first.',
+      'Usually yes. The audit shows whether the next step should be voice, SEO, ads, routing, or another operational fix instead of guessing and buying tools out of order.',
   },
   {
     question: 'Can you work with our existing software and ad accounts?',
