@@ -1,0 +1,191 @@
+---
+import type { Service } from '../../data/site';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SectionCta from '../../components/SectionCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+import {
+  caseStudyHref,
+  caseStudyMap,
+  industryHref,
+  industryMap,
+  serviceHref,
+  services,
+} from '../../data/site';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service }: { service: Service } = Astro.props;
+const relatedIndustries = service.relatedIndustries.map((slug) => industryMap[slug]);
+const relatedCaseStudies = service.relatedCaseStudies.map((slug) => caseStudyMap[slug]);
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: service.name, path: serviceHref(service.slug) },
+  ]),
+  serviceSchema(service),
+  faqSchema(service.faq),
+];
+---
+
+<Layout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonicalPath={serviceHref(service.slug)}
+  structuredData={structuredData}
+>
+  <SiteHeader />
+  <main class="bg-white text-slate-900">
+    <section class="border-b-2 border-slate-100 px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <Breadcrumbs
+          items={[
+            { href: '/', label: 'Home' },
+            { href: '/services/', label: 'Services' },
+            { href: serviceHref(service.slug), label: service.name },
+          ]}
+        />
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">{service.shortLabel}</div>
+        <h1 class="mt-6 max-w-4xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
+          {service.heroTitle}
+        </h1>
+        <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">{service.heroDescription}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {relatedIndustries.map((industry) => (
+            <a
+              href={industryHref(industry.slug)}
+              class="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-black uppercase tracking-[0.2em] text-blue-800"
+            >
+              {industry.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20">
+      <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-3">
+        <div class="rounded-[2rem] border-4 border-slate-900 bg-white p-8">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">What this solves</div>
+          <ul class="mt-6 space-y-4 text-lg leading-relaxed text-slate-700">
+            {service.problems.map((problem) => (
+              <li>{problem}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-[2rem] border-4 border-slate-200 bg-slate-50 p-8">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">What we build</div>
+          <ul class="mt-6 space-y-4 text-lg leading-relaxed text-slate-700">
+            {service.deliverables.map((deliverable) => (
+              <li>{deliverable}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-[2rem] border-4 border-slate-200 bg-slate-50 p-8">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Why it pays back</div>
+          <ul class="mt-6 space-y-4 text-lg leading-relaxed text-slate-700">
+            {service.outcomes.map((outcome) => (
+              <li>{outcome}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <div class="max-w-3xl">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Best fit</div>
+          <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">
+            Industries where this service matters most
+          </h2>
+        </div>
+        <div class="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {relatedIndustries.map((industry) => (
+            <article class="rounded-[2rem] border-4 border-slate-200 bg-white p-8">
+              <h3 class="text-2xl font-black text-slate-900">{industry.name}</h3>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">{industry.teaser}</p>
+              <a
+                href={industryHref(industry.slug)}
+                class="mt-6 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                Explore {industry.name}
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Proof</div>
+            <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">Related case studies</h2>
+          </div>
+          <a
+            href="/case-studies/"
+            class="inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+          >
+            View all case studies
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          {relatedCaseStudies.map((caseStudy) => (
+            <article class="rounded-[2rem] border-4 border-slate-200 bg-white p-8">
+              <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">
+                {caseStudy.clientLabel} · {caseStudy.location}
+              </div>
+              <h3 class="mt-4 text-3xl font-black text-slate-900">{caseStudy.title}</h3>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">{caseStudy.teaser}</p>
+              <a
+                href={caseStudyHref(caseStudy.slug)}
+                class="mt-6 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                Read the case study
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white px-6 py-20">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">FAQ</div>
+        <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">Questions about {service.name.toLowerCase()}</h2>
+        <div class="mt-10 space-y-5">
+          {service.faq.map((faq) => (
+            <details class="rounded-[1.75rem] border-4 border-slate-900 bg-white p-8 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
+              <summary class="cursor-pointer list-none text-xl font-black text-slate-900">
+                {faq.question}
+              </summary>
+              <p class="mt-5 text-lg leading-relaxed text-slate-600">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SectionCta
+      headline={`Ready to use ${service.name.toLowerCase()} where they actually pay back?`}
+      body="Request an audit and we’ll show where this service fits into your current workflow, lead flow, and growth targets."
+      buttonText={`Talk About ${service.name}`}
+      subject={`Caliperworks Service Inquiry - ${service.name}`}
+    />
+  </main>
+  <SiteFooter />
+</Layout>

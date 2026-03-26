@@ -1,5 +1,268 @@
 ---
-import V6Landing from './v6.astro';
+import Layout from '../layouts/Layout.astro';
+import SectionCta from '../components/SectionCta.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import {
+  caseStudies,
+  caseStudyHref,
+  homeFaqs,
+  industries,
+  industryHref,
+  serviceHref,
+  serviceMap,
+  services,
+  siteConfig,
+} from '../data/site';
+import { faqSchema, itemListSchema, organizationSchema, websiteSchema } from '../lib/seo';
+
+const now = new Date();
+const currentYear = now.getFullYear();
+const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
+const availabilityString = `Accepting Q${currentQuarter} ${currentYear} audit requests`;
+
+const structuredData = [
+  organizationSchema(),
+  websiteSchema(),
+  itemListSchema(
+    'Caliperworks services',
+    services.map((service) => ({
+      name: service.name,
+      path: serviceHref(service.slug),
+    }))
+  ),
+  faqSchema(homeFaqs),
+];
 ---
 
-<V6Landing />
+<Layout
+  title={siteConfig.defaultTitle}
+  description={siteConfig.defaultDescription}
+  structuredData={structuredData}
+>
+  <SiteHeader />
+  <main id="main-content" class="overflow-x-hidden bg-white text-slate-900">
+    <section class="border-b-2 border-slate-100 bg-white px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+        <div>
+          <div class="mb-8 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-4 py-2">
+            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+            <span class="text-sm font-bold tracking-tight text-blue-900">{availabilityString}</span>
+          </div>
+          <h1 class="max-w-4xl font-serif text-5xl font-black leading-tight tracking-tight text-slate-900 md:text-7xl">
+            AI automation for small businesses that need more booked jobs, not more software.
+          </h1>
+          <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600 md:text-2xl">
+            Caliperworks builds AI process audits, voice agents, and SEO or ads automation for small
+            businesses that need faster lead handling, fewer missed calls, and better marketing
+            performance.
+          </p>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-500">
+            We focus on businesses where response speed matters: home care agencies, HVAC and
+            plumbing teams, dental practices, laundromats, and real estate teams.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href="/services/"
+              class="rounded-2xl bg-blue-800 px-8 py-4 text-lg font-black text-white transition-all hover:-translate-y-1 hover:bg-slate-900"
+            >
+              Explore Services
+            </a>
+            <a
+              href="/case-studies/"
+              class="rounded-2xl border-2 border-slate-900 px-8 py-4 text-lg font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+            >
+              Review Case Studies
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="rounded-[2.5rem] border-4 border-slate-900 bg-white p-8 shadow-[16px_16px_0_0_rgba(15,23,42,1)]">
+            <div class="mb-8 inline-flex rounded-full bg-slate-900 px-4 py-2 text-xs font-black uppercase tracking-[0.3em] text-blue-300">
+              Caliper Core
+            </div>
+            <div class="space-y-5">
+              <div class="rounded-2xl border-2 border-slate-200 bg-slate-50 p-5">
+                <div class="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Process</div>
+                <div class="mt-2 text-2xl font-black text-slate-900">Find the workflow bottlenecks first.</div>
+              </div>
+              <div class="rounded-2xl border-2 border-slate-200 bg-slate-50 p-5">
+                <div class="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Voice</div>
+                <div class="mt-2 text-2xl font-black text-slate-900">Answer, qualify, and book the call.</div>
+              </div>
+              <div class="rounded-2xl border-2 border-slate-200 bg-slate-50 p-5">
+                <div class="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Growth</div>
+                <div class="mt-2 text-2xl font-black text-slate-900">Turn search visibility into qualified leads.</div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -right-6 -top-6 -z-10 h-32 w-32 rounded-full bg-blue-100 blur-3xl"></div>
+          <div class="absolute -bottom-8 -left-4 -z-10 h-28 w-28 rounded-full bg-emerald-100 blur-3xl"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div>
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Why this works</div>
+          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
+            Search, lead capture, and operations need to work as one system.
+          </h2>
+        </div>
+        <div class="border-l-4 border-blue-800 pl-8 text-xl leading-relaxed text-slate-700">
+          Most small businesses do not have an AI problem. They have a response-time problem, a
+          lead-routing problem, or a visibility problem. Caliperworks connects those pieces so your
+          marketing, intake, and operations stop fighting each other.
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="max-w-3xl">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Services</div>
+          <h2 class="mt-6 font-serif text-5xl font-black italic">What Caliperworks builds</h2>
+          <p class="mt-6 text-xl leading-relaxed text-slate-600">
+            Each service is built to move a concrete business metric: response time, lead quality,
+            booked jobs, or search visibility.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-8 lg:grid-cols-3">
+          {services.map((service) => (
+            <article class="flex h-full flex-col rounded-[2.5rem] border-4 border-slate-900 bg-white p-10 shadow-sm transition-all hover:-translate-y-2 hover:shadow-[16px_16px_0_0_rgba(15,23,42,1)]">
+              <div class="text-sm font-black uppercase tracking-[0.25em] text-blue-700">{service.shortLabel}</div>
+              <h3 class="mt-4 font-serif text-4xl font-black leading-tight">{service.name}</h3>
+              <p class="mt-6 flex-grow text-lg leading-relaxed text-slate-600">{service.teaser}</p>
+              <ul class="mt-8 space-y-3 text-sm font-semibold text-slate-700">
+                {service.outcomes.slice(0, 3).map((outcome) => (
+                  <li class="rounded-xl bg-slate-50 px-4 py-3">{outcome}</li>
+                ))}
+              </ul>
+              <a
+                href={serviceHref(service.slug)}
+                class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                Explore {service.name}
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="case-studies" class="border-y-2 border-slate-900 bg-slate-900 px-6 py-24 text-white">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-emerald-300">Proof</div>
+            <h2 class="mt-6 font-serif text-5xl font-black italic text-white md:text-6xl">
+              Case studies tied to outcomes
+            </h2>
+            <p class="mt-6 text-xl leading-relaxed text-slate-300">
+              The goal is not AI for its own sake. It is more qualified demand, faster intake, and
+              better use of the budget you already have.
+            </p>
+          </div>
+          <a
+            href="/case-studies/"
+            class="inline-flex items-center gap-3 text-lg font-black text-emerald-300 transition-colors hover:text-white"
+          >
+            View all case studies
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="mt-14 grid gap-8 lg:grid-cols-2">
+          {caseStudies.map((caseStudy) => (
+            <article class="rounded-[2.5rem] border-4 border-slate-800 bg-slate-800/60 p-10">
+              <div class="text-sm font-black uppercase tracking-[0.3em] text-emerald-300">
+                {caseStudy.clientLabel} · {caseStudy.location}
+              </div>
+              <h3 class="mt-4 font-serif text-4xl font-black italic">{caseStudy.title}</h3>
+              <p class="mt-6 text-lg leading-relaxed text-slate-300">{caseStudy.teaser}</p>
+              <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                {caseStudy.results.map((result) => (
+                  <div class="rounded-2xl border-2 border-slate-700 bg-slate-900/70 p-4">
+                    <div class="text-3xl font-black text-emerald-300">{result.value}</div>
+                    <div class="mt-2 text-xs font-black uppercase tracking-[0.3em] text-slate-400">
+                      {result.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <a
+                href={caseStudyHref(caseStudy.slug)}
+                class="mt-8 inline-flex items-center gap-3 text-base font-black text-white transition-colors hover:text-emerald-300"
+              >
+                Read the {caseStudy.title} case study
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="industries" class="bg-slate-100 px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="max-w-3xl">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Industries</div>
+          <h2 class="mt-6 font-serif text-5xl font-black italic">Built for real operating constraints</h2>
+          <p class="mt-6 text-xl leading-relaxed text-slate-600">
+            The same automation stack does not fit every business. We tailor the workflow, search,
+            and qualification strategy to how each industry actually sells.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {industries.map((industry) => (
+            <article class="flex h-full flex-col rounded-[2.25rem] border-4 border-slate-200 bg-white p-8 transition-all hover:border-blue-600 hover:shadow-xl">
+              <h3 class="text-3xl font-black text-slate-900">{industry.name}</h3>
+              <p class="mt-5 flex-grow text-lg leading-relaxed text-slate-600">{industry.teaser}</p>
+              <div class="mt-8 flex flex-wrap gap-2">
+                {industry.relatedServices.map((slug) => (
+                  <span class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-blue-800">
+                    {serviceMap[slug].shortLabel}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={industryHref(industry.slug)}
+                class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                Explore {industry.name} solutions
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">FAQ</div>
+          <h2 class="mt-6 font-serif text-5xl font-black italic">Common questions before the audit</h2>
+        </div>
+        <div class="mt-14 space-y-5">
+          {homeFaqs.map((faq) => (
+            <details class="rounded-[1.75rem] border-4 border-slate-900 bg-white p-8 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
+              <summary class="cursor-pointer list-none text-xl font-black text-slate-900">
+                {faq.question}
+              </summary>
+              <p class="mt-5 text-lg leading-relaxed text-slate-600">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SectionCta
+      headline="Ready to find the bottlenecks first?"
+      body="Request a free audit and we’ll map the highest-impact opportunities across response speed, lead qualification, voice handling, and search visibility."
+      buttonText="Request My Free Audit"
+    />
+  </main>
+  <SiteFooter />
+</Layout>
