@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionCta from '../../components/SectionCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import { caseStudies, caseStudyHref } from '../../data/site';
+import { breadcrumbSchema, itemListSchema } from '../../lib/seo';
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Case Studies', path: '/case-studies/' },
+  ]),
+  itemListSchema(
+    'Caliperworks case studies',
+    caseStudies.map((caseStudy) => ({
+      name: caseStudy.title,
+      path: caseStudyHref(caseStudy.slug),
+    }))
+  ),
+];
+---
+
+<Layout
+  title="Case Studies | Caliperworks"
+  description="Review Caliperworks case studies covering search growth, lead qualification, and automation outcomes for small businesses."
+  canonicalPath="/case-studies/"
+  structuredData={structuredData}
+>
+  <SiteHeader />
+  <main class="bg-white text-slate-900">
+    <section class="border-b-2 border-slate-100 px-6 py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Case studies</div>
+        <h1 class="mt-6 max-w-4xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
+          Proof tied to qualified demand, faster handling, and better efficiency
+        </h1>
+        <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">
+          These examples show the kinds of outcomes Caliperworks targets: stronger search
+          visibility, more efficient budget use, and better lead qualification once demand arrives.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-6 py-20">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+        {caseStudies.map((caseStudy) => (
+          <article class="rounded-[2.25rem] border-4 border-slate-900 bg-white p-10 shadow-sm">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">
+              {caseStudy.clientLabel} · {caseStudy.location}
+            </div>
+            <h2 class="mt-4 font-serif text-4xl font-black italic">{caseStudy.title}</h2>
+            <p class="mt-6 text-lg leading-relaxed text-slate-600">{caseStudy.heroDescription}</p>
+            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+              {caseStudy.results.map((result) => (
+                <div class="rounded-2xl border-2 border-slate-200 bg-slate-50 p-4">
+                  <div class="text-3xl font-black text-blue-800">{result.value}</div>
+                  <div class="mt-2 text-xs font-black uppercase tracking-[0.3em] text-slate-500">
+                    {result.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <a
+              href={caseStudyHref(caseStudy.slug)}
+              class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+            >
+              Read this case study
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <SectionCta
+      headline="Want this kind of operational lift in your business?"
+      body="Request an audit and we’ll show where your current workflow is leaking leads, time, or marketing efficiency."
+      buttonText="Request My Free Audit"
+      subject="Caliperworks Case Study Inquiry"
+    />
+  </main>
+  <SiteFooter />
+</Layout>
