@@ -1,418 +1,516 @@
 ---
 import Layout from './Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { createMailto, industryHref, serviceHref } from '../data/site';
 
-// Date Awareness Logic
 const now = new Date();
 const currentYear = now.getFullYear();
 const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
-const availabilityString = `Accepting Q${currentQuarter} ${currentYear} Discovery Calls`;
+const availabilityString = `Accepting Q${currentQuarter} ${currentYear} audit requests`;
 
-// Content Integration
+const inquiryMailto = createMailto();
+
 const hero = {
-  headline: "AI systems that support your team and keep work moving.",
-  subheadline: "Caliperworks helps service businesses add reliable AI coverage for calls, intake, follow-up, and marketing tasks without losing control of the workflow. We build collaboratively around the way your team already works.",
-  cta: "Schedule a Discovery Call"
+  headline: 'AI process audits that show where automation actually fits.',
+  subheadline:
+    'Caliperworks maps the gaps across intake, phone coverage, search visibility, ad workflows, and follow-up so service businesses can prioritize the right next move instead of buying isolated AI tools.',
+  cta: 'Start with a Process Audit',
 };
 
-const inquiryMailto =
-  "mailto:pranit@caliperworks.com?subject=Caliperworks%20Inquiry%20-%20Discovery%20Call";
+const auditAreas = [
+  {
+    title: 'Calls and intake',
+    detail: 'Spot where inquiries get missed, delayed, or depend too heavily on one person.',
+  },
+  {
+    title: 'Search and content',
+    detail: 'See whether visibility gaps, weak service pages, or local coverage are slowing demand.',
+  },
+  {
+    title: 'Ads and landing pages',
+    detail: 'Find where spend is active but conversion paths and follow-up are still leaking.',
+  },
+  {
+    title: 'Routing and follow-up',
+    detail: 'Map the handoffs between phone, inbox, CRM, scheduling, and staff ownership.',
+  },
+];
 
-const problem = {
-  text: "Most owners do not need more software to babysit. They need dependable coverage when the phone rings during lunch, after hours, or while the team is stretched thin. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate."
-};
+const auditFindings = [
+  'Missed handoffs',
+  'Thin service coverage',
+  'Manual follow-up',
+  'After-hours gaps',
+  'Unclear ownership',
+  'Underused ad spend',
+];
+
+const rolloutPaths = [
+  {
+    title: 'AI Process Audits',
+    detail: 'Map the workflow and rank what to change first.',
+    href: serviceHref('ai-process-audits'),
+  },
+  {
+    title: 'Voice Agents',
+    detail: 'Implement when phone coverage or qualification is the real bottleneck.',
+    href: serviceHref('voice-agents'),
+  },
+  {
+    title: 'SEO and Ads Automation',
+    detail: 'Prioritize when visibility, landing pages, or budget efficiency are the leak.',
+    href: serviceHref('seo-and-ads-automation'),
+  },
+];
 
 const solutions = [
   {
-    title: "Workflow Review",
-    subtitle: "Find the right starting points",
-    description: "We review your intake, follow-up, and handoff process with your team and identify the places where automation will actually help. You get a rollout plan grounded in your day-to-day operations."
+    title: 'AI Process Audit',
+    subtitle: 'Discovery before deployment',
+    description:
+      'We review intake, marketing, routing, follow-up, and handoffs to find the gaps worth fixing first.',
+    href: serviceHref('ai-process-audits'),
+    linkLabel: 'See audit scope',
   },
   {
-    title: "Voice Coverage",
-    subtitle: "Coverage when staff are busy or offline",
-    description: "We can answer routine calls during lunch breaks, after hours, or peak periods, capture the right details, and route or book the next step so your staff starts from a clean follow-up list."
+    title: 'Voice and Intake Systems',
+    subtitle: 'When coverage is the gap',
+    description:
+      'If the audit shows calls, triage, booking, or front-desk load is the real issue, we design voice and intake workflows around your rules.',
+    href: serviceHref('voice-agents'),
+    linkLabel: 'See voice-agent use cases',
   },
   {
-    title: "Search & Ads Support",
-    subtitle: "Measured automation, clear reporting",
-    description: "We support SEO and ad workflows with measured automation, human review, and reporting your team can actually use. The goal is more qualified demand without creating another system to monitor all day."
-  }
+    title: 'Search, Ads, and Workflow Automation',
+    subtitle: 'When demand or ops are the gap',
+    description:
+      'If the bottleneck sits in visibility, budget efficiency, routing, or manual follow-up, we implement the right search, ad, or workflow changes.',
+    href: serviceHref('seo-and-ads-automation'),
+    linkLabel: 'See growth and ops paths',
+  },
 ];
 
 const testimonials = [
   {
-    quote: "A home care agency used Caliperworks to improve search visibility and lead qualification. Monthly engaged visitors increased 199%, and the team had a much cleaner intake process for new inquiries.",
-    author: "Home Care Agency in Boston",
-    metrics: ["199% Visitor Growth", "Page 1 for Key Terms", "Cleaner Intake Handoffs"]
+    quote:
+      'Caliperworks helped us see where SEO and intake were disconnected. We left with a clearer plan, better search visibility, and a cleaner way to handle new inquiries.',
+    author: 'Owner, home care agency',
+    location: 'Boston',
+    metrics: ['199% engaged traffic', 'Page 1 visibility', 'Cleaner intake'],
   },
   {
-    quote: "A dental practice wanted dependable phone coverage during lunch and after hours without asking staff to hover over missed calls. Caliperworks helped create a workflow that captured patient requests, closed coverage gaps, and let the front desk follow up from a clear queue.",
-    author: "Dental Practice",
-    metrics: ["Lunch-Break Coverage", "After-Hours Intake", "Staff-Led Follow-Up"]
+    quote:
+      'Caliperworks helped us tighten phone coverage and follow-up without making the front desk feel replaced. The handoff is much cleaner when patients call during lunch or after hours.',
+    author: 'Owner, dental practice',
+    location: 'Austin, TX',
+    metrics: ['Lunch-hour coverage', 'After-hours intake', 'Clearer handoff'],
   },
   {
-    quote: "An HVAC business used Caliperworks to automate parts of its ad workflow and lead handling. The result was 25% more leads on the same spend and a 30% lift in lead conversion, with less day-to-day babysitting from the team.",
-    author: "HVAC Business Owner in Austin, TX",
-    metrics: ["25% More Leads", "30% Conversion Lift", "Same Budget"]
-  }
+    quote:
+      'Caliperworks tightened both our ad workflow and lead qualification process. We got more from the budget we already had without adding more admin work for the team.',
+    author: 'Owner, HVAC company',
+    location: 'Austin, TX',
+    metrics: ['25% more leads', '30% conversion lift', 'Same budget'],
+  },
 ];
 
 const industries = [
-  { 
-    name: "Home Care Agencies", 
-    detail: "SEO, intake, and qualification workflows that help your team respond faster to new client and caregiver inquiries.",
-    tags: ["SEO", "Ads Automation", "Voice Agent"]
+  {
+    name: 'Home Care Agencies',
+    detail:
+      'Use the audit to connect caregiver recruitment, client intake, SEO, and qualification workflows.',
+    tags: ['Process audit', 'SEO', 'Voice agent'],
+    href: industryHref('home-care-agencies'),
   },
-  { 
-    name: "Dentists", 
-    detail: "Coverage for calls during lunch, after hours, or peak chair time, with patient requests logged so staff can return to a clear follow-up list.",
-    tags: ["Voice Agent"]
+  {
+    name: 'Dentists',
+    detail:
+      'Audit where phone coverage, patient intake, and front-desk follow-up break down before automating.',
+    tags: ['Process audit', 'Voice agent'],
+    href: industryHref('dentists'),
   },
-  { 
-    name: "Laundromats", 
-    detail: "Local search and ad support for pickup and delivery services, with practical reporting and steadier follow-up.",
-    tags: ["Local SEO", "Ad Budget Optimization"]
+  {
+    name: 'Laundromats',
+    detail:
+      'Find whether local search, pickup and delivery demand, or repetitive admin is the best first place to improve.',
+    tags: ['Process audit', 'Local SEO', 'Ads'],
+    href: industryHref('laundromats'),
   },
-  { 
-    name: "HVAC & Plumbing", 
-    detail: "Reliable call coverage for urgent service windows and marketing support that helps the team respond without staying glued to the phone.",
-    tags: ["Voice Agent", "SEO", "Ads Automation"]
+  {
+    name: 'HVAC and Plumbing',
+    detail:
+      'Map the pressure points across urgent calls, dispatch qualification, ad spend, and follow-up workflows.',
+    tags: ['Process audit', 'Voice agent', 'SEO'],
+    href: industryHref('hvac-and-plumbing'),
   },
-  { 
-    name: "Real Estate", 
-    detail: "Lead qualification and routing that helps agents focus on serious buyer and seller conversations instead of sorting every inquiry by hand.",
-    tags: ["Voice Agent"]
-  }
+  {
+    name: 'Real Estate Teams',
+    detail:
+      'Clarify where qualification, routing, and lead follow-up should be automated so agents stay focused on serious prospects.',
+    tags: ['Process audit', 'Voice agent', 'Routing'],
+    href: industryHref('real-estate-teams'),
+  },
 ];
 
 const faqs = [
   {
-    q: "How is this different from ChatGPT?",
-    a: "ChatGPT is a general-purpose interface. We design workflow-specific systems that plug into the way your business already handles calls, follow-up, and marketing."
+    q: 'How is this different from using ChatGPT?',
+    a: 'ChatGPT is a tool. Caliperworks starts with the workflow, then identifies where voice, SEO, ads, routing, or other automation actually belongs.',
   },
   {
-    q: "How involved is my team in the setup?",
-    a: "Very involved. We build collaboratively: your team helps define scripts, escalation rules, booking logic, and review points. Nothing gets dropped into your business as a black box."
+    q: 'Why start with a process audit?',
+    a: 'Because most teams have more than one possible AI use case. The audit shows which one deserves implementation first and which ones should wait.',
   },
   {
-    q: "Will this replace my staff?",
-    a: "No. The goal is to remove repetitive coverage and admin work so your staff can focus on patients, customers, and higher-value follow-up. In most cases it makes the existing team more effective."
+    q: 'Will this only help businesses that need faster phone coverage?',
+    a: 'No. Voice is one possible outcome. The audit can also surface search, ads, intake, follow-up, routing, or reporting improvements.',
   },
   {
-    q: "What happens when the office is closed or staff are at lunch?",
-    a: "That is one of the clearest use cases. We can help you maintain coverage during lunch breaks, after hours, or busy periods so inquiries are captured, routed, or booked instead of slipping through."
+    q: 'How involved is my team in the setup?',
+    a: 'Very involved. We build collaboratively with your team so the system supports your actual operating model instead of forcing a new one.',
   },
   {
-    q: "How much control do we keep?",
-    a: "You keep control of the workflow. We define guardrails, escalation paths, booking rules, and review steps with you so the system supports your process rather than taking it over."
+    q: 'What happens after the audit?',
+    a: 'You get a prioritized rollout path. That might lead to voice implementation, SEO and ads work, workflow automation, or a sequence of changes over time.',
   },
-  {
-    q: "How do you measure success?",
-    a: "We look at the operational outcome that matters: fewer missed calls, cleaner follow-up, more qualified leads, better use of staff time, and stronger marketing performance where it applies."
-  }
 ];
 ---
 
 <Layout
-  title="Caliperworks | AI Systems for Service Businesses"
-  description="Caliperworks builds practical AI systems for service businesses, helping teams keep calls covered, reduce routine admin, and stay in control of the workflow."
+  title="Caliperworks | AI Process Audits for Service Businesses"
+  description="Caliperworks helps service businesses run AI process audits to uncover where voice agents, SEO, ad automation, and workflow improvements will have the most impact."
 >
-  <div class="font-sans text-xl leading-relaxed text-slate-900 overflow-x-hidden bg-white">
-    
-    <!-- Navigation (Sticky & Clear) -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-900 px-6 py-4 flex items-center justify-between">
-      <div class="text-2xl font-black tracking-tighter">CALIPERWORKS</div>
-      <div class="hidden lg:flex items-center space-x-10 font-bold text-base">
-        <a href="#solutions" class="hover:text-blue-800 transition-colors">How We Help</a>
-        <a href="#results" class="hover:text-blue-800 transition-colors">Use Cases</a>
-        <a href="#expertise" class="hover:text-blue-800 transition-colors">Industries</a>
-        <a href="#faq" class="hover:text-blue-800 transition-colors">FAQ</a>
-        <a href={inquiryMailto} class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-blue-800 transition-all hover:scale-105 active:scale-95 shadow-lg">Schedule a Discovery Call</a>
-      </div>
-    </nav>
+  <div class="font-sans overflow-x-hidden bg-white text-xl leading-relaxed text-slate-900">
+    <SiteHeader />
 
-    <!-- Hero Section -->
-    <section class="relative bg-white pt-12 md:pt-20 pb-24 px-6 overflow-hidden min-h-[90vh] flex items-center border-b-2 border-slate-100">
-      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <section class="relative border-b-2 border-slate-100 bg-white px-6 pb-24 pt-12 md:pt-20">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="relative z-10">
-          <div class="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 border border-blue-100 rounded-full mb-8">
-            <span class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-            <span class="font-bold text-blue-900 text-sm tracking-tight">{availabilityString}</span>
+          <div class="mb-8 inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-4 py-2">
+            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+            <span class="text-sm font-bold tracking-tight text-blue-900">{availabilityString}</span>
           </div>
-          <h1 class="font-serif text-6xl md:text-8xl font-black leading-tight tracking-tight mb-8 text-slate-900">
+          <h1 class="max-w-5xl font-serif text-6xl font-black leading-tight tracking-tight text-slate-900 md:text-8xl">
             {hero.headline}
           </h1>
-          <p class="text-xl md:text-2xl text-slate-600 mb-10 max-w-xl font-medium leading-relaxed">
+          <p class="mt-8 max-w-3xl text-xl font-medium leading-relaxed text-slate-600 md:text-2xl">
             {hero.subheadline}
           </p>
-          <div class="flex flex-wrap gap-6">
-            <a href={inquiryMailto} class="bg-blue-800 text-white text-xl md:text-2xl font-bold px-10 py-5 rounded-2xl hover:bg-slate-900 transition-all shadow-xl hover:-translate-y-1 active:translate-y-0">
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href={inquiryMailto}
+              class="rounded-2xl bg-blue-800 px-10 py-5 text-xl font-black text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-slate-900"
+            >
               {hero.cta}
+            </a>
+            <a
+              href="/services/"
+              class="rounded-2xl border-2 border-slate-900 px-8 py-5 text-lg font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+            >
+              Explore Services
             </a>
           </div>
         </div>
 
-        <!-- Cycling Growth Engine Graphic (Scaled Down) -->
-        <div class="relative hidden lg:block scale-90 origin-right">
-          <div class="absolute inset-0 bg-blue-600/[0.02] rounded-[3rem] transform -rotate-2 -z-10 border border-slate-100"></div>
-          
-          <div class="relative bg-white border-4 border-slate-900 p-8 rounded-[3.5rem] shadow-[20px_20px_0_0_rgba(15,23,42,1)] overflow-hidden max-w-xl mx-auto">
-            <!-- Background Decorative Grid -->
-            <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image: linear-gradient(#94a3b8 1px, transparent 1px), linear-gradient(90deg, #94a3b8 1px, transparent 1px); background-size: 30px 30px;"></div>
-            
-            <div class="relative z-10 flex flex-col gap-8 min-h-[360px]">
-              <!-- Central Anchor: Purposeful Automation -->
-              <div class="flex justify-center pt-4">
-                <div class="bg-slate-900 text-white rounded-[1.5rem] px-8 py-4 text-center shadow-xl border-2 border-slate-700">
-                  <div class="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-1">Caliper Core</div>
-                  <div class="text-xl font-serif font-black italic">Purposeful Automation</div>
+        <div class="relative">
+          <div class="rounded-[2.75rem] border-4 border-slate-900 bg-white p-8 shadow-[20px_20px_0_0_rgba(15,23,42,1)]">
+            <div class="mb-6 inline-flex rounded-full bg-slate-900 px-4 py-2 text-xs font-black uppercase tracking-[0.3em] text-blue-300">
+              Audit Canvas
+            </div>
+
+            <div class="grid gap-6">
+              <div class="rounded-[2rem] border-2 border-slate-200 bg-slate-50 p-6">
+                <div class="text-xs font-black uppercase tracking-[0.3em] text-slate-400">What we inspect</div>
+                <div class="mt-4 grid gap-4 md:grid-cols-2">
+                  {auditAreas.map((area) => (
+                    <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                      <div class="text-sm font-black uppercase tracking-[0.2em] text-blue-700">{area.title}</div>
+                      <p class="mt-3 text-base leading-relaxed text-slate-600">{area.detail}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <!-- Animated Connector Lines (Static CSS) -->
-              <div class="absolute top-[80px] left-1/2 -translate-x-1/2 w-px h-[240px] bg-dashed-v z-0"></div>
-
-              <!-- Cycling Content Area -->
-              <div id="hero-cycler" class="relative flex-grow">
-                <!-- State 1: Lead Capture (Voice) -->
-                <div class="cycle-item active flex flex-col gap-6 items-center transition-all duration-700 absolute inset-0 pt-4">
-                  <div class="w-full flex justify-between items-center px-4">
-                    <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                      </div>
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Inbound Call</span>
-                    </div>
-                    <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Capturing Details</span>
-                      <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-8 bg-emerald-50 border-2 border-emerald-500/30 p-6 rounded-2xl flex items-center gap-6 w-[90%] shadow-lg mx-auto">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                    </div>
-                    <div>
-                      <div class="text-[10px] font-black uppercase text-emerald-600 tracking-widest">Lead Result</div>
-                      <div class="text-xl font-serif font-black italic text-slate-800 leading-tight">Booked or Routed</div>
-                    </div>
+              <div class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+                <div class="rounded-[2rem] border-2 border-slate-200 bg-white p-6">
+                  <div class="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Common findings</div>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {auditFindings.map((finding) => (
+                      <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-emerald-800">
+                        {finding}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <!-- State 2: Growth Engine (Ads/Budget Optimization) -->
-                <div class="cycle-item opacity-0 translate-y-8 flex flex-col gap-6 items-center transition-all duration-700 absolute inset-0 pt-4">
-                  <div class="w-full flex justify-between items-center px-4">
-                    <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                      </div>
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Current Budget</span>
-                    </div>
-                    <div class="bg-white border-2 border-slate-200 p-4 rounded-xl flex items-center gap-3 shadow-sm">
-                      <span class="text-xs font-black uppercase tracking-widest text-slate-400">Reviewing Spend</span>
-                      <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-8 bg-blue-50 border-2 border-blue-500/30 p-6 rounded-2xl flex items-center gap-6 w-[90%] shadow-lg mx-auto">
-                    <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    </div>
-                    <div>
-                      <div class="text-[10px] font-black uppercase text-blue-600 tracking-widest">Growth Result</div>
-                      <div class="text-xl font-serif font-black italic text-slate-800 leading-tight">25% More Leads</div>
-                    </div>
+                <div class="rounded-[2rem] border-2 border-slate-200 bg-slate-900 p-6 text-white">
+                  <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-300">Likely rollout paths</div>
+                  <div class="mt-4 grid gap-3">
+                    {rolloutPaths.map((path) => (
+                      <a
+                        href={path.href}
+                        class="rounded-2xl border border-slate-700 bg-slate-800/80 p-4 transition-colors hover:border-blue-400 hover:bg-slate-800"
+                      >
+                        <div class="text-lg font-black">{path.title}</div>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-300">{path.detail}</p>
+                      </a>
+                    ))}
                   </div>
                 </div>
-              </div>
-
-              <!-- Cycle Navigation Pills -->
-              <div class="flex justify-center gap-3 pt-4">
-                <div class="cycle-pill active w-8 h-1.5 bg-slate-900 rounded-full transition-all"></div>
-                <div class="cycle-pill w-3 h-1.5 bg-slate-200 rounded-full transition-all"></div>
               </div>
             </div>
           </div>
-          
-          <!-- Abstract Background Glows -->
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-100 rounded-full blur-3xl opacity-50 -z-20"></div>
-          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-100 rounded-full blur-3xl opacity-50 -z-20"></div>
+
+          <div class="absolute -right-6 -top-6 -z-10 h-32 w-32 rounded-full bg-blue-100 blur-3xl"></div>
+          <div class="absolute -bottom-8 -left-4 -z-10 h-28 w-28 rounded-full bg-emerald-100 blur-3xl"></div>
         </div>
       </div>
     </section>
 
-    <!-- Problem Section (Zebra Stripe 1) -->
-    <section class="bg-slate-100 py-32 px-6 border-y-2 border-slate-900">
-      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-24">
+      <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start">
         <div>
-          <h2 class="font-serif text-5xl font-black mb-8 leading-tight">Keep the work moving.<br/><span class="text-blue-800">Without tying up your staff.</span></h2>
-          <div class="h-2 w-32 bg-blue-800"></div>
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Why this works</div>
+          <h2 class="mt-6 font-serif text-5xl font-black leading-tight md:text-6xl">
+            Start with the workflow, not the tool.
+          </h2>
+          <div class="mt-8 h-2 w-32 bg-blue-800"></div>
         </div>
-        <div class="text-2xl text-slate-700 leading-relaxed border-l-4 border-blue-800 pl-8 font-medium italic">
-          {problem.text}
-        </div>
-      </div>
-    </section>
-
-    <!-- Solutions Section -->
-    <section id="solutions" class="bg-white py-32 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="mb-20 text-center">
-          <h2 class="font-serif text-6xl font-black mb-6 italic">Built around the way your team works</h2>
-          <p class="text-2xl text-slate-500 font-medium">Collaborative systems for coverage, follow-up, and growth.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-10">
-          {solutions.map((s) => (
-            <div class="group relative bg-white border-4 border-slate-900 p-10 rounded-[2.5rem] transition-all hover:-translate-y-2 hover:shadow-[16px_16px_0_0_rgba(15,23,42,1)]">
-              <span class="text-blue-600 font-black text-sm uppercase tracking-[0.2em] mb-4 block underline decoration-2 underline-offset-4">{s.subtitle}</span>
-              <h3 class="font-serif text-4xl font-black mb-6 group-hover:text-blue-800 transition-colors leading-tight">{s.title}</h3>
-              <p class="text-slate-600 text-xl leading-relaxed font-medium mb-10">{s.description}</p>
-              
-              <div class="pt-8 border-t-2 border-slate-100">
-                <a href="#contact" class="inline-flex items-center gap-3 font-black text-slate-900 group-hover:text-blue-800 transition-colors">
-                  Learn more
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Results/Testimonials (Purposeful Automation) -->
-    <section id="results" class="bg-slate-900 text-white py-32 px-6 overflow-hidden relative border-y-2 border-slate-900">
-      <div class="max-w-7xl mx-auto relative z-10">
-        <div class="text-center mb-24">
-          <h2 class="font-serif text-5xl md:text-7xl font-black mb-6 text-emerald-400 italic">Recent Use Cases</h2>
-          <p class="text-2xl text-slate-400 font-medium">Selected outcomes from prior client work. Scope and results vary by business.</p>
-        </div>
-        
-        <div class="grid xl:grid-cols-3 gap-12">
-          {testimonials.map((t) => (
-            <div class="p-12 border-4 border-slate-800 rounded-[3rem] bg-slate-800/40 backdrop-blur-md relative">
-              <p class="text-3xl font-serif font-black mb-10 leading-snug italic text-slate-100">
-                "{t.quote}"
+        <div class="space-y-8">
+          <p class="border-l-4 border-blue-800 pl-8 text-2xl font-medium italic leading-relaxed text-slate-700">
+            Most businesses do not need a standalone AI product. They need clarity on where calls,
+            intake, search, ad spend, and follow-up break down, then a plan for which improvement
+            matters first.
+          </p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-[1.75rem] border-2 border-slate-200 bg-white p-6">
+              <div class="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Audit first</div>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">
+                Use the audit to decide whether the next move should be voice, SEO, ads, routing,
+                reporting, or a sequence across several of them.
               </p>
-              <div class="flex flex-wrap gap-3 mb-8">
-                {t.metrics.map(m => (
-                  <span class="bg-emerald-500/10 border-2 border-emerald-500/50 text-emerald-400 font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-widest">{m}</span>
-                ))}
-              </div>
-              <div class="text-xl font-bold text-slate-400 border-t-2 border-slate-700/50 pt-6">
-                — {t.author}
-              </div>
             </div>
-          ))}
-        </div>
-
-        <!-- Big Stats Summary Bar -->
-        <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t-4 border-slate-800 pt-20">
-          <div class="text-center">
-            <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">199%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Visitor Growth in One Engagement</div>
-          </div>
-          <div class="text-center">
-            <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">Page 1</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Search Visibility on Target Terms</div>
-          </div>
-          <div class="text-center">
-            <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">25%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Lead Growth on Existing Spend</div>
-          </div>
-          <div class="text-center">
-            <div class="text-7xl font-black text-emerald-400 tracking-tighter mb-2">30%</div>
-            <div class="text-sm font-black text-slate-400 uppercase tracking-widest leading-tight">Lead Conversion Lift</div>
+            <div class="rounded-[1.75rem] border-2 border-slate-200 bg-white p-6">
+              <div class="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Implement second</div>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">
+                Once the bottleneck is clear, the service pages become implementation paths rather
+                than disconnected offers.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Industry Expertise -->
-    <section id="expertise" class="bg-slate-100 py-32 px-6 border-y-2 border-slate-900">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <div>
-            <h2 class="font-serif text-6xl font-black mb-6 italic">Where this tends to fit best</h2>
-            <p class="text-2xl text-slate-600 max-w-2xl font-medium leading-relaxed">Service businesses with real phones, real schedules, and real handoffs.</p>
+    <section id="solutions" class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Services</div>
+            <h2 class="mt-6 font-serif text-5xl font-black italic md:text-6xl">
+              What the audit can lead to
+            </h2>
+            <p class="mt-6 text-xl leading-relaxed text-slate-600">
+              The homepage should preview the service mix. The deeper details live on the service
+              pages, and the audit decides which path deserves attention first.
+            </p>
           </div>
+          <a
+            href="/services/"
+            class="inline-flex items-center gap-3 text-lg font-black text-slate-900 transition-colors hover:text-blue-800"
+          >
+            View all services
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {industries.map((ind) => (
-            <div class="bg-white border-4 border-slate-200 p-10 rounded-[2.5rem] hover:border-blue-600 transition-all shadow-sm hover:shadow-xl group flex flex-col h-full">
-              <h3 class="font-black text-3xl mb-6 text-slate-900 group-hover:text-blue-800 transition-colors">{ind.name}</h3>
-              <p class="text-slate-600 text-xl font-medium leading-relaxed mb-8 flex-grow">{ind.detail}</p>
-              
-              <div class="flex flex-wrap gap-2 pt-6 border-t border-slate-100">
-                {ind.tags.map(tag => (
-                  <span class="bg-blue-50 text-blue-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-blue-100">{tag}</span>
-                ))}
-              </div>
-            </div>
+        <div class="mt-14 grid gap-8 lg:grid-cols-3">
+          {solutions.map((solution) => (
+            <article class="flex h-full flex-col rounded-[2.5rem] border-4 border-slate-900 bg-white p-10 shadow-sm transition-all hover:-translate-y-2 hover:shadow-[16px_16px_0_0_rgba(15,23,42,1)]">
+              <div class="text-sm font-black uppercase tracking-[0.25em] text-blue-700">{solution.subtitle}</div>
+              <h3 class="mt-4 font-serif text-4xl font-black leading-tight">{solution.title}</h3>
+              <p class="mt-6 flex-grow text-xl font-medium leading-relaxed text-slate-600">{solution.description}</p>
+              <a
+                href={solution.href}
+                class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                {solution.linkLabel}
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="bg-white py-32 px-6">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="font-serif text-6xl font-black text-center mb-24 italic">Common Questions</h2>
-        <div class="space-y-10">
+    <section id="results" class="border-y-2 border-slate-900 bg-slate-900 px-6 py-24 text-white">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-emerald-300">Proof</div>
+            <h2 class="mt-6 font-serif text-5xl font-black italic text-white md:text-6xl">
+              Selected client outcomes
+            </h2>
+            <p class="mt-6 text-xl leading-relaxed text-slate-300">
+              Short examples from the business perspective, tied to the kinds of changes the audit
+              can uncover.
+            </p>
+          </div>
+          <a
+            href="/case-studies/"
+            class="inline-flex items-center gap-3 text-lg font-black text-emerald-300 transition-colors hover:text-white"
+          >
+            Explore case studies
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="mt-14 grid gap-8 xl:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <article class="rounded-[2.5rem] border-4 border-slate-800 bg-slate-800/70 p-10">
+              <p class="text-2xl font-serif font-black leading-snug italic text-slate-100 md:text-[2rem]">
+                "{testimonial.quote}"
+              </p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                {testimonial.metrics.map((metric) => (
+                  <span class="rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-emerald-300">
+                    {metric}
+                  </span>
+                ))}
+              </div>
+              <div class="mt-8 border-t-2 border-slate-700 pt-6 text-lg font-bold text-slate-300">
+                {testimonial.author}
+                <div class="text-sm font-black uppercase tracking-[0.2em] text-slate-500">
+                  {testimonial.location}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise" class="bg-slate-100 px-6 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Industries</div>
+            <h2 class="mt-6 font-serif text-5xl font-black italic md:text-6xl">
+              Industries we already understand
+            </h2>
+            <p class="mt-6 text-xl leading-relaxed text-slate-600">
+              These pages are still in the project. The homepage now points back to them so users
+              can move from the audit story into industry-specific details.
+            </p>
+          </div>
+          <a
+            href="/industries/"
+            class="inline-flex items-center gap-3 text-lg font-black text-slate-900 transition-colors hover:text-blue-800"
+          >
+            Explore industries
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {industries.map((industry) => (
+            <a
+              href={industry.href}
+              class="group flex h-full flex-col rounded-[2.25rem] border-4 border-slate-200 bg-white p-8 transition-all hover:border-blue-600 hover:shadow-xl"
+            >
+              <h3 class="text-3xl font-black text-slate-900 transition-colors group-hover:text-blue-800">
+                {industry.name}
+              </h3>
+              <p class="mt-5 flex-grow text-lg leading-relaxed text-slate-600">{industry.detail}</p>
+              <div class="mt-8 flex flex-wrap gap-2">
+                {industry.tags.map((tag) => (
+                  <span class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-blue-800">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <span class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors group-hover:text-blue-800">
+                See {industry.name} detail
+                <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white px-6 py-24">
+      <div class="mx-auto max-w-4xl">
+        <h2 class="text-center font-serif text-6xl font-black italic">Common Questions</h2>
+        <div class="mt-16 space-y-8">
           {faqs.map((faq) => (
-            <div class="border-4 border-slate-900 rounded-[2rem] overflow-hidden shadow-[12px_12px_0_0_rgba(15,23,42,1)] hover:shadow-none transition-all duration-300">
-              <div class="bg-slate-900 text-white p-8 font-black text-2xl">
-                {faq.q}
-              </div>
-              <div class="p-10 text-xl text-slate-700 bg-white font-medium">
-                {faq.a}
-              </div>
+            <div class="overflow-hidden rounded-[2rem] border-4 border-slate-900 shadow-[12px_12px_0_0_rgba(15,23,42,1)] transition-all duration-300 hover:shadow-none">
+              <div class="bg-slate-900 p-8 text-2xl font-black text-white">{faq.q}</div>
+              <div class="bg-white p-10 text-xl font-medium text-slate-700">{faq.a}</div>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section id="contact" class="bg-blue-800 text-white py-32 px-6 text-center border-t-2 border-slate-900 relative overflow-hidden">
-      <div class="max-w-4xl mx-auto relative z-10">
-        <h2 class="font-serif text-6xl md:text-9xl font-black mb-12 tracking-tighter italic">See where this fits.</h2>
-        <p class="text-3xl mb-16 text-blue-100 font-medium leading-relaxed">We can review your intake, phone coverage, and follow-up process with you, identify the gaps worth solving, and outline a rollout your team can actually run.</p>
-        <a href={inquiryMailto} class="inline-block bg-white text-blue-900 text-4xl font-black px-20 py-10 rounded-3xl hover:scale-105 transition-transform shadow-[0_30px_90px_rgba(0,0,0,0.3)] hover:bg-slate-100 active:scale-95">
-          Schedule a Discovery Call
+    <section
+      id="contact"
+      class="relative overflow-hidden border-t-2 border-slate-900 bg-blue-800 px-6 py-32 text-center text-white"
+    >
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <h2 class="mb-12 font-serif text-6xl font-black tracking-tighter italic md:text-8xl">
+          Start with the workflow.
+        </h2>
+        <p class="mb-16 text-3xl font-medium leading-relaxed text-blue-100">
+          We can review your intake, phone coverage, follow-up, search visibility, and current
+          marketing system with you, then outline the changes worth making first.
+        </p>
+        <a
+          href={inquiryMailto}
+          class="inline-block rounded-3xl bg-white px-20 py-10 text-3xl font-black text-blue-900 shadow-[0_30px_90px_rgba(0,0,0,0.3)] transition-transform hover:scale-105 hover:bg-slate-100 active:scale-95 md:text-4xl"
+        >
+          Start with a Process Audit
         </a>
+        <div class="mt-10 flex flex-wrap justify-center gap-4 text-sm font-black uppercase tracking-[0.2em] text-blue-100">
+          <a href="/services/" class="transition-colors hover:text-white">Services</a>
+          <a href="/industries/" class="transition-colors hover:text-white">Industries</a>
+          <a href="/case-studies/" class="transition-colors hover:text-white">Case Studies</a>
+        </div>
       </div>
-      <!-- Decorative Background Text -->
-      <div class="absolute -bottom-10 -right-20 text-[20rem] font-black text-white/5 pointer-events-none select-none italic tracking-tighter">CALIPER</div>
+      <div class="pointer-events-none absolute -bottom-10 -right-20 select-none text-[20rem] font-black italic tracking-tighter text-white/5">
+        CALIPER
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-24 px-6 border-t-2 border-slate-800">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+    <footer class="border-t-2 border-slate-800 bg-slate-900 px-6 py-24 text-slate-400">
+      <div class="mx-auto mb-24 flex max-w-7xl flex-col items-start justify-between gap-16 md:flex-row">
         <div>
-          <div class="text-white text-4xl font-black tracking-tighter mb-6">CALIPERWORKS</div>
-          <p class="text-2xl font-medium text-slate-500 italic max-w-sm leading-snug">Practical AI systems for teams that want better coverage and cleaner follow-up.</p>
+          <div class="mb-6 text-4xl font-black tracking-tighter text-white">CALIPERWORKS</div>
+          <p class="max-w-md text-2xl font-medium italic leading-snug text-slate-500">
+            Audit first. Then implement the voice, search, ad, and workflow changes that actually fit.
+          </p>
         </div>
-        <div class="flex flex-wrap gap-16 text-xl font-bold">
-          <div class="space-y-6">
-            <div class="text-xs font-black text-blue-500 uppercase tracking-[0.3em] mb-4">Navigation</div>
-            <a href="#solutions" class="block hover:text-white transition-colors">How We Help</a>
-            <a href="#results" class="block hover:text-white transition-colors">Use Cases</a>
-            <a href="#expertise" class="block hover:text-white transition-colors">Expertise</a>
+        <div class="flex flex-wrap gap-16 text-lg font-bold">
+          <div class="space-y-4">
+            <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Explore</div>
+            <a href="/services/" class="block transition-colors hover:text-white">Services</a>
+            <a href="/case-studies/" class="block transition-colors hover:text-white">Case Studies</a>
+            <a href="/industries/" class="block transition-colors hover:text-white">Industries</a>
           </div>
-          <div class="space-y-6">
-            <div class="text-xs font-black text-blue-500 uppercase tracking-[0.3em] mb-4">Contact</div>
-            <a href={inquiryMailto} class="block hover:text-white transition-colors">Contact</a>
+          <div class="space-y-4">
+            <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Start</div>
+            <a href={serviceHref('ai-process-audits')} class="block transition-colors hover:text-white">AI Process Audits</a>
+            <a href={serviceHref('voice-agents')} class="block transition-colors hover:text-white">Voice Agents</a>
+            <a href={serviceHref('seo-and-ads-automation')} class="block transition-colors hover:text-white">SEO and Ads</a>
+          </div>
+          <div class="space-y-4">
+            <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Contact</div>
+            <a href={inquiryMailto} class="block transition-colors hover:text-white">Start with an audit</a>
           </div>
         </div>
       </div>
-      <div class="max-w-7xl mx-auto mt-20 pt-12 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-8 text-sm font-bold uppercase tracking-[0.2em] opacity-30">
-        <div>&copy; 2026 Caliperworks. All protocols observed.</div>
+      <div class="mx-auto mt-20 flex max-w-7xl flex-col items-center justify-between gap-8 border-t border-slate-800 pt-12 text-sm font-bold uppercase tracking-[0.2em] opacity-30 md:flex-row">
+        <div>&copy; 2026 Caliperworks. Audit first, then implement with intent.</div>
         <div class="flex gap-4">
           <div class="h-1 w-12 bg-slate-700"></div>
           <div class="h-1 w-12 bg-slate-700"></div>
@@ -420,64 +518,20 @@ const faqs = [
         </div>
       </div>
     </footer>
-
   </div>
-
-  <script is:inline>
-    // Hero Graphic Cycler
-    const items = document.querySelectorAll('.cycle-item');
-    const pills = document.querySelectorAll('.cycle-pill');
-    let currentIndex = 0;
-
-    function cycle() {
-      // Deactivate current
-      items[currentIndex].classList.remove('active');
-      items[currentIndex].classList.add('opacity-0', 'translate-y-8');
-      pills[currentIndex].classList.remove('active', 'w-8');
-      pills[currentIndex].classList.add('w-3', 'bg-slate-200');
-
-      // Update index
-      currentIndex = (currentIndex + 1) % items.length;
-
-      // Activate next
-      items[currentIndex].classList.add('active');
-      items[currentIndex].classList.remove('opacity-0', 'translate-y-8');
-      pills[currentIndex].classList.add('active', 'w-8', 'bg-slate-900');
-      pills[currentIndex].classList.remove('w-3', 'bg-slate-200');
-    }
-
-    setInterval(cycle, 4000);
-  </script>
 </Layout>
 
 <style>
   :global(body) {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     scroll-behavior: smooth;
   }
-  
+
   .font-serif {
     font-family: 'Fraunces', serif;
   }
-  
+
   .font-sans {
     font-family: 'Geist Sans', sans-serif;
-  }
-
-  .bg-dashed-v {
-    background-image: linear-gradient(to bottom, #e2e8f0 50%, transparent 50%);
-    background-size: 1px 12px;
-    background-repeat: repeat-y;
-  }
-
-  .cycle-item {
-    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    opacity: 0;
-  }
-  .cycle-item.active {
-    pointer-events: auto;
-    opacity: 1;
-    transform: translateY(0);
   }
 </style>
