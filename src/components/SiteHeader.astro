@@ -2,6 +2,17 @@
 import CalTriggerButton from './CalTriggerButton.astro';
 import { createMailto, mainNav } from '../data/site';
 
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems?: readonly NavItem[];
+}
+
+const { navItems = mainNav } = Astro.props;
+
 const contactMailto = createMailto();
 ---
 
@@ -11,7 +22,7 @@ const contactMailto = createMailto();
       CALIPERWORKS
     </a>
     <nav aria-label="Primary" class="hidden items-center gap-8 text-sm font-bold text-slate-700 lg:flex">
-      {mainNav.map((item) => (
+      {navItems.map((item) => (
         <a href={item.href} class="transition-colors hover:text-blue-800">
           {item.label}
         </a>
@@ -31,30 +42,24 @@ const contactMailto = createMailto();
       </a>
     </div>
     <div class="flex items-center gap-2 lg:hidden">
-      <a
-        href="/pricing/"
+      <CalTriggerButton
+        label="Schedule Discovery Call"
+        mobileLabel="Schedule"
         class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-colors hover:bg-blue-800 sm:px-4 sm:py-3 sm:text-sm"
-      >
-        Pricing
-      </a>
+      />
       <details class="relative">
         <summary class="list-none cursor-pointer rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-4 sm:py-3 sm:text-sm">
           Menu
         </summary>
         <div class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-64 rounded-[1.5rem] border-2 border-slate-900 bg-white p-4 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
           <nav aria-label="Mobile primary" class="space-y-2 text-sm font-bold text-slate-900">
-            {mainNav.map((item) => (
+            {navItems.map((item) => (
               <a href={item.href} class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">
                 {item.label}
               </a>
             ))}
           </nav>
           <div class="mt-4 grid gap-2">
-            <CalTriggerButton
-              label="Schedule Discovery Call"
-              mobileLabel="Schedule"
-              class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-black text-white transition-colors hover:bg-blue-800"
-            />
             <a
               href={contactMailto}
               class="rounded-xl border-2 border-slate-900 px-4 py-3 text-center text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
