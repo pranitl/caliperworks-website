@@ -87,6 +87,7 @@ export const calEmbed = {
 
 export const mainNav = [
   { href: '/services/', label: 'Services' },
+  { href: '/pricing/', label: 'Pricing' },
   { href: '/industries/', label: 'Industries' },
   { href: '/case-studies/', label: 'Case Studies' },
   { href: '/#faq', label: 'FAQ' },
@@ -566,6 +567,7 @@ export function caseStudyHref(slug: string) {
 export const publicRoutes = [
   '/',
   '/services/',
+  '/pricing/',
   '/industries/',
   '/case-studies/',
   ...services.map((service) => serviceHref(service.slug)),

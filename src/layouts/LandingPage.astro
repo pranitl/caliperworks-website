@@ -3,15 +3,22 @@ import CalTriggerButton from '../components/CalTriggerButton.astro';
 import Layout from './Layout.astro';
 import { createMailto } from '../data/site';
 
-const now = new Date();
-const currentYear = now.getFullYear();
-const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
+const discoveryTimezone = 'America/New_York';
+const nowParts = new Intl.DateTimeFormat('en-US', {
+  timeZone: discoveryTimezone,
+  year: 'numeric',
+  month: 'numeric',
+}).formatToParts(new Date());
+
+const currentYear = Number(nowParts.find((part) => part.type === 'year')?.value ?? new Date().getUTCFullYear());
+const currentMonth = Number(nowParts.find((part) => part.type === 'month')?.value ?? new Date().getUTCMonth() + 1);
+const currentQuarter = Math.floor((currentMonth - 1) / 3) + 1;
 const availabilityString = `Accepting Q${currentQuarter} ${currentYear} Discovery Calls`;
 
 const hero = {
-  headline: 'AI systems that support your team and keep work moving.',
+  headline: 'You do not need more tools. You need more coverage.',
   subheadline:
-    'Caliperworks helps service businesses add reliable AI coverage for calls, intake, follow-up, and marketing tasks without losing control of the workflow. We build collaboratively around the way your team already works.',
+    'We build AI systems that help service businesses handle demand, reduce admin drag, and keep the workflow under your team’s control.',
   cta: 'Schedule a Discovery Call',
 };
 
