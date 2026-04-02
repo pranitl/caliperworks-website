@@ -2,26 +2,39 @@
 import CalTriggerButton from './CalTriggerButton.astro';
 import { createMailto } from '../data/site';
 
+type CalendarCta = {
+  kind: 'calendar';
+  label: string;
+};
+
+type MailtoCta = {
+  kind: 'mailto';
+  label: string;
+  subject: string;
+};
+
+type LinkCta = {
+  kind: 'link';
+  label: string;
+  href: string;
+};
+
 interface Props {
   headline: string;
   body: string;
-  buttonText?: string;
-  subject?: string;
-  primaryAction?: 'calendar' | 'mailto' | 'link';
-  primaryHref?: string;
+  primaryCta?: CalendarCta | MailtoCta | LinkCta;
+  secondarySubject?: string;
 }
 
 const {
   headline,
   body,
-  buttonText = 'Start with a Process Audit',
-  subject = 'Caliperworks Inquiry - AI Process Audit',
-  primaryAction = 'calendar',
-  primaryHref,
+  primaryCta = { kind: 'calendar', label: 'Start with a Process Audit' },
+  secondarySubject = 'Caliperworks Inquiry - AI Process Audit',
 } = Astro.props;
 
-const href = createMailto(subject);
-const resolvedPrimaryHref = primaryAction === 'mailto' ? href : primaryHref;
+const secondaryHref = createMailto(secondarySubject);
+const primaryHref = primaryCta.kind === 'mailto' ? createMailto(primaryCta.subject) : primaryCta.kind === 'link' ? primaryCta.href : null;
 ---
 
 <section class="border-t-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
@@ -29,21 +42,21 @@ const resolvedPrimaryHref = primaryAction === 'mailto' ? href : primaryHref;
     <h2 class="font-serif text-4xl font-black italic tracking-tight md:text-6xl">{headline}</h2>
     <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">{body}</p>
     <div class="mt-10 flex flex-wrap justify-center gap-4">
-      {primaryAction === 'calendar' ? (
+      {primaryCta.kind === 'calendar' ? (
         <CalTriggerButton
-          label={buttonText}
+          label={primaryCta.label}
           class="rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-transform hover:scale-105 hover:bg-slate-100"
         />
       ) : (
         <a
-          href={resolvedPrimaryHref}
+          href={primaryHref}
           class="rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
         >
-          {buttonText}
+          {primaryCta.label}
         </a>
       )}
       <a
-        href={href}
+        href={secondaryHref}
         class="rounded-3xl border-2 border-white/70 px-10 py-5 text-xl font-black text-white transition-colors hover:border-white hover:bg-white/10"
       >
         Contact Us

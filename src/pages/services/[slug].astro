@@ -206,9 +206,8 @@ const structuredData = [
     <SectionCta
       headline={ctaHeadline}
       body="Start with the free audit and we’ll show where this service fits into your current workflow, lead flow, and growth targets."
-      buttonText="Start with the Free Audit"
-      subject={`Caliperworks Service Inquiry - ${service.name}`}
-      primaryAction="mailto"
+      primaryCta={{ kind: 'mailto', label: 'Start with the Free Audit', subject: `Caliperworks Service Inquiry - ${service.name}` }}
+      secondarySubject={`Caliperworks Service Inquiry - ${service.name}`}
     />
   </main>
   <SiteFooter />

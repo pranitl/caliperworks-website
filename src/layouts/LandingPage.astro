@@ -1,11 +1,24 @@
 ---
 import CalTriggerButton from '../components/CalTriggerButton.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Layout from './Layout.astro';
 import { createMailto } from '../data/site';
+import {
+  homeContactSection,
+  homeFaqs,
+  homeFeaturedIndustries,
+  homeHero,
+  homeMeta,
+  homeNavItems,
+  homeProblemText,
+  homeSectionIds,
+  homeSolutions,
+  homeTestimonials,
+} from '../data/home';
 import { organizationSchema, websiteSchema } from '../lib/seo';
 
-const discoveryTimezone = 'America/New_York';
+const discoveryTimezone = homeHero.availabilityTimezone;
 const nowParts = new Intl.DateTimeFormat('en-US', {
   timeZone: discoveryTimezone,
   year: 'numeric',
@@ -17,137 +30,17 @@ const currentMonth = Number(nowParts.find((part) => part.type === 'month')?.valu
 const currentQuarter = Math.floor((currentMonth - 1) / 3) + 1;
 const availabilityString = `Accepting Q${currentQuarter} ${currentYear} Discovery Calls`;
 
-const hero = {
-  headline: 'You do not need more tools. You need more coverage.',
-  subheadline:
-    'We build AI systems that help service businesses handle demand, reduce admin drag, and keep the workflow under your team’s control.',
-  cta: 'Schedule a Discovery Call',
-};
-
 const inquiryMailto = createMailto();
 const structuredData = [organizationSchema(), websiteSchema()];
-const homeNav = [
-  { href: '#solutions', label: 'How We Help' },
-  { href: '#results', label: 'Use Cases' },
-  { href: '#expertise', label: 'Industries' },
-  { href: '/pricing/', label: 'Pricing' },
-  { href: '#faq', label: 'FAQ' },
-] as const;
-
-const problem = {
-  text: 'Most owners do not need more software to babysit. They need dependable coverage when the phone rings during lunch, after hours, or while the team is stretched thin. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate.',
-};
-
-const solutions = [
-  {
-    title: 'Workflow Review',
-    subtitle: 'Find the right starting points',
-    description:
-      'We review your intake, follow-up, and handoff process with your team and identify the places where automation will actually help. You get a rollout plan grounded in your day-to-day operations.',
-  },
-  {
-    title: 'Voice Coverage',
-    subtitle: 'Coverage when staff are busy or offline',
-    description:
-      'We can answer routine calls during lunch breaks, after hours, or peak periods, capture the right details, and route or book the next step so your staff starts from a clean follow-up list.',
-  },
-  {
-    title: 'Search & Ads Support',
-    subtitle: 'Measured automation, clear reporting',
-    description:
-      'We support SEO and ad workflows with measured automation, human review, and reporting your team can actually use. The goal is more qualified demand without creating another system to monitor all day.',
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      'A home care agency used Caliperworks to improve search visibility and lead qualification. Monthly engaged visitors increased 199%, and the team had a much cleaner intake process for new inquiries.',
-    author: 'Home Care Agency in Boston',
-    metrics: ['199% Visitor Growth', 'Page 1 for Key Terms', 'Cleaner Intake Handoffs'],
-  },
-  {
-    quote:
-      'A dental practice wanted dependable phone coverage during lunch and after hours without asking staff to hover over missed calls. Caliperworks helped create a workflow that captured patient requests, closed coverage gaps, and let the front desk follow up from a clear queue.',
-    author: 'Dental Practice',
-    metrics: ['Lunch-Break Coverage', 'After-Hours Intake', 'Staff-Led Follow-Up'],
-  },
-  {
-    quote:
-      'An HVAC business used Caliperworks to automate parts of its ad workflow and lead handling. The result was 25% more leads on the same spend and a 30% lift in lead conversion, with less day-to-day babysitting from the team.',
-    author: 'HVAC Business Owner in Austin, TX',
-    metrics: ['25% More Leads', '30% Conversion Lift', 'Same Budget'],
-  },
-];
-
-const industries = [
-  {
-    name: 'Home Care Agencies',
-    detail:
-      'SEO, intake, and qualification workflows that help your team respond faster to new client and caregiver inquiries.',
-    tags: ['SEO', 'Ads Automation', 'Voice Agent'],
-  },
-  {
-    name: 'Dentists',
-    detail:
-      'Coverage for calls during lunch, after hours, or peak chair time, with patient requests logged so staff can return to a clear follow-up list.',
-    tags: ['Voice Agent'],
-  },
-  {
-    name: 'Laundromats',
-    detail:
-      'Local search and ad support for pickup and delivery services, with practical reporting and steadier follow-up.',
-    tags: ['Local SEO', 'Ad Budget Optimization'],
-  },
-  {
-    name: 'HVAC & Plumbing',
-    detail:
-      'Reliable call coverage for urgent service windows and marketing support that helps the team respond without staying glued to the phone.',
-    tags: ['Voice Agent', 'SEO', 'Ads Automation'],
-  },
-  {
-    name: 'Real Estate',
-    detail:
-      'Lead qualification and routing that helps agents focus on serious buyer and seller conversations instead of sorting every inquiry by hand.',
-    tags: ['Voice Agent'],
-  },
-];
-
-const faqs = [
-  {
-    q: 'How is this different from ChatGPT?',
-    a: 'ChatGPT is a general-purpose interface. We design workflow-specific systems that plug into the way your business already handles calls, follow-up, and marketing.',
-  },
-  {
-    q: 'How involved is my team in the setup?',
-    a: 'Very involved. We build collaboratively: your team helps define scripts, escalation rules, booking logic, and review points. Nothing gets dropped into your business as a black box.',
-  },
-  {
-    q: 'Will this replace my staff?',
-    a: 'No. The goal is to remove repetitive coverage and admin work so your staff can focus on patients, customers, and higher-value follow-up. In most cases it makes the existing team more effective.',
-  },
-  {
-    q: 'What happens when the office is closed or staff are at lunch?',
-    a: 'That is one of the clearest use cases. We can help you maintain coverage during lunch breaks, after hours, or busy periods so inquiries are captured, routed, or booked instead of slipping through.',
-  },
-  {
-    q: 'How much control do we keep?',
-    a: 'You keep control of the workflow. We define guardrails, escalation paths, booking rules, and review steps with you so the system supports your process rather than taking it over.',
-  },
-  {
-    q: 'How do you measure success?',
-    a: 'We look at the operational outcome that matters: fewer missed calls, cleaner follow-up, more qualified leads, better use of staff time, and stronger marketing performance where it applies.',
-  },
-];
 ---
 
 <Layout
-  title="Caliperworks | Free AI Audit, Voice Agents, and SEO for Service Businesses"
-  description="Start with a free AI process audit. Caliperworks helps service businesses improve coverage, follow-up, voice handling, and SEO with clear pricing and practical workflows."
+  title={homeMeta.title}
+  description={homeMeta.description}
   structuredData={structuredData}
 >
   <div class="font-sans overflow-x-hidden bg-white text-xl leading-relaxed text-slate-900">
-    <SiteHeader navItems={homeNav} />
+    <SiteHeader navItems={homeNavItems} />
 
     <section
       data-cal-floating-threshold
@@ -160,21 +53,21 @@ const faqs = [
             <span class="text-sm font-bold tracking-tight text-blue-900">{availabilityString}</span>
           </div>
           <h1 class="mb-8 font-serif text-6xl font-black leading-tight tracking-tight text-slate-900 md:text-8xl">
-            {hero.headline}
+            {homeHero.headline}
           </h1>
           <p class="mb-10 max-w-xl text-xl font-medium leading-relaxed text-slate-600 md:text-2xl">
-            {hero.subheadline}
+            {homeHero.subheadline}
           </p>
           <div class="flex flex-wrap gap-4 sm:gap-6">
             <CalTriggerButton
-              label={hero.cta}
+              label={homeHero.primaryCtaLabel}
               class="rounded-2xl bg-blue-800 px-10 py-5 text-xl font-bold text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-slate-900 active:translate-y-0 md:text-2xl"
             />
             <a
               href="/pricing/"
               class="rounded-2xl border-2 border-slate-900 px-8 py-5 text-lg font-bold text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 md:text-xl"
             >
-              View Pricing
+              {homeHero.secondaryCtaLabel}
             </a>
           </div>
         </div>
@@ -274,12 +167,12 @@ const faqs = [
           <div class="h-2 w-32 bg-blue-800"></div>
         </div>
         <div class="border-l-4 border-blue-800 pl-8 text-2xl font-medium italic leading-relaxed text-slate-700">
-          {problem.text}
+          {homeProblemText}
         </div>
       </div>
     </section>
 
-    <section id="solutions" class="bg-white px-6 py-32">
+    <section id={homeSectionIds.solutions} class="bg-white px-6 py-32">
       <div class="mx-auto max-w-7xl">
         <div class="mb-20 text-center">
           <h2 class="mb-6 font-serif text-6xl font-black italic">Built around the way your team works</h2>
@@ -289,7 +182,7 @@ const faqs = [
         </div>
 
         <div class="grid gap-10 md:grid-cols-3">
-          {solutions.map((s) => (
+          {homeSolutions.map((s) => (
             <div class="group relative rounded-[2.5rem] border-4 border-slate-900 bg-white p-10 transition-all hover:-translate-y-2 hover:shadow-[16px_16px_0_0_rgba(15,23,42,1)]">
               <span class="mb-4 block text-sm font-black uppercase tracking-[0.2em] text-blue-600 underline decoration-2 underline-offset-4">
                 {s.subtitle}
@@ -301,7 +194,7 @@ const faqs = [
 
               <div class="border-t-2 border-slate-100 pt-8">
                 <a
-                  href="#contact"
+                  href={`#${homeSectionIds.contact}`}
                   class="inline-flex items-center gap-3 font-black text-slate-900 transition-colors group-hover:text-blue-800"
                 >
                   Learn more
@@ -315,7 +208,7 @@ const faqs = [
     </section>
 
     <section
-      id="results"
+      id={homeSectionIds.results}
       class="relative overflow-hidden border-y-2 border-slate-900 bg-slate-900 px-6 py-32 text-white"
     >
       <div class="relative z-10 mx-auto max-w-7xl">
@@ -327,7 +220,7 @@ const faqs = [
         </div>
 
         <div class="grid gap-12 xl:grid-cols-3">
-          {testimonials.map((t) => (
+          {homeTestimonials.map((t) => (
             <div class="relative rounded-[3rem] border-4 border-slate-800 bg-slate-800/40 p-12 backdrop-blur-md">
               <p class="mb-10 font-serif text-3xl font-black leading-snug italic text-slate-100">
                 "{t.quote}"
@@ -375,7 +268,7 @@ const faqs = [
       </div>
     </section>
 
-    <section id="expertise" class="border-y-2 border-slate-900 bg-slate-100 px-6 py-32">
+    <section id={homeSectionIds.expertise} class="border-y-2 border-slate-900 bg-slate-100 px-6 py-32">
       <div class="mx-auto max-w-7xl">
         <div class="mb-20 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
@@ -387,7 +280,7 @@ const faqs = [
         </div>
 
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {industries.map((ind) => (
+          {homeFeaturedIndustries.map((ind) => (
             <div class="group flex h-full flex-col rounded-[2.5rem] border-4 border-slate-200 bg-white p-10 shadow-sm transition-all hover:border-blue-600 hover:shadow-xl">
               <h3 class="mb-6 text-3xl font-black text-slate-900 transition-colors group-hover:text-blue-800">
                 {ind.name}
@@ -407,14 +300,14 @@ const faqs = [
       </div>
     </section>
 
-    <section id="faq" class="bg-white px-6 py-32">
+    <section id={homeSectionIds.faq} class="bg-white px-6 py-32">
       <div class="mx-auto max-w-4xl">
         <h2 class="mb-24 text-center font-serif text-6xl font-black italic">Common Questions</h2>
         <div class="space-y-10">
-          {faqs.map((faq) => (
+          {homeFaqs.map((faq) => (
             <div class="overflow-hidden rounded-[2rem] border-4 border-slate-900 shadow-[12px_12px_0_0_rgba(15,23,42,1)] transition-all duration-300 hover:shadow-none">
-              <div class="bg-slate-900 p-8 text-2xl font-black text-white">{faq.q}</div>
-              <div class="bg-white p-10 text-xl font-medium text-slate-700">{faq.a}</div>
+              <div class="bg-slate-900 p-8 text-2xl font-black text-white">{faq.question}</div>
+              <div class="bg-white p-10 text-xl font-medium text-slate-700">{faq.answer}</div>
             </div>
           ))}
         </div>
@@ -422,13 +315,13 @@ const faqs = [
     </section>
 
     <section
-      id="contact"
+      id={homeSectionIds.contact}
       class="relative overflow-hidden border-t-2 border-slate-900 bg-blue-800 px-6 py-32 text-center text-white"
     >
       <div class="relative z-10 mx-auto max-w-4xl">
-        <h2 class="mb-12 font-serif text-6xl font-black tracking-tighter italic md:text-9xl">See where this fits.</h2>
+        <h2 class="mb-12 font-serif text-6xl font-black tracking-tighter italic md:text-9xl">{homeContactSection.headline}</h2>
         <p class="mb-16 text-3xl font-medium leading-relaxed text-blue-100">
-          We can review your intake, phone coverage, and follow-up process with you, identify the gaps worth solving, and outline a rollout your team can actually run.
+          {homeContactSection.body}
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <CalTriggerButton
@@ -447,56 +340,7 @@ const faqs = [
         CALIPER
       </div>
     </section>
-
-    <footer class="border-t-2 border-slate-800 bg-slate-900 px-6 py-24 text-slate-400">
-      <div class="mx-auto mb-24 flex max-w-7xl flex-col items-start justify-between gap-16 md:flex-row">
-        <div>
-          <div class="mb-6 text-4xl font-black tracking-tighter text-white">CALIPERWORKS</div>
-          <p class="max-w-sm text-2xl font-medium italic leading-snug text-slate-500">
-            Practical AI systems for teams that want better coverage and cleaner follow-up.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              href="/pricing/"
-              class="rounded-full border border-blue-300 px-5 py-3 text-sm font-black text-blue-200 transition-colors hover:border-blue-200 hover:bg-blue-900/30 hover:text-white"
-            >
-              View Pricing
-            </a>
-            <CalTriggerButton
-              label="Schedule Discovery Call"
-              class="rounded-full bg-white px-5 py-3 text-sm font-black text-slate-900 transition-colors hover:bg-blue-100"
-            />
-            <a
-              href={inquiryMailto}
-              class="rounded-full border border-slate-600 px-5 py-3 text-sm font-black text-white transition-colors hover:border-blue-400 hover:text-blue-300"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-16 text-xl font-bold">
-          <div class="space-y-6">
-            <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Navigation</div>
-            <a href="#solutions" class="block transition-colors hover:text-white">How We Help</a>
-            <a href="#results" class="block transition-colors hover:text-white">Use Cases</a>
-            <a href="#expertise" class="block transition-colors hover:text-white">Expertise</a>
-            <a href="/pricing/" class="block transition-colors hover:text-white">Pricing</a>
-          </div>
-          <div class="space-y-6">
-            <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Contact</div>
-            <a href={inquiryMailto} class="block transition-colors hover:text-white">pranit@caliperworks.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="mx-auto mt-20 flex max-w-7xl flex-col items-center justify-between gap-8 border-t border-slate-800 pt-12 text-sm font-bold uppercase tracking-[0.2em] opacity-30 md:flex-row">
-        <div>&copy; 2026 Caliperworks. All protocols observed.</div>
-        <div class="flex gap-4">
-          <div class="h-1 w-12 bg-slate-700"></div>
-          <div class="h-1 w-12 bg-slate-700"></div>
-          <div class="h-1 w-12 bg-slate-700"></div>
-        </div>
-      </div>
-    </footer>
+    <SiteFooter />
   </div>
 
   <script is:inline>

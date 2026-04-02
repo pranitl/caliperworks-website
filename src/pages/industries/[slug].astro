@@ -163,9 +163,8 @@ const structuredData = [
     <SectionCta
       headline={`Want to map AI opportunities for ${industry.name.toLowerCase()}?`}
       body="Start with the free audit and we’ll show where lead handling, intake, and growth automation fit best for your team."
-      buttonText="Start with the Free Audit"
-      subject={`Caliperworks Industry Inquiry - ${industry.name}`}
-      primaryAction="mailto"
+      primaryCta={{ kind: 'mailto', label: 'Start with the Free Audit', subject: `Caliperworks Industry Inquiry - ${industry.name}` }}
+      secondarySubject={`Caliperworks Industry Inquiry - ${industry.name}`}
     />
   </main>
   <SiteFooter />
