@@ -17,7 +17,7 @@ const contactMailto = createMailto();
         </a>
       ))}
     </nav>
-    <div class="flex items-center gap-2 sm:gap-3">
+    <div class="hidden items-center gap-2 sm:gap-3 lg:flex">
       <CalTriggerButton
         label="Schedule Discovery Call"
         mobileLabel="Schedule"
@@ -29,6 +29,41 @@ const contactMailto = createMailto();
       >
         Contact Us
       </a>
+    </div>
+    <div class="flex items-center gap-2 lg:hidden">
+      <a
+        href="/pricing/"
+        class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-colors hover:bg-blue-800 sm:px-4 sm:py-3 sm:text-sm"
+      >
+        Pricing
+      </a>
+      <details class="relative">
+        <summary class="list-none cursor-pointer rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-4 sm:py-3 sm:text-sm">
+          Menu
+        </summary>
+        <div class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-64 rounded-[1.5rem] border-2 border-slate-900 bg-white p-4 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
+          <nav aria-label="Mobile primary" class="space-y-2 text-sm font-bold text-slate-900">
+            {mainNav.map((item) => (
+              <a href={item.href} class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div class="mt-4 grid gap-2">
+            <CalTriggerButton
+              label="Schedule Discovery Call"
+              mobileLabel="Schedule"
+              class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-black text-white transition-colors hover:bg-blue-800"
+            />
+            <a
+              href={contactMailto}
+              class="rounded-xl border-2 border-slate-900 px-4 py-3 text-center text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </header>

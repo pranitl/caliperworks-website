@@ -2,6 +2,7 @@
 import CalTriggerButton from '../components/CalTriggerButton.astro';
 import Layout from './Layout.astro';
 import { createMailto } from '../data/site';
+import { organizationSchema, websiteSchema } from '../lib/seo';
 
 const discoveryTimezone = 'America/New_York';
 const nowParts = new Intl.DateTimeFormat('en-US', {
@@ -23,6 +24,7 @@ const hero = {
 };
 
 const inquiryMailto = createMailto();
+const structuredData = [organizationSchema(), websiteSchema()];
 
 const problem = {
   text: 'Most owners do not need more software to babysit. They need dependable coverage when the phone rings during lunch, after hours, or while the team is stretched thin. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate.',
@@ -132,8 +134,9 @@ const faqs = [
 ---
 
 <Layout
-  title="Caliperworks | AI Systems for Service Businesses"
-  description="Caliperworks builds practical AI systems for service businesses, helping teams keep calls covered, reduce routine admin, and stay in control of the workflow."
+  title="Caliperworks | Free AI Audit, Voice Agents, and SEO for Service Businesses"
+  description="Start with a free AI process audit. Caliperworks helps service businesses improve coverage, follow-up, voice handling, and SEO with clear pricing and practical workflows."
+  structuredData={structuredData}
 >
   <div class="font-sans overflow-x-hidden bg-white text-xl leading-relaxed text-slate-900">
     <nav class="sticky top-0 z-50 flex items-center justify-between gap-3 border-b-2 border-slate-900 bg-white/95 px-4 py-4 backdrop-blur-md sm:px-6">
@@ -144,9 +147,16 @@ const faqs = [
         <a href="#solutions" class="transition-colors hover:text-blue-800">How We Help</a>
         <a href="#results" class="transition-colors hover:text-blue-800">Use Cases</a>
         <a href="#expertise" class="transition-colors hover:text-blue-800">Industries</a>
+        <a href="/pricing/" class="transition-colors hover:text-blue-800">Pricing</a>
         <a href="#faq" class="transition-colors hover:text-blue-800">FAQ</a>
       </div>
-      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+      <div class="ml-auto hidden shrink-0 items-center gap-2 sm:gap-3 lg:flex">
+        <a
+          href="/pricing/"
+          class="rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-5 sm:py-3 sm:text-sm"
+        >
+          View Pricing
+        </a>
         <CalTriggerButton
           label="Schedule Discovery Call"
           mobileLabel="Schedule"
@@ -158,6 +168,41 @@ const faqs = [
         >
           Contact Us
         </a>
+      </div>
+      <div class="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
+        <a
+          href="/pricing/"
+          class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-colors hover:bg-blue-800 sm:px-4 sm:py-3 sm:text-sm"
+        >
+          Pricing
+        </a>
+        <details class="relative">
+          <summary class="list-none cursor-pointer rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-4 sm:py-3 sm:text-sm">
+            Menu
+          </summary>
+          <div class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-72 rounded-[1.5rem] border-2 border-slate-900 bg-white p-4 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
+            <nav aria-label="Homepage mobile primary" class="space-y-2 text-sm font-bold text-slate-900">
+              <a href="#solutions" class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">How We Help</a>
+              <a href="#results" class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">Use Cases</a>
+              <a href="#expertise" class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">Industries</a>
+              <a href="/pricing/" class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">Pricing</a>
+              <a href="#faq" class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">FAQ</a>
+            </nav>
+            <div class="mt-4 grid gap-2">
+              <CalTriggerButton
+                label="Schedule Discovery Call"
+                mobileLabel="Schedule"
+                class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-black text-white transition-colors hover:bg-blue-800"
+              />
+              <a
+                href={inquiryMailto}
+                class="rounded-xl border-2 border-slate-900 px-4 py-3 text-center text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </details>
       </div>
     </nav>
 
@@ -183,10 +228,10 @@ const faqs = [
               class="rounded-2xl bg-blue-800 px-10 py-5 text-xl font-bold text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-slate-900 active:translate-y-0 md:text-2xl"
             />
             <a
-              href={inquiryMailto}
+              href="/pricing/"
               class="rounded-2xl border-2 border-slate-900 px-8 py-5 text-lg font-bold text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 md:text-xl"
             >
-              Contact Us
+              View Pricing
             </a>
           </div>
         </div>
@@ -468,6 +513,12 @@ const faqs = [
             Practical AI systems for teams that want better coverage and cleaner follow-up.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/pricing/"
+              class="rounded-full border border-blue-300 px-5 py-3 text-sm font-black text-blue-200 transition-colors hover:border-blue-200 hover:bg-blue-900/30 hover:text-white"
+            >
+              View Pricing
+            </a>
             <CalTriggerButton
               label="Schedule Discovery Call"
               class="rounded-full bg-white px-5 py-3 text-sm font-black text-slate-900 transition-colors hover:bg-blue-100"
@@ -486,6 +537,7 @@ const faqs = [
             <a href="#solutions" class="block transition-colors hover:text-white">How We Help</a>
             <a href="#results" class="block transition-colors hover:text-white">Use Cases</a>
             <a href="#expertise" class="block transition-colors hover:text-white">Expertise</a>
+            <a href="/pricing/" class="block transition-colors hover:text-white">Pricing</a>
           </div>
           <div class="space-y-6">
             <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-500">Contact</div>

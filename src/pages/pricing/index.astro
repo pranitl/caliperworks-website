@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import { createMailto } from '../../data/site';
-import { breadcrumbSchema } from '../../lib/seo';
+import { breadcrumbSchema, offerCatalogSchema } from '../../lib/seo';
 
 const seoPlans = [
   {
@@ -66,7 +66,32 @@ const contactPricing = [
   },
 ];
 
-const structuredData = [breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing/' }])];
+const structuredData = [
+  breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing/' }]),
+  offerCatalogSchema('Caliperworks pricing', [
+    {
+      name: 'Starter SEO Plan',
+      description: '1 new content piece, 1 optimization, Google Business Profile optimization, and a monthly metrics recap overview.',
+      price: '499',
+      url: '/pricing/#starter',
+      category: 'SEO content creation and optimization',
+    },
+    {
+      name: 'Growth SEO Plan',
+      description: '2 new content pieces, 3 optimizations, Google Business Profile optimization, GSC-based reporting, and a monthly strategy call.',
+      price: '899',
+      url: '/pricing/#growth',
+      category: 'SEO content creation and optimization',
+    },
+    {
+      name: 'Max SEO Plan',
+      description: '3 new content pieces, 5 optimizations, Google Business Profile optimization, 2 repurposed social posts, a strategy call, and priority turnaround.',
+      price: '1199',
+      url: '/pricing/#max',
+      category: 'SEO content creation and optimization',
+    },
+  ]),
+];
 const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discovery Call');
 ---
 
@@ -127,7 +152,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
             href={generalInquiryHref}
             class="inline-flex items-center justify-center rounded-full border-2 border-slate-900 px-6 py-3 text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
           >
-            Email to book a discovery call
+            Email about pricing
           </a>
         </div>
         <div class="mt-10 grid gap-8 lg:grid-cols-3">
@@ -167,7 +192,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
                     : 'bg-slate-900 text-white hover:bg-blue-800',
                 ]}
               >
-                Email to book this plan
+                {`Email about ${plan.name}`}
               </a>
             </article>
           ))}
@@ -216,7 +241,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
                 href={service.href}
                 class="mt-8 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
               >
-                Email to book a discovery call
+                {service.name === 'Voice Agents' ? 'Ask about voice agents' : 'Ask about ads support'}
               </a>
             </article>
           ))}
@@ -237,7 +262,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
           href={generalInquiryHref}
           class="mt-10 inline-flex items-center justify-center rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
         >
-          Email to start the free audit
+          Start the free audit by email
         </a>
       </div>
     </section>

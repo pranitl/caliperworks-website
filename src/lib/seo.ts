@@ -60,6 +60,43 @@ export function websiteSchema() {
   };
 }
 
+interface OfferEntry {
+  name: string;
+  description: string;
+  price?: string;
+  priceCurrency?: string;
+  url: string;
+  category?: string;
+}
+
+export function offerCatalogSchema(name: string, offers: OfferEntry[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: offers.map((offer, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Offer',
+          name: offer.name,
+          description: offer.description,
+          url: absoluteUrl(offer.url),
+          category: offer.category,
+          ...(offer.price
+            ? {
+                price: offer.price,
+                priceCurrency: offer.priceCurrency ?? 'USD',
+              }
+            : {}),
+        },
+      })),
+    },
+  };
+}
+
 export function itemListSchema(name: string, items: ItemListEntry[]) {
   return {
     '@context': 'https://schema.org',
