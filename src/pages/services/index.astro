@@ -46,6 +46,20 @@ const structuredData = [
           real constraint sits, then uses voice agents, SEO or ads automation, and workflow changes
           in the order that makes sense for the business.
         </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a
+            href="/pricing/"
+            class="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-8 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
+          >
+            View Pricing
+          </a>
+          <a
+            href={serviceHref('ai-process-audits')}
+            class="inline-flex items-center justify-center rounded-2xl border-2 border-slate-900 px-8 py-4 text-base font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+          >
+            Start with a Free Audit
+          </a>
+        </div>
       </div>
     </section>
 
@@ -64,17 +78,20 @@ const structuredData = [
             <div class="mt-8 flex flex-wrap gap-4">
               <a
                 href={serviceHref(service.slug)}
-                class="inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+                class="inline-flex items-center justify-center rounded-2xl border-2 border-slate-900 px-5 py-3 text-base font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
               >
-                See how {service.name.toLowerCase()} work
-                <span aria-hidden="true">→</span>
+                Learn more
               </a>
               <a
                 href={service.slug === 'ai-process-audits' ? serviceHref(service.slug) : pricingHref(service.slug)}
-                class="inline-flex items-center gap-3 text-base font-black text-blue-800 transition-colors hover:text-slate-900"
+                class:list={[
+                  'inline-flex items-center justify-center rounded-2xl px-5 py-3 text-base font-black transition-colors',
+                  service.slug === 'ai-process-audits'
+                    ? 'bg-slate-900 text-white hover:bg-blue-800'
+                    : 'bg-blue-800 text-white hover:bg-slate-900',
+                ]}
               >
                 {service.slug === 'ai-process-audits' ? 'Request the free audit' : 'See pricing'}
-                <span aria-hidden="true">→</span>
               </a>
             </div>
           </article>
