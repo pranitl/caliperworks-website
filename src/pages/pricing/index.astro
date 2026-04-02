@@ -133,6 +133,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
         <div class="mt-10 grid gap-8 lg:grid-cols-3">
           {seoPlans.map((plan) => (
             <article
+              id={plan.name.toLowerCase()}
               class:list={[
                 'flex h-full flex-col rounded-[2.5rem] border-4 p-10',
                 plan.featured
@@ -207,7 +208,7 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
         </p>
         <div class="mt-10 grid gap-8 md:grid-cols-2">
           {contactPricing.map((service) => (
-            <article class="rounded-[2rem] border-4 border-slate-900 bg-white p-8 shadow-sm">
+            <article id={service.name === 'Voice Agents' ? 'voice-agents' : 'seo-and-ads-automation'} class="rounded-[2rem] border-4 border-slate-900 bg-white p-8 shadow-sm">
               <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">{service.name}</div>
               <div class="mt-4 text-3xl font-black text-slate-900">Contact us to learn more</div>
               <p class="mt-5 text-lg leading-relaxed text-slate-600">{service.detail}</p>
@@ -230,14 +231,13 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
           Reach out and we can sort out the right starting point.
         </h2>
         <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">
-          If the bottleneck is unclear, the discovery call is where we figure out whether SEO, voice, ads, or a
-          process audit should come first.
+          If the bottleneck is unclear, start with the free audit. That is where we figure out whether SEO, voice, ads, or workflow cleanup should come first.
         </p>
         <a
           href={generalInquiryHref}
           class="mt-10 inline-flex items-center justify-center rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
         >
-          Email to book a discovery call
+          Email to start the free audit
         </a>
       </div>
     </section>

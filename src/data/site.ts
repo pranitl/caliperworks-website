@@ -96,18 +96,18 @@ export const mainNav = [
 export const services: Service[] = [
   {
     slug: 'ai-process-audits',
-    name: 'AI Process Audits',
+    name: 'Free AI Process Audit',
     shortLabel: 'Process audits',
     teaser:
       'Map the workflow first, then prioritize the voice, SEO, ad, and operational changes worth implementing.',
-    metaTitle: 'AI Process Audits for Small Businesses | Caliperworks',
+    metaTitle: 'Free AI Process Audit for Small Businesses | Caliperworks',
     metaDescription:
-      'Caliperworks runs AI process audits for small businesses to map workflows, uncover revenue leaks, and prioritize the highest-impact automation opportunities.',
-    heroTitle: 'AI process audits for small businesses',
+      'Caliperworks offers a free AI process audit for small businesses to map workflows, uncover revenue leaks, and prioritize the highest-impact automation opportunities.',
+    heroTitle: 'Free AI process audit for small businesses',
     heroDescription:
-      'Review intake, marketing, handoffs, and follow-up to uncover the automation opportunities that actually fit your business.',
+      'Review intake, marketing, handoffs, and follow-up to uncover the automation opportunities that actually fit your business before you commit to implementation.',
     summary:
-      'The audit is the discovery layer. It shows whether voice handling, search growth, ad automation, or workflow cleanup should come first.',
+      'The audit is a free discovery layer. It shows whether voice handling, search growth, ad automation, or workflow cleanup should come first.',
     problems: [
       'Teams spend too much time on repetitive intake, quoting, follow-up, and admin work.',
       'Lead handoffs break between phone, inbox, CRM, and scheduling tools.',
@@ -130,6 +130,11 @@ export const services: Service[] = [
         question: 'How long does an AI process audit take?',
         answer:
           'Most audits can be scoped and delivered in days, not months. The timeline depends on how many systems, handoffs, and lead sources you want reviewed.',
+      },
+      {
+        question: 'Is the audit paid?',
+        answer:
+          'No. The process audit is free. It is the fastest way to see where voice, search, ads, or workflow cleanup should start.',
       },
       {
         question: 'Do you need to replace our current software stack?',
@@ -554,6 +559,13 @@ export function createMailto(subject = siteConfig.defaultSubject) {
 
 export function serviceHref(slug: string) {
   return `/services/${slug}/`;
+}
+
+export function pricingHref(slug?: string) {
+  if (!slug) return '/pricing/';
+  if (slug === 'voice-agents') return '/pricing/#voice-agents';
+  if (slug === 'seo-and-ads-automation') return '/pricing/';
+  return '/pricing/';
 }
 
 export function industryHref(slug: string) {

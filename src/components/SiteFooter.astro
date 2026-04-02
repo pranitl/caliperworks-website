@@ -55,6 +55,7 @@ const contactMailto = createMailto();
     <div>
       <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Proof</div>
       <div class="space-y-3 text-sm font-semibold">
+        <a href="/pricing/" class="block transition-colors hover:text-white">Pricing</a>
         <a href="/case-studies/" class="block transition-colors hover:text-white">All case studies</a>
         {caseStudies.map((caseStudy) => (
           <a href={caseStudyHref(caseStudy.slug)} class="block transition-colors hover:text-white">

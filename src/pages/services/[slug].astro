@@ -10,6 +10,7 @@ import {
   caseStudyMap,
   industryHref,
   industryMap,
+  pricingHref,
   serviceHref,
   services,
 } from '../../data/site';
@@ -25,6 +26,12 @@ export function getStaticPaths() {
 const { service }: { service: Service } = Astro.props;
 const relatedIndustries = service.relatedIndustries.map((slug) => industryMap[slug]);
 const relatedCaseStudies = service.relatedCaseStudies.map((slug) => caseStudyMap[slug]);
+const pricingLink = service.slug === 'ai-process-audits' ? serviceHref(service.slug) : pricingHref(service.slug);
+const pricingLabel = service.slug === 'ai-process-audits' ? 'Request the free audit' : 'See pricing';
+const ctaHeadline =
+  service.slug === 'ai-process-audits'
+    ? 'Want a clearer starting point?'
+    : `Ready to use ${service.name.toLowerCase()} where they actually pay back?`;
 
 const structuredData = [
   breadcrumbSchema([
@@ -59,6 +66,22 @@ const structuredData = [
           {service.heroTitle}
         </h1>
         <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">{service.heroDescription}</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href={pricingLink}
+            class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white transition-colors hover:bg-blue-800"
+          >
+            {pricingLabel}
+          </a>
+          {service.slug !== 'ai-process-audits' && (
+            <a
+              href="/pricing/"
+              class="inline-flex items-center justify-center rounded-full border-2 border-slate-900 px-6 py-3 text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+            >
+              View all pricing
+            </a>
+          )}
+        </div>
         <div class="mt-8 flex flex-wrap gap-3">
           {relatedIndustries.map((industry) => (
             <a
@@ -181,9 +204,9 @@ const structuredData = [
     </section>
 
     <SectionCta
-      headline={`Ready to use ${service.name.toLowerCase()} where they actually pay back?`}
-      body="Request an audit and we’ll show where this service fits into your current workflow, lead flow, and growth targets."
-      buttonText={`Talk About ${service.name}`}
+      headline={ctaHeadline}
+      body="Start with the free audit and we’ll show where this service fits into your current workflow, lead flow, and growth targets."
+      buttonText={service.slug === 'ai-process-audits' ? 'Start the Free Audit' : `Talk About ${service.name}`}
       subject={`Caliperworks Service Inquiry - ${service.name}`}
     />
   </main>

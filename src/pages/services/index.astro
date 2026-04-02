@@ -6,6 +6,7 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import {
   caseStudies,
   caseStudyHref,
+  pricingHref,
   serviceHref,
   services,
 } from '../../data/site';
@@ -60,13 +61,22 @@ const structuredData = [
                 <li class="rounded-xl bg-slate-50 px-4 py-3">{deliverable}</li>
               ))}
             </ul>
-            <a
-              href={serviceHref(service.slug)}
-              class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
-            >
-              See how {service.name.toLowerCase()} work
-              <span aria-hidden="true">→</span>
-            </a>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a
+                href={serviceHref(service.slug)}
+                class="inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
+              >
+                See how {service.name.toLowerCase()} work
+                <span aria-hidden="true">→</span>
+              </a>
+              <a
+                href={service.slug === 'ai-process-audits' ? serviceHref(service.slug) : pricingHref(service.slug)}
+                class="inline-flex items-center gap-3 text-base font-black text-blue-800 transition-colors hover:text-slate-900"
+              >
+                {service.slug === 'ai-process-audits' ? 'Request the free audit' : 'See pricing'}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </article>
         ))}
       </div>
@@ -87,6 +97,7 @@ const structuredData = [
             If the main constraint is visibility, landing-page coverage, or budget efficiency, SEO
             and ads automation may be the better first move.
           </p>
+          <p>The audit is free, so if the bottleneck is still fuzzy, that is the lowest-friction place to start.</p>
         </div>
       </div>
     </section>
@@ -129,8 +140,8 @@ const structuredData = [
 
     <SectionCta
       headline="Need to choose the right starting point?"
-      body="The process audit is designed to show which service should come first based on your current workflow gaps, follow-up friction, and marketing goals."
-      buttonText="Start with a Service Audit"
+      body="The free process audit is designed to show which service should come first based on your current workflow gaps, follow-up friction, and marketing goals."
+      buttonText="Start with a Free Audit"
       subject="Caliperworks Services Inquiry"
     />
   </main>
