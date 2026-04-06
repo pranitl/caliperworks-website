@@ -37,7 +37,7 @@ export const pricingTerms = {
     'Covers the strategy foundation, market understanding, and positioning work before ongoing execution starts.',
   termDescription:
     'SEO needs time to compound. The minimum term is there so the work has room to show results.',
-  includedLabel: 'GBP',
+  includedLabel: 'Google Business Profile',
   includedDescription: 'Google Business Profile optimization is included across all three SEO packages.',
 } as const;
 
@@ -49,10 +49,10 @@ export const seoPricingPlans: SeoPricingPlan[] = [
     cadence: '/month',
     summary: 'For teams that need a steady SEO baseline without overbuilding the program.',
     features: [
-      '1 new content piece each month',
+      '2 new content pieces each month',
       '1 optimization each month',
       'Google Business Profile optimization',
-      'Monthly metrics recap overview',
+      'Monthly Metrics Executive Summary',
     ],
     inquirySubject: 'Caliperworks Pricing Inquiry - Starter SEO Plan',
   },
@@ -63,10 +63,10 @@ export const seoPricingPlans: SeoPricingPlan[] = [
     cadence: '/month',
     summary: 'For businesses that need more content velocity, more cleanup, and clearer reporting.',
     features: [
-      '2 new content pieces each month',
+      '3 new content pieces each month',
       '3 optimizations each month',
       'Google Business Profile optimization',
-      'GSC-based reporting',
+      'Detailed Monthly Metrics',
       'Monthly strategy call',
     ],
     inquirySubject: 'Caliperworks Pricing Inquiry - Growth SEO Plan',
@@ -75,16 +75,17 @@ export const seoPricingPlans: SeoPricingPlan[] = [
   {
     id: 'max',
     name: 'Max',
-    price: '$1199',
+    price: '$1,199',
     cadence: '/month',
     summary: 'For businesses that want a faster content engine and tighter monthly support.',
     features: [
-      '3 new content pieces each month',
+      '4 new content pieces each month',
       '5 optimizations each month',
       'Google Business Profile optimization',
-      '2 social posts repurposed from SEO content',
-      'Strategy call',
-      'Priority turnaround',
+      'Detailed Monthly Metrics',
+      'Monthly strategy call',
+      '2 social media posts',
+      'Priority content',
     ],
     inquirySubject: 'Caliperworks Pricing Inquiry - Max SEO Plan',
   },

@@ -18,6 +18,7 @@ const structuredData = [
   offerCatalogSchema('Caliperworks pricing', pricingSeoStructuredOffers),
 ];
 const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discovery Call');
+const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.length));
 ---
 
 <Layout
@@ -100,17 +101,28 @@ const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discover
               <p class:list={['mt-6 text-lg leading-relaxed', plan.featured ? 'text-blue-50' : 'text-slate-600']}>
                 {plan.summary}
               </p>
-              <ul class="mt-8 space-y-3 text-sm font-semibold">
-                {plan.features.map((feature) => (
-                  <li class:list={['rounded-xl px-4 py-3', plan.featured ? 'bg-white/10 text-white' : 'bg-slate-50 text-slate-700']}>
-                    {feature}
-                  </li>
-                ))}
+              <ul class="mt-8 grid gap-3 text-sm font-semibold">
+                {Array.from({ length: maxFeatureCount }).map((_, index) => {
+                  const feature = plan.features[index];
+
+                  return (
+                    <li
+                      class:list={[
+                        'min-h-[3.5rem] rounded-xl px-4 py-3',
+                        plan.featured ? 'bg-white/10 text-white' : 'bg-slate-50 text-slate-700',
+                        !feature && 'invisible',
+                      ]}
+                      aria-hidden={feature ? undefined : 'true'}
+                    >
+                      {feature ?? 'Placeholder feature'}
+                    </li>
+                  );
+                })}
               </ul>
               <a
                 href={createMailto(plan.inquirySubject)}
                 class:list={[
-                  'mt-8 inline-flex items-center justify-center rounded-2xl px-6 py-4 text-base font-black transition-colors',
+                  'mt-auto pt-8 inline-flex items-center justify-center rounded-2xl px-6 py-4 text-base font-black transition-colors',
                   plan.featured
                     ? 'bg-white text-blue-900 hover:bg-slate-100'
                     : 'bg-slate-900 text-white hover:bg-blue-800',
