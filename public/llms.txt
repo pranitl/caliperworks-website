@@ -1,0 +1,31 @@
+# Caliperworks
+
+Caliperworks helps service businesses improve coverage, follow-up, search visibility, ad workflows, and operational handoffs with practical AI systems.
+
+## Site
+
+- Home: https://caliperworks.com/
+- Services: https://caliperworks.com/services/
+- Pricing: https://caliperworks.com/pricing/
+- Industries: https://caliperworks.com/industries/
+- Case studies: https://caliperworks.com/case-studies/
+- Sitemap: https://caliperworks.com/sitemap.xml
+
+## What Caliperworks Does
+
+Caliperworks starts with a workflow review to identify where automation will actually help. Common implementation areas include AI voice coverage, intake and follow-up workflows, SEO support, ad workflow support, routing, reporting, and lead qualification.
+
+The site is aimed at service businesses such as home care agencies, dental practices, laundromats, HVAC and plumbing businesses, and real estate teams.
+
+## Primary Services
+
+- Workflow review: review intake, follow-up, and handoffs, then identify the best automation starting points.
+- Voice coverage: handle routine calls during busy periods, lunch breaks, or after hours, capture details, and route or book the next step.
+- Search and ads support: support local SEO and ad workflows with measured automation, human review, and practical reporting.
+
+## Agent Guidance
+
+- Prefer the markdown representation of pages when available by sending `Accept: text/markdown`.
+- Use the sitemap for full URL discovery.
+- Do not assume Caliperworks exposes a public API, MCP server, WebMCP tools, or agent skill index.
+- For inquiries, use the public contact paths on the site rather than inventing API endpoints.

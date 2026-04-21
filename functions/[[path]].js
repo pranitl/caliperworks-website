@@ -26,7 +26,7 @@ export async function onRequest(context) {
   const headers = new Headers(assetResponse.headers);
   headers.set('Content-Type', 'text/markdown; charset=utf-8');
   if (isHomepage) {
-    headers.set('Link', appendLink(headers.get('Link'), '</sitemap.xml>; rel="sitemap"'));
+    headers.set('Link', appendDiscoveryLinks(headers.get('Link')));
   }
   headers.set('Vary', appendVary(headers.get('Vary'), 'Accept'));
   headers.set('x-markdown-tokens', String(estimateMarkdownTokens(markdown)));
@@ -56,7 +56,7 @@ function appendVary(currentValue, nextValue) {
 
 function withDiscoveryHeaders(response) {
   const headers = new Headers(response.headers);
-  headers.set('Link', appendLink(headers.get('Link'), '</sitemap.xml>; rel="sitemap"'));
+  headers.set('Link', appendDiscoveryLinks(headers.get('Link')));
 
   return new Response(response.body, {
     status: response.status,
@@ -65,7 +65,20 @@ function withDiscoveryHeaders(response) {
   });
 }
 
-function appendLink(currentValue, nextValue) {
-  if (!currentValue) return nextValue;
-  return currentValue.includes(nextValue) ? currentValue : `${currentValue}, ${nextValue}`;
+function appendDiscoveryLinks(currentValue) {
+  const discoveryLinks = [
+    '</>; rel="alternate"; type="text/markdown"',
+    '</llms.txt>; rel="describedby"; type="text/plain"',
+    '</services/>; rel="service-doc"; type="text/html"',
+    '</sitemap.xml>; rel="service-meta"; type="application/xml"',
+  ];
+  const existingLinks = currentValue ? currentValue.split(',').map((value) => value.trim()) : [];
+
+  for (const link of discoveryLinks) {
+    if (!existingLinks.includes(link)) {
+      existingLinks.push(link);
+    }
+  }
+
+  return existingLinks.join(', ');
 }

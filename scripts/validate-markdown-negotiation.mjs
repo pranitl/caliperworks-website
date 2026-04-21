@@ -36,7 +36,10 @@ const markdownResponse = await onRequest(createContext('text/markdown'));
 const markdown = await markdownResponse.text();
 
 assert(markdownResponse.headers.get('Content-Type')?.startsWith('text/markdown'), 'Expected markdown content type');
-assert(markdownResponse.headers.get('Link')?.includes('rel="sitemap"'), 'Expected sitemap Link header on homepage markdown response');
+assert(markdownResponse.headers.get('Link')?.includes('rel="alternate"'), 'Expected markdown alternate Link header on homepage markdown response');
+assert(markdownResponse.headers.get('Link')?.includes('/llms.txt'), 'Expected llms.txt Link header on homepage markdown response');
+assert(markdownResponse.headers.get('Link')?.includes('rel="service-doc"'), 'Expected service-doc Link header on homepage markdown response');
+assert(markdownResponse.headers.get('Link')?.includes('rel="service-meta"'), 'Expected service-meta Link header on homepage markdown response');
 assert(markdownResponse.headers.get('Vary')?.toLowerCase().split(',').map((value) => value.trim()).includes('accept'), 'Expected Vary: Accept');
 assert(/^\d+$/.test(markdownResponse.headers.get('x-markdown-tokens') || ''), 'Expected x-markdown-tokens header');
 assert(markdown.includes('title:'), 'Expected markdown frontmatter title');
@@ -45,7 +48,10 @@ assert(!markdown.includes('<html'), 'Expected markdown body without HTML documen
 
 const htmlResponse = await onRequest(createContext('text/html'));
 assert(htmlResponse.headers.get('Content-Type')?.startsWith('text/html'), 'Expected HTML content type for browser Accept header');
-assert(htmlResponse.headers.get('Link')?.includes('rel="sitemap"'), 'Expected sitemap Link header on homepage HTML response');
+assert(htmlResponse.headers.get('Link')?.includes('rel="alternate"'), 'Expected markdown alternate Link header on homepage HTML response');
+assert(htmlResponse.headers.get('Link')?.includes('/llms.txt'), 'Expected llms.txt Link header on homepage HTML response');
+assert(htmlResponse.headers.get('Link')?.includes('rel="service-doc"'), 'Expected service-doc Link header on homepage HTML response');
+assert(htmlResponse.headers.get('Link')?.includes('rel="service-meta"'), 'Expected service-meta Link header on homepage HTML response');
 
 const browserResponse = await onRequest(createContext('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'));
 assert(browserResponse.headers.get('Content-Type')?.startsWith('text/html'), 'Expected HTML content type for wildcard browser Accept header');
