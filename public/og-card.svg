@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">Caliperworks</title>
-  <desc id="desc">AI process audits for service businesses.</desc>
+  <desc id="desc">Local SEO, voice coverage, and workflow systems for service businesses.</desc>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f8fafc" />
@@ -15,22 +15,22 @@
   </text>
 
   <text x="96" y="224" fill="#0f172a" font-family="Fraunces, Georgia, serif" font-size="76" font-weight="800">
-    AI process audits
+    Local SEO systems
   </text>
   <text x="96" y="308" fill="#0f172a" font-family="Fraunces, Georgia, serif" font-size="76" font-weight="800">
-    for service businesses
+    that capture demand
   </text>
 
   <text x="96" y="392" fill="#334155" font-family="Geist Sans, Arial, sans-serif" font-size="30" font-weight="600">
-    Discover where voice agents, SEO, ad automation,
+    Build search assets, voice coverage, follow-up,
   </text>
   <text x="96" y="434" fill="#334155" font-family="Geist Sans, Arial, sans-serif" font-size="30" font-weight="600">
-    and workflow changes actually fit.
+    and workflow changes that actually fit.
   </text>
 
   <rect x="96" y="482" width="314" height="18" rx="9" fill="#2563eb" />
   <text x="96" y="540" fill="#1d4ed8" font-family="Geist Sans, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="2">
-    AUDIT FIRST. IMPLEMENT WITH INTENT.
+    SEARCH FIRST. IMPLEMENT WITH INTENT.
   </text>
 
   <rect x="760" y="122" width="304" height="90" rx="24" fill="#eff6ff" stroke="#bfdbfe" stroke-width="3" />
@@ -43,10 +43,10 @@
 
   <rect x="760" y="232" width="304" height="90" rx="24" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="3" />
   <text x="788" y="272" fill="#15803d" font-family="Geist Sans, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="2">
-    SEARCH AND ADS
+    LOCAL SEO
   </text>
   <text x="788" y="306" fill="#334155" font-family="Geist Sans, Arial, sans-serif" font-size="24" font-weight="600">
-    Visibility, spend, landing pages
+    Pages, visibility, conversions
   </text>
 
   <rect x="760" y="342" width="304" height="90" rx="24" fill="#fff7ed" stroke="#fed7aa" stroke-width="3" />

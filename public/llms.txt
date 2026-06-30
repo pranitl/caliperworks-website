@@ -4,7 +4,7 @@
 
 Caliperworks starts with a workflow review to identify where automation will actually help. Common implementation areas include AI voice coverage, intake and follow-up workflows, SEO support, ad workflow support, routing, reporting, and lead qualification.
 
-The site is aimed at service businesses such as home care agencies, dental practices, laundromats, HVAC and plumbing businesses, and real estate teams.
+The site is aimed at service businesses such as home care agencies, dental practices, HVAC and plumbing businesses, law offices, and med spas.
 
 Agent guidance:
 - Prefer the markdown representation of pages when available by sending `Accept: text/markdown`.
@@ -16,7 +16,7 @@ Agent guidance:
 
 - [Home](https://caliperworks.com/): Overview of Caliperworks positioning, services, industries, FAQ, and contact paths.
 - [Services](https://caliperworks.com/services/): Service overview for workflow review, voice coverage, SEO, and ads support.
-- [Pricing](https://caliperworks.com/pricing/): Current SEO pricing and discovery-based custom pricing notes for voice agents and ads support.
+- [Pricing](https://caliperworks.com/pricing/): Packaged growth execution pricing for local search and landing-page assets, plus discovery-scoped implementation notes for voice agents, ads workflows, and operational automation.
 - [Industries](https://caliperworks.com/industries/): Industry-specific pages for service business use cases.
 - [Case studies](https://caliperworks.com/case-studies/): Public examples and outcome summaries.
 - [Sitemap](https://caliperworks.com/sitemap.xml): Full URL discovery for crawlers and agents.
@@ -25,7 +25,7 @@ Agent guidance:
 
 - [Workflow review](https://caliperworks.com/services/ai-process-audits/): Review intake, follow-up, and handoffs, then identify the best automation starting points.
 - [Voice coverage](https://caliperworks.com/services/voice-agents/): Handle routine calls during busy periods, lunch breaks, or after hours, capture details, and route or book the next step.
-- [Search and ads support](https://caliperworks.com/services/seo-and-ads-automation/): Support local SEO and ad workflows with measured automation, human review, and practical reporting.
+- [Local SEO and growth assets](https://caliperworks.com/services/seo-and-ads-automation/): Build service pages, location pages, landing pages, and optimization workflows around qualified local demand.
 
 ## Optional
 

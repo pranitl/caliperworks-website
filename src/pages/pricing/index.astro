@@ -5,20 +5,25 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import { createMailto } from '../../data/site';
 import {
   customPricingItems,
+  growthAssetDefinition,
+  notFitReasons,
+  pricingFaqs,
+  pricingFit,
+  pricingLogic,
   pricingMeta,
   pricingOverview,
   pricingSeoStructuredOffers,
   pricingTerms,
   seoPricingPlans,
 } from '../../data/pricing';
-import { breadcrumbSchema, offerCatalogSchema } from '../../lib/seo';
+import { breadcrumbSchema, faqSchema, offerCatalogSchema } from '../../lib/seo';
 
+const auditHref = createMailto('Caliperworks Pricing Inquiry - Free Discovery Audit');
 const structuredData = [
   breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing/' }]),
   offerCatalogSchema('Caliperworks pricing', pricingSeoStructuredOffers),
+  faqSchema(pricingFaqs),
 ];
-const generalInquiryHref = createMailto('Caliperworks Pricing Inquiry - Discovery Call');
-const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.length));
 ---
 
 <Layout
@@ -35,64 +40,127 @@ const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.
         <h1 class="mt-6 max-w-5xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
           {pricingOverview.headline}
         </h1>
-        <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">
+        <p class="mt-8 max-w-4xl text-xl leading-relaxed text-slate-600">
           {pricingOverview.body}
         </p>
-        <div class="mt-12 grid gap-4 md:grid-cols-3">
-          <div class="rounded-[2rem] border-2 border-slate-900 bg-slate-50 p-6">
-            <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-700">Initial setup</div>
-            <div class="mt-3 text-3xl font-black text-slate-900">{pricingTerms.setupFee}</div>
-            <p class="mt-3 text-base leading-relaxed text-slate-600">
-              {pricingTerms.setupDescription}
-            </p>
-          </div>
-          <div class="rounded-[2rem] border-2 border-slate-900 bg-slate-50 p-6">
-            <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-700">Minimum term</div>
-            <div class="mt-3 text-3xl font-black text-slate-900">{pricingTerms.minimumTerm}</div>
-            <p class="mt-3 text-base leading-relaxed text-slate-600">
-              {pricingTerms.termDescription}
-            </p>
-          </div>
-          <div class="rounded-[2rem] border-2 border-slate-900 bg-slate-50 p-6">
-            <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-700">Included in every SEO plan</div>
-            <div class="mt-3 text-3xl font-black text-slate-900">{pricingTerms.includedLabel}</div>
-            <p class="mt-3 text-base leading-relaxed text-slate-600">
-              {pricingTerms.includedDescription}
-            </p>
-          </div>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a
+            href={auditHref}
+            class="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-7 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
+          >
+            {pricingOverview.primaryCta}
+          </a>
+          <a
+            href="#plans"
+            class="inline-flex items-center justify-center rounded-2xl border-2 border-slate-900 px-7 py-4 text-base font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
+          >
+            {pricingOverview.secondaryCta}
+          </a>
         </div>
       </div>
     </section>
 
     <section class="px-6 py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Package logic</div>
+          <h2 class="mt-6 max-w-3xl font-serif text-4xl font-black leading-tight md:text-5xl">
+            {pricingLogic.headline}
+          </h2>
+          <p class="mt-6 text-xl leading-relaxed text-slate-600">
+            {pricingLogic.body}
+          </p>
+        </div>
+        <div class="grid gap-4">
+          {pricingLogic.rows.map((row) => (
+            <div class="grid gap-3 rounded-[1.25rem] border-2 border-slate-900 bg-slate-50 p-6 sm:grid-cols-[10rem_1fr]">
+              <div class="text-xl font-black text-slate-900">{row.plan}</div>
+              <div class="text-lg font-semibold leading-relaxed text-slate-700">{row.meaning}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Included across plans</div>
+        <div class="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <h2 class="font-serif text-4xl font-black leading-tight md:text-5xl">
+              {pricingTerms.includedLabel}
+            </h2>
+            <p class="mt-6 text-xl font-semibold leading-relaxed text-slate-700">
+              {pricingTerms.includedDescription}
+            </p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            {pricingTerms.includedItems.map((item) => (
+              <div class="rounded-[1.25rem] border-2 border-slate-900 bg-white px-5 py-4 text-base font-bold leading-relaxed text-slate-800">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" class="px-6 py-20">
       <div class="mx-auto max-w-7xl">
         <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">SEO content creation & optimization</div>
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Packaged growth plans</div>
             <h2 class="mt-6 max-w-4xl font-serif text-4xl font-black leading-tight md:text-5xl">
-              Three plans, one setup, and enough runway for the work to matter.
+              Choose your monthly execution pace.
             </h2>
           </div>
           <a
-            href={generalInquiryHref}
+            href={auditHref}
             class="inline-flex items-center justify-center rounded-full border-2 border-slate-900 px-6 py-3 text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
           >
-            Email about pricing
+            Start Free Discovery Audit
           </a>
         </div>
+
+        <div class="mt-10 overflow-hidden rounded-[1.5rem] border-4 border-slate-900">
+          <div class="grid bg-slate-900 px-5 py-4 text-sm font-black uppercase tracking-[0.2em] text-white md:grid-cols-[0.9fr_0.8fr_1.4fr_1.4fr]">
+            <div>Plan</div>
+            <div class="hidden md:block">Monthly price</div>
+            <div class="hidden md:block">Best for</div>
+            <div class="hidden md:block">Monthly output</div>
+          </div>
+          {seoPricingPlans.map((plan) => (
+            <div class="grid gap-3 border-t-2 border-slate-900 bg-white px-5 py-5 md:grid-cols-[0.9fr_0.8fr_1.4fr_1.4fr] md:gap-6">
+              <div class="text-xl font-black text-slate-900">{plan.name}</div>
+              <div class="text-lg font-black text-slate-900">
+                {plan.price}<span class="text-sm font-bold text-slate-500">{plan.cadence}</span>
+              </div>
+              <div class="text-base font-semibold leading-relaxed text-slate-700">{plan.bestFor}</div>
+              <div class="text-base font-black leading-relaxed text-blue-800">{plan.output}</div>
+            </div>
+          ))}
+        </div>
+
         <div class="mt-10 grid gap-8 lg:grid-cols-3">
           {seoPricingPlans.map((plan) => (
             <article
               id={plan.id}
               class:list={[
-                'flex h-full flex-col rounded-[2.5rem] border-4 p-10',
+                'flex h-full flex-col rounded-[2rem] border-4 p-8',
                 plan.featured
-                  ? 'border-blue-800 bg-blue-800 text-white shadow-[18px_18px_0_0_rgba(15,23,42,1)]'
+                  ? 'border-blue-800 bg-blue-800 text-white shadow-[14px_14px_0_0_rgba(15,23,42,1)]'
                   : 'border-slate-900 bg-white text-slate-900 shadow-sm',
               ]}
             >
-              <div class:list={['text-sm font-black uppercase tracking-[0.3em]', plan.featured ? 'text-blue-100' : 'text-blue-700']}>
-                {plan.name}
+              <div class="flex items-start justify-between gap-4">
+                <div class:list={['text-sm font-black uppercase tracking-[0.3em]', plan.featured ? 'text-blue-100' : 'text-blue-700']}>
+                  {plan.name}
+                </div>
+                {plan.featured && (
+                  <div class="rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-widest text-blue-900">
+                    Recommended
+                  </div>
+                )}
               </div>
               <div class="mt-6 flex items-end gap-2">
                 <div class="font-serif text-6xl font-black italic">{plan.price}</div>
@@ -102,33 +170,22 @@ const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.
                 {plan.summary}
               </p>
               <ul class="mt-8 grid gap-3 text-sm font-semibold">
-                {Array.from({ length: maxFeatureCount }).map((_, index) => {
-                  const feature = plan.features[index];
-
-                  return (
-                    <li
-                      class:list={[
-                        'min-h-[3.5rem] rounded-xl px-4 py-3',
-                        plan.featured ? 'bg-white/10 text-white' : 'bg-slate-50 text-slate-700',
-                        !feature && 'invisible',
-                      ]}
-                      aria-hidden={feature ? undefined : 'true'}
-                    >
-                      {feature ?? 'Placeholder feature'}
-                    </li>
-                  );
-                })}
+                {plan.features.map((feature) => (
+                  <li class:list={['rounded-xl px-4 py-3', plan.featured ? 'bg-white/10 text-white' : 'bg-slate-50 text-slate-700']}>
+                    {feature}
+                  </li>
+                ))}
               </ul>
               <a
                 href={createMailto(plan.inquirySubject)}
                 class:list={[
-                  'mt-auto pt-8 inline-flex items-center justify-center rounded-2xl px-6 py-4 text-base font-black transition-colors',
+                  'mt-auto inline-flex items-center justify-center rounded-2xl px-6 py-4 pt-4 text-base font-black transition-colors',
                   plan.featured
                     ? 'bg-white text-blue-900 hover:bg-slate-100'
                     : 'bg-slate-900 text-white hover:bg-blue-800',
                 ]}
               >
-                {`Email about ${plan.name}`}
+                {plan.ctaLabel}
               </a>
             </article>
           ))}
@@ -137,42 +194,78 @@ const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.
     </section>
 
     <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
-      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <div>
-          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">What the setup covers</div>
-          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
-            The first month is not generic onboarding.
-          </h2>
-        </div>
-        <div class="space-y-5 text-lg leading-relaxed text-slate-700">
-          <p>
-            The setup is where we get clear on the business before content starts shipping. That includes the
-            real value proposition, the way the business speaks, the local market, and what already sounds
-            overused in the category.
-          </p>
-          <p>
-            The point is simple: the output should fit the location, sound distinct, and match what makes the
-            business worth choosing in the first place.
-          </p>
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Growth assets</div>
+            <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
+              {growthAssetDefinition.headline}
+            </h2>
+            <p class="mt-6 text-xl leading-relaxed text-slate-700">
+              {growthAssetDefinition.body}
+            </p>
+            <p class="mt-6 rounded-[1.25rem] border-2 border-slate-900 bg-white p-5 text-lg font-bold leading-relaxed text-slate-800">
+              {growthAssetDefinition.note}
+            </p>
+          </div>
+          <div class="overflow-hidden rounded-[1.5rem] border-4 border-slate-900 bg-white">
+            <div class="grid grid-cols-[0.85fr_1.15fr] bg-slate-900 px-5 py-4 text-sm font-black uppercase tracking-[0.2em] text-white">
+              <div>Asset type</div>
+              <div>Example</div>
+            </div>
+            {growthAssetDefinition.examples.map((asset) => (
+              <div class="grid grid-cols-[0.85fr_1.15fr] gap-4 border-t-2 border-slate-900 px-5 py-4">
+                <div class="font-black text-slate-900">{asset.type}</div>
+                <div class="font-semibold leading-relaxed text-slate-700">{asset.example}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
     <section class="px-6 py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Initial setup</div>
+          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
+            Initial setup: {pricingTerms.setupFee}
+          </h2>
+          <p class="mt-6 text-xl leading-relaxed text-slate-600">
+            {pricingTerms.setupDescription} We review the business, service mix, local market, current website, Google Business Profile, existing pages, competitors, and highest-value opportunities.
+          </p>
+          <div class="mt-8 rounded-[1.25rem] border-4 border-slate-900 bg-slate-50 p-6">
+            <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-700">Minimum term</div>
+            <div class="mt-3 text-3xl font-black text-slate-900">{pricingTerms.minimumTerm}</div>
+            <p class="mt-3 text-base leading-relaxed text-slate-600">
+              {pricingTerms.termDescription}
+            </p>
+          </div>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {pricingTerms.setupItems.map((item) => (
+            <div class="rounded-[1.25rem] border-2 border-slate-900 bg-white px-5 py-4 text-base font-bold leading-relaxed text-slate-800">
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
       <div class="mx-auto max-w-7xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Custom pricing</div>
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Custom implementation</div>
         <h2 class="mt-6 max-w-4xl font-serif text-4xl font-black leading-tight md:text-5xl">
-          Voice agents and ads support are scoped after discovery.
+          Voice agents, ads workflows, and automation are scoped after discovery.
         </h2>
         <p class="mt-6 max-w-3xl text-xl leading-relaxed text-slate-600">
-          Those services depend too much on the workflow to pretend there is one public price that fits everyone.
+          The packaged plans cover search, local visibility, landing-page coverage, and conversion-focused execution. Work that depends on call flows, integrations, routing rules, paid media accounts, or operational handoffs gets scoped after the audit.
         </p>
-        <div class="mt-10 grid gap-8 md:grid-cols-2">
+        <div class="mt-10 grid gap-8 lg:grid-cols-3">
           {customPricingItems.map((service) => (
-            <article id={service.id} class="rounded-[2rem] border-4 border-slate-900 bg-white p-8 shadow-sm">
+            <article id={service.id} class="flex h-full flex-col rounded-[2rem] border-4 border-slate-900 bg-white p-8 shadow-sm">
               <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">{service.name}</div>
-              <div class="mt-4 text-3xl font-black text-slate-900">Contact us to learn more</div>
-              <p class="mt-5 text-lg leading-relaxed text-slate-600">{service.detail}</p>
+              <p class="mt-5 flex-grow text-lg leading-relaxed text-slate-600">{service.detail}</p>
               <a
                 href={createMailto(service.inquirySubject)}
                 class="mt-8 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
@@ -185,21 +278,68 @@ const maxFeatureCount = Math.max(...seoPricingPlans.map((plan) => plan.features.
       </div>
     </section>
 
-    <section class="border-t-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
+    <section class="px-6 py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
+        <div>
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Fit</div>
+          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
+            {pricingFit.headline}
+          </h2>
+          <p class="mt-6 max-w-3xl text-xl leading-relaxed text-slate-600">
+            {pricingFit.body}
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            {pricingFit.industries.map((industry) => (
+              <span class="rounded-full border-2 border-slate-900 bg-slate-50 px-4 py-2 text-sm font-black text-slate-800">
+                {industry}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div class="rounded-[2rem] border-4 border-slate-900 bg-slate-900 p-8 text-white">
+          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-100">Not a good fit</div>
+          <h3 class="mt-5 text-3xl font-black">This is probably not the right fit if...</h3>
+          <ul class="mt-6 grid gap-3 text-base font-semibold leading-relaxed text-slate-100">
+            {notFitReasons.map((reason) => (
+              <li class="rounded-xl bg-white/10 px-4 py-3">{reason}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
       <div class="mx-auto max-w-5xl text-center">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-100">Need help choosing?</div>
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-100">Start with the discovery audit</div>
         <h2 class="mt-6 font-serif text-4xl font-black italic tracking-tight md:text-6xl">
-          Reach out and we can sort out the right starting point.
+          Find the right starting point before choosing a plan.
         </h2>
         <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">
-          If the bottleneck is unclear, start with the free audit. That is where we figure out whether SEO, voice, ads, or workflow cleanup should come first.
+          No monthly calls required. The audit starts with your website, service area, current workflow, and growth bottlenecks.
         </p>
         <a
-          href={generalInquiryHref}
+          href={auditHref}
           class="mt-10 inline-flex items-center justify-center rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
         >
-          Start the free audit by email
+          {pricingOverview.primaryCta}
         </a>
+      </div>
+    </section>
+
+    <section class="bg-white px-6 py-20">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">FAQ</div>
+        <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">Questions about pricing</h2>
+        <div class="mt-10 space-y-5">
+          {pricingFaqs.map((faq) => (
+            <details class="rounded-[1.75rem] border-4 border-slate-900 bg-white p-8 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
+              <summary class="cursor-pointer list-none text-xl font-black text-slate-900">
+                {faq.question}
+              </summary>
+              <p class="mt-5 text-lg leading-relaxed text-slate-600">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   </main>

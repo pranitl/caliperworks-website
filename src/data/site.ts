@@ -61,12 +61,12 @@ export const siteConfig = {
   siteUrl: 'https://caliperworks.com',
   email: 'pranit@caliperworks.com',
   defaultSubject: 'Caliperworks Inquiry - AI Process Audit',
-  defaultTitle: 'AI Process Audits, Voice Agents, and SEO for Service Businesses | Caliperworks',
+  defaultTitle: 'Local SEO, Voice Agents, and AI Workflows for Service Businesses | Caliperworks',
   defaultDescription:
-    'Caliperworks helps service businesses run AI process audits to uncover where voice agents, SEO, ad automation, and workflow improvements will have the most impact.',
+    'Caliperworks helps service businesses build local SEO assets, voice coverage, ads workflows, and practical automation that improve demand capture and follow-up.',
   defaultOgImagePath: '/og-card.svg',
   tagline:
-    'AI process audits and implementation for service businesses that need clearer workflows, stronger follow-up, and better operational leverage.',
+    'Local SEO execution, voice coverage, and practical workflow automation for service businesses that need stronger demand capture and cleaner follow-up.',
 } as const;
 
 export const calEmbed = {
@@ -123,8 +123,8 @@ export const services: Service[] = [
       'Clarify which use cases deserve implementation first and which should wait.',
       'Give the team a rollout order it can actually execute.',
     ],
-    relatedIndustries: ['home-care-agencies', 'hvac-and-plumbing', 'real-estate-teams'],
-    relatedCaseStudies: ['home-care-agency-seo-growth', 'hvac-lead-automation'],
+    relatedIndustries: ['home-care-agencies', 'hvac-and-plumbing', 'law-offices'],
+    relatedCaseStudies: ['home-care-agency-seo-growth', 'law-office-seo-intake', 'med-spa-consultation-growth'],
     faq: [
       {
         question: 'How long does an AI process audit take?',
@@ -176,8 +176,8 @@ export const services: Service[] = [
       'Improve speed to lead for emergency jobs and time-sensitive appointments.',
       'Give staff more time for in-office work instead of repetitive triage.',
     ],
-    relatedIndustries: ['dentists', 'hvac-and-plumbing', 'real-estate-teams'],
-    relatedCaseStudies: ['home-care-agency-seo-growth', 'hvac-lead-automation'],
+    relatedIndustries: ['dentists', 'hvac-and-plumbing', 'med-spas'],
+    relatedCaseStudies: ['med-spa-consultation-growth', 'hvac-lead-automation'],
     faq: [
       {
         question: 'Will callers know they are speaking with AI?',
@@ -198,34 +198,34 @@ export const services: Service[] = [
   },
   {
     slug: 'seo-and-ads-automation',
-    name: 'SEO and Ads Automation',
-    shortLabel: 'SEO and ads',
-    teaser: 'Grow search visibility and squeeze more results from existing ad spend with AI-supported execution.',
-    metaTitle: 'SEO and Ads Automation for Small Businesses | Caliperworks',
+    name: 'Local SEO and Growth Assets',
+    shortLabel: 'Local SEO',
+    teaser: 'Grow local search visibility with service pages, location pages, landing pages, and practical optimization work.',
+    metaTitle: 'Local SEO and Growth Assets for Service Businesses | Caliperworks',
     metaDescription:
-      'Caliperworks helps small businesses grow with AI-assisted SEO and ads automation, from landing pages and local search coverage to budget optimization.',
-    heroTitle: 'SEO and ads automation built for local growth',
+      'Caliperworks helps service businesses grow with local SEO execution, growth assets, landing pages, existing-page optimization, and practical ads workflow support.',
+    heroTitle: 'Local SEO execution built for practical growth',
     heroDescription:
-      'Use AI where it actually compounds: faster landing-page production, stronger local search coverage, and tighter ad-budget optimization tied to lead quality.',
+      'Build the service pages, location pages, growth assets, and conversion paths that help qualified local demand find you and take the next step.',
     summary:
-      'This service combines local SEO execution with ad-optimization workflows so your existing marketing budget produces more qualified demand.',
+      'This service focuses on local SEO execution first: growth assets, service and location coverage, internal linking, existing-page optimization, and conversion-focused landing pages.',
     problems: [
       'Local service businesses need more location and service-page coverage to rank consistently.',
-      'Ad accounts drift because bids, copy, and landing pages are not reviewed often enough.',
+      'Existing pages often miss buyer intent, local relevance, internal links, or a clear conversion path.',
       'Marketing spend grows, but lead quality and follow-up do not improve with it.',
     ],
     deliverables: [
-      'A content and landing-page plan designed around high-intent services and locations.',
-      'Optimization workflows for campaign budgets, routing, and reporting.',
-      'Conversion-focused pages that connect search traffic to fast follow-up.',
+      'A growth asset roadmap designed around high-intent services, locations, and buyer questions.',
+      'New service pages, location pages, FAQ resources, comparison pages, or landing pages based on the plan.',
+      'Existing-page optimization, internal linking, and conversion updates that connect search traffic to fast follow-up.',
     ],
     outcomes: [
       'Build more search visibility for core services and local intent queries.',
-      'Improve lead efficiency from paid search or local campaigns.',
+      'Turn thin or underused pages into clearer lead-capture paths.',
       'Create better alignment between marketing execution and operations.',
     ],
-    relatedIndustries: ['home-care-agencies', 'laundromats', 'hvac-and-plumbing'],
-    relatedCaseStudies: ['home-care-agency-seo-growth', 'hvac-lead-automation'],
+    relatedIndustries: ['home-care-agencies', 'med-spas', 'law-offices', 'hvac-and-plumbing'],
+    relatedCaseStudies: ['home-care-agency-seo-growth', 'law-office-seo-intake', 'med-spa-consultation-growth', 'hvac-lead-automation'],
     faq: [
       {
         question: 'Is this just automated content publishing?',
@@ -240,7 +240,7 @@ export const services: Service[] = [
       {
         question: 'Do you handle both SEO and paid search?',
         answer:
-          'Yes. The strongest results usually come from connecting search visibility, landing pages, lead capture, and follow-up instead of treating them separately.',
+          'Yes, but the packaged plans focus on local SEO and landing-page execution. Ads workflows can be scoped when the audit shows paid traffic, landing pages, and follow-up need to be connected.',
       },
     ],
   },
@@ -270,7 +270,7 @@ export const industries: Industry[] = [
       'SEO execution focused on high-intent care services and local coverage.',
     ],
     relatedServices: ['ai-process-audits', 'voice-agents', 'seo-and-ads-automation'],
-    relatedCaseStudies: ['home-care-agency-seo-growth'],
+    relatedCaseStudies: ['law-office-seo-intake'],
     faq: [
       {
         question: 'Can AI help on both caregiver recruitment and client intake?',
@@ -307,7 +307,7 @@ export const industries: Industry[] = [
       'Escalation logic for urgent or complex cases that need a human handoff.',
     ],
     relatedServices: ['voice-agents', 'ai-process-audits'],
-    relatedCaseStudies: ['hvac-lead-automation'],
+    relatedCaseStudies: ['med-spa-consultation-growth'],
     faq: [
       {
         question: 'Can AI handle after-hours appointment requests?',
@@ -322,39 +322,39 @@ export const industries: Industry[] = [
     ],
   },
   {
-    slug: 'laundromats',
-    name: 'Laundromats',
-    teaser: 'Grow pickup and delivery demand with better local search coverage and leaner ad spend.',
-    metaTitle: 'SEO and Ads Automation for Laundromats | Caliperworks',
+    slug: 'law-offices',
+    name: 'Law Offices',
+    teaser: 'Build search coverage, intake routing, and follow-up systems around high-value legal matters.',
+    metaTitle: 'Local SEO and AI Workflows for Law Offices | Caliperworks',
     metaDescription:
-      'Caliperworks helps laundromats use AI-supported SEO and ads automation to grow pickup and delivery demand in local markets.',
-    heroTitle: 'AI growth systems for laundromats',
+      'Caliperworks helps law offices build local SEO assets, intake workflows, and follow-up systems for high-value practice areas and service regions.',
+    heroTitle: 'Local growth systems for law offices',
     heroDescription:
-      'Win more pickup and delivery demand with local search coverage, sharper paid campaigns, and faster lead handling for service inquiries.',
+      'Build stronger practice-area visibility and cleaner intake follow-up so qualified legal inquiries move to the right next step faster.',
     summary:
-      'Laundromat growth usually depends on dominating a tight geographic area. That makes local SEO and ad efficiency especially important.',
+      'Law offices need clear search coverage for high-value matters, fast intake qualification, and follow-up that does not leave serious prospects sitting in an inbox.',
     painPoints: [
-      'Pickup and delivery offers need stronger local visibility to break through crowded markets.',
-      'Paid campaigns can waste budget on low-intent searches or the wrong neighborhoods.',
-      'Store owners often do not have time to build and maintain new landing pages regularly.',
+      'Practice-area pages often miss local intent, urgency, or the questions prospects ask before contacting an attorney.',
+      'Potential clients need quick routing, especially when the matter is time-sensitive or high value.',
+      'Marketing, intake, and consultation scheduling can drift into separate manual processes.',
     ],
     automations: [
-      'Location and service pages built around local-intent search demand.',
-      'Ad and landing-page workflows tuned around delivery zones and high-margin services.',
-      'Lead capture paths for commercial and recurring laundry inquiries.',
+      'Practice-area, location, FAQ, and comparison pages built around qualified legal search intent.',
+      'Intake workflows that collect matter type, urgency, location, and follow-up details before staff review.',
+      'Routing and follow-up support so qualified inquiries reach the right person with cleaner context.',
     ],
-    relatedServices: ['seo-and-ads-automation', 'ai-process-audits'],
+    relatedServices: ['seo-and-ads-automation', 'ai-process-audits', 'voice-agents'],
     relatedCaseStudies: ['home-care-agency-seo-growth'],
     faq: [
       {
-        question: 'Why does SEO matter so much for laundromats?',
+        question: 'Can SEO work for a specialized law practice?',
         answer:
-          'Because searchers usually need a nearby option right away. Better local visibility can create steady demand for pickup, delivery, and commercial services.',
+          'Yes. Specialized practices often benefit from pages built around specific matters, locations, eligibility questions, costs, and comparison searches.',
       },
       {
-        question: 'Can AI help without a huge ad budget?',
+        question: 'Can automation help without replacing legal intake staff?',
         answer:
-          'Yes. The work is often about increasing efficiency and local coverage before spend increases at all.',
+          'Yes. The goal is to collect useful context, route inquiries, and reduce manual chasing while keeping legal review and client decisions with the firm.',
       },
     ],
   },
@@ -396,39 +396,39 @@ export const industries: Industry[] = [
     ],
   },
   {
-    slug: 'real-estate-teams',
-    name: 'Real Estate Teams',
-    teaser: 'Qualify buyer and seller leads earlier so agents spend more time on serious prospects.',
-    metaTitle: 'AI Automation for Real Estate Teams | Caliperworks',
+    slug: 'med-spas',
+    name: 'Med Spas',
+    teaser: 'Grow treatment visibility and capture consultation demand without overloading the front desk.',
+    metaTitle: 'Local SEO and AI Workflows for Med Spas | Caliperworks',
     metaDescription:
-      'Caliperworks helps real estate teams use AI voice agents and lead-qualification systems to respond faster and focus on serious buyers and sellers.',
-    heroTitle: 'AI systems for real estate teams',
+      'Caliperworks helps med spas build treatment pages, local SEO assets, consultation intake workflows, and follow-up systems for higher-intent demand.',
+    heroTitle: 'Local growth systems for med spas',
     heroDescription:
-      'Build a cleaner lead-qualification and follow-up system so agents stay focused on the buyers and sellers most likely to move.',
+      'Build treatment-page coverage, consultation capture, and follow-up workflows around the procedures and questions that bring qualified patients in.',
     summary:
-      'Real estate teams need cleaner qualification, routing, and follow-up so agents are not forced to manually sort every inquiry.',
+      'Med spas need stronger search visibility for treatments, comparisons, cost questions, and local intent, plus fast follow-up when prospects are ready to book.',
     painPoints: [
-      'Leads go cold when they sit in a form inbox or voicemail too long.',
-      'Agents waste time on low-intent prospects who should have been screened earlier.',
-      'Showing, scheduling, and follow-up work creates friction when volume spikes.',
+      'Treatment pages can be too thin to rank or too generic to convert high-intent prospects.',
+      'Consultation requests lose momentum when staff are busy with in-office clients.',
+      'Paid ads and social interest often need stronger landing pages and follow-up paths to turn into booked appointments.',
     ],
     automations: [
-      'Voice and intake agents for buyer and seller lead qualification.',
-      'Routing logic based on geography, price band, readiness, or transaction type.',
-      'Follow-up workflows that keep warm leads moving without manual chasing.',
+      'Treatment, comparison, cost, FAQ, and location pages built around local search demand.',
+      'Consultation intake workflows that capture treatment interest, timing, and next-step details.',
+      'Follow-up and landing-page support that connects search or ad traffic to booking intent.',
     ],
-    relatedServices: ['voice-agents', 'ai-process-audits'],
+    relatedServices: ['seo-and-ads-automation', 'voice-agents', 'ai-process-audits'],
     relatedCaseStudies: ['hvac-lead-automation'],
     faq: [
       {
-        question: 'Can AI qualify both buyer and seller leads?',
+        question: 'Can local SEO help med spas beyond blog posts?',
         answer:
-          'Yes. The screening criteria differ, but the value is the same: capture intent, timeline, and fit before an agent spends time manually sorting.',
+          'Yes. The most useful assets are often treatment pages, comparison pages, cost explainers, local pages, and consultation-focused landing pages.',
       },
       {
-        question: 'Is this only for large brokerages?',
+        question: 'Can AI help with consultation requests?',
         answer:
-          'No. Smaller teams often get the most leverage because every missed lead and every wasted follow-up hour matters more.',
+          'Yes. It can collect treatment interest, preferred timing, and contact details so staff can follow up from a cleaner queue.',
       },
     ],
   },
@@ -483,7 +483,7 @@ export const caseStudies: CaseStudy[] = [
     heroDescription:
       'An HVAC business needed to get more value from the budget it was already spending while improving how quickly new calls were qualified.',
     clientLabel: 'HVAC business',
-    location: 'Austin, Texas',
+    location: 'Houston, Texas',
     industrySlug: 'hvac-and-plumbing',
     serviceSlugs: ['seo-and-ads-automation', 'voice-agents'],
     challenge: [
@@ -507,6 +507,80 @@ export const caseStudies: CaseStudy[] = [
       'Efficiency gains often come from tightening conversion flow, not just media buying.',
       'Trade businesses benefit most when speed-to-lead and budget optimization work together.',
       'A better qualification layer can raise conversion rates without more spend.',
+    ],
+  },
+  {
+    slug: 'law-office-seo-intake',
+    title: 'Law office search coverage and intake cleanup',
+    teaser: 'A law office clarified practice-area search coverage and made new inquiries easier to route.',
+    metaTitle: 'Law Office Local SEO and Intake Case Study | Caliperworks',
+    metaDescription:
+      'See how a law office used Caliperworks to plan local SEO assets, improve practice-area coverage, and tighten intake follow-up.',
+    heroTitle: 'Law office search coverage and intake cleanup',
+    heroDescription:
+      'A law office needed clearer visibility for high-value practice areas and a cleaner way to route new inquiries before staff spent time manually sorting them.',
+    clientLabel: 'Law office',
+    location: 'Boston',
+    industrySlug: 'law-offices',
+    serviceSlugs: ['seo-and-ads-automation', 'ai-process-audits'],
+    challenge: [
+      'Practice-area pages did not clearly map to the highest-value local matters.',
+      'New inquiries arrived with inconsistent detail, making follow-up slower than it needed to be.',
+      'Marketing priorities and intake handling were not connected in one practical plan.',
+    ],
+    solution: [
+      'Mapped priority practice areas, local search intent, and the questions prospects ask before contacting the firm.',
+      'Outlined new practice-area, FAQ, and location assets to support qualified search demand.',
+      'Defined intake fields and routing priorities so staff could review new inquiries with cleaner context.',
+    ],
+    results: [
+      { value: 'Mapped', label: 'priority practice-area coverage' },
+      { value: 'Cleaner', label: 'intake routing plan' },
+      { value: 'Ready', label: 'growth asset roadmap' },
+    ],
+    quote:
+      'The useful part was seeing which practice-area pages and intake steps should come first, instead of treating SEO and follow-up like separate projects.',
+    takeaways: [
+      'Law-office SEO works better when practice-area pages and intake routing are planned together.',
+      'Specific legal matters, locations, costs, and eligibility questions can become useful growth assets.',
+      'A cleaner intake path helps staff spend less time sorting and more time reviewing qualified inquiries.',
+    ],
+  },
+  {
+    slug: 'med-spa-consultation-growth',
+    title: 'Med spa treatment visibility and consultation capture',
+    teaser: 'A med spa planned treatment-page coverage and a cleaner consultation follow-up path.',
+    metaTitle: 'Med Spa Local SEO and Consultation Capture Case Study | Caliperworks',
+    metaDescription:
+      'See how a med spa used Caliperworks to plan local SEO assets, improve treatment-page coverage, and tighten consultation follow-up.',
+    heroTitle: 'Med spa treatment visibility and consultation capture',
+    heroDescription:
+      'A med spa needed stronger treatment visibility and a better way to capture consultation intent when prospects were comparing procedures, pricing, and local providers.',
+    clientLabel: 'Med spa',
+    location: 'Boston',
+    industrySlug: 'med-spas',
+    serviceSlugs: ['seo-and-ads-automation', 'voice-agents'],
+    challenge: [
+      'Treatment pages were too thin to support the range of searches prospects used before booking.',
+      'Comparison and cost questions were not clearly answered in the site structure.',
+      'Consultation requests needed faster capture and cleaner handoff to the front desk.',
+    ],
+    solution: [
+      'Built a growth asset roadmap across treatments, comparisons, cost questions, FAQs, and local intent.',
+      'Prioritized conversion-focused pages that could support both search traffic and paid campaigns.',
+      'Outlined a consultation capture workflow so staff could follow up from clearer treatment-interest details.',
+    ],
+    results: [
+      { value: 'Planned', label: 'treatment-page coverage' },
+      { value: 'Clearer', label: 'consultation capture path' },
+      { value: 'Aligned', label: 'search and landing-page priorities' },
+    ],
+    quote:
+      'The plan connected the treatment pages we needed with the consultation follow-up process, which made the next steps much easier to prioritize.',
+    takeaways: [
+      'Med-spa growth assets should match how prospects compare treatments, costs, providers, and timing.',
+      'Treatment visibility is stronger when pages are built for both search intent and consultation conversion.',
+      'Front-desk follow-up improves when consultation requests include the right treatment context.',
     ],
   },
 ];

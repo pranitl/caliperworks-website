@@ -51,7 +51,7 @@ const contactMailto = createMailto();
     <div>
       <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Industries</div>
       <div class="space-y-3 text-sm font-semibold">
-        {industries.slice(0, 4).map((industry) => (
+        {industries.map((industry) => (
           <a href={industryHref(industry.slug)} class="block transition-colors hover:text-white">
             {industry.name}
           </a>

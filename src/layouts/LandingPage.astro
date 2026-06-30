@@ -222,8 +222,8 @@ const structuredData = [organizationSchema(), websiteSchema()];
         <div class="grid gap-12 xl:grid-cols-3">
           {homeTestimonials.map((t) => (
             <div class="relative rounded-[3rem] border-4 border-slate-800 bg-slate-800/40 p-12 backdrop-blur-md">
-              <p class="mb-10 font-serif text-3xl font-black leading-snug italic text-slate-100">
-                "{t.quote}"
+              <p class="mb-10 font-serif text-3xl font-black leading-snug text-slate-100">
+                {t.quote}
               </p>
               <div class="mb-8 flex flex-wrap gap-3">
                 {t.metrics.map((m) => (
@@ -233,7 +233,7 @@ const structuredData = [organizationSchema(), websiteSchema()];
                 ))}
               </div>
               <div class="border-t-2 border-slate-700/50 pt-6 text-xl font-bold text-slate-400">
-                — {t.author}
+                {t.author}
               </div>
             </div>
           ))}

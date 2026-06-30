@@ -17,29 +17,29 @@ export const homeNavItems = [
 ] as const;
 
 export const homeMeta = {
-  title: 'Caliperworks | Free AI Audit, Voice Agents, and SEO for Service Businesses',
+  title: 'Caliperworks | Local SEO, Voice Agents, and AI Workflows for Service Businesses',
   description:
-    'Start with a free AI process audit. Caliperworks helps service businesses improve coverage, follow-up, voice handling, and SEO with clear pricing and practical workflows.',
+    'Caliperworks helps service businesses grow local search visibility, build practical SEO assets, improve voice coverage, and clean up follow-up workflows.',
 } as const;
 
 export const homeHero = {
-  headline: 'You do not need more tools. You need more coverage.',
+  headline: 'Local search, voice coverage, and follow-up systems that actually ship.',
   subheadline:
-    'We build AI systems that help service businesses handle demand, reduce admin drag, and keep the workflow under your team’s control.',
+    'Caliperworks helps service businesses build the pages, workflows, and AI-supported coverage needed to capture more qualified demand without adding another tool to babysit.',
   primaryCtaLabel: 'Schedule a Discovery Call',
   secondaryCtaLabel: 'View Pricing',
   availabilityTimezone: 'America/New_York',
 } as const;
 
 export const homeProblemText =
-  'Most owners do not need more software to babysit. They need dependable coverage when the phone rings during lunch, after hours, or while the team is stretched thin. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate.';
+  'Most owners do not need more software to babysit. They need stronger visibility for the services people are already searching for, dependable coverage when the phone rings, and cleaner follow-up once demand arrives. We work with you to build practical systems that fit your process, keep your staff in control, and take repetitive work off their plate.';
 
 export const homeSolutions = [
   {
-    title: 'Workflow Review',
-    subtitle: 'Find the right starting points',
+    title: 'Local SEO & Growth Assets',
+    subtitle: 'Search visibility that compounds',
     description:
-      'We review your intake, follow-up, and handoff process with your team and identify the places where automation will actually help. You get a rollout plan grounded in your day-to-day operations.',
+      'We build and optimize service pages, location pages, FAQ resources, and conversion-focused landing pages around the searches that matter for your market.',
   },
   {
     title: 'Voice Coverage',
@@ -48,10 +48,10 @@ export const homeSolutions = [
       'We can answer routine calls during lunch breaks, after hours, or peak periods, capture the right details, and route or book the next step so your staff starts from a clean follow-up list.',
   },
   {
-    title: 'Search & Ads Support',
-    subtitle: 'Measured automation, clear reporting',
+    title: 'Workflow Review',
+    subtitle: 'Find the right starting points',
     description:
-      'We support SEO and ad workflows with measured automation, human review, and reporting your team can actually use. The goal is more qualified demand without creating another system to monitor all day.',
+      'We review your intake, follow-up, marketing, and handoff process with your team and identify whether search growth, voice coverage, ads workflows, or operational cleanup should come first.',
   },
 ] as const;
 
@@ -64,14 +64,14 @@ export const homeTestimonials = [
   },
   {
     quote:
-      'A dental practice wanted dependable phone coverage during lunch and after hours without asking staff to hover over missed calls. Caliperworks helped create a workflow that captured patient requests, closed coverage gaps, and let the front desk follow up from a clear queue.',
-    author: 'Dental Practice',
+      'A Boston dental practice wanted dependable phone coverage during lunch and after hours without asking staff to hover over missed calls. Caliperworks helped create a workflow that captured patient requests, closed coverage gaps, and let the front desk follow up from a clear queue.',
+    author: 'Dental Practice in Boston',
     metrics: ['Lunch-Break Coverage', 'After-Hours Intake', 'Staff-Led Follow-Up'],
   },
   {
     quote:
-      'An HVAC business used Caliperworks to automate parts of its ad workflow and lead handling. The result was 25% more leads on the same spend and a 30% lift in lead conversion, with less day-to-day babysitting from the team.',
-    author: 'HVAC Business Owner in Austin, TX',
+      'A Houston HVAC business used Caliperworks to automate parts of its ad workflow and lead handling. The result was 25% more leads on the same spend and a 30% lift in lead conversion, with less day-to-day babysitting from the team.',
+    author: 'HVAC Business Owner in Houston, TX',
     metrics: ['25% More Leads', '30% Conversion Lift', 'Same Budget'],
   },
 ] as const;
@@ -86,14 +86,14 @@ export const homeFeaturedIndustries = [
   {
     name: 'Dentists',
     detail:
-      'Coverage for calls during lunch, after hours, or peak chair time, with patient requests logged so staff can return to a clear follow-up list.',
-    tags: ['Voice Agent'],
+      'Local search coverage for treatments, emergency needs, and new-patient intent, plus phone workflows for lunch and after-hours gaps.',
+    tags: ['Local SEO', 'Voice Agent'],
   },
   {
-    name: 'Laundromats',
+    name: 'Law Offices',
     detail:
-      'Local search and ad support for pickup and delivery services, with practical reporting and steadier follow-up.',
-    tags: ['Local SEO', 'Ad Budget Optimization'],
+      'Practice-area pages, local search assets, intake routing, and follow-up support for higher-value legal inquiries.',
+    tags: ['Local SEO', 'Intake Automation'],
   },
   {
     name: 'HVAC & Plumbing',
@@ -102,10 +102,10 @@ export const homeFeaturedIndustries = [
     tags: ['Voice Agent', 'SEO', 'Ads Automation'],
   },
   {
-    name: 'Real Estate',
+    name: 'Med Spas',
     detail:
-      'Lead qualification and routing that helps agents focus on serious buyer and seller conversations instead of sorting every inquiry by hand.',
-    tags: ['Voice Agent'],
+      'Treatment pages, comparison resources, consultation capture, and follow-up workflows for high-intent local demand.',
+    tags: ['Local SEO', 'Voice Agent'],
   },
 ] as const;
 
