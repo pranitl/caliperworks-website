@@ -26,6 +26,7 @@ export interface SearchBriefOffer {
   promise: string;
   deliverables: string[];
   effort: string;
+  exclusivity: string;
 }
 
 export interface SearchBrief {

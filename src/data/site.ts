@@ -618,7 +618,7 @@ export const caseStudies: CaseStudy[] = [
     metaTitle: 'Med Spa SEO and Voice Agent Case Study | Caliperworks',
     metaDescription:
       'See how a med spa used Caliperworks SEO execution to move from Page 5 to Page 1 and implemented a voice agent to improve consultation intake.',
-    heroTitle: 'From Page 5 to Page 1—with voice coverage ready for the demand',
+    heroTitle: 'From Page 5 to Page 1, with voice coverage ready for the demand',
     heroDescription:
       'A med spa needed stronger treatment visibility and a better way to capture consultation intent when staff could not answer immediately.',
     clientLabel: 'Med spa',

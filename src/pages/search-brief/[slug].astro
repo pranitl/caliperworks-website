@@ -115,13 +115,14 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
           <p>{brief.proof}</p>
           <footer>{brief.proofQualification}</footer>
         </blockquote>
+        <p class="exclusivity-note"><strong>Local exclusivity.</strong> {brief.offer.exclusivity}</p>
         </div>
 
         <div class="form-card">
         <div class="form-card-rule" aria-hidden="true"></div>
         <p class="form-overline">Complimentary · prepared for {brief.businessName}</p>
         <h2>Where should Pranit send it?</h2>
-        <p class="delivery-note">I’ll review it personally and email your 2-page action plan—usually within a few hours.</p>
+        <p class="delivery-note">I’ll review it personally and email your 2-page action plan. It usually arrives within a few hours.</p>
         <form
           id="brief-request-form"
           data-brief-slug={brief.slug}
@@ -207,7 +208,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
 
           form.reset();
           status.className = 'form-status success';
-          status.textContent = 'Request received. Pranit will review it personally and email your 2-page action plan—usually within a few hours.';
+          status.textContent = 'Request received. Pranit will review it personally and email your 2-page action plan. It usually arrives within a few hours.';
         } catch (error) {
           status.className = 'form-status error';
           const fallbackUrl = form.dataset.fallbackUrl || 'mailto:pranit@caliperworks.com';
@@ -280,6 +281,8 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
   blockquote { margin:50px 0 0; padding:24px 0 0; border-top:1px solid #41506a; }
   blockquote p { margin:0; color:#fff; font-family:var(--font-serif); font-size:1.25rem; line-height:1.5; }
   blockquote footer { margin-top:10px; color:#9da9bb; font-size:.74rem; }
+  .request-copy .exclusivity-note { margin:24px 0 0; padding:16px 18px; border:1px solid #41506a; color:#dbe2ec; font-size:.88rem; line-height:1.55; }
+  .exclusivity-note strong { color:#fff; }
   .form-card { position:relative; padding:40px; background:#fff; color:var(--ink); box-shadow:18px 18px 0 var(--gold); }
   .form-card-rule { position:absolute; inset:14px; border:1px solid #d8dee7; pointer-events:none; }
   .form-overline { position:relative; margin:0; color:var(--blue); font-size:.7rem; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
