@@ -21,6 +21,23 @@ export interface Service {
   faq: FaqEntry[];
 }
 
+export interface UseCase {
+  slug: string;
+  shortLabel: string;
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  headline: string;
+  body: string;
+  observedCondition: string;
+  consequence: string;
+  outcome: string;
+  mechanism: string[];
+  deliverables: string[];
+  relatedServices: string[];
+  relatedCaseStudies: string[];
+}
+
 export interface Industry {
   slug: string;
   name: string;
@@ -52,7 +69,7 @@ export interface CaseStudy {
   challenge: string[];
   solution: string[];
   results: Array<{ value: string; label: string }>;
-  quote: string;
+  quote?: string;
   takeaways: string[];
 }
 
@@ -60,13 +77,13 @@ export const siteConfig = {
   name: 'Caliperworks',
   siteUrl: 'https://caliperworks.com',
   email: 'pranit@caliperworks.com',
-  defaultSubject: 'Caliperworks Inquiry - AI Process Audit',
-  defaultTitle: 'Local SEO, Voice Agents, and AI Workflows for Service Businesses | Caliperworks',
+  defaultSubject: 'Caliperworks Gap Review Request',
+  defaultTitle: 'Growth Systems for Service Businesses | Caliperworks',
   defaultDescription:
-    'Caliperworks helps service businesses build local SEO assets, voice coverage, ads workflows, and practical automation that improve demand capture and follow-up.',
+    'Caliperworks helps service businesses improve the path from local search or inbound call to a qualified, properly routed next step.',
   defaultOgImagePath: '/og-card.svg',
   tagline:
-    'Local SEO execution, voice coverage, and practical workflow automation for service businesses that need stronger demand capture and cleaner follow-up.',
+    'SEO execution, call coverage, ads workflows, and practical automation for service businesses that need stronger demand capture and cleaner follow-up.',
 } as const;
 
 export const calEmbed = {
@@ -86,28 +103,28 @@ export const calEmbed = {
 } as const;
 
 export const mainNav = [
+  { href: '/use-cases/', label: 'Use Cases' },
   { href: '/services/', label: 'Services' },
-  { href: '/pricing/', label: 'Pricing' },
   { href: '/industries/', label: 'Industries' },
+  { href: '/pricing/', label: 'Pricing' },
   { href: '/case-studies/', label: 'Case Studies' },
-  { href: '/#faq', label: 'FAQ' },
 ] as const;
 
 export const services: Service[] = [
   {
     slug: 'ai-process-audits',
-    name: 'Free AI Process Audit',
-    shortLabel: 'Process audits',
+    name: 'Gap Review and Process Audit',
+    shortLabel: 'Gap review',
     teaser:
       'Map the workflow first, then prioritize the voice, SEO, ad, and operational changes worth implementing.',
-    metaTitle: 'Free AI Process Audit for Small Businesses | Caliperworks',
+    metaTitle: 'Growth Gap Review and Process Audit | Caliperworks',
     metaDescription:
       'Caliperworks offers a free AI process audit for small businesses to map workflows, uncover revenue leaks, and prioritize the highest-impact automation opportunities.',
-    heroTitle: 'Free AI process audit for small businesses',
+    heroTitle: 'Find the first growth or workflow constraint worth fixing',
     heroDescription:
       'Review intake, marketing, handoffs, and follow-up to uncover the automation opportunities that actually fit your business before you commit to implementation.',
     summary:
-      'The audit is a free discovery layer. It shows whether voice handling, search growth, ad automation, or workflow cleanup should come first.',
+      'The gap review is a free discovery layer. It shows whether search visibility, voice handling, paid-demand flow, or workflow cleanup should come first.',
     problems: [
       'Teams spend too much time on repetitive intake, quoting, follow-up, and admin work.',
       'Lead handoffs break between phone, inbox, CRM, and scheduling tools.',
@@ -124,7 +141,7 @@ export const services: Service[] = [
       'Give the team a rollout order it can actually execute.',
     ],
     relatedIndustries: ['home-care-agencies', 'hvac-and-plumbing', 'law-offices'],
-    relatedCaseStudies: ['home-care-agency-seo-growth', 'law-office-seo-intake', 'med-spa-consultation-growth'],
+    relatedCaseStudies: ['home-care-agency-seo-growth', 'med-spa-consultation-growth'],
     faq: [
       {
         question: 'How long does an AI process audit take?',
@@ -225,7 +242,7 @@ export const services: Service[] = [
       'Create better alignment between marketing execution and operations.',
     ],
     relatedIndustries: ['home-care-agencies', 'med-spas', 'law-offices', 'hvac-and-plumbing'],
-    relatedCaseStudies: ['home-care-agency-seo-growth', 'law-office-seo-intake', 'med-spa-consultation-growth', 'hvac-lead-automation'],
+    relatedCaseStudies: ['home-care-agency-seo-growth', 'med-spa-consultation-growth', 'hvac-lead-automation'],
     faq: [
       {
         question: 'Is this just automated content publishing?',
@@ -243,6 +260,89 @@ export const services: Service[] = [
           'Yes, but the packaged plans focus on local SEO and landing-page execution. Ads workflows can be scoped when the audit shows paid traffic, landing pages, and follow-up need to be connected.',
       },
     ],
+  },
+];
+
+export const useCases: UseCase[] = [
+  {
+    slug: 'local-visibility-growth',
+    shortLabel: 'Local visibility growth',
+    metaTitle: 'Local Visibility Growth for Service Businesses | Caliperworks',
+    metaDescription: 'Build the service, location, and buyer-intent pages that help qualified local demand find your business and take the next step.',
+    eyebrow: 'Use case · local visibility',
+    headline: 'Build the search coverage qualified local demand is already looking for.',
+    body: 'Turn gaps in service, location, treatment, practice-area, and buyer-question coverage into a prioritized execution plan.',
+    observedCondition: 'Important services or locations are difficult to find, and existing pages do not match how buyers search or decide.',
+    consequence: 'Qualified demand reaches competitors, paid traffic lands on weak pages, and marketing effort does not compound.',
+    outcome: 'A clearer path from high-intent search to calls, consultations, quotes, or booked work.',
+    mechanism: [
+      'Map service, location, and buyer-intent gaps.',
+      'Prioritize new growth assets and existing-page improvements.',
+      'Connect each page to a clear conversion and follow-up path.',
+    ],
+    deliverables: ['Opportunity map', 'Priority asset list', 'Recommended execution pace', 'First-page brief'],
+    relatedServices: ['seo-and-ads-automation', 'ai-process-audits'],
+    relatedCaseStudies: ['home-care-agency-seo-growth', 'med-spa-consultation-growth'],
+  },
+  {
+    slug: 'missed-call-coverage',
+    shortLabel: 'Missed-call coverage',
+    metaTitle: 'Missed-Call Coverage for Service Businesses | Caliperworks',
+    metaDescription: 'Capture, qualify, route, or book inbound calls when staff are busy, at lunch, or offline.',
+    eyebrow: 'Use case · call coverage',
+    headline: 'When the office cannot answer, the inquiry should still move.',
+    body: 'Create reliable coverage for busy periods, lunch breaks, after hours, and other windows where valuable calls reach voicemail.',
+    observedCondition: 'Calls arrive while staff are serving customers, working in the field, at lunch, or already on another call.',
+    consequence: 'Follow-up starts late, caller context has to be reconstructed, and time-sensitive demand goes elsewhere.',
+    outcome: 'Clean caller details and a qualified, routed, or booked next step delivered to the existing team.',
+    mechanism: [
+      'Review call types, coverage windows, and booking rules.',
+      'Define qualification, routing, and escalation logic.',
+      'Connect the handoff to the systems staff already use.',
+    ],
+    deliverables: ['Coverage-window review', 'Call-type map', 'Escalation rules', 'Recommended first workflow'],
+    relatedServices: ['voice-agents', 'ai-process-audits'],
+    relatedCaseStudies: ['hvac-lead-automation'],
+  },
+  {
+    slug: 'lead-handoff-cleanup',
+    shortLabel: 'Lead handoff cleanup',
+    metaTitle: 'Lead Handoff and Follow-Up Cleanup | Caliperworks',
+    metaDescription: 'Reduce intake friction and move qualified inquiries to the right owner with better context and less manual chasing.',
+    eyebrow: 'Use case · follow-up',
+    headline: 'Make the next handoff clear before adding another tool.',
+    body: 'Review how leads move between forms, phones, inboxes, calendars, and staff, then fix the steps that create delay or rework.',
+    observedCondition: 'New inquiries arrive through several channels with inconsistent detail and no reliable next owner.',
+    consequence: 'Staff chase missing information, promising leads wait, and reporting never reflects the real customer journey.',
+    outcome: 'Qualified inquiries reach the right person with the context needed to act.',
+    mechanism: [
+      'Map the current intake and follow-up path.',
+      'Find missing fields, unclear ownership, and duplicate work.',
+      'Prioritize the smallest workflow changes with the largest operational effect.',
+    ],
+    deliverables: ['Current-state map', 'Friction and ownership gaps', 'Priority fixes', 'Implementation recommendation'],
+    relatedServices: ['ai-process-audits', 'voice-agents'],
+    relatedCaseStudies: ['med-spa-consultation-growth'],
+  },
+  {
+    slug: 'paid-demand-efficiency',
+    shortLabel: 'Paid-demand efficiency',
+    metaTitle: 'Paid-Demand and Landing-Page Efficiency | Caliperworks',
+    metaDescription: 'Improve the path from paid traffic to qualification, follow-up, and booked work without treating ad performance as a media-only problem.',
+    eyebrow: 'Use case · paid demand',
+    headline: 'Get more from active demand before increasing the budget.',
+    body: 'Connect ad workflows, landing-page coverage, qualification, and follow-up so the existing spend has a better chance to convert.',
+    observedCondition: 'Paid traffic is active, but landing pages, qualification, and operational follow-up are managed as separate systems.',
+    consequence: 'Clicks increase without a comparable improvement in qualified opportunities or booked work.',
+    outcome: 'A more efficient path from campaign intent to properly handled lead.',
+    mechanism: [
+      'Review campaign intent and landing-page alignment.',
+      'Inspect qualification and speed-to-lead constraints.',
+      'Prioritize workflow, page, and reporting changes before adding spend.',
+    ],
+    deliverables: ['Demand-path review', 'Landing-page gaps', 'Qualification gaps', 'Priority action plan'],
+    relatedServices: ['seo-and-ads-automation', 'ai-process-audits'],
+    relatedCaseStudies: ['hvac-lead-automation'],
   },
 ];
 
@@ -270,7 +370,7 @@ export const industries: Industry[] = [
       'SEO execution focused on high-intent care services and local coverage.',
     ],
     relatedServices: ['ai-process-audits', 'voice-agents', 'seo-and-ads-automation'],
-    relatedCaseStudies: ['law-office-seo-intake'],
+    relatedCaseStudies: ['home-care-agency-seo-growth'],
     faq: [
       {
         question: 'Can AI help on both caregiver recruitment and client intake?',
@@ -307,7 +407,7 @@ export const industries: Industry[] = [
       'Escalation logic for urgent or complex cases that need a human handoff.',
     ],
     relatedServices: ['voice-agents', 'ai-process-audits'],
-    relatedCaseStudies: ['med-spa-consultation-growth'],
+    relatedCaseStudies: [],
     faq: [
       {
         question: 'Can AI handle after-hours appointment requests?',
@@ -344,7 +444,7 @@ export const industries: Industry[] = [
       'Routing and follow-up support so qualified inquiries reach the right person with cleaner context.',
     ],
     relatedServices: ['seo-and-ads-automation', 'ai-process-audits', 'voice-agents'],
-    relatedCaseStudies: ['home-care-agency-seo-growth'],
+    relatedCaseStudies: [],
     faq: [
       {
         question: 'Can SEO work for a specialized law practice?',
@@ -418,7 +518,7 @@ export const industries: Industry[] = [
       'Follow-up and landing-page support that connects search or ad traffic to booking intent.',
     ],
     relatedServices: ['seo-and-ads-automation', 'voice-agents', 'ai-process-audits'],
-    relatedCaseStudies: ['hvac-lead-automation'],
+    relatedCaseStudies: ['med-spa-consultation-growth'],
     faq: [
       {
         question: 'Can local SEO help med spas beyond blog posts?',
@@ -510,77 +610,38 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: 'law-office-seo-intake',
-    title: 'Law office search coverage and intake cleanup',
-    teaser: 'A law office clarified practice-area search coverage and made new inquiries easier to route.',
-    metaTitle: 'Law Office Local SEO and Intake Case Study | Caliperworks',
-    metaDescription:
-      'See how a law office used Caliperworks to plan local SEO assets, improve practice-area coverage, and tighten intake follow-up.',
-    heroTitle: 'Law office search coverage and intake cleanup',
-    heroDescription:
-      'A law office needed clearer visibility for high-value practice areas and a cleaner way to route new inquiries before staff spent time manually sorting them.',
-    clientLabel: 'Law office',
-    location: 'Boston',
-    industrySlug: 'law-offices',
-    serviceSlugs: ['seo-and-ads-automation', 'ai-process-audits'],
-    challenge: [
-      'Practice-area pages did not clearly map to the highest-value local matters.',
-      'New inquiries arrived with inconsistent detail, making follow-up slower than it needed to be.',
-      'Marketing priorities and intake handling were not connected in one practical plan.',
-    ],
-    solution: [
-      'Mapped priority practice areas, local search intent, and the questions prospects ask before contacting the firm.',
-      'Outlined new practice-area, FAQ, and location assets to support qualified search demand.',
-      'Defined intake fields and routing priorities so staff could review new inquiries with cleaner context.',
-    ],
-    results: [
-      { value: 'Mapped', label: 'priority practice-area coverage' },
-      { value: 'Cleaner', label: 'intake routing plan' },
-      { value: 'Ready', label: 'growth asset roadmap' },
-    ],
-    quote:
-      'The useful part was seeing which practice-area pages and intake steps should come first, instead of treating SEO and follow-up like separate projects.',
-    takeaways: [
-      'Law-office SEO works better when practice-area pages and intake routing are planned together.',
-      'Specific legal matters, locations, costs, and eligibility questions can become useful growth assets.',
-      'A cleaner intake path helps staff spend less time sorting and more time reviewing qualified inquiries.',
-    ],
-  },
-  {
     slug: 'med-spa-consultation-growth',
-    title: 'Med spa treatment visibility and consultation capture',
-    teaser: 'A med spa planned treatment-page coverage and a cleaner consultation follow-up path.',
-    metaTitle: 'Med Spa Local SEO and Consultation Capture Case Study | Caliperworks',
+    title: 'Med spa Page 1 search growth and voice-agent intake',
+    teaser: 'A med spa moved a priority treatment search from Page 5 to Page 1 and added voice-agent coverage for consultation intake.',
+    metaTitle: 'Med Spa SEO and Voice Agent Case Study | Caliperworks',
     metaDescription:
-      'See how a med spa used Caliperworks to plan local SEO assets, improve treatment-page coverage, and tighten consultation follow-up.',
-    heroTitle: 'Med spa treatment visibility and consultation capture',
+      'See how a med spa used Caliperworks SEO execution to move from Page 5 to Page 1 and implemented a voice agent to improve consultation intake.',
+    heroTitle: 'From Page 5 to Page 1—with voice coverage ready for the demand',
     heroDescription:
-      'A med spa needed stronger treatment visibility and a better way to capture consultation intent when prospects were comparing procedures, pricing, and local providers.',
+      'A med spa needed stronger treatment visibility and a better way to capture consultation intent when staff could not answer immediately.',
     clientLabel: 'Med spa',
     location: 'Boston',
     industrySlug: 'med-spas',
     serviceSlugs: ['seo-and-ads-automation', 'voice-agents'],
     challenge: [
-      'Treatment pages were too thin to support the range of searches prospects used before booking.',
-      'Comparison and cost questions were not clearly answered in the site structure.',
-      'Consultation requests needed faster capture and cleaner handoff to the front desk.',
+      'A priority treatment search was sitting on Page 5 instead of reaching high-intent prospects.',
+      'The existing search coverage did not fully support how prospects compared treatments, pricing, and local providers.',
+      'Consultation calls needed reliable capture and a cleaner handoff when the front desk was occupied or offline.',
     ],
     solution: [
-      'Built a growth asset roadmap across treatments, comparisons, cost questions, FAQs, and local intent.',
-      'Prioritized conversion-focused pages that could support both search traffic and paid campaigns.',
-      'Outlined a consultation capture workflow so staff could follow up from clearer treatment-interest details.',
+      'Improved the priority treatment page and supporting local search structure around qualified treatment intent.',
+      'Expanded the page coverage needed to support comparison, cost, FAQ, and local-intent searches.',
+      'Implemented a voice agent to capture consultation interest and hand cleaner intake details to the team.',
     ],
     results: [
-      { value: 'Planned', label: 'treatment-page coverage' },
-      { value: 'Clearer', label: 'consultation capture path' },
-      { value: 'Aligned', label: 'search and landing-page priorities' },
+      { value: 'Page 5 → 1', label: 'priority treatment search improvement' },
+      { value: 'Voice agent', label: 'consultation coverage implemented' },
+      { value: 'Cleaner', label: 'intake details for staff follow-up' },
     ],
-    quote:
-      'The plan connected the treatment pages we needed with the consultation follow-up process, which made the next steps much easier to prioritize.',
     takeaways: [
-      'Med-spa growth assets should match how prospects compare treatments, costs, providers, and timing.',
-      'Treatment visibility is stronger when pages are built for both search intent and consultation conversion.',
-      'Front-desk follow-up improves when consultation requests include the right treatment context.',
+      'Search growth creates more value when the intake path is ready to handle the resulting demand.',
+      'Treatment visibility improves when the main page and supporting buyer questions are planned together.',
+      'Voice coverage can preserve consultation intent when the front desk cannot answer immediately.',
     ],
   },
 ];
@@ -623,6 +684,11 @@ export const caseStudyMap = Object.fromEntries(caseStudies.map((caseStudy) => [c
   CaseStudy
 >;
 
+export const useCaseMap = Object.fromEntries(useCases.map((useCase) => [useCase.slug, useCase])) as Record<
+  string,
+  UseCase
+>;
+
 export function absoluteUrl(path: string) {
   return new URL(path, siteConfig.siteUrl).toString();
 }
@@ -633,6 +699,10 @@ export function createMailto(subject = siteConfig.defaultSubject) {
 
 export function serviceHref(slug: string) {
   return `/services/${slug}/`;
+}
+
+export function useCaseHref(slug: string) {
+  return `/use-cases/${slug}/`;
 }
 
 export function pricingHref(slug?: string) {
@@ -652,10 +722,12 @@ export function caseStudyHref(slug: string) {
 
 export const publicRoutes = [
   '/',
+  '/use-cases/',
   '/services/',
   '/pricing/',
   '/industries/',
   '/case-studies/',
+  ...useCases.map((useCase) => useCaseHref(useCase.slug)),
   ...services.map((service) => serviceHref(service.slug)),
   ...industries.map((industry) => industryHref(industry.slug)),
   ...caseStudies.map((caseStudy) => caseStudyHref(caseStudy.slug)),

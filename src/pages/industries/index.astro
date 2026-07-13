@@ -3,82 +3,54 @@ import Layout from '../../layouts/Layout.astro';
 import SectionCta from '../../components/SectionCta.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
-import {
-  industries,
-  industryHref,
-  serviceMap,
-} from '../../data/site';
+import { industries, industryHref, serviceMap } from '../../data/site';
 import { breadcrumbSchema, itemListSchema } from '../../lib/seo';
 
 const structuredData = [
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Industries', path: '/industries/' },
-  ]),
-  itemListSchema(
-    'Caliperworks industry pages',
-    industries.map((industry) => ({
-      name: industry.name,
-      path: industryHref(industry.slug),
-    }))
-  ),
+  breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Industries', path: '/industries/' }]),
+  itemListSchema('Caliperworks industry pages', industries.map((industry) => ({ name: industry.name, path: industryHref(industry.slug) }))),
 ];
 ---
 
 <Layout
   title="Industries Caliperworks Supports | Caliperworks"
-  description="See how Caliperworks adapts local SEO execution, voice coverage, and workflow automation for specific service-business industries."
+  description="See how Caliperworks adapts SEO execution, call coverage, ads workflows, and operational automation for service businesses."
   canonicalPath="/industries/"
   structuredData={structuredData}
 >
   <SiteHeader />
-  <main class="bg-white text-slate-900">
-    <section class="border-b-2 border-slate-100 px-6 py-20">
-      <div class="mx-auto max-w-7xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Industries</div>
-        <h1 class="mt-6 max-w-4xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
-          Local search and follow-up systems tailored to each service industry
-        </h1>
-        <p class="mt-8 max-w-3xl text-xl leading-relaxed text-slate-600">
-          Caliperworks works best in businesses where search visibility, intake, qualification, and
-          follow-up all have to work together. The point is not one fixed AI product. It is finding
-          the mix of local SEO assets, voice coverage, ads workflows, and operational cleanup that
-          fits how the business actually operates.
-        </p>
+  <main class="bg-[#fbfaf7] text-slate-950">
+    <section class="border-b border-slate-200 px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Industries</div>
+          <h1 class="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">Broad capabilities. Industry-specific constraints.</h1>
+        </div>
+        <p class="text-lg leading-8 text-slate-600">The underlying path is consistent: qualified demand has to be found, captured, understood, and moved to the right next step. The details change by industry.</p>
       </div>
     </section>
 
-    <section class="px-6 py-20">
-      <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 xl:grid-cols-3">
-        {industries.map((industry) => (
-          <article class="flex h-full flex-col rounded-[2.25rem] border-4 border-slate-200 bg-white p-8">
-            <h2 class="text-3xl font-black text-slate-900">{industry.name}</h2>
-            <p class="mt-5 flex-grow text-lg leading-relaxed text-slate-600">{industry.summary}</p>
-            <div class="mt-8 flex flex-wrap gap-2">
-              {industry.relatedServices.map((slug) => (
-                <span class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-blue-800">
-                  {serviceMap[slug].shortLabel}
-                </span>
-              ))}
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl border-t border-slate-300">
+        {industries.map((industry, index) => (
+          <article class="grid gap-8 border-b border-slate-300 py-10 lg:grid-cols-[5rem_0.8fr_1.2fr]">
+            <div class="text-sm font-semibold text-slate-400">0{index + 1}</div>
+            <div>
+              <h2 class="text-3xl font-semibold tracking-[-0.035em]">{industry.name}</h2>
+              <div class="mt-5 space-y-2 text-xs font-bold uppercase tracking-[0.17em] text-blue-700">
+                {industry.relatedServices.map((slug) => <div>{serviceMap[slug].shortLabel}</div>)}
+              </div>
             </div>
-            <a
-              href={industryHref(industry.slug)}
-              class="mt-8 inline-flex items-center gap-3 text-base font-black text-slate-900 transition-colors hover:text-blue-800"
-            >
-              See {industry.name} solutions
-              <span aria-hidden="true">→</span>
-            </a>
+            <div>
+              <p class="max-w-2xl text-lg leading-8 text-slate-600">{industry.summary}</p>
+              <a href={industryHref(industry.slug)} class="mt-6 inline-flex text-sm font-bold text-blue-800">See the industry context →</a>
+            </div>
           </article>
         ))}
       </div>
     </section>
 
-    <SectionCta
-      headline="Need an industry-specific starting point?"
-      body="Start with the free audit and we can map where local search growth, voice handling, or workflow automation will make the biggest difference in your specific industry."
-      primaryCta={{ kind: 'mailto', label: 'Start with the Free Audit', subject: 'Caliperworks Industry Inquiry' }}
-      secondarySubject="Caliperworks Industry Inquiry"
-    />
+    <SectionCta headline="Need an industry-specific starting point?" body="Request a gap review and we will map the visibility, coverage, and follow-up constraints that matter for your market and operating model." />
   </main>
   <SiteFooter />
 </Layout>

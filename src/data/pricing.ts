@@ -34,11 +34,11 @@ export const pricingMeta = {
 
 export const pricingOverview = {
   eyebrow: 'Pricing',
-  headline: 'Pricing for practical growth execution.',
+  headline: 'Packaged SEO pricing. Custom scope everywhere else.',
   body:
-    'For service businesses that need better local visibility, stronger follow-up, and cleaner demand capture. The monthly plans below are packaged around search and landing-page execution. Voice agents, ads workflows, and operational automations are scoped after discovery.',
-  primaryCta: 'Start with a Free Discovery Audit',
-  secondaryCta: 'View packaged plans',
+    'Local visibility work is priced by monthly execution pace. Voice agents, ads workflows, and operational automation are scoped around the call flows, integrations, handoffs, and support your business actually needs.',
+  primaryCta: 'Request a Gap Review',
+  secondaryCta: 'Compare SEO Plans',
 } as const;
 
 export const pricingTerms = {
@@ -107,7 +107,7 @@ export const seoPricingPlans: SeoPricingPlan[] = [
       'Businesses with thin websites',
       'Owners who need steady foundational execution',
     ],
-    ctaLabel: 'Start with Starter',
+    ctaLabel: 'Ask about Starter',
     inquirySubject: 'Caliperworks Pricing Inquiry - Starter Plan',
   },
   {
@@ -130,7 +130,7 @@ export const seoPricingPlans: SeoPricingPlan[] = [
       'Businesses that need more consistent publishing',
       'Businesses that want to cover both services and local search intent',
     ],
-    ctaLabel: 'Start with Growth',
+    ctaLabel: 'Ask about Growth',
     inquirySubject: 'Caliperworks Pricing Inquiry - Growth Plan',
     featured: true,
   },
@@ -155,7 +155,7 @@ export const seoPricingPlans: SeoPricingPlan[] = [
       'High-value treatments, procedures, or legal matters',
       'Businesses already spending on ads and needing better landing-page/search coverage',
     ],
-    ctaLabel: 'Start with Max',
+    ctaLabel: 'Ask about Max',
     inquirySubject: 'Caliperworks Pricing Inquiry - Max Plan',
   },
 ] as const;

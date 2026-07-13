@@ -1,65 +1,40 @@
 ---
-import CalTriggerButton from './CalTriggerButton.astro';
 import { createMailto } from '../data/site';
 
-type CalendarCta = {
-  kind: 'calendar';
-  label: string;
-};
-
-type MailtoCta = {
-  kind: 'mailto';
-  label: string;
-  subject: string;
-};
-
-type LinkCta = {
-  kind: 'link';
-  label: string;
-  href: string;
-};
+type MailtoCta = { kind: 'mailto'; label: string; subject: string };
+type LinkCta = { kind: 'link'; label: string; href: string };
 
 interface Props {
   headline: string;
   body: string;
-  primaryCta?: CalendarCta | MailtoCta | LinkCta;
+  primaryCta?: MailtoCta | LinkCta;
   secondarySubject?: string;
 }
 
 const {
   headline,
   body,
-  primaryCta = { kind: 'calendar', label: 'Start with a Process Audit' },
-  secondarySubject = 'Caliperworks Inquiry - AI Process Audit',
+  primaryCta = { kind: 'mailto', label: 'Request a Gap Review', subject: 'Caliperworks Gap Review Request' },
+  secondarySubject = 'Caliperworks Inquiry',
 } = Astro.props;
 
+const primaryHref = primaryCta.kind === 'mailto' ? createMailto(primaryCta.subject) : primaryCta.href;
 const secondaryHref = createMailto(secondarySubject);
-const primaryHref = primaryCta.kind === 'mailto' ? createMailto(primaryCta.subject) : primaryCta.kind === 'link' ? primaryCta.href : null;
 ---
 
-<section class="border-t-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
-  <div class="mx-auto max-w-5xl text-center">
-    <h2 class="font-serif text-4xl font-black italic tracking-tight md:text-6xl">{headline}</h2>
-    <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">{body}</p>
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
-      {primaryCta.kind === 'calendar' ? (
-        <CalTriggerButton
-          label={primaryCta.label}
-          class="rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-transform hover:scale-105 hover:bg-slate-100"
-        />
-      ) : (
-        <a
-          href={primaryHref}
-          class="rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
-        >
-          {primaryCta.label}
-        </a>
-      )}
-      <a
-        href={secondaryHref}
-        class="rounded-3xl border-2 border-white/70 px-10 py-5 text-xl font-black text-white transition-colors hover:border-white hover:bg-white/10"
-      >
-        Contact Us
+<section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-28">
+  <div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+    <div>
+      <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Start with the constraint</div>
+      <h2 class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.045em] text-slate-950 md:text-6xl">{headline}</h2>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">{body}</p>
+    </div>
+    <div class="flex flex-wrap gap-4 md:justify-end">
+      <a href={primaryHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">
+        {primaryCta.label}
+      </a>
+      <a href={secondaryHref} class="rounded-lg border border-slate-300 px-6 py-4 text-sm font-bold text-slate-900 transition-colors hover:border-blue-700 hover:text-blue-800">
+        Contact Caliperworks
       </a>
     </div>
   </div>

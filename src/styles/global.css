@@ -3,11 +3,12 @@
 @theme {
   --font-serif: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  
-  --color-brand-gold: #B89B72;
-  --color-brand-navy: #1A2B42;
-  --color-warm-white: #FAFAFA;
-  --color-deep-charcoal: #171717;
+
+  --color-brand-blue: #1d4ed8;
+  --color-brand-ink: #132238;
+  --color-brand-line: #d7dde7;
+  --color-brand-mist: #f2f6fb;
+  --color-warm-white: #fbfaf7;
 }
 
 /* Custom fade-in animations */
@@ -41,9 +42,20 @@
 
 @layer base {
   body {
-    @apply font-sans;
+    @apply font-sans bg-[var(--color-warm-white)] text-[var(--color-brand-ink)];
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

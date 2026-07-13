@@ -26,7 +26,7 @@ for (const anchor of ['starter', 'growth', 'max', 'voice-agents', 'ads-support']
 }
 
 assert(servicesIndex.includes('pricingHref(service.slug)'), 'Expected pricing link usage in services index');
-assert(serviceDetail.includes('pricingLink') && serviceDetail.includes('View all pricing'), 'Expected pricing CTAs in service detail');
+assert(serviceDetail.includes('pricingHref(service.slug)') && serviceDetail.includes('Request a gap review'), 'Expected packaged and custom scoping CTAs in service detail');
 
 for (const sectionId of ['solutions', 'results', 'expertise', 'faq', 'contact']) {
   assert(homeData.includes(`${sectionId}: '${sectionId}'`), `Missing home section id "${sectionId}" in src/data/home.ts`);
@@ -43,6 +43,8 @@ assert(searchBriefData.every((brief) => brief.opportunities.length === 3), 'Ever
 for (const route of [
   'src/pages/index.astro',
   'src/pages/pricing/index.astro',
+  'src/pages/use-cases/index.astro',
+  'src/pages/use-cases/[slug].astro',
   'src/pages/services/index.astro',
   'src/pages/industries/index.astro',
   'src/pages/case-studies/index.astro',

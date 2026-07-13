@@ -1,5 +1,4 @@
 ---
-import CalTriggerButton from './CalTriggerButton.astro';
 import { createMailto, mainNav } from '../data/site';
 
 interface NavItem {
@@ -12,63 +11,46 @@ interface Props {
 }
 
 const { navItems = mainNav } = Astro.props;
-
-const contactMailto = createMailto();
+const reviewHref = createMailto('Caliperworks Gap Review Request');
 ---
 
-<header class="sticky top-0 z-50 border-b-2 border-slate-900 bg-white/95 backdrop-blur-md">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-    <a href="/" class="text-2xl font-black tracking-tighter text-slate-900">
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-[#fbfaf7]/95 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-5">
+    <a href="/" class="text-xl font-black tracking-[-0.045em] text-slate-950 md:text-2xl">
       CALIPERWORKS
     </a>
-    <nav aria-label="Primary" class="hidden items-center gap-8 text-sm font-bold text-slate-700 lg:flex">
+
+    <nav aria-label="Primary" class="hidden items-center gap-7 text-sm font-semibold text-slate-600 lg:flex">
       {navItems.map((item) => (
-        <a href={item.href} class="transition-colors hover:text-blue-800">
+        <a href={item.href} class="border-b border-transparent py-2 transition-colors hover:border-blue-700 hover:text-blue-800">
           {item.label}
         </a>
       ))}
     </nav>
-    <div class="hidden items-center gap-2 sm:gap-3 lg:flex">
-      <CalTriggerButton
-        label="Schedule Discovery Call"
-        mobileLabel="Schedule"
-        class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-all hover:bg-blue-800 sm:px-5 sm:py-3 sm:text-sm"
-      />
-      <a
-        href={contactMailto}
-        class="rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-5 sm:py-3 sm:text-sm"
-      >
-        Contact Us
-      </a>
-    </div>
-    <div class="flex items-center gap-2 lg:hidden">
-      <CalTriggerButton
-        label="Schedule Discovery Call"
-        mobileLabel="Schedule"
-        class="rounded-full bg-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-white transition-colors hover:bg-blue-800 sm:px-4 sm:py-3 sm:text-sm"
-      />
-      <details class="relative">
-        <summary class="list-none cursor-pointer rounded-full border-2 border-slate-900 px-3 py-2 text-xs font-black whitespace-nowrap text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800 sm:px-4 sm:py-3 sm:text-sm">
-          Menu
-        </summary>
-        <div class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-64 rounded-[1.5rem] border-2 border-slate-900 bg-white p-4 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
-          <nav aria-label="Mobile primary" class="space-y-2 text-sm font-bold text-slate-900">
-            {navItems.map((item) => (
-              <a href={item.href} class="block rounded-xl px-3 py-3 transition-colors hover:bg-slate-50 hover:text-blue-800">
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <div class="mt-4 grid gap-2">
-            <a
-              href={contactMailto}
-              class="rounded-xl border-2 border-slate-900 px-4 py-3 text-center text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
-            >
-              Contact Us
+
+    <a
+      href={reviewHref}
+      class="hidden rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 lg:inline-flex"
+    >
+      Request a Gap Review
+    </a>
+
+    <details class="relative lg:hidden">
+      <summary class="cursor-pointer list-none rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-900">
+        Menu
+      </summary>
+      <div class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-72 rounded-xl border border-slate-200 bg-[#fbfaf7] p-4 shadow-xl shadow-slate-900/10">
+        <nav aria-label="Mobile primary" class="grid gap-1 text-sm font-semibold text-slate-800">
+          {navItems.map((item) => (
+            <a href={item.href} class="rounded-md px-3 py-3 transition-colors hover:bg-slate-100 hover:text-blue-800">
+              {item.label}
             </a>
-          </div>
-        </div>
-      </details>
-    </div>
+          ))}
+        </nav>
+        <a href={reviewHref} class="mt-3 block rounded-lg bg-blue-700 px-4 py-3 text-center text-sm font-bold text-white">
+          Request a Gap Review
+        </a>
+      </div>
+    </details>
   </div>
 </header>

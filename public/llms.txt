@@ -1,8 +1,8 @@
 # Caliperworks
 
-> Caliperworks helps service businesses improve coverage, follow-up, search visibility, ad workflows, and operational handoffs with practical AI systems.
+> Caliperworks helps service businesses improve the path from local search or inbound call to a qualified, properly routed next step.
 
-Caliperworks starts with a workflow review to identify where automation will actually help. Common implementation areas include AI voice coverage, intake and follow-up workflows, SEO support, ad workflow support, routing, reporting, and lead qualification.
+Caliperworks starts with a gap review to identify whether visibility, call coverage, paid-demand flow, or operational follow-up should come first. Local SEO execution is offered through published monthly plans with a setup fee and six-month minimum. Voice agents, ads workflows, and operational automations are custom-scoped.
 
 The site is aimed at service businesses such as home care agencies, dental practices, HVAC and plumbing businesses, law offices, and med spas.
 
@@ -16,7 +16,8 @@ Agent guidance:
 
 - [Home](https://caliperworks.com/): Overview of Caliperworks positioning, services, industries, FAQ, and contact paths.
 - [Services](https://caliperworks.com/services/): Service overview for workflow review, voice coverage, SEO, and ads support.
-- [Pricing](https://caliperworks.com/pricing/): Packaged growth execution pricing for local search and landing-page assets, plus discovery-scoped implementation notes for voice agents, ads workflows, and operational automation.
+- [Use cases](https://caliperworks.com/use-cases/): Problem-led starting points for local visibility, missed-call coverage, lead handoffs, and paid-demand efficiency.
+- [Pricing](https://caliperworks.com/pricing/): Published monthly SEO execution plans with a setup fee and six-month minimum, plus custom-scoped voice, ads, and automation work.
 - [Industries](https://caliperworks.com/industries/): Industry-specific pages for service business use cases.
 - [Case studies](https://caliperworks.com/case-studies/): Public examples and outcome summaries.
 - [Sitemap](https://caliperworks.com/sitemap.xml): Full URL discovery for crawlers and agents.

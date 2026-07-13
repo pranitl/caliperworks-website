@@ -8,8 +8,6 @@ import {
   growthAssetDefinition,
   notFitReasons,
   pricingFaqs,
-  pricingFit,
-  pricingLogic,
   pricingMeta,
   pricingOverview,
   pricingSeoStructuredOffers,
@@ -18,326 +16,158 @@ import {
 } from '../../data/pricing';
 import { breadcrumbSchema, faqSchema, offerCatalogSchema } from '../../lib/seo';
 
-const auditHref = createMailto('Caliperworks Pricing Inquiry - Free Discovery Audit');
+const reviewHref = createMailto('Caliperworks Gap Review Request');
 const structuredData = [
   breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing/' }]),
-  offerCatalogSchema('Caliperworks pricing', pricingSeoStructuredOffers),
+  offerCatalogSchema('Caliperworks SEO pricing', pricingSeoStructuredOffers),
   faqSchema(pricingFaqs),
 ];
 ---
 
-<Layout
-  title={pricingMeta.title}
-  description={pricingMeta.description}
-  canonicalPath="/pricing/"
-  structuredData={structuredData}
->
+<Layout title={pricingMeta.title} description={pricingMeta.description} canonicalPath="/pricing/" structuredData={structuredData}>
   <SiteHeader />
-  <main class="bg-white text-slate-900">
-    <section class="border-b-2 border-slate-100 px-6 py-20">
-      <div class="mx-auto max-w-7xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">{pricingOverview.eyebrow}</div>
-        <h1 class="mt-6 max-w-5xl font-serif text-5xl font-black leading-tight italic md:text-7xl">
-          {pricingOverview.headline}
-        </h1>
-        <p class="mt-8 max-w-4xl text-xl leading-relaxed text-slate-600">
-          {pricingOverview.body}
-        </p>
-        <div class="mt-10 flex flex-wrap gap-4">
-          <a
-            href={auditHref}
-            class="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-7 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
-          >
-            {pricingOverview.primaryCta}
-          </a>
-          <a
-            href="#plans"
-            class="inline-flex items-center justify-center rounded-2xl border-2 border-slate-900 px-7 py-4 text-base font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
-          >
-            {pricingOverview.secondaryCta}
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="px-6 py-20">
-      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+  <main class="bg-[#fbfaf7] text-slate-950">
+    <section class="border-b border-slate-200 px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div>
-          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Package logic</div>
-          <h2 class="mt-6 max-w-3xl font-serif text-4xl font-black leading-tight md:text-5xl">
-            {pricingLogic.headline}
-          </h2>
-          <p class="mt-6 text-xl leading-relaxed text-slate-600">
-            {pricingLogic.body}
-          </p>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">{pricingOverview.eyebrow}</div>
+          <h1 class="mt-6 max-w-5xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">{pricingOverview.headline}</h1>
         </div>
-        <div class="grid gap-4">
-          {pricingLogic.rows.map((row) => (
-            <div class="grid gap-3 rounded-[1.25rem] border-2 border-slate-900 bg-slate-50 p-6 sm:grid-cols-[10rem_1fr]">
-              <div class="text-xl font-black text-slate-900">{row.plan}</div>
-              <div class="text-lg font-semibold leading-relaxed text-slate-700">{row.meaning}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
-      <div class="mx-auto max-w-7xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Included across plans</div>
-        <div class="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <h2 class="font-serif text-4xl font-black leading-tight md:text-5xl">
-              {pricingTerms.includedLabel}
-            </h2>
-            <p class="mt-6 text-xl font-semibold leading-relaxed text-slate-700">
-              {pricingTerms.includedDescription}
-            </p>
-          </div>
-          <div class="grid gap-3 sm:grid-cols-2">
-            {pricingTerms.includedItems.map((item) => (
-              <div class="rounded-[1.25rem] border-2 border-slate-900 bg-white px-5 py-4 text-base font-bold leading-relaxed text-slate-800">
-                {item}
-              </div>
-            ))}
+        <div>
+          <p class="text-lg leading-8 text-slate-600">{pricingOverview.body}</p>
+          <div class="mt-7 flex flex-wrap items-center gap-5">
+            <a href={reviewHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white hover:bg-slate-900">{pricingOverview.primaryCta}</a>
+            <a href="#plans" class="text-sm font-bold text-blue-800">{pricingOverview.secondaryCta} →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="plans" class="px-6 py-20">
+    <section id="plans" class="px-6 py-20 md:py-28">
       <div class="mx-auto max-w-7xl">
-        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Packaged growth plans</div>
-            <h2 class="mt-6 max-w-4xl font-serif text-4xl font-black leading-tight md:text-5xl">
-              Choose your monthly execution pace.
-            </h2>
-          </div>
-          <a
-            href={auditHref}
-            class="inline-flex items-center justify-center rounded-full border-2 border-slate-900 px-6 py-3 text-sm font-black text-slate-900 transition-colors hover:border-blue-800 hover:text-blue-800"
-          >
-            Start Free Discovery Audit
-          </a>
-        </div>
-
-        <div class="mt-10 overflow-hidden rounded-[1.5rem] border-4 border-slate-900">
-          <div class="grid bg-slate-900 px-5 py-4 text-sm font-black uppercase tracking-[0.2em] text-white md:grid-cols-[0.9fr_0.8fr_1.4fr_1.4fr]">
-            <div>Plan</div>
-            <div class="hidden md:block">Monthly price</div>
-            <div class="hidden md:block">Best for</div>
-            <div class="hidden md:block">Monthly output</div>
-          </div>
-          {seoPricingPlans.map((plan) => (
-            <div class="grid gap-3 border-t-2 border-slate-900 bg-white px-5 py-5 md:grid-cols-[0.9fr_0.8fr_1.4fr_1.4fr] md:gap-6">
-              <div class="text-xl font-black text-slate-900">{plan.name}</div>
-              <div class="text-lg font-black text-slate-900">
-                {plan.price}<span class="text-sm font-bold text-slate-500">{plan.cadence}</span>
-              </div>
-              <div class="text-base font-semibold leading-relaxed text-slate-700">{plan.bestFor}</div>
-              <div class="text-base font-black leading-relaxed text-blue-800">{plan.output}</div>
+            <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Packaged local visibility</div>
+            <h2 class="mt-5 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-5xl">One standard of work. Three execution paces.</h2>
+            <div class="mt-7 border-l border-slate-300 pl-5 text-base leading-7 text-slate-600">
+              <div><strong class="text-slate-900">{pricingTerms.setupFee} setup</strong></div>
+              <div><strong class="text-slate-900">{pricingTerms.minimumTerm} minimum</strong></div>
+              <div class="mt-2">Monthly work begins after the setup foundation is complete.</div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div class="mt-10 grid gap-8 lg:grid-cols-3">
-          {seoPricingPlans.map((plan) => (
-            <article
-              id={plan.id}
-              class:list={[
-                'flex h-full flex-col rounded-[2rem] border-4 p-8',
-                plan.featured
-                  ? 'border-blue-800 bg-blue-800 text-white shadow-[14px_14px_0_0_rgba(15,23,42,1)]'
-                  : 'border-slate-900 bg-white text-slate-900 shadow-sm',
-              ]}
-            >
-              <div class="flex items-start justify-between gap-4">
-                <div class:list={['text-sm font-black uppercase tracking-[0.3em]', plan.featured ? 'text-blue-100' : 'text-blue-700']}>
-                  {plan.name}
-                </div>
-                {plan.featured && (
-                  <div class="rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-widest text-blue-900">
-                    Recommended
+          <div class="overflow-x-auto">
+            <div class="grid min-w-[760px] grid-cols-3 border-y border-slate-300">
+              {seoPricingPlans.map((plan) => (
+                <article id={plan.id} class:list={['border-r border-slate-300 px-7 py-8 last:border-r-0', plan.featured ? 'bg-[#f2f6fb]' : '']}>
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">{plan.name}</div>
+                    {plan.featured && <div class="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">Most common</div>}
                   </div>
-                )}
-              </div>
-              <div class="mt-6 flex items-end gap-2">
-                <div class="font-serif text-6xl font-black italic">{plan.price}</div>
-                <div class:list={['pb-2 text-lg font-bold', plan.featured ? 'text-blue-100' : 'text-slate-500']}>{plan.cadence}</div>
-              </div>
-              <p class:list={['mt-6 text-lg leading-relaxed', plan.featured ? 'text-blue-50' : 'text-slate-600']}>
-                {plan.summary}
-              </p>
-              <ul class="mt-8 grid gap-3 text-sm font-semibold">
-                {plan.features.map((feature) => (
-                  <li class:list={['rounded-xl px-4 py-3', plan.featured ? 'bg-white/10 text-white' : 'bg-slate-50 text-slate-700']}>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={createMailto(plan.inquirySubject)}
-                class:list={[
-                  'mt-auto inline-flex items-center justify-center rounded-2xl px-6 py-4 pt-4 text-base font-black transition-colors',
-                  plan.featured
-                    ? 'bg-white text-blue-900 hover:bg-slate-100'
-                    : 'bg-slate-900 text-white hover:bg-blue-800',
-                ]}
-              >
-                {plan.ctaLabel}
-              </a>
-            </article>
+                  <div class="mt-6 text-4xl font-semibold tracking-[-0.045em]">{plan.price}<span class="text-base font-medium text-slate-500">{plan.cadence}</span></div>
+                  <div class="mt-5 min-h-14 font-semibold leading-6 text-slate-800">{plan.bestFor}</div>
+                  <div class="mt-8 border-t border-slate-300 pt-6 text-sm font-semibold leading-6 text-blue-800">{plan.output}</div>
+                  <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-600">
+                    {plan.fit.slice(0, 3).map((item) => <li>{item}</li>)}
+                  </ul>
+                  <a href={createMailto(plan.inquirySubject)} class="mt-8 inline-flex text-sm font-bold text-blue-800 hover:text-slate-950">{plan.ctaLabel} →</a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">What the setup builds</div>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">The execution foundation.</h2>
+          <p class="mt-5 text-lg leading-8 text-slate-600">{pricingTerms.setupDescription}</p>
+        </div>
+        <div class="grid gap-px border-y border-slate-300 bg-slate-300 sm:grid-cols-2">
+          {pricingTerms.setupItems.map((item, index) => (
+            <div class="flex gap-4 bg-[#f2f6fb] p-5 text-sm font-semibold leading-6 text-slate-700"><span class="text-blue-700">0{index + 1}</span>{item}</div>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Growth assets</div>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">{growthAssetDefinition.headline}</h2>
+          <p class="mt-5 text-lg leading-8 text-slate-600">{growthAssetDefinition.body}</p>
+        </div>
+        <div class="border-t border-slate-300">
+          {growthAssetDefinition.examples.map((asset) => (
+            <div class="grid gap-3 border-b border-slate-300 py-5 sm:grid-cols-[0.7fr_1.3fr]">
+              <div class="font-semibold text-slate-900">{asset.type}</div>
+              <div class="text-slate-600">{asset.example}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-slate-200 bg-white px-6 py-20 md:py-28">
       <div class="mx-auto max-w-7xl">
-        <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <div class="grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Growth assets</div>
-            <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
-              {growthAssetDefinition.headline}
-            </h2>
-            <p class="mt-6 text-xl leading-relaxed text-slate-700">
-              {growthAssetDefinition.body}
-            </p>
-            <p class="mt-6 rounded-[1.25rem] border-2 border-slate-900 bg-white p-5 text-lg font-bold leading-relaxed text-slate-800">
-              {growthAssetDefinition.note}
-            </p>
+            <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Custom implementation</div>
+            <h2 class="mt-5 text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-5xl">Scoped to the workflow, not forced into a package.</h2>
+            <p class="mt-5 text-lg leading-8 text-slate-600">These services depend on call flows, integrations, routing rules, existing accounts, handoffs, support, and implementation depth.</p>
           </div>
-          <div class="overflow-hidden rounded-[1.5rem] border-4 border-slate-900 bg-white">
-            <div class="grid grid-cols-[0.85fr_1.15fr] bg-slate-900 px-5 py-4 text-sm font-black uppercase tracking-[0.2em] text-white">
-              <div>Asset type</div>
-              <div>Example</div>
-            </div>
-            {growthAssetDefinition.examples.map((asset) => (
-              <div class="grid grid-cols-[0.85fr_1.15fr] gap-4 border-t-2 border-slate-900 px-5 py-4">
-                <div class="font-black text-slate-900">{asset.type}</div>
-                <div class="font-semibold leading-relaxed text-slate-700">{asset.example}</div>
-              </div>
+          <div class="border-t border-slate-300">
+            {customPricingItems.map((service) => (
+              <article id={service.id} class="grid gap-5 border-b border-slate-300 py-7 md:grid-cols-[0.7fr_1.3fr]">
+                <div class="text-xl font-semibold tracking-[-0.02em]">{service.name}</div>
+                <div>
+                  <p class="leading-7 text-slate-600">{service.detail}</p>
+                  <a href={createMailto(service.inquirySubject)} class="mt-4 inline-flex text-sm font-bold text-blue-800">Request custom scope →</a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </div>
     </section>
 
-    <section class="px-6 py-20">
-      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
         <div>
-          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Initial setup</div>
-          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
-            Initial setup: {pricingTerms.setupFee}
-          </h2>
-          <p class="mt-6 text-xl leading-relaxed text-slate-600">
-            {pricingTerms.setupDescription} We review the business, service mix, local market, current website, Google Business Profile, existing pages, competitors, and highest-value opportunities.
-          </p>
-          <div class="mt-8 rounded-[1.25rem] border-4 border-slate-900 bg-slate-50 p-6">
-            <div class="text-xs font-black uppercase tracking-[0.3em] text-blue-700">Minimum term</div>
-            <div class="mt-3 text-3xl font-black text-slate-900">{pricingTerms.minimumTerm}</div>
-            <p class="mt-3 text-base leading-relaxed text-slate-600">
-              {pricingTerms.termDescription}
-            </p>
-          </div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Fit</div>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">A real offer, service area, and follow-up owner.</h2>
+          <p class="mt-5 text-lg leading-8 text-slate-600">The strongest fit is a service business with active demand and a team ready to act on the work that gets shipped.</p>
         </div>
-        <div class="grid gap-3 sm:grid-cols-2">
-          {pricingTerms.setupItems.map((item) => (
-            <div class="rounded-[1.25rem] border-2 border-slate-900 bg-white px-5 py-4 text-base font-bold leading-relaxed text-slate-800">
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y-2 border-slate-900 bg-slate-100 px-6 py-20">
-      <div class="mx-auto max-w-7xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Custom implementation</div>
-        <h2 class="mt-6 max-w-4xl font-serif text-4xl font-black leading-tight md:text-5xl">
-          Voice agents, ads workflows, and automation are scoped after discovery.
-        </h2>
-        <p class="mt-6 max-w-3xl text-xl leading-relaxed text-slate-600">
-          The packaged plans cover search, local visibility, landing-page coverage, and conversion-focused execution. Work that depends on call flows, integrations, routing rules, paid media accounts, or operational handoffs gets scoped after the audit.
-        </p>
-        <div class="mt-10 grid gap-8 lg:grid-cols-3">
-          {customPricingItems.map((service) => (
-            <article id={service.id} class="flex h-full flex-col rounded-[2rem] border-4 border-slate-900 bg-white p-8 shadow-sm">
-              <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">{service.name}</div>
-              <p class="mt-5 flex-grow text-lg leading-relaxed text-slate-600">{service.detail}</p>
-              <a
-                href={createMailto(service.inquirySubject)}
-                class="mt-8 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-4 text-base font-black text-white transition-colors hover:bg-blue-800"
-              >
-                {service.ctaLabel}
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="px-6 py-20">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">Fit</div>
-          <h2 class="mt-6 font-serif text-4xl font-black leading-tight md:text-5xl">
-            {pricingFit.headline}
-          </h2>
-          <p class="mt-6 max-w-3xl text-xl leading-relaxed text-slate-600">
-            {pricingFit.body}
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            {pricingFit.industries.map((industry) => (
-              <span class="rounded-full border-2 border-slate-900 bg-slate-50 px-4 py-2 text-sm font-black text-slate-800">
-                {industry}
-              </span>
-            ))}
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">Probably not a fit</div>
+          <div class="mt-5 border-t border-slate-300">
+            {notFitReasons.map((reason) => <div class="border-b border-slate-300 py-4 text-slate-600">{reason}</div>)}
           </div>
         </div>
-        <div class="rounded-[2rem] border-4 border-slate-900 bg-slate-900 p-8 text-white">
-          <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-100">Not a good fit</div>
-          <h3 class="mt-5 text-3xl font-black">This is probably not the right fit if...</h3>
-          <ul class="mt-6 grid gap-3 text-base font-semibold leading-relaxed text-slate-100">
-            {notFitReasons.map((reason) => (
-              <li class="rounded-xl bg-white/10 px-4 py-3">{reason}</li>
-            ))}
-          </ul>
+      </div>
+    </section>
+
+    <section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Choose the starting point</div>
+          <h2 class="mt-5 max-w-3xl text-5xl font-semibold leading-tight tracking-[-0.05em]">Not sure whether the constraint is visibility, coverage, or follow-up?</h2>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Request a gap review. We will recommend a packaged SEO pace, a custom implementation path, or a clear not-a-fit answer.</p>
         </div>
+        <div class="lg:text-right"><a href={reviewHref} class="inline-flex rounded-lg bg-blue-700 px-7 py-4 text-sm font-bold text-white hover:bg-slate-900">Request a Gap Review</a></div>
       </div>
     </section>
 
-    <section class="border-y-2 border-slate-900 bg-blue-800 px-6 py-20 text-white">
-      <div class="mx-auto max-w-5xl text-center">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-100">Start with the discovery audit</div>
-        <h2 class="mt-6 font-serif text-4xl font-black italic tracking-tight md:text-6xl">
-          Find the right starting point before choosing a plan.
-        </h2>
-        <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-blue-100">
-          No monthly calls required. The audit starts with your website, service area, current workflow, and growth bottlenecks.
-        </p>
-        <a
-          href={auditHref}
-          class="mt-10 inline-flex items-center justify-center rounded-3xl bg-white px-10 py-5 text-xl font-black text-blue-900 transition-colors hover:bg-slate-100"
-        >
-          {pricingOverview.primaryCta}
-        </a>
-      </div>
-    </section>
-
-    <section class="bg-white px-6 py-20">
-      <div class="mx-auto max-w-4xl">
-        <div class="text-sm font-black uppercase tracking-[0.3em] text-blue-700">FAQ</div>
-        <h2 class="mt-6 font-serif text-4xl font-black italic md:text-5xl">Questions about pricing</h2>
-        <div class="mt-10 space-y-5">
+    <section class="px-6 py-20 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+        <div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">FAQ</div><h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">Questions about pricing.</h2></div>
+        <div class="border-t border-slate-300">
           {pricingFaqs.map((faq) => (
-            <details class="rounded-[1.75rem] border-4 border-slate-900 bg-white p-8 shadow-[10px_10px_0_0_rgba(15,23,42,1)]">
-              <summary class="cursor-pointer list-none text-xl font-black text-slate-900">
-                {faq.question}
-              </summary>
-              <p class="mt-5 text-lg leading-relaxed text-slate-600">{faq.answer}</p>
-            </details>
+            <details class="border-b border-slate-300 py-6"><summary class="cursor-pointer list-none text-xl font-semibold">{faq.question}</summary><p class="mt-4 text-lg leading-8 text-slate-600">{faq.answer}</p></details>
           ))}
         </div>
       </div>

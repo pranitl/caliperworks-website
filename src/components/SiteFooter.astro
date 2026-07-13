@@ -1,79 +1,48 @@
 ---
-import CalTriggerButton from './CalTriggerButton.astro';
 import {
-  caseStudies,
-  caseStudyHref,
   createMailto,
   industries,
   industryHref,
   services,
   serviceHref,
   siteConfig,
+  useCases,
+  useCaseHref,
 } from '../data/site';
 
-const contactMailto = createMailto();
+const reviewHref = createMailto('Caliperworks Gap Review Request');
 ---
 
-<footer class="border-t-2 border-slate-800 bg-slate-900 px-6 py-20 text-slate-300">
+<footer class="border-t border-slate-200 bg-[#fbfaf7] px-6 py-16 text-slate-600">
   <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
     <div>
-      <div class="mb-4 text-3xl font-black tracking-tighter text-white">{siteConfig.name.toUpperCase()}</div>
-      <p class="max-w-md text-lg leading-relaxed text-slate-400">{siteConfig.tagline}</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a
-          href="/pricing/"
-          class="rounded-full border border-blue-300 px-5 py-3 text-sm font-black text-blue-200 transition-colors hover:border-blue-200 hover:bg-blue-900/30 hover:text-white"
-        >
-          View Pricing
-        </a>
-        <CalTriggerButton
-          label="Schedule Discovery Call"
-          class="rounded-full bg-white px-5 py-3 text-sm font-black text-slate-900 transition-colors hover:bg-blue-100"
-        />
-        <a
-          href={contactMailto}
-          class="rounded-full border border-slate-600 px-5 py-3 text-sm font-black text-white transition-colors hover:border-blue-400 hover:text-blue-300"
-        >
-          Contact Us
-        </a>
+      <div class="text-2xl font-black tracking-[-0.045em] text-slate-950">{siteConfig.name.toUpperCase()}</div>
+      <p class="mt-5 max-w-md text-base leading-7">{siteConfig.tagline}</p>
+      <a href={reviewHref} class="mt-7 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white hover:bg-slate-900">
+        Request a Gap Review
+      </a>
+    </div>
+    <div>
+      <div class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Use cases</div>
+      <div class="space-y-3 text-sm font-medium">
+        {useCases.map((useCase) => <a href={useCaseHref(useCase.slug)} class="block hover:text-blue-800">{useCase.shortLabel}</a>)}
       </div>
     </div>
     <div>
-      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Services</div>
-      <div class="space-y-3 text-sm font-semibold">
-        {services.map((service) => (
-          <a href={serviceHref(service.slug)} class="block transition-colors hover:text-white">
-            {service.name}
-          </a>
-        ))}
+      <div class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Services</div>
+      <div class="space-y-3 text-sm font-medium">
+        {services.map((service) => <a href={serviceHref(service.slug)} class="block hover:text-blue-800">{service.name}</a>)}
       </div>
     </div>
     <div>
-      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Industries</div>
-      <div class="space-y-3 text-sm font-semibold">
-        {industries.map((industry) => (
-          <a href={industryHref(industry.slug)} class="block transition-colors hover:text-white">
-            {industry.name}
-          </a>
-        ))}
-      </div>
-    </div>
-    <div>
-      <div class="mb-4 text-xs font-black uppercase tracking-[0.3em] text-blue-400">Proof</div>
-      <div class="space-y-3 text-sm font-semibold">
-        <a href="/case-studies/" class="block transition-colors hover:text-white">All case studies</a>
-        {caseStudies.map((caseStudy) => (
-          <a href={caseStudyHref(caseStudy.slug)} class="block transition-colors hover:text-white">
-            {caseStudy.title}
-          </a>
-        ))}
-        <a href={contactMailto} class="block transition-colors hover:text-white">
-          {siteConfig.email}
-        </a>
+      <div class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Industries</div>
+      <div class="space-y-3 text-sm font-medium">
+        {industries.map((industry) => <a href={industryHref(industry.slug)} class="block hover:text-blue-800">{industry.name}</a>)}
+        <a href={createMailto()} class="block pt-2 text-slate-950 hover:text-blue-800">{siteConfig.email}</a>
       </div>
     </div>
   </div>
-  <div class="mx-auto mt-16 max-w-7xl border-t border-slate-800 pt-8 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-    <div>&copy; 2026 {siteConfig.name}. Purposeful automation for the real world.</div>
+  <div class="mx-auto mt-14 max-w-7xl border-t border-slate-200 pt-7 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+    &copy; 2026 {siteConfig.name}. Practical growth systems for service businesses.
   </div>
 </footer>

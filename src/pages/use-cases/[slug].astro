@@ -1,0 +1,124 @@
+---
+import type { UseCase } from '../../data/site';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SectionCta from '../../components/SectionCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+import {
+  caseStudyHref,
+  caseStudyMap,
+  serviceHref,
+  serviceMap,
+  useCases,
+  useCaseHref,
+} from '../../data/site';
+import { breadcrumbSchema } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } }));
+}
+
+const { useCase }: { useCase: UseCase } = Astro.props;
+const relatedServices = useCase.relatedServices.map((slug) => serviceMap[slug]);
+const relatedCaseStudies = useCase.relatedCaseStudies.map((slug) => caseStudyMap[slug]);
+const structuredData = breadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Use Cases', path: '/use-cases/' },
+  { name: useCase.shortLabel, path: useCaseHref(useCase.slug) },
+]);
+---
+
+<Layout title={useCase.metaTitle} description={useCase.metaDescription} canonicalPath={useCaseHref(useCase.slug)} structuredData={structuredData}>
+  <SiteHeader />
+  <main class="bg-[#fbfaf7] text-slate-950">
+    <section class="border-b border-slate-200 px-6 py-16 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/use-cases/', label: 'Use Cases' }, { href: useCaseHref(useCase.slug), label: useCase.shortLabel }]} />
+        <div class="mt-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">{useCase.eyebrow}</div>
+            <h1 class="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">{useCase.headline}</h1>
+            <p class="mt-7 max-w-2xl text-xl leading-8 text-slate-600">{useCase.body}</p>
+          </div>
+          <div class="border-l border-slate-300 pl-7">
+            <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Desired outcome</div>
+            <p class="mt-4 text-2xl font-medium leading-9 tracking-[-0.02em] text-slate-800">{useCase.outcome}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <h2 class="max-w-xl text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-5xl">Diagnose the condition before choosing the implementation.</h2>
+        <div class="border-t border-slate-300">
+          {[
+            ['Observed condition', useCase.observedCondition],
+            ['Operational consequence', useCase.consequence],
+            ['Useful outcome', useCase.outcome],
+          ].map(([label, copy], index) => (
+            <div class="grid gap-4 border-b border-slate-300 py-7 sm:grid-cols-[4rem_1fr]">
+              <div class="text-sm font-semibold tabular-nums text-blue-700">0{index + 1}</div>
+              <div>
+                <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{label}</div>
+                <p class="mt-3 text-lg leading-8 text-slate-700">{copy}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Recommended workflow</div>
+            <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">What changes</h2>
+          </div>
+          <div class="grid gap-px border-y border-slate-300 bg-slate-300 md:grid-cols-3">
+            {useCase.mechanism.map((item, index) => (
+              <div class="bg-[#f2f6fb] p-7">
+                <div class="text-sm font-semibold text-blue-700">0{index + 1}</div>
+                <p class="mt-6 text-lg leading-8 text-slate-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1fr]">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Gap review output</div>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">A useful first artifact, not a vague sales call.</h2>
+          <div class="mt-9 border-t border-slate-300">
+            {useCase.deliverables.map((item, index) => (
+              <div class="flex gap-5 border-b border-slate-300 py-5 text-lg text-slate-700"><span class="text-sm font-semibold text-slate-400">0{index + 1}</span>{item}</div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Relevant work</div>
+          <div class="mt-5 space-y-8">
+            {relatedCaseStudies.length > 0 ? relatedCaseStudies.map((caseStudy) => (
+              <article class="border-t border-slate-300 pt-6">
+                <h3 class="text-2xl font-semibold tracking-[-0.025em]">{caseStudy.title}</h3>
+                <p class="mt-3 leading-7 text-slate-600">{caseStudy.teaser}</p>
+                <a href={caseStudyHref(caseStudy.slug)} class="mt-4 inline-flex text-sm font-bold text-blue-800">Read the case study →</a>
+              </article>
+            )) : <p class="border-t border-slate-300 pt-6 text-lg leading-8 text-slate-600">Ask for the closest relevant example during the gap review.</p>}
+          </div>
+          <div class="mt-10 flex flex-wrap gap-4">
+            {relatedServices.map((service) => <a href={serviceHref(service.slug)} class="text-sm font-bold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-blue-800">{service.name}</a>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionCta headline="See whether this is the first constraint worth fixing." body="Request a gap review and we will map the relevant condition, consequence, and next useful move before recommending implementation." />
+  </main>
+  <SiteFooter />
+</Layout>

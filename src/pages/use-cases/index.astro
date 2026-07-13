@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionCta from '../../components/SectionCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import { serviceMap, useCases, useCaseHref } from '../../data/site';
+import { breadcrumbSchema, itemListSchema } from '../../lib/seo';
+
+const structuredData = [
+  breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Use Cases', path: '/use-cases/' }]),
+  itemListSchema('Caliperworks use cases', useCases.map((useCase) => ({ name: useCase.shortLabel, path: useCaseHref(useCase.slug) }))),
+];
+---
+
+<Layout
+  title="Growth and Automation Use Cases | Caliperworks"
+  description="See how Caliperworks approaches local visibility, missed-call coverage, lead handoffs, and paid-demand efficiency for service businesses."
+  canonicalPath="/use-cases/"
+  structuredData={structuredData}
+>
+  <SiteHeader />
+  <main class="bg-[#fbfaf7] text-slate-950">
+    <section class="border-b border-slate-200 px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Use cases</div>
+          <h1 class="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">
+            Start with the constraint you can already see.
+          </h1>
+        </div>
+        <p class="max-w-xl text-lg leading-8 text-slate-600">
+          Caliperworks connects visibility, coverage, and follow-up. The right starting point depends on where qualified demand is being lost today.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl border-t border-slate-300">
+        {useCases.map((useCase, index) => (
+          <article class="grid gap-8 border-b border-slate-300 py-12 lg:grid-cols-[5rem_1.1fr_0.9fr] lg:items-start">
+            <div class="text-sm font-semibold tabular-nums text-slate-400">0{index + 1}</div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">{useCase.shortLabel}</div>
+              <h2 class="mt-4 max-w-2xl text-3xl font-semibold leading-tight tracking-[-0.035em] md:text-5xl">{useCase.headline}</h2>
+              <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{useCase.body}</p>
+              <a href={useCaseHref(useCase.slug)} class="mt-7 inline-flex items-center gap-2 text-sm font-bold text-blue-800 hover:text-slate-950">
+                Explore this use case <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div class="border-l border-slate-200 pl-6">
+              <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Related work</div>
+              <div class="mt-4 space-y-3 text-sm font-semibold text-slate-700">
+                {useCase.relatedServices.map((slug) => <div>{serviceMap[slug].name}</div>)}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <SectionCta
+      headline="Not sure which constraint comes first?"
+      body="Request a gap review and we will look at the path from demand to next step, then recommend the smallest useful starting point."
+    />
+  </main>
+  <SiteFooter />
+</Layout>
