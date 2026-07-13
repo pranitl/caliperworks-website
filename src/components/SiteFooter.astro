@@ -1,6 +1,7 @@
 ---
 import {
   createMailto,
+  gapReviewHref,
   industries,
   industryHref,
   services,
@@ -10,7 +11,7 @@ import {
   useCaseHref,
 } from '../data/site';
 
-const reviewHref = createMailto('Caliperworks Gap Review Request');
+const reviewHref = gapReviewHref;
 ---
 
 <footer class="border-t border-slate-200 bg-[#fbfaf7] px-6 py-16 text-slate-600">
@@ -19,7 +20,7 @@ const reviewHref = createMailto('Caliperworks Gap Review Request');
       <div class="text-2xl font-black tracking-[-0.045em] text-slate-950">{siteConfig.name.toUpperCase()}</div>
       <p class="mt-5 max-w-md text-base leading-7">{siteConfig.tagline}</p>
       <a href={reviewHref} class="mt-7 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white hover:bg-slate-900">
-        Request a Gap Review
+        Get the Gap Review
       </a>
     </div>
     <div>

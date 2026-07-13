@@ -68,7 +68,7 @@ export interface CaseStudy {
   serviceSlugs: string[];
   challenge: string[];
   solution: string[];
-  results: Array<{ value: string; label: string }>;
+  results: Array<{ value: string; label: string; kind?: 'outcome' | 'implementation' }>;
   quote?: string;
   takeaways: string[];
 }
@@ -85,6 +85,8 @@ export const siteConfig = {
   tagline:
     'SEO execution, call coverage, ads workflows, and practical automation for service businesses that need stronger demand capture and cleaner follow-up.',
 } as const;
+
+export const gapReviewHref = '/#gap-review';
 
 export const calEmbed = {
   namespace: '30min',
@@ -560,9 +562,9 @@ export const caseStudies: CaseStudy[] = [
       'Added automation support so intake moved faster after the first touch.',
     ],
     results: [
-      { value: '199%', label: 'increase in engaged visitors' },
-      { value: 'Page 1', label: 'visibility for top keywords' },
-      { value: 'Faster', label: 'lead qualification workflow' },
+      { value: '199%', label: 'increase in engaged visitors', kind: 'outcome' },
+      { value: 'Page 1', label: 'visibility for top keywords', kind: 'outcome' },
+      { value: 'Lead qualification', label: 'workflow support added', kind: 'implementation' },
     ],
     quote:
       "Our monthly engaged visitors shot up by 199% and we're finally holding Page 1 rankings for our top keywords. The automated lead qualification has transformed how we handle new client intake.",
@@ -597,9 +599,9 @@ export const caseStudies: CaseStudy[] = [
       'Connected marketing execution with operational handling to reduce waste.',
     ],
     results: [
-      { value: '25%', label: 'more leads on the same budget' },
-      { value: '30%', label: 'conversion lift' },
-      { value: '24/7', label: 'better coverage for lead capture' },
+      { value: '25%', label: 'more leads on the same budget', kind: 'outcome' },
+      { value: '30%', label: 'conversion lift', kind: 'outcome' },
+      { value: '24/7', label: 'lead coverage implemented', kind: 'implementation' },
     ],
     quote:
       'The ad automation hyper-optimized the budget I was already spending. I saw 25% more leads without increasing my ad spend, and the lead conversion rate jumped by 30%.',
@@ -634,9 +636,9 @@ export const caseStudies: CaseStudy[] = [
       'Implemented a voice agent to capture consultation interest and hand cleaner intake details to the team.',
     ],
     results: [
-      { value: 'Page 5 → 1', label: 'priority treatment search improvement' },
-      { value: 'Voice agent', label: 'consultation coverage implemented' },
-      { value: 'Cleaner', label: 'intake details for staff follow-up' },
+      { value: 'Page 5 → 1', label: 'priority treatment search improvement', kind: 'outcome' },
+      { value: 'Voice agent', label: 'consultation coverage implemented', kind: 'implementation' },
+      { value: 'Intake handoff', label: 'cleaner consultation details for staff follow-up', kind: 'implementation' },
     ],
     takeaways: [
       'Search growth creates more value when the intake path is ready to handle the resulting demand.',

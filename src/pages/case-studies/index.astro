@@ -27,12 +27,12 @@ const structuredData = [
           <article class="grid gap-8 border-b border-slate-300 py-10 lg:grid-cols-[5rem_0.8fr_1.2fr]">
             <div class="text-sm font-semibold text-slate-400">0{index + 1}</div>
             <div><div class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">{caseStudy.clientLabel} · {caseStudy.location}</div><h2 class="mt-4 text-3xl font-semibold tracking-[-0.035em]">{caseStudy.title}</h2></div>
-            <div><p class="text-lg leading-8 text-slate-600">{caseStudy.heroDescription}</p><div class="mt-6 flex flex-wrap gap-x-8 gap-y-3">{caseStudy.results.map((result) => <div><span class="font-semibold text-slate-950">{result.value}</span> <span class="text-sm text-slate-500">{result.label}</span></div>)}</div><a href={caseStudyHref(caseStudy.slug)} class="mt-6 inline-flex text-sm font-bold text-blue-800">Read the case study →</a></div>
+            <div><p class="text-lg leading-8 text-slate-600">{caseStudy.heroDescription}</p><div class="mt-6 flex flex-wrap gap-x-8 gap-y-4">{caseStudy.results.map((result) => <div><div class="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">{result.kind === 'implementation' ? 'Implementation milestone' : 'Observed outcome'}</div><div class="mt-1"><span class="font-semibold text-slate-950">{result.value}</span> <span class="text-sm text-slate-500">{result.label}</span></div></div>)}</div><a href={caseStudyHref(caseStudy.slug)} class="mt-6 inline-flex text-sm font-bold text-blue-800">Read the case study →</a></div>
           </article>
         ))}
       </div>
     </section>
-    <SectionCta headline="See where the closest relevant result begins." body="Request a gap review and we will connect your current constraint to the most relevant prior work without treating another company’s result as a promise." />
+    <SectionCta headline="See where the closest relevant result begins." body="Start with the gap review and we will connect your current constraint to the most relevant prior work without treating another company’s result as a promise." />
   </main>
   <SiteFooter />
 </Layout>

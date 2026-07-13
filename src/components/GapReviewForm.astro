@@ -1,0 +1,127 @@
+---
+import { createMailto } from '../data/site';
+
+interface Props {
+  deliverables: readonly string[];
+}
+
+const { deliverables } = Astro.props;
+const fallbackUrl = createMailto('Caliperworks Gap Review Request');
+---
+
+<div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+  <div>
+    <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">What you receive</div>
+    <h2 class="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-5xl">A useful first read, before a sales call.</h2>
+    <p class="mt-6 max-w-xl text-lg leading-8 text-slate-600">We will use the information you send to identify the first material gap, the consequence worth checking, and the practical starting path.</p>
+    <div class="mt-8 border-t border-slate-300">
+      {deliverables.map((deliverable, index) => <div class="border-b border-slate-300 py-4 text-base leading-7 text-slate-700">{String(index + 1).padStart(2, '0')}&nbsp;&nbsp;{deliverable}</div>)}
+    </div>
+  </div>
+
+  <div class="border border-slate-300 bg-white p-7 md:p-9">
+    <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Start with three details</div>
+    <h2 class="mt-4 text-3xl font-semibold tracking-[-0.035em]">Send the site and the constraint.</h2>
+    <p class="mt-4 text-base leading-7 text-slate-600">No calendar booking is required to start. We will review the context first, then make the next step clear.</p>
+    <form id="gap-review-form" data-fallback-url={fallbackUrl} class="mt-8 space-y-5">
+      <label class="block">
+        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Name</span>
+        <input name="name" type="text" autocomplete="name" maxlength="80" required class="w-full rounded-lg border border-slate-300 bg-[#fbfaf7] px-4 py-3 text-base outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100" />
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Work email</span>
+        <input name="email" type="email" autocomplete="email" maxlength="160" required class="w-full rounded-lg border border-slate-300 bg-[#fbfaf7] px-4 py-3 text-base outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100" />
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Website</span>
+        <input name="website" type="text" autocomplete="url" maxlength="240" placeholder="yourbusiness.com" required class="w-full rounded-lg border border-slate-300 bg-[#fbfaf7] px-4 py-3 text-base outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100" />
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Closest constraint</span>
+        <select name="constraint" required class="w-full rounded-lg border border-slate-300 bg-[#fbfaf7] px-4 py-3 text-base outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100">
+          <option value="">Choose one</option>
+          <option>Getting found in local search</option>
+          <option>Answering and covering calls</option>
+          <option>Following up with new inquiries</option>
+          <option>Converting paid demand</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <label class="hidden" aria-hidden="true">
+        <span>Company</span>
+        <input name="company" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+      <input name="startedAt" type="hidden" value="" />
+      <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900 disabled:cursor-wait disabled:opacity-70">Send my site for a gap review <span class="ml-2" aria-hidden="true">→</span></button>
+      <p class="text-sm leading-6 text-slate-500">You are asking for a review of the starting constraint, not committing to implementation.</p>
+      <div id="gap-review-status" class="min-h-6 text-sm leading-6" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector('#gap-review-form');
+  const status = document.querySelector('#gap-review-status');
+
+  if (form && status) {
+    const startedAt = form.elements.namedItem('startedAt');
+    if (startedAt instanceof HTMLInputElement) startedAt.value = String(Date.now());
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const submit = form.querySelector('button[type="submit"]');
+      const submitLabel = submit?.innerHTML;
+      const values = new FormData(form);
+      const payload = {
+        name: String(values.get('name') || ''),
+        email: String(values.get('email') || ''),
+        website: String(values.get('website') || ''),
+        constraint: String(values.get('constraint') || ''),
+        company: String(values.get('company') || ''),
+        startedAt: Number(values.get('startedAt') || 0),
+      };
+
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+      }
+      status.className = 'min-h-6 text-sm leading-6 text-slate-600';
+      status.textContent = '';
+
+      try {
+        const response = await fetch('/api/gap-review-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          const fallbackUrl = result.fallbackUrl || form.dataset.fallbackUrl;
+          if (fallbackUrl) {
+            status.className = 'min-h-6 text-sm leading-6 text-rose-800';
+            status.innerHTML = `The request could not be recorded automatically. <a class="font-bold underline" href="${fallbackUrl}">Email the request directly instead.</a>`;
+            return;
+          }
+          throw new Error(result.error || 'The request could not be sent.');
+        }
+
+        form.reset();
+        if (startedAt instanceof HTMLInputElement) startedAt.value = String(Date.now());
+        status.className = 'min-h-6 text-sm leading-6 text-emerald-800';
+        status.textContent = 'Request received. We will review the details and reply with the first recommended next step.';
+      } catch {
+        const fallbackUrl = form.dataset.fallbackUrl;
+        status.className = 'min-h-6 text-sm leading-6 text-rose-800';
+        status.innerHTML = fallbackUrl ? `The form could not send the request. <a class="font-bold underline" href="${fallbackUrl}">Email Pranit directly.</a>` : 'The form could not send the request. Please email pranit@caliperworks.com.';
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          if (submitLabel) submit.innerHTML = submitLabel;
+        }
+      }
+    });
+  }
+</script>

@@ -1,25 +1,24 @@
 ---
-import { createMailto } from '../data/site';
+import { gapReviewHref } from '../data/site';
 
-type MailtoCta = { kind: 'mailto'; label: string; subject: string };
 type LinkCta = { kind: 'link'; label: string; href: string };
 
 interface Props {
   headline: string;
   body: string;
-  primaryCta?: MailtoCta | LinkCta;
-  secondarySubject?: string;
+  primaryCta?: LinkCta;
+  secondaryCta?: LinkCta;
 }
 
 const {
   headline,
   body,
-  primaryCta = { kind: 'mailto', label: 'Request a Gap Review', subject: 'Caliperworks Gap Review Request' },
-  secondarySubject = 'Caliperworks Inquiry',
+  primaryCta = { kind: 'link', label: 'Get the Gap Review', href: gapReviewHref },
+  secondaryCta = { kind: 'link', label: 'See relevant proof', href: '/case-studies/' },
 } = Astro.props;
 
-const primaryHref = primaryCta.kind === 'mailto' ? createMailto(primaryCta.subject) : primaryCta.href;
-const secondaryHref = createMailto(secondarySubject);
+const primaryHref = primaryCta.href;
+const secondaryHref = secondaryCta.href;
 ---
 
 <section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-28">
@@ -34,7 +33,7 @@ const secondaryHref = createMailto(secondarySubject);
         {primaryCta.label}
       </a>
       <a href={secondaryHref} class="rounded-lg border border-slate-300 px-6 py-4 text-sm font-bold text-slate-900 transition-colors hover:border-blue-700 hover:text-blue-800">
-        Contact Caliperworks
+        {secondaryCta.label}
       </a>
     </div>
   </div>

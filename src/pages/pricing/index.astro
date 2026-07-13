@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
-import { createMailto } from '../../data/site';
+import { createMailto, gapReviewHref } from '../../data/site';
 import {
   customPricingItems,
   growthAssetDefinition,
@@ -16,7 +16,6 @@ import {
 } from '../../data/pricing';
 import { breadcrumbSchema, faqSchema, offerCatalogSchema } from '../../lib/seo';
 
-const reviewHref = createMailto('Caliperworks Gap Review Request');
 const structuredData = [
   breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing/' }]),
   offerCatalogSchema('Caliperworks SEO pricing', pricingSeoStructuredOffers),
@@ -36,7 +35,7 @@ const structuredData = [
         <div>
           <p class="text-lg leading-8 text-slate-600">{pricingOverview.body}</p>
           <div class="mt-7 flex flex-wrap items-center gap-5">
-            <a href={reviewHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white hover:bg-slate-900">{pricingOverview.primaryCta}</a>
+            <a href={gapReviewHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white hover:bg-slate-900">{pricingOverview.primaryCta}</a>
             <a href="#plans" class="text-sm font-bold text-blue-800">{pricingOverview.secondaryCta} →</a>
           </div>
         </div>
@@ -126,7 +125,7 @@ const structuredData = [
                 <div class="text-xl font-semibold tracking-[-0.02em]">{service.name}</div>
                 <div>
                   <p class="leading-7 text-slate-600">{service.detail}</p>
-                  <a href={createMailto(service.inquirySubject)} class="mt-4 inline-flex text-sm font-bold text-blue-800">Request custom scope →</a>
+                  <a href={gapReviewHref} class="mt-4 inline-flex text-sm font-bold text-blue-800">Start with the gap review →</a>
                 </div>
               </article>
             ))}
@@ -156,9 +155,9 @@ const structuredData = [
         <div>
           <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Choose the starting point</div>
           <h2 class="mt-5 max-w-3xl text-5xl font-semibold leading-tight tracking-[-0.05em]">Not sure whether the constraint is visibility, coverage, or follow-up?</h2>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Request a gap review. We will recommend a packaged SEO pace, a custom implementation path, or a clear not-a-fit answer.</p>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Start with the gap review. We will recommend a packaged SEO pace, a custom implementation path, or a clear not-a-fit answer.</p>
         </div>
-        <div class="lg:text-right"><a href={reviewHref} class="inline-flex rounded-lg bg-blue-700 px-7 py-4 text-sm font-bold text-white hover:bg-slate-900">Request a Gap Review</a></div>
+        <div class="lg:text-right"><a href={gapReviewHref} class="inline-flex rounded-lg bg-blue-700 px-7 py-4 text-sm font-bold text-white hover:bg-slate-900">Get the Gap Review</a></div>
       </div>
     </section>
 

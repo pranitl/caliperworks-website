@@ -1,8 +1,9 @@
 ---
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import GapReviewForm from '../components/GapReviewForm.astro';
 import Layout from './Layout.astro';
-import { createMailto } from '../data/site';
+import { gapReviewHref } from '../data/site';
 import {
   homeContactSection,
   homeFaqs,
@@ -16,7 +17,6 @@ import {
 } from '../data/home';
 import { organizationSchema, websiteSchema } from '../lib/seo';
 
-const reviewHref = createMailto('Caliperworks Gap Review Request');
 const structuredData = [organizationSchema(), websiteSchema()];
 ---
 
@@ -30,7 +30,7 @@ const structuredData = [organizationSchema(), websiteSchema()];
           <h1 class="mt-6 max-w-4xl text-6xl font-semibold leading-[0.98] tracking-[-0.06em] md:text-8xl">{homeHero.headline}</h1>
           <p class="mt-8 max-w-2xl text-xl leading-8 text-slate-600">{homeHero.subheadline}</p>
           <div class="mt-9 flex flex-wrap items-center gap-5">
-            <a href={reviewHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeHero.primaryCtaLabel}</a>
+            <a href={gapReviewHref} class="rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeHero.primaryCtaLabel}</a>
             <a href={`#${homeSectionIds.results}`} class="text-sm font-bold text-blue-800 hover:text-slate-950">{homeHero.secondaryCtaLabel} →</a>
           </div>
         </div>
@@ -86,7 +86,7 @@ const structuredData = [organizationSchema(), websiteSchema()];
             <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Custom implementation</div>
             <h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">Scoped around the workflow.</h2>
             <p class="mt-5 max-w-xl text-lg leading-8 text-slate-600">Voice agents, ads workflows, and operational automation depend on routing rules, integrations, handoffs, support, and the systems already in place.</p>
-            <a href={reviewHref} class="mt-7 inline-flex text-sm font-bold text-blue-800">Request a custom gap review →</a>
+            <a href={gapReviewHref} class="mt-7 inline-flex text-sm font-bold text-blue-800">Get the gap review →</a>
           </div>
         </div>
       </div>
@@ -150,14 +150,14 @@ const structuredData = [organizationSchema(), websiteSchema()];
       </div>
     </section>
 
-    <section id={homeSectionIds.contact} class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-28">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-        <div>
-          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Gap review</div>
-          <h2 class="mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">{homeContactSection.headline}</h2>
-          <p class="mt-7 max-w-2xl text-xl leading-8 text-slate-600">{homeContactSection.body}</p>
+    <section id="gap-review" class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 max-w-3xl">
+          <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">{homeContactSection.eyebrow}</div>
+          <h2 class="mt-5 text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">{homeContactSection.headline}</h2>
+          <p class="mt-7 text-xl leading-8 text-slate-600">{homeContactSection.body}</p>
         </div>
-        <div class="lg:text-right"><a href={reviewHref} class="inline-flex rounded-lg bg-blue-700 px-7 py-4 text-sm font-bold text-white hover:bg-slate-900">Request a Gap Review</a></div>
+        <GapReviewForm deliverables={homeContactSection.deliverables} />
       </div>
     </section>
   </main>

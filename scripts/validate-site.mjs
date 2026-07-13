@@ -17,6 +17,7 @@ const servicesIndex = read('src/pages/services/index.astro');
 const serviceDetail = read('src/pages/services/[slug].astro');
 const homeData = read('src/data/home.ts');
 const landingPage = read('src/layouts/LandingPage.astro');
+const gapReviewForm = read('src/components/GapReviewForm.astro');
 const siteData = read('src/data/site.ts');
 const searchBriefPage = read('src/pages/search-brief/[slug].astro');
 const searchBriefData = JSON.parse(read('src/data/searchBriefs.json'));
@@ -26,13 +27,15 @@ for (const anchor of ['starter', 'growth', 'max', 'voice-agents', 'ads-support']
 }
 
 assert(servicesIndex.includes('pricingHref(service.slug)'), 'Expected pricing link usage in services index');
-assert(serviceDetail.includes('pricingHref(service.slug)') && serviceDetail.includes('Request a gap review'), 'Expected packaged and custom scoping CTAs in service detail');
+assert(serviceDetail.includes('pricingHref(service.slug)') && serviceDetail.includes('gapReviewHref'), 'Expected packaged and gap-review scoping CTAs in service detail');
 
 for (const sectionId of ['solutions', 'results', 'expertise', 'faq', 'contact']) {
   assert(homeData.includes(`${sectionId}: '${sectionId}'`), `Missing home section id "${sectionId}" in src/data/home.ts`);
 }
 
 assert(landingPage.includes('homeSectionIds.solutions') || landingPage.includes('homeNavItems'), 'Expected centralized homepage section usage');
+assert(landingPage.includes('id="gap-review"') && landingPage.includes('GapReviewForm'), 'Expected homepage gap-review entry offer');
+assert(gapReviewForm.includes("fetch('/api/gap-review-request'") && fs.existsSync(path.join(root, 'functions/api/gap-review-request.js')), 'Expected working gap-review request path');
 assert(siteData.includes("'/pricing/'"), 'Expected /pricing/ in shared site config');
 assert(searchBriefPage.includes('noindex'), 'Personalized search briefs must remain out of the public search index');
 assert(searchBriefPage.includes('brief-request-form'), 'Expected the search-brief request form');

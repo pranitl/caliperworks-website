@@ -27,18 +27,20 @@ const structuredData = breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'C
           <Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/case-studies/', label: 'Case Studies' }, { href: caseStudyHref(caseStudy.slug), label: caseStudy.title }]} />
           <div class="mt-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">{caseStudy.clientLabel} · {caseStudy.location}</div><h1 class="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] md:text-7xl">{caseStudy.heroTitle}</h1><p class="mt-7 max-w-2xl text-xl leading-8 text-slate-600">{caseStudy.heroDescription}</p></div>
-            <div class="border-t border-slate-300 lg:border-l lg:border-t-0 lg:pl-7"><div class="grid gap-5 py-6 sm:grid-cols-3 lg:grid-cols-1">{caseStudy.results.map((result) => <div><div class="text-3xl font-semibold tracking-[-0.04em]">{result.value}</div><div class="mt-1 text-sm leading-6 text-slate-500">{result.label}</div></div>)}</div></div>
+            <div class="border-t border-slate-300 lg:border-l lg:border-t-0 lg:pl-7"><div class="grid gap-5 py-6 sm:grid-cols-3 lg:grid-cols-1">{caseStudy.results.map((result) => <div><div class="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">{result.kind === 'implementation' ? 'Implementation milestone' : 'Observed outcome'}</div><div class="mt-2 text-3xl font-semibold tracking-[-0.04em]">{result.value}</div><div class="mt-1 text-sm leading-6 text-slate-500">{result.label}</div></div>)}</div></div>
           </div>
         </div>
       </section>
 
       <section class="px-6 py-20 md:py-28"><div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2"><div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Challenge</div><div class="mt-5 border-t border-slate-300">{caseStudy.challenge.map((item) => <div class="border-b border-slate-300 py-5 text-lg leading-8 text-slate-700">{item}</div>)}</div></div><div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">What changed</div><div class="mt-5 border-t border-slate-300">{caseStudy.solution.map((item) => <div class="border-b border-slate-300 py-5 text-lg leading-8 text-slate-700">{item}</div>)}</div></div></div></section>
 
+      {caseStudy.quote && <section class="border-y border-slate-200 bg-white px-6 py-16"><div class="mx-auto max-w-4xl"><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Client-reported result</div><blockquote class="mt-6 text-3xl font-medium leading-tight tracking-[-0.035em] text-slate-800">“{caseStudy.quote}”</blockquote></div></section>}
+
       <section class="border-y border-slate-200 bg-[#f2f6fb] px-6 py-20"><div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]"><div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">What transfers</div><h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">Lessons, not universal promises.</h2></div><div class="grid gap-px border-y border-slate-300 bg-slate-300 md:grid-cols-3">{caseStudy.takeaways.map((takeaway) => <div class="bg-[#f2f6fb] p-7 text-lg leading-8 text-slate-700">{takeaway}</div>)}</div></div></section>
 
       <section class="px-6 py-20"><div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]"><div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Related work</div><a href={industryHref(industry.slug)} class="mt-5 inline-flex text-sm font-bold text-blue-800">{industry.name} context →</a></div><div class="border-t border-slate-300">{relatedServices.map((service) => <a href={serviceHref(service.slug)} class="grid gap-4 border-b border-slate-300 py-5 md:grid-cols-[0.7fr_1.3fr]"><span class="font-semibold">{service.name}</span><span class="text-slate-600">{service.teaser}</span></a>)}</div></div></section>
 
-      <SectionCta headline="See whether the same underlying constraint exists in your business." body="Request a gap review and we will identify the closest relevant lesson, the important differences, and the first practical next step." />
+      <SectionCta headline="See whether the same underlying constraint exists in your business." body="Start with the gap review and we will identify the closest relevant lesson, the important differences, and the first practical next step." />
     </article>
   </main>
   <SiteFooter />

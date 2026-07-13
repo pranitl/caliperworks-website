@@ -25,7 +25,7 @@ export const homeHero = {
   eyebrow: 'Growth systems for service businesses',
   headline: 'More qualified demand. Fewer dropped handoffs.',
   subheadline: 'Caliperworks improves the path from local search or inbound call to the next useful action through SEO execution, call coverage, ads workflows, and practical automation.',
-  primaryCtaLabel: 'Request a Gap Review',
+  primaryCtaLabel: 'Get the Gap Review',
   secondaryCtaLabel: 'View Selected Work',
 } as const;
 
@@ -99,6 +99,12 @@ export const homeFaqs: FaqEntry[] = [
 ];
 
 export const homeContactSection = {
-  headline: 'Find the first constraint worth fixing.',
-  body: 'Request a gap review and we will map where qualified demand is being lost, what the consequence is, and which practical next step makes sense.',
+  eyebrow: 'Gap review · a useful first artifact',
+  headline: 'See where qualified demand is getting lost.',
+  body: 'Send your website, market, and one constraint. We will map the first material gap, the consequence worth checking, and whether SEO or a custom workflow should come first.',
+  deliverables: [
+    'The first material visibility, coverage, or follow-up gap to investigate.',
+    'The evidence we would use to verify the issue before recommending work.',
+    'A recommended starting path: packaged SEO, custom implementation, or wait.',
+  ],
 } as const;

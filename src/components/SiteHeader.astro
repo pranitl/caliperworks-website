@@ -1,5 +1,5 @@
 ---
-import { createMailto, mainNav } from '../data/site';
+import { gapReviewHref, mainNav } from '../data/site';
 
 interface NavItem {
   href: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { navItems = mainNav } = Astro.props;
-const reviewHref = createMailto('Caliperworks Gap Review Request');
+const reviewHref = gapReviewHref;
 ---
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-[#fbfaf7]/95 backdrop-blur-md">
@@ -32,7 +32,7 @@ const reviewHref = createMailto('Caliperworks Gap Review Request');
       href={reviewHref}
       class="hidden rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 lg:inline-flex"
     >
-      Request a Gap Review
+      Get the Gap Review
     </a>
 
     <details class="relative lg:hidden">
@@ -48,7 +48,7 @@ const reviewHref = createMailto('Caliperworks Gap Review Request');
           ))}
         </nav>
         <a href={reviewHref} class="mt-3 block rounded-lg bg-blue-700 px-4 py-3 text-center text-sm font-bold text-white">
-          Request a Gap Review
+          Get the Gap Review
         </a>
       </div>
     </details>

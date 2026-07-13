@@ -8,6 +8,7 @@ import Layout from '../../layouts/Layout.astro';
 import {
   caseStudyHref,
   caseStudyMap,
+  gapReviewHref,
   industryHref,
   industryMap,
   pricingHref,
@@ -45,7 +46,7 @@ const structuredData = [
           <div class="border-l border-slate-300 pl-7">
             <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">How it is scoped</div>
             <p class="mt-4 text-xl leading-8 text-slate-700">{isPackaged ? 'Choose a published monthly execution pace after the setup and opportunity review.' : 'Scope the implementation after reviewing the workflow, rules, integrations, handoffs, and support needs.'}</p>
-            <a href={isPackaged ? pricingHref(service.slug) : `mailto:pranit@caliperworks.com?subject=${encodeURIComponent(`Caliperworks Gap Review - ${service.name}`)}`} class="mt-6 inline-flex text-sm font-bold text-blue-800">{isPackaged ? 'View SEO pricing' : 'Request a gap review'} →</a>
+            <a href={isPackaged ? pricingHref(service.slug) : gapReviewHref} class="mt-6 inline-flex text-sm font-bold text-blue-800">{isPackaged ? 'View SEO pricing' : 'Get the gap review'} →</a>
           </div>
         </div>
       </div>
@@ -84,7 +85,7 @@ const structuredData = [
 
     <section class="px-6 py-20"><div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]"><div><div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">FAQ</div><h2 class="mt-5 text-4xl font-semibold tracking-[-0.04em]">Questions about {service.name.toLowerCase()}.</h2></div><div class="border-t border-slate-300">{service.faq.map((faq) => <details class="border-b border-slate-300 py-6"><summary class="cursor-pointer list-none text-xl font-semibold">{faq.question}</summary><p class="mt-4 text-lg leading-8 text-slate-600">{faq.answer}</p></details>)}</div></div></section>
 
-    <SectionCta headline="See whether this is the first constraint worth fixing." body="Request a gap review and we will recommend the appropriate packaged SEO pace, custom implementation path, or a clear reason to wait." />
+    <SectionCta headline="See whether this is the first constraint worth fixing." body="Start with the gap review and we will recommend the appropriate packaged SEO pace, custom implementation path, or a clear reason to wait." />
   </main>
   <SiteFooter />
 </Layout>

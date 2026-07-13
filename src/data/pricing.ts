@@ -37,7 +37,7 @@ export const pricingOverview = {
   headline: 'Packaged SEO pricing. Custom scope everywhere else.',
   body:
     'Local visibility work is priced by monthly execution pace. Voice agents, ads workflows, and operational automation are scoped around the call flows, integrations, handoffs, and support your business actually needs.',
-  primaryCta: 'Request a Gap Review',
+  primaryCta: 'Get the Gap Review',
   secondaryCta: 'Compare SEO Plans',
 } as const;
 
