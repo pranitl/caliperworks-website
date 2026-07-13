@@ -60,7 +60,7 @@ export async function onRequestPost({ request, env }) {
     `Brief: ${briefSlug}`,
     `Source: ${url.origin}/search-brief/${briefSlug}/`,
     '',
-    'Requested artifact: two-page implementation brief',
+    'Requested artifact: 2-page action plan',
   ].join('\n');
 
   let telegramResponse;
@@ -99,8 +99,8 @@ function clean(value, maxLength) {
 }
 
 function createFallbackUrl(brief, name, email) {
-  const subject = `${brief.businessName} implementation brief`;
-  const body = `Hi Pranit,\n\nPlease send the ${brief.businessName} two-page implementation brief to ${email}.\n\nName: ${name}\nGeography: ${brief.geoLabel}`;
+  const subject = `${brief.businessName} 2-page action plan`;
+  const body = `Hi Pranit,\n\nPlease send the ${brief.businessName} 2-page action plan to ${email}.\n\nName: ${name}\nGeography: ${brief.geoLabel}`;
   return `mailto:pranit@caliperworks.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 

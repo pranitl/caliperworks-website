@@ -11,11 +11,11 @@ interface Props {
 }
 
 const { brief } = Astro.props;
-const fallbackSubject = `${brief.businessName} implementation brief`;
+const fallbackSubject = `${brief.businessName} 2-page action plan`;
 const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent(fallbackSubject)}`;
 ---
 
-<Layout title={brief.title} description={brief.description} canonicalPath={`/search-brief/${brief.slug}/`} noindex>
+<Layout title={brief.title} description={brief.description} canonicalPath={`/search-brief/${brief.slug}/`} noindex hideCalEmbed>
   <main class="brief-shell">
     <div class="paper-grid" aria-hidden="true"></div>
 
@@ -36,7 +36,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
         <p class="kicker">Private search brief · {brief.geo.territoryLabel}</p>
         <h1>{brief.headline}</h1>
         <p class="lede">{brief.framing}</p>
-        <a href="#request" class="hero-link">Get the implementation order <span aria-hidden="true">↓</span></a>
+        <a href="#request" class="hero-link">Get the 2-page action plan <span aria-hidden="true">↓</span></a>
       </div>
 
       <aside class="observation-card" aria-label="Snapshot summary">
@@ -107,6 +107,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
         <p class="kicker light">The next useful step</p>
         <h2 id="request-title">{brief.offer.headline}</h2>
         <p>{brief.offer.promise}</p>
+        <p class="sender-intro">I’m Pranit. I help local businesses turn what Google is showing into a clear, prioritized plan for improving their website and business listing.</p>
         <ul>
           {brief.offer.deliverables.map((item) => <li>{item}</li>)}
         </ul>
@@ -120,6 +121,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
         <div class="form-card-rule" aria-hidden="true"></div>
         <p class="form-overline">Complimentary · prepared for {brief.businessName}</p>
         <h2>Where should Pranit send it?</h2>
+        <p class="delivery-note">I’ll review it personally and email your 2-page action plan—usually within a few hours.</p>
         <form
           id="brief-request-form"
           data-brief-slug={brief.slug}
@@ -140,7 +142,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
             <input name="website" type="text" tabindex="-1" autocomplete="off" />
           </label>
           <input name="startedAt" type="hidden" value="" />
-          <button type="submit">Send my {brief.geo.territoryLabel} brief <span aria-hidden="true">→</span></button>
+          <button type="submit">Send my {brief.geo.territoryLabel} action plan <span aria-hidden="true">→</span></button>
           <p class="assurance">{brief.offer.effort}</p>
           <div id="form-status" class="form-status" aria-live="polite"></div>
         </form>
@@ -205,7 +207,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
 
           form.reset();
           status.className = 'form-status success';
-          status.textContent = 'Request received. Pranit will prepare the brief and send it to the email above.';
+          status.textContent = 'Request received. Pranit will review it personally and email your 2-page action plan—usually within a few hours.';
         } catch (error) {
           status.className = 'form-status error';
           const fallbackUrl = form.dataset.fallbackUrl || 'mailto:pranit@caliperworks.com';
@@ -269,6 +271,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
   .kicker.light { color:#ddc9a9; }
   .request-copy h2 { max-width:650px; margin:0; font-size:clamp(3rem,6vw,5.5rem); line-height:.96; letter-spacing:-.05em; }
   .request-copy>p { max-width:680px; color:#c7d0dd; font-size:1.1rem; line-height:1.7; }
+  .request-copy .sender-intro { margin:28px 0 0; padding-left:18px; border-left:2px solid var(--gold); color:#fff; font-size:1rem; line-height:1.55; }
   .request-copy ul { display:grid; gap:14px; margin:36px 0; padding:0; list-style:none; }
   .request-copy li { position:relative; padding-left:28px; color:#fff; }
   .request-copy li::before { content:'✓'; position:absolute; left:0; color:#ddc9a9; font-weight:900; }
@@ -280,7 +283,8 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
   .form-card { position:relative; padding:40px; background:#fff; color:var(--ink); box-shadow:18px 18px 0 var(--gold); }
   .form-card-rule { position:absolute; inset:14px; border:1px solid #d8dee7; pointer-events:none; }
   .form-overline { position:relative; margin:0; color:var(--blue); font-size:.7rem; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
-  .form-card h2 { position:relative; margin:18px 0 30px; font-size:2.2rem; line-height:1.05; }
+  .form-card h2 { position:relative; margin:18px 0 16px; font-size:2.2rem; line-height:1.05; }
+  .delivery-note { position:relative; margin:0 0 30px; color:#667286; font-size:.9rem; line-height:1.5; }
   form { position:relative; }
   label { display:grid; gap:8px; margin-top:18px; }
   label span { font-size:.76rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }

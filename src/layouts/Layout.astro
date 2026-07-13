@@ -9,6 +9,7 @@ interface Props {
 	canonicalPath?: string;
 	image?: string;
 	noindex?: boolean;
+	hideCalEmbed?: boolean;
 	structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 	ogType?: 'website' | 'article';
 }
@@ -19,6 +20,7 @@ const {
 	canonicalPath = Astro.url.pathname,
 	image = siteConfig.defaultOgImagePath,
 	noindex = false,
+	hideCalEmbed = false,
 	structuredData,
 	ogType = 'website',
 } = Astro.props;
@@ -60,9 +62,9 @@ const structuredDataItems = Array.isArray(structuredData)
 			<script type="application/ld+json" set:html={JSON.stringify(item)} />
 		))}
 	</head>
-		<body class="bg-[#fbfaf7] text-slate-950 antialiased selection:bg-blue-100 selection:text-slate-950">
+	<body class="bg-[#fbfaf7] text-slate-950 antialiased selection:bg-blue-100 selection:text-slate-950">
 		<slot />
-		<CalEmbed />
+		{!hideCalEmbed && <CalEmbed />}
 	</body>
 </html>
 
