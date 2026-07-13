@@ -20,6 +20,7 @@ All commands run from the project root.
 | `npm run dev` | Start the local Astro dev server |
 | `npm run build` | Build the production site into `dist/` |
 | `npm run preview` | Preview the production build locally |
+| `npm run validate:brief` | Validate the personalized search-brief request endpoint and fallback |
 
 ## Project Structure
 
@@ -56,6 +57,25 @@ Avoid copy that sounds inflated or pushy.
 - Avoid phrases like `free audit`, `dominate`, `hyper-optimized`, `replace your staff`, or similar hard-sell wording.
 - Avoid guarantees unless they are literally true and supportable.
 - Avoid vague AI claims that are not tied to a business workflow.
+
+## Personalized Search Briefs
+
+Account-specific QR destinations live at `/search-brief/[slug]/`. Their content is defined in
+the generated `src/data/searchBriefs.json` file. These pages are intentionally `noindex` and should
+not be added to the sitemap or `llms.txt`. Do not hand-edit the generated JSON or
+`functions/api/search-brief-catalog.js`; regenerate both from the evidence records with
+`../business-development/scripts/build_austin_home_care_briefs.py`. The shared route and request
+function do not need to change when the compiler adds another approved business or geography.
+
+The request form posts to the Cloudflare Pages Function at
+`functions/api/action-brief-request.js`. Configure these variables in both the production and
+preview Pages environments:
+
+- `TELEGRAM_BOT_TOKEN` (encrypted secret, required; never commit or expose this value in client code)
+- `TELEGRAM_CHAT_ID` (encrypted secret, required; the chat where new requests should be delivered)
+
+If either Telegram secret is unavailable, the page presents an explicit direct-email fallback instead
+of claiming the request was submitted.
 
 ## Content Priorities
 

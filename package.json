@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "validate:site": "node scripts/validate-site.mjs",
-    "validate:markdown": "node scripts/validate-markdown-negotiation.mjs"
+    "validate:markdown": "node scripts/validate-markdown-negotiation.mjs",
+    "validate:brief": "node scripts/validate-action-brief.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",

@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = '/home/pranit/caliperworks-website';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function read(relativePath) {
   return fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -17,6 +18,8 @@ const serviceDetail = read('src/pages/services/[slug].astro');
 const homeData = read('src/data/home.ts');
 const landingPage = read('src/layouts/LandingPage.astro');
 const siteData = read('src/data/site.ts');
+const searchBriefPage = read('src/pages/search-brief/[slug].astro');
+const searchBriefData = JSON.parse(read('src/data/searchBriefs.json'));
 
 for (const anchor of ['starter', 'growth', 'max', 'voice-agents', 'ads-support']) {
   assert(pricingPage.includes(`id={plan.id}`) || pricingPage.includes(`id="${anchor}"`) || pricingPage.includes(`id={service.id}`), `Missing pricing anchor handling for "${anchor}"`);
@@ -31,6 +34,11 @@ for (const sectionId of ['solutions', 'results', 'expertise', 'faq', 'contact'])
 
 assert(landingPage.includes('homeSectionIds.solutions') || landingPage.includes('homeNavItems'), 'Expected centralized homepage section usage');
 assert(siteData.includes("'/pricing/'"), 'Expected /pricing/ in shared site config');
+assert(searchBriefPage.includes('noindex'), 'Personalized search briefs must remain out of the public search index');
+assert(searchBriefPage.includes('brief-request-form'), 'Expected the search-brief request form');
+assert(searchBriefData.length === 8, `Expected 8 Austin search briefs, found ${searchBriefData.length}`);
+assert(searchBriefData.some((brief) => brief.slug === 'right-at-home-austin-west'), 'Missing Right at Home Austin West brief data');
+assert(searchBriefData.every((brief) => brief.opportunities.length === 3), 'Every search brief must have exactly three evidence-backed opportunities');
 
 for (const route of [
   'src/pages/index.astro',

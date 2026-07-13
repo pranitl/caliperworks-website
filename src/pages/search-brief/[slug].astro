@@ -1,0 +1,299 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { searchBriefs, type SearchBrief } from '../../data/searchBriefs';
+
+export function getStaticPaths() {
+  return searchBriefs.map((brief) => ({ params: { slug: brief.slug }, props: { brief } }));
+}
+
+interface Props {
+  brief: SearchBrief;
+}
+
+const { brief } = Astro.props;
+const fallbackSubject = `${brief.businessName} implementation brief`;
+const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent(fallbackSubject)}`;
+---
+
+<Layout title={brief.title} description={brief.description} canonicalPath={`/search-brief/${brief.slug}/`} noindex>
+  <main class="brief-shell">
+    <div class="paper-grid" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <a href="/" class="wordmark" aria-label="Caliperworks home">CALIPERWORKS</a>
+      <div class="document-label">
+        <span>Prepared for</span>
+        <strong>{brief.businessName}</strong>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">Private search note · {brief.geo.territoryLabel}</p>
+        <h1>{brief.headline}</h1>
+        <p class="lede">{brief.framing}</p>
+        <a href="#request" class="hero-link">Get the implementation order <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <aside class="observation-card" aria-label="Snapshot summary">
+        <div class="card-index">SEARCH NOTE / 01</div>
+        <p class="card-title">What the outside-in review found</p>
+        <div class="metrics">
+          {brief.metrics.map((metric) => (
+            <div class="metric">
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+            </div>
+          ))}
+        </div>
+        <p class="method-note">Point-in-time positions can change by date, location, and device.</p>
+      </aside>
+    </section>
+
+    <section class="evidence-section" aria-labelledby="working-title">
+      <div class="section-heading">
+        <p>01 · Evidence before recommendations</p>
+        <h2 id="working-title">{brief.winsHeading}</h2>
+      </div>
+      <div class="wins">
+        {brief.wins.length > 0 ? (
+          brief.wins.map((win) => (
+            <article class="win-card">
+              <span>{win.label}</span>
+              <h3>{win.search}</h3>
+              <p>{win.explanation}</p>
+            </article>
+          ))
+        ) : (
+          <article class="win-card no-wins">
+            <span>What the review found</span>
+            <h3>No early search foothold yet</h3>
+            <p>{brief.noWinsExplanation}</p>
+          </article>
+        )}
+      </div>
+    </section>
+
+    <section class="opportunity-band" aria-labelledby="opportunities-title">
+      <div class="opportunity-section">
+        <div class="section-heading">
+          <p>02 · Three priority moves</p>
+          <h2 id="opportunities-title">Focus on the searches with the clearest room to grow.</h2>
+        </div>
+        <div class="opportunities">
+          {brief.opportunities.map((opportunity, index) => (
+            <article class="opportunity">
+              <div class="opportunity-number">{String(index + 1).padStart(2, '0')}</div>
+              <div>
+                <div class="opportunity-topline">
+                  <h3>{opportunity.search}</h3>
+                  <span>{opportunity.evidence}</span>
+                </div>
+                <p><strong>{opportunity.heading}.</strong> {opportunity.explanation}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="request" class="request-band" aria-labelledby="request-title">
+      <div class="request-section">
+        <div class="request-copy">
+        <p class="kicker light">The next useful step</p>
+        <h2 id="request-title">{brief.offer.headline}</h2>
+        <p>{brief.offer.promise}</p>
+        <ul>
+          {brief.offer.deliverables.map((item) => <li>{item}</li>)}
+        </ul>
+        <blockquote>
+          <p>{brief.proof}</p>
+          <footer>{brief.proofQualification}</footer>
+        </blockquote>
+        </div>
+
+        <div class="form-card">
+        <div class="form-card-rule" aria-hidden="true"></div>
+        <p class="form-overline">Complimentary · specific to this office</p>
+        <h2>Where should Pranit send it?</h2>
+        <form
+          id="brief-request-form"
+          data-brief-slug={brief.slug}
+          data-business-name={brief.businessName}
+          data-geo-label={brief.geo.territoryLabel}
+          data-fallback-url={fallbackUrl}
+        >
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" autocomplete="name" maxlength="80" required />
+          </label>
+          <label>
+            <span>Work email</span>
+            <input name="email" type="email" autocomplete="email" maxlength="160" required />
+          </label>
+          <label class="honeypot" aria-hidden="true">
+            <span>Website</span>
+            <input name="website" type="text" tabindex="-1" autocomplete="off" />
+          </label>
+          <input name="startedAt" type="hidden" value="" />
+          <button type="submit">Send my {brief.geo.territoryLabel} brief <span aria-hidden="true">→</span></button>
+          <p class="assurance">{brief.offer.effort}</p>
+          <div id="form-status" class="form-status" aria-live="polite"></div>
+        </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <div><strong>Caliperworks</strong><span>Search strategy for home-care operators</span></div>
+      <a href="mailto:pranit@caliperworks.com">pranit@caliperworks.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#brief-request-form');
+    const status = document.querySelector<HTMLElement>('#form-status');
+
+    if (form && status) {
+      const startedAt = form.elements.namedItem('startedAt') as HTMLInputElement | null;
+      if (startedAt) startedAt.value = String(Date.now());
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        const submitLabel = submit?.innerHTML;
+        const values = new FormData(form);
+        const payload = {
+          name: String(values.get('name') || ''),
+          email: String(values.get('email') || ''),
+          website: String(values.get('website') || ''),
+          startedAt: Number(values.get('startedAt') || 0),
+          briefSlug: form.dataset.briefSlug,
+          businessName: form.dataset.businessName,
+          geoLabel: form.dataset.geoLabel,
+        };
+
+        if (submit) {
+          submit.disabled = true;
+          submit.textContent = 'Sending…';
+        }
+        status.className = 'form-status';
+        status.textContent = '';
+
+        try {
+          const response = await fetch('/api/action-brief-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const result = await response.json();
+
+          if (!response.ok) {
+            if (result.fallbackUrl) {
+              status.className = 'form-status error';
+              status.innerHTML = `The request could not be recorded automatically. <a href="${result.fallbackUrl}">Email the request directly instead.</a>`;
+              return;
+            }
+            throw new Error(result.error || 'The request could not be sent.');
+          }
+
+          form.reset();
+          status.className = 'form-status success';
+          status.textContent = 'Request received. Pranit will prepare the brief and send it to the email above.';
+        } catch (error) {
+          status.className = 'form-status error';
+          const fallbackUrl = form.dataset.fallbackUrl || 'mailto:pranit@caliperworks.com';
+          status.innerHTML = `The form could not send the request. <a href="${fallbackUrl}">Email Pranit directly.</a>`;
+        } finally {
+          if (submit) {
+            submit.disabled = false;
+            if (submitLabel) submit.innerHTML = submitLabel;
+          }
+        }
+      });
+    }
+  </script>
+</Layout>
+
+<style>
+  :global(html) { scroll-behavior: smooth; }
+  :global(body) { background: #f2efe8; }
+  .brief-shell { --ink:#15233a; --blue:#173fa5; --gold:#b89b72; --paper:#fbfaf6; position:relative; min-height:100vh; overflow:hidden; background:var(--paper); color:var(--ink); }
+  .paper-grid { position:absolute; inset:0; pointer-events:none; opacity:.28; background-image:linear-gradient(rgba(21,35,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(21,35,58,.04) 1px,transparent 1px); background-size:32px 32px; mask-image:linear-gradient(to bottom,black,transparent 72%); }
+  .masthead,.hero,.evidence-section,.opportunity-section,.request-section,.page-footer { position:relative; z-index:1; width:min(1180px,calc(100% - 40px)); margin-inline:auto; }
+  .masthead { display:flex; align-items:center; justify-content:space-between; padding:28px 0; border-bottom:2px solid var(--ink); }
+  .wordmark { color:var(--ink); font-size:1.15rem; font-weight:900; letter-spacing:-.04em; text-decoration:none; }
+  .document-label { display:flex; gap:12px; align-items:baseline; font-size:.78rem; }
+  .document-label span { color:#647084; text-transform:uppercase; letter-spacing:.14em; }
+  .hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr); gap:76px; align-items:center; padding:96px 0 110px; }
+  .kicker { margin:0 0 20px; color:var(--blue); font-size:.76rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+  .hero h1 { max-width:760px; margin:0; font-size:clamp(3rem,6vw,5.8rem); line-height:.96; letter-spacing:-.055em; }
+  .lede { max-width:690px; margin:32px 0 0; color:#4b596d; font-size:clamp(1.05rem,1.8vw,1.35rem); line-height:1.62; }
+  .hero-link { display:inline-flex; gap:16px; align-items:center; margin-top:34px; padding-bottom:8px; border-bottom:2px solid var(--blue); color:var(--blue); font-weight:800; text-decoration:none; }
+  .observation-card { position:relative; padding:34px; border:2px solid var(--ink); background:#fff; box-shadow:16px 16px 0 var(--ink); transform:rotate(1deg); }
+  .card-index { position:absolute; top:-15px; right:20px; padding:7px 12px; background:var(--gold); color:var(--ink); font-size:.66rem; font-weight:900; letter-spacing:.14em; }
+  .card-title { margin:0 0 24px; font-family:var(--font-serif); font-size:1.45rem; font-weight:800; }
+  .metric { display:grid; grid-template-columns:92px 1fr; gap:18px; align-items:start; padding:17px 0; border-top:1px solid #d8dee7; }
+  .metric strong { font-size:1.75rem; line-height:1; }
+  .metric span { color:#5c6879; font-size:.84rem; line-height:1.35; }
+  .method-note { margin:20px 0 0; color:#6d7787; font-size:.74rem; line-height:1.45; }
+  .evidence-section,.opportunity-section { padding:105px 0; border-top:1px solid #cfd5df; }
+  .section-heading { display:grid; grid-template-columns:220px 1fr; gap:40px; margin-bottom:48px; }
+  .section-heading>p { margin:8px 0 0; color:var(--blue); font-size:.72rem; font-weight:900; letter-spacing:.16em; text-transform:uppercase; }
+  .section-heading h2 { max-width:850px; margin:0; font-size:clamp(2.5rem,5vw,4.8rem); line-height:1; letter-spacing:-.045em; }
+  .wins { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-left:260px; }
+  .win-card { min-height:220px; padding:34px; border:1px solid #cfd5df; background:#fff; }
+  .win-card span { display:inline-block; padding:7px 10px; background:#e7f5f0; color:#087568; font-size:.75rem; font-weight:900; text-transform:uppercase; letter-spacing:.08em; }
+  .win-card h3 { margin:30px 0 12px; font-size:1.75rem; }
+  .win-card p { margin:0; color:#5a6678; line-height:1.6; }
+  .win-card.no-wins { grid-column:1/-1; min-height:0; }
+  .opportunity-band { background:#f6f3ec; }
+  .opportunities { display:grid; gap:14px; }
+  .opportunity { display:grid; grid-template-columns:78px 1fr; gap:28px; align-items:start; padding:30px; border:1px solid #c8ced8; background:var(--paper); }
+  .opportunity-number { display:flex; align-items:center; justify-content:center; width:58px; height:58px; background:var(--ink); color:#fff; font-family:var(--font-serif); font-size:1.35rem; font-weight:800; }
+  .opportunity-topline { display:flex; justify-content:space-between; gap:30px; align-items:baseline; }
+  .opportunity h3 { margin:0; font-size:1.5rem; }
+  .opportunity-topline span { color:var(--blue); font-size:.78rem; font-weight:800; text-align:right; }
+  .opportunity p { max-width:900px; margin:14px 0 0; color:#526074; line-height:1.65; }
+  .opportunity p strong { color:var(--ink); }
+  .request-section { display:grid; grid-template-columns:1fr 430px; gap:90px; align-items:start; padding:120px 0; }
+  .kicker.light { color:#ddc9a9; }
+  .request-copy h2 { max-width:650px; margin:0; font-size:clamp(3rem,6vw,5.5rem); line-height:.96; letter-spacing:-.05em; }
+  .request-copy>p { max-width:680px; color:#c7d0dd; font-size:1.1rem; line-height:1.7; }
+  .request-copy ul { display:grid; gap:14px; margin:36px 0; padding:0; list-style:none; }
+  .request-copy li { position:relative; padding-left:28px; color:#fff; }
+  .request-copy li::before { content:'✓'; position:absolute; left:0; color:#ddc9a9; font-weight:900; }
+  .request-band { background:var(--ink); }
+  .request-section { color:#fff; }
+  blockquote { margin:50px 0 0; padding:24px 0 0; border-top:1px solid #41506a; }
+  blockquote p { margin:0; color:#fff; font-family:var(--font-serif); font-size:1.25rem; line-height:1.5; }
+  blockquote footer { margin-top:10px; color:#9da9bb; font-size:.74rem; }
+  .form-card { position:relative; padding:40px; background:#fff; color:var(--ink); box-shadow:18px 18px 0 var(--gold); }
+  .form-card-rule { position:absolute; inset:14px; border:1px solid #d8dee7; pointer-events:none; }
+  .form-overline { position:relative; margin:0; color:var(--blue); font-size:.7rem; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+  .form-card h2 { position:relative; margin:18px 0 30px; font-size:2.2rem; line-height:1.05; }
+  form { position:relative; }
+  label { display:grid; gap:8px; margin-top:18px; }
+  label span { font-size:.76rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+  input { width:100%; border:1px solid #aeb8c7; border-radius:0; background:#fbfaf6; padding:15px 14px; color:var(--ink); font:inherit; }
+  input:focus { outline:3px solid rgba(23,63,165,.18); border-color:var(--blue); }
+  button { display:flex; width:100%; align-items:center; justify-content:space-between; margin-top:24px; border:0; background:var(--blue); padding:17px 18px; color:#fff; font:inherit; font-weight:900; cursor:pointer; }
+  button:hover { background:#102f80; }
+  button:focus-visible { outline:3px solid #d8b873; outline-offset:3px; }
+  button:disabled { cursor:wait; opacity:.7; }
+  .assurance { margin:15px 0 0; color:#667286; font-size:.75rem; line-height:1.45; }
+  .honeypot { position:absolute!important; left:-9999px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
+  .form-status { min-height:22px; margin-top:16px; font-size:.8rem; line-height:1.45; }
+  .form-status.success { color:#087568; }
+  .form-status.error { color:#a1283e; }
+  .form-status a { color:inherit; font-weight:900; }
+  .page-footer { display:flex; justify-content:space-between; gap:24px; padding:34px 0 48px; border-top:1px solid #cfd5df; font-size:.82rem; }
+  .page-footer div { display:flex; gap:14px; }
+  .page-footer span { color:#6a7586; }
+  .page-footer a { color:var(--blue); font-weight:800; text-decoration:none; }
+  @media (prefers-reduced-motion:no-preference) { .observation-card { animation:note-in .7s ease-out both; } @keyframes note-in { from { opacity:0; transform:translateY(18px) rotate(1deg); } } }
+  @media (max-width:900px) { .hero,.request-section { grid-template-columns:1fr; gap:60px; } .hero { padding:72px 0 84px; } .observation-card { max-width:620px; } .section-heading { grid-template-columns:1fr; gap:16px; } .wins { margin-left:0; } .opportunity-topline { display:block; } .opportunity-topline span { display:block; margin-top:8px; text-align:left; } .request-section { padding:90px 0; } .form-card { max-width:620px; } }
+  @media (max-width:620px) { .masthead,.hero,.evidence-section,.opportunity-section,.request-section,.page-footer { width:min(100% - 28px,1180px); } .masthead { align-items:flex-start; } .document-label { display:none; } .hero h1 { font-size:2.85rem; } .observation-card { padding:27px 22px; box-shadow:10px 10px 0 var(--ink); } .metric { grid-template-columns:78px 1fr; } .evidence-section,.opportunity-section { padding:76px 0; } .wins { grid-template-columns:1fr; } .win-card { min-height:auto; } .opportunity { grid-template-columns:1fr; gap:18px; padding:24px; } .opportunity-number { width:48px; height:48px; } .request-copy h2 { font-size:3rem; } .form-card { padding:32px 24px; box-shadow:10px 10px 0 var(--gold); } .page-footer,.page-footer div { flex-direction:column; } }
+</style>
