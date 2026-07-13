@@ -22,22 +22,26 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
     <header class="masthead">
       <a href="/" class="wordmark" aria-label="Caliperworks home">CALIPERWORKS</a>
       <div class="document-label">
-        <span>Prepared for</span>
+        <span>Private page for</span>
         <strong>{brief.businessName}</strong>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-copy">
-        <p class="kicker">Private search note · {brief.geo.territoryLabel}</p>
+        <div class="personalization-mark">
+          <span>Personalized for</span>
+          <strong>{brief.businessName}</strong>
+        </div>
+        <p class="kicker">Private search brief · {brief.geo.territoryLabel}</p>
         <h1>{brief.headline}</h1>
         <p class="lede">{brief.framing}</p>
         <a href="#request" class="hero-link">Get the implementation order <span aria-hidden="true">↓</span></a>
       </div>
 
       <aside class="observation-card" aria-label="Snapshot summary">
-        <div class="card-index">SEARCH NOTE / 01</div>
-        <p class="card-title">What the outside-in review found</p>
+        <div class="card-index">PERSONALIZED / 01</div>
+        <p class="card-title">What we found for {brief.businessName}</p>
         <div class="metrics">
           {brief.metrics.map((metric) => (
             <div class="metric">
@@ -114,7 +118,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
 
         <div class="form-card">
         <div class="form-card-rule" aria-hidden="true"></div>
-        <p class="form-overline">Complimentary · specific to this office</p>
+        <p class="form-overline">Complimentary · prepared for {brief.businessName}</p>
         <h2>Where should Pranit send it?</h2>
         <form
           id="brief-request-form"
@@ -145,7 +149,7 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
     </section>
 
     <footer class="page-footer">
-      <div><strong>Caliperworks</strong><span>Search strategy for home-care operators</span></div>
+      <div><strong>Caliperworks</strong><span>Private brief for {brief.businessName}</span></div>
       <a href="mailto:pranit@caliperworks.com">pranit@caliperworks.com</a>
     </footer>
   </main>
@@ -228,6 +232,9 @@ const fallbackUrl = `mailto:pranit@caliperworks.com?subject=${encodeURIComponent
   .document-label { display:flex; gap:12px; align-items:baseline; font-size:.78rem; }
   .document-label span { color:#647084; text-transform:uppercase; letter-spacing:.14em; }
   .hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr); gap:76px; align-items:center; padding:96px 0 110px; }
+  .personalization-mark { display:inline-flex; align-items:center; gap:9px; margin:0 0 18px; padding:8px 11px; border:1px solid #d6c5a9; background:#f7f0e5; color:var(--ink); font-size:.72rem; letter-spacing:.04em; }
+  .personalization-mark span { color:#6a5a43; font-weight:700; text-transform:uppercase; letter-spacing:.11em; }
+  .personalization-mark strong { font-weight:900; }
   .kicker { margin:0 0 20px; color:var(--blue); font-size:.76rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
   .hero h1 { max-width:800px; margin:0; font-family:var(--font-sans); font-size:clamp(2.8rem,5vw,5.1rem); font-weight:800; line-height:1; letter-spacing:-.05em; text-wrap:balance; }
   .lede { max-width:690px; margin:32px 0 0; color:#4b596d; font-size:clamp(1.05rem,1.8vw,1.35rem); line-height:1.62; }
