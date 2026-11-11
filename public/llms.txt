@@ -30,4 +30,6 @@ Agent guidance:
 
 ## Optional
 
+- [FirstLight planner privacy](https://caliperworks.com/privacy/firstlight-care-planner/): Data handling for the separately hosted FirstLight Boston Northwest care planner.
+
 - [Robots policy](https://caliperworks.com/robots.txt): Crawl policy and Content Signals preferences.

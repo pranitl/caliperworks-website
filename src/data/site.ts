@@ -724,6 +724,7 @@ export function caseStudyHref(slug: string) {
 
 export const publicRoutes = [
   '/',
+  '/privacy/firstlight-care-planner/',
   '/use-cases/',
   '/services/',
   '/pricing/',

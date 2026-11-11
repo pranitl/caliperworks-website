@@ -56,4 +56,23 @@ assert(htmlResponse.headers.get('Link')?.includes('rel="service-meta"'), 'Expect
 const browserResponse = await onRequest(createContext('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'));
 assert(browserResponse.headers.get('Content-Type')?.startsWith('text/html'), 'Expected HTML content type for wildcard browser Accept header');
 
+const privacyPath = '/privacy/firstlight-care-planner/';
+const privacyHtml = readPrivacyHtml();
+assert(!privacyHtml.includes('https://app.cal.com/embed/embed.js'), 'Privacy notice must avoid loading the booking embed');
+assert(privacyHtml.includes('https://caliperworks.com/privacy/firstlight-care-planner/'), 'Expected canonical privacy URL');
+const privacyContext = createContext('text/markdown');
+privacyContext.request = new Request(`https://caliperworks.com${privacyPath}`, { headers: { Accept: 'text/markdown' } });
+privacyContext.env.ASSETS.fetch = async () => new Response(privacyHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+const privacyResponse = await onRequest(privacyContext);
+const privacyMarkdown = await privacyResponse.text();
+assert(privacyResponse.headers.get('Content-Type')?.startsWith('text/markdown'), 'Expected markdown privacy response');
+assert(privacyResponse.headers.get('Vary')?.includes('Accept'), 'Expected privacy content negotiation header');
+assert(privacyMarkdown.includes('FirstLight care planner privacy'), 'Expected privacy heading in markdown');
+assert(privacyMarkdown.includes('pranit@caliperworks.com'), 'Expected privacy support contact in markdown');
+assert(privacyMarkdown.includes('Optional resource answers'), 'Expected resource-answer disclosure in markdown');
+
+function readPrivacyHtml() {
+  return fs.readFileSync(path.join(root, 'dist/privacy/firstlight-care-planner/index.html'), 'utf8');
+}
+
 console.log('validate-markdown-negotiation: ok');

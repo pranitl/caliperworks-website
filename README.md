@@ -91,3 +91,9 @@ When updating messaging, keep these ideas visible:
 Keep only public routes in `src/pages/`.
 
 Reusable landing content should live outside `src/pages/` so Astro does not expose it as a standalone route.
+
+## FirstLight planner privacy
+
+The proposed service-specific notice is at `/privacy/firstlight-care-planner/`. It describes the deployed care planner’s input processing, browser-local resource answers, brief downloads, consultation links and infrastructure metadata. The page disables the optional Cal.com embed and uses the existing site shell.
+
+Before publishing, the service owner should review the stated technical/support roles and provider disclosures. After approval and production publication, verify the live page and update the care planner’s listing privacy URL to `https://caliperworks.com/privacy/firstlight-care-planner/`. The separate care-planner repository owns that listing and its hosted `/privacy` route.

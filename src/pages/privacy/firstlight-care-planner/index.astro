@@ -1,0 +1,59 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { siteConfig } from '../../../data/site';
+
+const title = 'FirstLight Care Planner Privacy | Caliperworks';
+const description = 'How the FirstLight Boston Northwest care planner processes planning choices, optional resource answers, downloads and connection information.';
+---
+
+<Layout title={title} description={description} canonicalPath="/privacy/firstlight-care-planner/" hideCalEmbed>
+  <SiteHeader />
+  <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <h1 class="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">FirstLight care planner privacy</h1>
+    <p class="mt-5 text-sm text-slate-500">Updated November 10, 2026</p>
+    <div class="privacy-copy mt-10 text-base leading-8 text-slate-700">
+      <p>This notice covers the FirstLight Home Care of Boston Northwest care planner at <a href="https://care.caliperworks.com/">care.caliperworks.com</a> and its connected ChatGPT tools. Caliperworks builds and hosts the technical planner for FirstLight Home Care of Boston Northwest.</p>
+      <p>The planner uses general support choices and hypothetical weekly visits to show service information and illustrative cost ranges. Results are available before you choose whether to contact the care team.</p>
+
+      <h2>Planning choices and their purpose</h2>
+      <p>Support choices describe everyday tasks such as meals, company, personal routines and family caregiver breaks. A hypothetical visit includes a weekday, hours, paid or family coverage, and a general time period. These fields support service exploration, estimate calculations and the discussion brief.</p>
+      <p>On the standalone website, calculations happen in your browser. With the ChatGPT connection, the selected general categories and hypothetical visits are sent to the MCP server to calculate its response. Application processing lasts for the request. The planner keeps no database of these inputs or application logs containing them.</p>
+      <p>Please keep names linked to health details, diagnoses, medical narratives, records, addresses, insurance policy numbers and veteran documents out of tool inputs. The tools accept fixed category choices and visit fields. Your ChatGPT conversation is handled by OpenAI under its policies and your account settings.</p>
+
+      <h2>Optional resource answers</h2>
+      <p>The veteran-resource and long-term care insurance questions are optional. Their answers stay in the component’s memory while it is open and clear when it reloads. Answers are omitted from MCP requests, model-context updates, discussion briefs and consultation URLs. You can choose “Prefer not to say” or skip the questions.</p>
+
+      <h2>Downloads and consultation links</h2>
+      <p>A discussion brief contains the selected services and hypothetical visits. A download happens at your request through your browser or the ChatGPT host. You control the downloaded file’s retention.</p>
+      <p>The consultation button opens <a href="https://cal.com/firstlight/consultation">Cal.com</a> at your request. The URL contains no planner selections. Cal.com and the care team handle information you choose to enter on that page under their own practices. The same applies when you independently contact FirstLight through its website.</p>
+
+      <h2>Hosting, providers and technical information</h2>
+      <p>Cloudflare hosts the planner and processes technical connection information, such as IP addresses and request metadata, to deliver and secure the service. Worker request logging is disabled in this deployment. Cloudflare’s infrastructure processing and retention follow its policies and applicable service settings.</p>
+      <p>OpenAI processes the ChatGPT conversation, connected-tool interactions and host-mediated downloads under its policies and your account settings. Use the available OpenAI account controls for conversation retention and deletion.</p>
+      <p>The planner’s application code sets no advertising or analytics cookies and includes no analytics tracker. Provider and external-site cookie practices follow their respective policies. This Caliperworks policy page uses site font assets served by jsDelivr, whose delivery also involves technical connection information.</p>
+      <ul>
+        <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a></li>
+        <li><a href="https://openai.com/policies/privacy-policy/">OpenAI privacy policy</a></li>
+        <li><a href="https://cal.com/privacy">Cal.com privacy policy</a></li>
+        <li><a href="https://www.jsdelivr.com/terms/privacy-policy">jsDelivr privacy policy</a></li>
+        <li><a href="https://www.firstlighthomecare.com/privacy-policy/">FirstLight website privacy policy</a></li>
+      </ul>
+
+      <h2>Your controls and privacy questions</h2>
+      <p>You can edit your planning choices, skip optional questions or close the planner to clear its in-memory state. Keep any downloaded brief only for as long as you need it. Application input retention is limited to the processing described above. Provider-managed information is subject to the controls and retention practices of the relevant provider.</p>
+      <p>For technical privacy questions, including requests concerning information handled by Caliperworks, email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. For information supplied directly to the care team, use <a href="https://www.firstlighthomecare.com/home-healthcare-boston-northwest/contact-us/">FirstLight Boston Northwest’s contact page</a>.</p>
+      <p>Other Caliperworks website interactions, such as requesting a business review or scheduling a Caliperworks consultation, involve the information you choose to provide through those separate forms and services. This notice describes the FirstLight planner’s data flow.</p>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .privacy-copy h2 { margin-top: 2.5rem; margin-bottom: 1rem; color: #0f172a; font-size: 1.5rem; font-weight: 600; line-height: 1.35; }
+  .privacy-copy p + p { margin-top: 1rem; }
+  .privacy-copy a { color: #1d4ed8; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .privacy-copy a:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; }
+  .privacy-copy ul { margin-top: 1rem; padding-left: 1.5rem; list-style: disc; }
+</style>
