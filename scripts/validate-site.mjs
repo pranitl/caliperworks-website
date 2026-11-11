@@ -21,6 +21,8 @@ const gapReviewForm = read('src/components/GapReviewForm.astro');
 const siteData = read('src/data/site.ts');
 const searchBriefPage = read('src/pages/search-brief/[slug].astro');
 const searchBriefData = JSON.parse(read('src/data/searchBriefs.json'));
+const plannerPrivacy = read('src/pages/privacy/firstlight-care-planner/index.astro');
+const siteFooter = read('src/components/SiteFooter.astro');
 
 for (const anchor of ['starter', 'growth', 'max', 'voice-agents', 'ads-support']) {
   assert(pricingPage.includes(`id={plan.id}`) || pricingPage.includes(`id="${anchor}"`) || pricingPage.includes(`id={service.id}`), `Missing pricing anchor handling for "${anchor}"`);
@@ -54,5 +56,11 @@ for (const route of [
 ]) {
   assert(fs.existsSync(path.join(root, route)), `Missing required route file ${route}`);
 }
+
+assert(plannerPrivacy.includes('hideCalEmbed'), 'Privacy notice must disable the optional booking embed');
+assert(plannerPrivacy.includes('siteConfig.email'), 'Privacy contact must use the configured support address');
+assert(siteFooter.includes('/privacy/firstlight-care-planner/'), 'Expected a footer link to planner privacy');
+assert(siteData.includes("'/privacy/firstlight-care-planner/'"), 'Expected privacy notice in public routes');
+assert(read('public/llms.txt').includes('https://caliperworks.com/privacy/firstlight-care-planner/'), 'Expected privacy notice in public discovery links');
 
 console.log('validate-site: ok');
