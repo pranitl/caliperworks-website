@@ -58,6 +58,17 @@ Avoid copy that sounds inflated or pushy.
 - Avoid guarantees unless they are literally true and supportable.
 - Avoid vague AI claims that are not tied to a business workflow.
 
+For a final copy pass, use [Peter Yang’s no-ai-slop checklist](https://github.com/petergyang/no-ai-slop/blob/000650b156983f5159695b441477f4e63b25dc85/skills/no-ai-slop/SKILL.md) as an editing reference. Keep the site’s direct tone. Say what the reader gets and what the button does. Swap vague claims for concrete examples, cut lines another agency could use unchanged, and label examples and results accurately.
+
+## Home-care sample PDF
+
+The report page and downloadable PDF use reviewed public evidence in
+`src/data/homeCareSample.json`. Update the data and regenerate the PDF with
+`python scripts/render-home-care-sample.py` (requires Python with ReportLab).
+The renderer does not fetch sources or produce comparative findings. Review the
+source pages, date the observations, and keep fictional agency assumptions
+separate. This sample does not measure Google organic or Maps positions.
+
 ## Personalized Search Briefs
 
 Account-specific QR destinations live at `/search-brief/[slug]/`. Their content is defined in
@@ -97,3 +108,16 @@ Reusable landing content should live outside `src/pages/` so Astro does not expo
 The proposed service-specific notice is at `/privacy/firstlight-care-planner/`. It describes the deployed care planner’s input processing, browser-local resource answers, brief downloads, consultation links and infrastructure metadata. The page disables the optional Cal.com embed and uses the existing site shell.
 
 Before publishing, the service owner should review the stated technical/support roles and provider disclosures. After approval and production publication, verify the live page and update the care planner’s listing privacy URL to `https://caliperworks.com/privacy/firstlight-care-planner/`. The separate care-planner repository owns that listing and its hosted `/privacy` route.
+
+## Home-care search review
+
+The home-care industry page and the homepage reuse the gap-review form and Pages Function.
+The home-care form asks for the agency website and a work email. A service or market focus
+is optional. The notification and email fallback identify the page the request came from.
+The linked sample report uses a fictional agency and does not present live search results.
+
+Run `npm run validate:gap-review` for the request, routing, and fallback checks with mocked
+Telegram. Before merging, use the Cloudflare Pages preview with test-only Telegram configuration:
+submit one labeled test request from the home-care page and check the optional focus and source
+in the test chat. In a preview without the Telegram secrets, check that the form offers a
+pre-filled email instead of showing success. Do not send a test from production.

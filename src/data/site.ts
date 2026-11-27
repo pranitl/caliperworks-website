@@ -1,3 +1,5 @@
+import { homeCareSampleHref } from '../lib/gap-review.js';
+
 export interface FaqEntry {
   question: string;
   answer: string;
@@ -352,37 +354,42 @@ export const industries: Industry[] = [
   {
     slug: 'home-care-agencies',
     name: 'Home Care Agencies',
-    teaser: 'Support caregiver recruitment and client intake with faster lead qualification and stronger search visibility.',
-    metaTitle: 'AI Automation for Home Care Agencies | Caliperworks',
+    teaser: 'Help local families find the care you offer and make it easier for them to reach your team.',
+    metaTitle: 'Local SEO for Home Care Agencies | Caliperworks',
     metaDescription:
-      'Caliperworks helps home care agencies improve caregiver recruitment and client intake with AI automation, voice agents, and SEO systems.',
-    heroTitle: 'AI automation for home care agencies',
+      'Get a short report on how families find your home care agency on Google, what they see on your website, and what to change first.',
+    heroTitle: 'Can local families find your home care agency on Google?',
     heroDescription:
-      'Build a smoother client-intake and caregiver-recruitment pipeline with AI systems that qualify leads, tighten follow-up, and support local search growth.',
+      'Send us your website. We’ll email a short report on what families find when they search for care near them, what your site is missing, and what we’d change first. No call needed.',
     summary:
-      'Home care agencies need reliable lead qualification on both the client and caregiver side. AI helps keep intake moving without creating more admin burden.',
+      'A family looking for dementia care wants to know whether you serve their town, what a visit includes, and who to call.',
     painPoints: [
-      'Incoming client inquiries and caregiver applications often wait too long for a response.',
-      'Marketing generates demand, but intake teams still have to chase missing information manually.',
-      'Local search competition makes it hard to rank for priority care services and locations.',
+      'A family searches for dementia care near home. Your site lists dementia care in a bullet, but there’s no page answering their questions.',
+      'A family lands on your site but can’t tell whether you serve their town or what happens when they call.',
+      'A family calls during a shift change and reaches voicemail. Who calls them back?',
     ],
     automations: [
-      'Voice or intake agents that gather the right details before staff step in.',
-      'Lead-routing workflows for applications, consultations, and service-area fit.',
-      'SEO execution focused on high-intent care services and local coverage.',
+      'Look at the Google results for a care service you offer in an area you serve.',
+      'Compare your site with the pages families are likely to find and flag one change worth making first.',
+      'Check how a family would reach your team from that page.',
     ],
-    relatedServices: ['ai-process-audits', 'voice-agents', 'seo-and-ads-automation'],
+    relatedServices: ['seo-and-ads-automation', 'voice-agents', 'ai-process-audits'],
     relatedCaseStudies: ['home-care-agency-seo-growth'],
     faq: [
       {
-        question: 'Can AI help on both caregiver recruitment and client intake?',
+        question: 'What will I get in the home-care search review?',
         answer:
-          'Yes. Both flows usually share the same operational bottlenecks: delayed follow-up, missing information, and inconsistent routing.',
+          'A short report by email: the searches we checked, what your site leaves unanswered, and the first change we’d make. You don’t have to book a call.',
       },
       {
-        question: 'Does this work for multi-location agencies?',
+        question: 'What if my franchisor controls our website?',
         answer:
-          'Yes. Multi-location agencies benefit from tighter local SEO coverage and more consistent intake rules across locations.',
+          'You can still ask for a review. We’ll point out which changes your local office could make and which to take to corporate.',
+      },
+      {
+        question: 'Can I request a review for a multi-location agency?',
+        answer:
+          'Yes. If there’s a branch you want us to look at, mention it in the form. Otherwise, we’ll pick a starting point from your website.',
       },
     ],
   },
@@ -539,39 +546,34 @@ export const industries: Industry[] = [
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'home-care-agency-seo-growth',
-    title: 'Home care agency search growth and lead qualification',
-    teaser: 'A home care agency improved engaged traffic and kept qualified intake moving with search and automation support.',
-    metaTitle: 'Home Care Agency SEO and Intake Case Study | Caliperworks',
+    title: 'FirstLight Boston Northwest: local search and client intake',
+    teaser: 'How Caliperworks worked with FirstLight Home Care of Boston Northwest on local search and built a separate intake workflow.',
+    metaTitle: 'FirstLight Boston Northwest Home Care SEO Case Study | Caliperworks',
     metaDescription:
-      'See how a home care agency used Caliperworks to improve search visibility, grow engaged traffic, and strengthen lead qualification workflows.',
-    heroTitle: 'Home care agency search growth and intake automation',
+      'See how Caliperworks approached local search for FirstLight Home Care of Boston Northwest and separately built a workflow for new care inquiries.',
+    heroTitle: 'Local search and client intake at FirstLight Boston Northwest',
     heroDescription:
-      'A home care agency needed more qualified visibility in search and a better way to keep new client intake moving once leads arrived.',
-    clientLabel: 'Home care agency',
-    location: 'Boston',
+      'FirstLight Home Care of Boston Northwest wanted local families to find the care they needed and reach the right person when they called.',
+    clientLabel: 'FirstLight Home Care of Boston Northwest',
+    location: 'Greater Boston, Massachusetts',
     industrySlug: 'home-care-agencies',
     serviceSlugs: ['seo-and-ads-automation', 'voice-agents'],
     challenge: [
-      'The agency needed stronger local visibility for its highest-value search terms.',
-      'New inquiries required faster qualification and follow-up to avoid leakage.',
-      'Marketing and intake were operating as separate systems instead of one pipeline.',
+      'Families searching for in-home care tend to look for both a specific service and a provider near them.',
+      'Once families called, the local office needed a way to get inquiries to the right person.',
     ],
     solution: [
-      'Built an SEO execution plan around high-intent service terms and visibility gaps.',
-      'Improved the conversion path from search traffic into lead qualification.',
-      'Added automation support so intake moved faster after the first touch.',
+      'Local search: compared competing pages and wrote briefs around the questions families were asking about care services in the agency’s market.',
+      'Intake: built an inbound voice agent that answers new calls and starts a warm transfer to staff. That was a separate workflow from the search work.',
     ],
     results: [
-      { value: '199%', label: 'increase in engaged visitors', kind: 'outcome' },
-      { value: 'Page 1', label: 'visibility for top keywords', kind: 'outcome' },
-      { value: 'Lead qualification', label: 'workflow support added', kind: 'implementation' },
+      { value: 'Local search', label: 'Research and content briefs for care-service searches.', kind: 'implementation' },
+      { value: 'Client intake', label: 'Inbound call answering and warm transfer to staff.', kind: 'implementation' },
     ],
-    quote:
-      "Our monthly engaged visitors shot up by 199% and we're finally holding Page 1 rankings for our top keywords. The automated lead qualification has transformed how we handle new client intake.",
     takeaways: [
-      'Search growth works better when the intake path is ready to absorb new demand.',
-      'Operational follow-through matters as much as rankings for service businesses.',
-      'Local service pages and qualification workflows can compound each other.',
+      'Start with a care service and a market so you can see what local families actually find.',
+      'Confirm who can publish website changes before planning implementation.',
+      'Track search visibility and intake separately. Visits alone do not tell you how many families asked for care.',
     ],
   },
   {
@@ -723,6 +725,7 @@ export function caseStudyHref(slug: string) {
 }
 
 export const publicRoutes = [
+  homeCareSampleHref,
   '/',
   '/privacy/firstlight-care-planner/',
   '/use-cases/',

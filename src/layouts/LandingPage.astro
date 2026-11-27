@@ -3,7 +3,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import GapReviewForm from '../components/GapReviewForm.astro';
 import Layout from './Layout.astro';
-import { gapReviewHref } from '../data/site';
+import { caseStudyHref, caseStudyMap, gapReviewHref } from '../data/site';
 import {
   homeContactSection,
   homeFaqs,
@@ -17,6 +17,7 @@ import {
 } from '../data/home';
 import { organizationSchema, websiteSchema } from '../lib/seo';
 
+const firstLight = caseStudyMap['home-care-agency-seo-growth'];
 const structuredData = [organizationSchema(), websiteSchema()];
 ---
 
@@ -51,6 +52,13 @@ const structuredData = [organizationSchema(), websiteSchema()];
         </div>
       </div>
     </section>
+
+    <div class="border-b border-slate-200 px-6 py-5">
+      <div class="mx-auto flex max-w-7xl flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Featured work</span>
+        <a href={caseStudyHref(firstLight.slug)} class="text-sm font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 hover:text-blue-800">{firstLight.clientLabel}: local search and intake →</a>
+      </div>
+    </div>
 
     <section id={homeSectionIds.solutions} class="px-6 py-20 md:py-28">
       <div class="mx-auto max-w-7xl">
@@ -99,7 +107,7 @@ const structuredData = [organizationSchema(), websiteSchema()];
             <div class="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Selected outcomes</div>
             <h2 class="mt-5 max-w-md text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-5xl">Proof stays tied to its context.</h2>
           </div>
-          <div class="grid gap-px border-y border-slate-300 bg-slate-300 md:grid-cols-3">
+          <div class="grid gap-px border-y border-slate-300 bg-slate-300 md:grid-cols-2">
             {homeTestimonials.map((result) => (
               <a href={result.href} class="bg-[#fbfaf7] p-7 transition-colors hover:bg-white">
                 <div class="text-4xl font-semibold tracking-[-0.04em] text-slate-950">{result.metric}</div>

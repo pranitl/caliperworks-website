@@ -52,12 +52,6 @@ export const homeSolutions = [
 
 export const homeTestimonials = [
   {
-    metric: '199%',
-    label: 'increase in engaged visitors',
-    context: 'Home care search and intake engagement',
-    href: '/case-studies/home-care-agency-seo-growth/',
-  },
-  {
     metric: '25%',
     label: 'more leads on the same spend',
     context: 'HVAC paid-demand and qualification workflow',

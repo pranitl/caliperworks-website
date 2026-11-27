@@ -1,0 +1,59 @@
+{
+  "title": "Dementia home care in Scottsdale",
+  "date": "November 27, 2026",
+  "summary": "Give families a way to tell whether your agency can cover the hours they need. Use the dementia care page to explain what visits include, then link to a respite page that spells out short breaks and overnight options, if offered.",
+  "scope": "CaliperWorks reviewed five public service pages from four providers surfaced by two Scottsdale-focused web searches. The websites and observations are real. Sonoran Path Home Care and its starting page are fictional; none of the providers listed commissioned this report.",
+  "limits": "This is a content comparison, not a location-controlled Google organic or Maps ranking report. No rankings, search volume, traffic or lead figures were measured.",
+  "queries": [
+    "dementia home care Scottsdale Arizona in home dementia caregivers Scottsdale Alzheimer overnight care agency",
+    "respite care Scottsdale Arizona in home dementia respite caregivers Scottsdale"
+  ],
+  "pages": [
+    {
+      "provider": "Heritage Home Care",
+      "service": "Dementia care",
+      "url": "https://www.heritagehomecareaz.com/alzheimers-dementia-care/",
+      "evidence": "Publishes a four-hour minimum visit and a 12-hour weekly minimum. Gives example weekly schedules and explains what the in-home assessment covers."
+    },
+    {
+      "provider": "Cypress HomeCare Solutions",
+      "service": "Dementia care",
+      "url": "https://cypresshomecare.com/services/alzheimers-dementia-care/",
+      "evidence": "Links from its dementia page to separate respite, overnight and 24-hour care pages. Families can explore the coverage they need without knowing the service name first."
+    },
+    {
+      "provider": "Seniors Helping Seniors",
+      "service": "Dementia care",
+      "url": "https://shsscottsdaleaz.com/care-services/dementia-care",
+      "evidence": "Names the areas served, explains how caregivers are matched and describes when non-medical home support may not be enough."
+    },
+    {
+      "provider": "Wellby",
+      "service": "Respite care",
+      "url": "https://www.wellbyhealth.com/en/locations/scottsdale/respite-care",
+      "evidence": "Answers questions about a one-off weekend and awake overnight coverage. Says most respite starts with a four-hour minimum."
+    },
+    {
+      "provider": "Heritage Home Care",
+      "service": "Respite care",
+      "url": "https://www.heritagehomecareaz.com/respite-care/",
+      "evidence": "Walks families through dates, routines, cost and family updates. Discusses one-time and recurring help without promising staff availability."
+    }
+  ],
+  "comparison": "The three dementia pages explain the service, but each makes a different decision easier: weekly coverage, overnight options or caregiver fit. Both respite pages focus on the handoff. Wellby answers schedule questions directly; Heritage shows what information to bring and what to confirm. Put the schedule answers on the page where families are already deciding whether to call.",
+  "baseline": "Assume Sonoran Path mentions dementia support in a list of services, with no dedicated page, scheduling details or clear handoff to respite care. This is an example starting point, not a finding about a real website.",
+  "plan": [
+    {
+      "name": "Publish one dementia care page",
+      "detail": "Use /services/dementia-care/ and name Scottsdale in the title. Near the top, explain what a visit can include, where you serve, the minimum visit (if any) and how the first call works. Link to it from Services."
+    },
+    {
+      "name": "Give respite its own page if you offer it",
+      "detail": "Answer whether you can cover one afternoon, a weekend or an overnight. State what the caregiver can help with while family is away, and link the two pages. Confirm actual staffing and minimums before publishing."
+    }
+  ],
+  "draftTitle": "In-home dementia care in Scottsdale",
+  "draftCopy": "Tell us which hours are hardest to cover and what your loved one needs during that time. We’ll explain what a caregiver can help with at home and check whether we can cover those hours.",
+  "draftButton": "Ask about care hours",
+  "measurement": "Once the page is indexed, check impressions and clicks for relevant queries to that URL in Search Console. Separately track calls and forms that start from the page. Compare equal periods and report low counts as directional."
+}
