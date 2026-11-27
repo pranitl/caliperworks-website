@@ -3,10 +3,12 @@ import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Layout from '../../../layouts/Layout.astro';
+import report from '../../../data/homeCareSample.json';
 import { gapReviewSources, homeCareReviewLabel, homeCareSampleHref } from '../../../lib/gap-review.js';
 import { breadcrumbSchema } from '../../../lib/seo';
 
 const homeCareHref = '/industries/home-care-agencies/';
+const pdfHref = '/reports/scottsdale-home-care-search-sample.pdf';
 const reviewCta = { href: gapReviewSources.homeCare, label: homeCareReviewLabel };
 const crumbs = [
   { href: '/', label: 'Home' },
@@ -17,7 +19,7 @@ const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name:
 ---
 <Layout
   title="Sample Local Search Report for a Home Care Agency | Caliperworks"
-  description="See an example local search report for a fictional home care agency, including search terms, a page gap, and the first change we’d make."
+  description="Download a two-page home care search review comparing five real Scottsdale service pages. See the source links, findings and draft page copy."
   canonicalPath={homeCareSampleHref}
   structuredData={structuredData}
   hideCalEmbed
@@ -28,47 +30,55 @@ const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name:
       <Breadcrumbs items={crumbs} />
       <header class="mt-10 border-b border-slate-300 pb-9">
         <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Sample local search report</p>
-        <h1 class="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">Dementia home care in Scottsdale</h1>
-        <p class="mt-4 text-lg font-semibold">Prepared for Sonoran Path Home Care</p>
-        <p class="mt-2 text-sm leading-6 text-slate-600">Fictional agency and example findings. This shows the format of the report, not a live Google search or a client result.</p>
+        <h1 class="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">{report.title}</h1>
+        <p class="mt-4 text-lg leading-7 text-slate-700">{report.scope}</p>
+        <a href={pdfHref} class="mt-5 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900">Open sample report (PDF)</a>
+        <p class="mt-2 text-sm text-slate-600">2 pages · Research reviewed {report.date}</p>
       </header>
 
       <section class="mt-9 border border-slate-300 bg-[#f2f6fb] p-6 md:p-8" aria-labelledby="first-change">
         <h2 id="first-change" class="text-2xl font-semibold tracking-tight">The first change we’d make</h2>
-        <p class="mt-3 leading-7 text-slate-700">Give dementia care its own page and link to it from Services. Right now it’s one bullet, so a family can’t tell whether the agency serves Scottsdale, what a visit includes, or how to ask about care.</p>
+        <p class="mt-3 leading-7 text-slate-700">{report.summary}</p>
       </section>
 
-      <section class="mt-10" aria-labelledby="searches">
-        <h2 id="searches" class="text-2xl font-semibold tracking-tight">Searches we’d check</h2>
-        <ul class="mt-3 list-disc space-y-1 pl-5 leading-7 text-slate-700">
-          <li>“in-home dementia care Scottsdale”</li>
-          <li>“Alzheimer’s home care near me” with Scottsdale as the search location</li>
+      <section class="mt-10" aria-labelledby="comparison">
+        <h2 id="comparison" class="text-2xl font-semibold tracking-tight">What the published pages answer</h2>
+        <ul class="mt-4 divide-y divide-slate-200 border-y border-slate-200">
+          {report.pages.map((page) => (
+            <li class="py-4 leading-7 text-slate-700">
+              <a href={page.url} class="font-semibold text-blue-800 underline underline-offset-4">{page.provider}: {page.service}</a>
+              <p>{page.evidence}</p>
+            </li>
+          ))}
         </ul>
-        <p class="mt-4 leading-7 text-slate-700">In a live review, we’d note the location and date. We’d look at where your agency appears, which pages come up, and what those pages tell families.</p>
-      </section>
-
-      <section class="mt-10" aria-labelledby="page-gap">
-        <h2 id="page-gap" class="text-2xl font-semibold tracking-tight">What’s missing from the page</h2>
-        <p class="mt-3 leading-7 text-slate-700">In this example, the results include pages that name Scottsdale and explain what happens on a first visit. Sonoran Path has that information spread between a general services page and its contact page. A family has to piece it together.</p>
+        <p class="mt-4 leading-7 text-slate-700">{report.comparison}</p>
       </section>
 
       <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="draft">
-        <h2 id="draft" class="text-2xl font-semibold tracking-tight">What we’d put on the new page</h2>
-        <dl class="mt-4 space-y-4 leading-7 text-slate-700">
-          <div><dt class="font-semibold text-slate-950">Page title</dt><dd>In-Home Dementia Care in Scottsdale | Sonoran Path</dd></div>
-          <div><dt class="font-semibold text-slate-950">Opening</dt><dd>“We help Scottsdale families care for a loved one with dementia at home. Tell us what a typical day looks like and where you need help. We’ll talk through the support we can provide.”</dd></div>
-          <div><dt class="font-semibold text-slate-950">What the page should answer</dt><dd>What does a visit include? Can the same caregiver return? Which hours and neighborhoods does the agency cover? Confirm the answers with the care team before publishing.</dd></div>
-          <div><dt class="font-semibold text-slate-950">Button</dt><dd>“Ask about dementia care,” linking to the existing inquiry form.</dd></div>
+        <h2 id="draft" class="text-2xl font-semibold tracking-tight">What Sonoran Path could publish</h2>
+        <p class="mt-3 leading-7 text-slate-700">{report.baseline}</p>
+        <ol class="mt-4 list-decimal space-y-3 pl-5 leading-7 text-slate-700">
+          {report.plan.map((item) => <li><strong>{item.name}.</strong> {item.detail}</li>)}
+        </ol>
+        <dl class="mt-5 space-y-3 leading-7 text-slate-700">
+          <div><dt class="font-semibold text-slate-950">Page title</dt><dd>{report.draftTitle}</dd></div>
+          <div><dt class="font-semibold text-slate-950">Opening</dt><dd>{report.draftCopy}</dd></div>
+          <div><dt class="font-semibold text-slate-950">Button</dt><dd>{report.draftButton}</dd></div>
         </dl>
       </section>
 
-      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="measure">
-        <h2 id="measure" class="text-2xl font-semibold tracking-tight">How we’d check whether it helped</h2>
-        <p class="mt-3 leading-7 text-slate-700">After the page is indexed, check whether it appears for relevant searches in Search Console. Track clicks from search separately from calls or forms that start on the page. If the counts are small, give it more time before drawing a conclusion.</p>
+      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="method">
+        <h2 id="method" class="text-2xl font-semibold tracking-tight">How we did the review</h2>
+        <ul class="mt-3 list-disc space-y-1 pl-5 leading-7 text-slate-700">
+          {report.queries.map((query) => <li>{query}</li>)}
+        </ul>
+        <p class="mt-4 leading-7 text-slate-700">{report.limits}</p>
+        <h3 class="mt-5 text-lg font-semibold">How we’d check whether it helped</h3>
+        <p class="mt-2 leading-7 text-slate-700">{report.measurement}</p>
       </section>
 
       <div class="mt-12 border-t border-slate-300 pt-7">
-        <p class="mb-4 text-sm leading-6 text-slate-600">Want a report on your own website? Send us the link and we’ll reply by email.</p>
+        <p class="mb-4 text-sm leading-6 text-slate-600">Want a review of your own website? Send us the link and we’ll reply by email.</p>
         <a href={gapReviewSources.homeCare} class="inline-flex rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeCareReviewLabel}</a>
       </div>
     </article>
