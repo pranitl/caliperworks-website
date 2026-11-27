@@ -59,42 +59,122 @@
   "aeo": {
     "title": "Where AI answers mention you",
     "label": "Simulated AEO example",
-    "scope": "These figures are invented for Sonoran Path and two unnamed example competitors. No live AI answers were collected. The public website research on pages 1–2 is real.",
+    "scope": "All AI results and excerpts in this section are simulated for Sonoran Path and two fictional competitors. The provider website comparison on page 1 is real.",
     "engines": [
       "ChatGPT",
-      "Gemini",
-      "Perplexity"
+      "Google AI Overviews",
+      "Bing AI Mode"
     ],
     "repeats": 2,
     "prompts": [
       {
         "question": "Who offers in-home dementia care in Scottsdale?",
-        "mentions": 4,
         "competitorMentions": 7,
-        "ownCitations": 2
+        "results": [
+          {
+            "mentions": 2,
+            "ownCitations": 1
+          },
+          {
+            "mentions": 1,
+            "ownCitations": 1
+          },
+          {
+            "mentions": 1,
+            "ownCitations": 0
+          }
+        ]
       },
       {
         "question": "Which Scottsdale agencies offer non-medical care for someone with Alzheimer’s?",
-        "mentions": 3,
         "competitorMentions": 7,
-        "ownCitations": 1
+        "results": [
+          {
+            "mentions": 1,
+            "ownCitations": 1
+          },
+          {
+            "mentions": 1,
+            "ownCitations": 0
+          },
+          {
+            "mentions": 1,
+            "ownCitations": 0
+          }
+        ]
       },
       {
         "question": "Who offers awake overnight dementia care at home in Scottsdale?",
-        "mentions": 1,
         "competitorMentions": 7,
-        "ownCitations": 0
+        "results": [
+          {
+            "mentions": 1,
+            "ownCitations": 0
+          },
+          {
+            "mentions": 0,
+            "ownCitations": 0
+          },
+          {
+            "mentions": 0,
+            "ownCitations": 0
+          }
+        ]
       },
       {
         "question": "Where can I find a one-off weekend respite caregiver in Scottsdale?",
-        "mentions": 1,
         "competitorMentions": 6,
-        "ownCitations": 0
+        "results": [
+          {
+            "mentions": 0,
+            "ownCitations": 0
+          },
+          {
+            "mentions": 1,
+            "ownCitations": 0
+          },
+          {
+            "mentions": 0,
+            "ownCitations": 0
+          }
+        ]
       }
     ],
     "finding": "The example agency appears in 7 of 12 answers to broad dementia-care questions but only 2 of 12 about overnight or weekend coverage. None of the 12 scheduling answers links to its website.",
     "action": "If you offer overnight or weekend care, publish which shifts you cover, any visit minimum, and how families can check availability. Link that information from the dementia care page. The real provider pages on page 1 show what this looks like.",
     "retest": "After the pages are indexed, repeat the same prompts on the same engines. Compare mentions and direct website citations on the two scheduling questions first. Keep the tracked competitors fixed.",
-    "methodUrl": "https://github.com/elmohq/elmo#how-elmo-measures-ai-visibility"
-  }
+    "methodUrl": "https://github.com/elmohq/elmo#how-elmo-measures-ai-visibility",
+    "surfaceNote": "These are AI answer surfaces. This example does not show standard Google or Bing search rankings or Google Maps positions. In a live check, record when an AI answer does not appear separately from a visible answer that omits the brand.",
+    "examples": [
+      {
+        "engine": 0,
+        "prompt": 0,
+        "excerpt": "Sonoran Path Home Care is one option to ask about in-home dementia support in Scottsdale.",
+        "source": "sonoranpath.example/dementia-care",
+        "brandNamed": true,
+        "siteCited": true,
+        "note": "The answer names the correct agency and the source link points to its own domain."
+      },
+      {
+        "engine": 1,
+        "prompt": 2,
+        "excerpt": "Desert Lantern Care is an option to ask about for awake overnight support.",
+        "source": "desertlantern.example/overnight-care",
+        "brandNamed": false,
+        "siteCited": false,
+        "note": "The answer names and links a fictional competitor, not Sonoran Path."
+      },
+      {
+        "engine": 2,
+        "prompt": 1,
+        "excerpt": "Sonoran Path Home Care is one Scottsdale provider families could contact about non-medical support.",
+        "source": "No source link shown",
+        "brandNamed": true,
+        "siteCited": false,
+        "note": "The agency name appears, but the answer does not link to the agency website."
+      }
+    ]
+  },
+  "evidenceHeadline": "Two provider pages make scheduling concrete.",
+  "evidenceHighlight": "Heritage lists a four-hour minimum for dementia visits and 12 hours per week. Wellby says most respite shifts start at four hours and explains awake overnight care."
 }

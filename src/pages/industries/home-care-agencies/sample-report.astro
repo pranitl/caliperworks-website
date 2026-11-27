@@ -11,9 +11,12 @@ const homeCareHref = '/industries/home-care-agencies/';
 const aeo = report.aeo;
 const answersPerPrompt = aeo.engines.length * aeo.repeats;
 const answerCount = aeo.prompts.length * answersPerPrompt;
-const mentionCount = aeo.prompts.reduce((sum, prompt) => sum + prompt.mentions, 0);
+const promptMentions = (prompt: (typeof aeo.prompts)[number]) => prompt.results.reduce((sum, result) => sum + result.mentions, 0);
+const promptCitations = (prompt: (typeof aeo.prompts)[number]) => prompt.results.reduce((sum, result) => sum + result.ownCitations, 0);
+const mentionCount = aeo.prompts.reduce((sum, prompt) => sum + promptMentions(prompt), 0);
+const engineAnswers = aeo.prompts.length * aeo.repeats;
 const trackedMentions = mentionCount + aeo.prompts.reduce((sum, prompt) => sum + prompt.competitorMentions, 0);
-const citationCount = aeo.prompts.reduce((sum, prompt) => sum + prompt.ownCitations, 0);
+const citationCount = aeo.prompts.reduce((sum, prompt) => sum + promptCitations(prompt), 0);
 const percent = (part: number, whole: number) => `${Math.round(100 * part / whole)}%`;
 const pdfHref = '/reports/scottsdale-home-care-search-sample.pdf';
 const reviewCta = { href: gapReviewSources.homeCare, label: homeCareReviewLabel };
@@ -40,12 +43,15 @@ const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name:
         <h1 class="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">{report.title}</h1>
         <p class="mt-4 text-lg leading-7 text-slate-700">{report.scope}</p>
         <a href={pdfHref} class="mt-5 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900">Open sample report (PDF)</a>
-        <p class="mt-2 text-sm text-slate-600">3 pages · Research reviewed {report.date}</p>
+        <p class="mt-2 text-sm text-slate-600">4 pages · Research reviewed {report.date}</p>
       </header>
 
       <section class="mt-9 border border-slate-300 bg-[#f2f6fb] p-6 md:p-8" aria-labelledby="first-change">
-        <h2 id="first-change" class="text-2xl font-semibold tracking-tight">The first change we’d make</h2>
-        <p class="mt-3 leading-7 text-slate-700">{report.summary}</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Real website evidence / {report.pages.length} pages</p>
+        <h2 id="first-change" class="mt-2 text-2xl font-semibold tracking-tight">{report.evidenceHeadline}</h2>
+        <p class="mt-3 leading-7 text-slate-700">{report.evidenceHighlight}</p>
+        <p class="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Simulated AI finding / not a live result</p>
+        <p class="mt-2 leading-7 text-slate-700">7 of 12 broad-care answers named the agency vs. 2 of 12 scheduling answers.</p>
       </section>
 
       <section class="mt-10" aria-labelledby="comparison">
@@ -61,8 +67,73 @@ const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name:
         <p class="mt-4 leading-7 text-slate-700">{report.comparison}</p>
       </section>
 
+      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="aeo-title">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">{aeo.label}</p>
+        <h2 id="aeo-title" class="mt-2 text-2xl font-semibold tracking-tight">{aeo.title}</h2>
+        <p class="mt-3 leading-7 text-slate-700">{aeo.scope.replace('on page 1', 'above')}</p>
+        <p class="mt-3 text-sm leading-6 text-slate-600">{aeo.prompts.length} prompts × {aeo.engines.length} engines × {aeo.repeats} repeats = {answerCount} simulated answers. Example engines: {aeo.engines.join(', ')}.</p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-lg bg-[#edf4fb] p-4">
+            <dt class="font-semibold">AI visibility</dt><dd class="text-2xl font-semibold">{percent(mentionCount, answerCount)}</dd>
+            <dd class="text-sm text-slate-600">{mentionCount}/{answerCount} answers named you</dd>
+          </div>
+          <div class="rounded-lg bg-[#edf4fb] p-4">
+            <dt class="font-semibold">Share of voice</dt><dd class="text-2xl font-semibold">{percent(mentionCount, trackedMentions)}</dd>
+            <dd class="text-sm text-slate-600">{mentionCount}/{trackedMentions} tracked brand mentions</dd>
+          </div>
+          <div class="rounded-lg bg-[#edf4fb] p-4">
+            <dt class="font-semibold">Website citations</dt><dd class="text-2xl font-semibold">{citationCount}/{answerCount}</dd>
+            <dd class="text-sm text-slate-600">Answers that linked to your site</dd>
+          </div>
+        </dl>
+        <h3 class="mt-6 text-lg font-semibold">By AI surface</h3>
+        <table class="mt-2 w-full table-fixed border-collapse text-left text-sm leading-5">
+          <caption class="sr-only">Simulated mentions and website citations by AI surface</caption>
+          <thead><tr class="border-b border-slate-300"><th scope="col" class="w-[60%] pb-2 pr-2">AI surface</th><th scope="col" class="w-[20%] pb-2 pr-1">Brand named</th><th scope="col" class="w-[20%] pb-2">Site cited</th></tr></thead>
+          <tbody>{aeo.engines.map((engine, i) => (
+            <tr class="border-b border-slate-200 align-top">
+              <th scope="row" class="py-3 pr-3 font-normal">{engine}</th>
+              <td class="py-3">{aeo.prompts.reduce((sum, p) => sum + p.results[i].mentions, 0)}/{engineAnswers}</td>
+              <td class="py-3">{aeo.prompts.reduce((sum, p) => sum + p.results[i].ownCitations, 0)}/{engineAnswers}</td>
+            </tr>
+          ))}</tbody>
+        </table>
+        <h3 class="mt-6 text-lg font-semibold">By prompt</h3>
+        <table class="mt-5 w-full table-fixed border-collapse text-left text-sm leading-5">
+          <caption class="sr-only">Simulated mentions and website citations by prompt</caption>
+          <thead><tr class="border-b border-slate-300"><th scope="col" class="w-[60%] pb-2 pr-2">Example prompt</th><th scope="col" class="w-[20%] pb-2 pr-1">Brand named</th><th scope="col" class="w-[20%] pb-2">Site cited</th></tr></thead>
+          <tbody>{aeo.prompts.map((prompt) => (
+            <tr class="border-b border-slate-200 align-top">
+              <th scope="row" class="py-3 pr-3 font-normal">{prompt.question}</th>
+              <td class="py-3">{promptMentions(prompt)}/{answersPerPrompt}</td>
+              <td class="py-3">{promptCitations(prompt)}/{answersPerPrompt}</td>
+            </tr>
+          ))}</tbody>
+        </table>
+        <p class="mt-4 font-semibold leading-7">{aeo.finding}</p>
+        <a href={aeo.methodUrl} class="mt-3 inline-block text-sm font-semibold text-blue-800 underline underline-offset-4">Elmo metric definitions</a>
+      </section>
+
+      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="example-title">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Simulated results / validation examples</p>
+        <h2 id="example-title" class="mt-2 text-2xl font-semibold tracking-tight">Check the answer and the link</h2>
+        <p class="mt-3 leading-7 text-slate-700">{aeo.surfaceNote}</p>
+        {aeo.examples.map((example) => (
+          <article class="mt-5 border-t border-slate-200 pt-4">
+            <h3 class="text-lg font-semibold">{aeo.engines[example.engine]}</h3>
+            <p class="mt-1 text-sm text-slate-600">Prompt: {aeo.prompts[example.prompt].question}</p>
+            <blockquote class="mt-2 leading-7">“{example.excerpt}”</blockquote>
+            <p class="mt-2 break-all text-sm text-slate-600">Shown source: {example.source}</p>
+            <p class="mt-2 text-sm font-semibold text-blue-800">Brand named: {example.brandNamed ? 'Yes' : 'No'} · Agency site cited: {example.siteCited ? 'Yes' : 'No'}</p>
+            <p class="mt-1 text-sm text-slate-600">{example.note}</p>
+          </article>
+        ))}
+        <p class="mt-4 leading-7 text-slate-700">{aeo.retest}</p>
+      </section>
+
       <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="draft">
         <h2 id="draft" class="text-2xl font-semibold tracking-tight">What Sonoran Path could publish</h2>
+        <p class="mt-3 leading-7 text-slate-700">{report.summary}</p>
         <p class="mt-3 leading-7 text-slate-700">{report.baseline}</p>
         <ol class="mt-4 list-decimal space-y-3 pl-5 leading-7 text-slate-700">
           {report.plan.map((item) => <li><strong>{item.name}.</strong> {item.detail}</li>)}
@@ -82,42 +153,6 @@ const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name:
         <p class="mt-4 leading-7 text-slate-700">{report.limits}</p>
         <h3 class="mt-5 text-lg font-semibold">How we’d check whether it helped</h3>
         <p class="mt-2 leading-7 text-slate-700">{report.measurement}</p>
-      </section>
-
-      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="aeo-title">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">{aeo.label}</p>
-        <h2 id="aeo-title" class="mt-2 text-2xl font-semibold tracking-tight">{aeo.title}</h2>
-        <p class="mt-3 leading-7 text-slate-700">{aeo.scope.replace('The public website research on pages 1–2 is real.', 'The public website research above is real.')}</p>
-        <p class="mt-3 text-sm leading-6 text-slate-600">{aeo.prompts.length} prompts × {aeo.engines.length} engines × {aeo.repeats} repeats = {answerCount} simulated answers. Example engines: {aeo.engines.join(', ')}.</p>
-        <dl class="mt-4 grid gap-3 sm:grid-cols-3">
-          <div class="rounded-lg bg-[#edf4fb] p-4">
-            <dt class="font-semibold">AI visibility</dt><dd class="text-2xl font-semibold">{percent(mentionCount, answerCount)}</dd>
-            <dd class="text-sm text-slate-600">{mentionCount}/{answerCount} answers named you</dd>
-          </div>
-          <div class="rounded-lg bg-[#edf4fb] p-4">
-            <dt class="font-semibold">Share of voice</dt><dd class="text-2xl font-semibold">{percent(mentionCount, trackedMentions)}</dd>
-            <dd class="text-sm text-slate-600">{mentionCount}/{trackedMentions} tracked brand mentions</dd>
-          </div>
-          <div class="rounded-lg bg-[#edf4fb] p-4">
-            <dt class="font-semibold">Website citations</dt><dd class="text-2xl font-semibold">{citationCount}/{answerCount}</dd>
-            <dd class="text-sm text-slate-600">Answers that linked to your site</dd>
-          </div>
-        </dl>
-        <table class="mt-5 w-full table-fixed border-collapse text-left text-sm leading-5">
-          <caption class="sr-only">Simulated mentions and website citations by prompt</caption>
-          <thead><tr class="border-b border-slate-300"><th scope="col" class="w-[60%] pb-2 pr-2">Example prompt</th><th scope="col" class="w-[20%] pb-2 pr-1">Brand named</th><th scope="col" class="w-[20%] pb-2">Site cited</th></tr></thead>
-          <tbody>{aeo.prompts.map((prompt) => (
-            <tr class="border-b border-slate-200 align-top">
-              <th scope="row" class="py-3 pr-3 font-normal">{prompt.question}</th>
-              <td class="py-3">{prompt.mentions}/{answersPerPrompt}</td>
-              <td class="py-3">{prompt.ownCitations}/{answersPerPrompt}</td>
-            </tr>
-          ))}</tbody>
-        </table>
-        <p class="mt-4 font-semibold leading-7">{aeo.finding}</p>
-        <p class="mt-3 leading-7 text-slate-700">{aeo.action.replace('on page 1', 'above')}</p>
-        <p class="mt-3 leading-7 text-slate-700">{aeo.retest}</p>
-        <a href={aeo.methodUrl} class="mt-3 inline-block text-sm font-semibold text-blue-800 underline underline-offset-4">Elmo metric definitions</a>
       </section>
 
       <div class="mt-12 border-t border-slate-300 pt-7">
