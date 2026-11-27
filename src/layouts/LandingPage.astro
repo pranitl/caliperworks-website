@@ -1,4 +1,5 @@
 ---
+import SeoAuditFeature from '../components/SeoAuditFeature.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import GapReviewForm from '../components/GapReviewForm.astro';
@@ -52,6 +53,8 @@ const structuredData = [organizationSchema(), websiteSchema()];
         </div>
       </div>
     </section>
+
+    <SeoAuditFeature featured heading="What would you fix first to show up in local search?" />
 
     <div class="border-b border-slate-200 px-6 py-5">
       <div class="mx-auto flex max-w-7xl flex-wrap items-baseline gap-x-3 gap-y-1">

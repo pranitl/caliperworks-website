@@ -1,59 +1,1031 @@
 {
-  "title": "Dementia home care in Scottsdale",
+  "title": "Local SEO audit: dementia care in Scottsdale",
   "date": "November 27, 2026",
-  "summary": "Give families a way to tell whether your agency can cover the hours they need. Use the dementia care page to explain what visits include, then link to a respite page that spells out short breaks and overnight options, if offered.",
-  "scope": "CaliperWorks reviewed five public service pages from four providers surfaced by two Scottsdale-focused web searches. The websites and observations are real. Sonoran Path Home Care and its starting page are fictional; none of the providers listed commissioned this report.",
-  "limits": "This is a content comparison, not a location-controlled Google organic or Maps ranking report. No rankings, search volume, traffic or lead figures were measured.",
-  "queries": [
-    "dementia home care Scottsdale Arizona in home dementia caregivers Scottsdale Alzheimer overnight care agency",
-    "respite care Scottsdale Arizona in home dementia respite caregivers Scottsdale"
-  ],
   "pages": [
     {
-      "provider": "Heritage Home Care",
-      "service": "Dementia care",
-      "url": "https://www.heritagehomecareaz.com/alzheimers-dementia-care/",
-      "evidence": "Publishes a four-hour minimum visit and a 12-hour weekly minimum. Gives example weekly schedules and explains what the in-home assessment covers."
+      "kicker": "01 / Scottsdale, Arizona",
+      "title": "Executive Summary",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "Build one dementia care page that tells families what a visit includes, what hours you can cover and how to check availability. Make overnight and weekend care easy to find if you offer them."
+        },
+        {
+          "kind": "cards",
+          "cards": [
+            [
+              "5 pages",
+              "Real competitor research",
+              "Five service pages from four Scottsdale-area providers."
+            ],
+            [
+              "2 / 12",
+              "Simulated Google top 10",
+              "Two example queries place the website in the first ten results."
+            ],
+            [
+              "3 / 24",
+              "Simulated scheduling mentions",
+              "Overnight and weekend prompts name the agency three times. None links to its site."
+            ]
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "What makes this the first move"
+        },
+        {
+          "kind": "body",
+          "text": "Heritage makes minimum hours explicit. Wellby answers whether an awake overnight shift or one-off weekend is possible. In the fictional example, the agency has a general services page and leaves families to ask by phone. Give them enough detail to decide whether to call."
+        },
+        {
+          "kind": "subhead",
+          "text": "What to do first"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Order",
+            "Work",
+            "Why now"
+          ],
+          "rows": [
+            [
+              "01",
+              "Check that Google can index the main care page; fix any confirmed blockers.",
+              "A page can’t compete if Google can’t index it."
+            ],
+            [
+              "02",
+              "Publish the dementia care page, then make respite hours and availability easy to find.",
+              "It answers the questions the general services page leaves open."
+            ],
+            [
+              "03",
+              "Align the Google Business Profile and retest after launch.",
+              "Families should see consistent services, hours and contact details."
+            ]
+          ],
+          "widths": [
+            0.1,
+            0.46,
+            0.44
+          ]
+        },
+        {
+          "kind": "note",
+          "text": "Evidence key: competitor pages and observations are real. Sonoran Path Home Care, the ranks, AI results and site or listing examples are fictional. No private accounts were accessed. Nothing here measures a real agency’s ranking, traffic or leads."
+        }
+      ]
     },
     {
-      "provider": "Cypress HomeCare Solutions",
-      "service": "Dementia care",
-      "url": "https://cypresshomecare.com/services/alzheimers-dementia-care/",
-      "evidence": "Links from its dementia page to separate respite, overnight and 24-hour care pages. Families can explore the coverage they need without knowing the service name first."
+      "kicker": "02 / Real website evidence",
+      "title": "Competitors",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "What can a family decide before picking up the phone? Two Scottsdale-focused web searches surfaced these five pages, reviewed on November 27, 2026."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Provider / source page",
+            "What the page lets families decide"
+          ],
+          "rows": [
+            [
+              {
+                "text": "Heritage Home Care · Dementia care",
+                "url": "https://www.heritagehomecareaz.com/alzheimers-dementia-care/"
+              },
+              "Publishes a four-hour minimum visit and a 12-hour weekly minimum. Gives example weekly schedules and explains what the in-home assessment covers."
+            ],
+            [
+              {
+                "text": "Cypress HomeCare Solutions · Dementia care",
+                "url": "https://cypresshomecare.com/services/alzheimers-dementia-care/"
+              },
+              "Links from its dementia page to separate respite, overnight and 24-hour care pages. Families can explore the coverage they need without knowing the service name first."
+            ],
+            [
+              {
+                "text": "Seniors Helping Seniors · Dementia care",
+                "url": "https://shsscottsdaleaz.com/care-services/dementia-care"
+              },
+              "Names the areas served, explains how caregivers are matched and describes when non-medical home support may not be enough."
+            ],
+            [
+              {
+                "text": "Wellby · Respite care",
+                "url": "https://www.wellbyhealth.com/en/locations/scottsdale/respite-care"
+              },
+              "Answers questions about a one-off weekend and awake overnight coverage. Says most respite starts with a four-hour minimum."
+            ],
+            [
+              {
+                "text": "Heritage Home Care · Respite care",
+                "url": "https://www.heritagehomecareaz.com/respite-care/"
+              },
+              "Walks families through dates, routines, cost and family updates. Discusses one-time and recurring help without promising staff availability."
+            ]
+          ],
+          "widths": [
+            0.36,
+            0.64
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "What stands out"
+        },
+        {
+          "kind": "body",
+          "text": "Heritage explains minimum hours. Cypress connects dementia care to overnight and round-the-clock options. Seniors Helping Seniors describes caregiver matching and when home support may not be enough. On respite, Wellby answers schedule questions; Heritage explains what to bring to the first conversation."
+        },
+        {
+          "kind": "note",
+          "text": "This compares the linked pages, not care quality or the providers’ entire websites."
+        },
+        {
+          "kind": "subhead",
+          "text": "Searches used to find these pages"
+        },
+        {
+          "kind": "note",
+          "text": "dementia home care Scottsdale Arizona in home dementia caregivers Scottsdale Alzheimer overnight care agency"
+        },
+        {
+          "kind": "note",
+          "text": "respite care Scottsdale Arizona in home dementia respite caregivers Scottsdale"
+        }
+      ]
     },
     {
-      "provider": "Seniors Helping Seniors",
-      "service": "Dementia care",
-      "url": "https://shsscottsdaleaz.com/care-services/dementia-care",
-      "evidence": "Names the areas served, explains how caregivers are matched and describes when non-medical home support may not be enough."
+      "kicker": "03 / Simulated search positions",
+      "title": "Rankings",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "Where does the website show up, and where does the agency listing show up? Standard Google results and Google Maps answer different questions."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "ID",
+            "Example query",
+            "Google web",
+            "Google Maps",
+            "Agency page"
+          ],
+          "rows": [
+            [
+              "R01",
+              "home care Scottsdale",
+              "8",
+              "7",
+              "Home"
+            ],
+            [
+              "R02",
+              "in-home senior care Scottsdale",
+              "10",
+              "9",
+              "Home"
+            ],
+            [
+              "R03",
+              "non-medical home care Scottsdale",
+              "13",
+              "12",
+              "Services"
+            ],
+            [
+              "R04",
+              "in-home dementia care Scottsdale",
+              "12",
+              "8",
+              "Services"
+            ],
+            [
+              "R05",
+              "Alzheimer’s home care Scottsdale",
+              "17",
+              "11",
+              "Services"
+            ],
+            [
+              "R06",
+              "dementia caregivers Scottsdale",
+              "19",
+              "15",
+              "Services"
+            ],
+            [
+              "R07",
+              "respite care Scottsdale",
+              "15",
+              "13",
+              "Services"
+            ],
+            [
+              "R08",
+              "in-home respite care Scottsdale",
+              "18",
+              "16",
+              "Services"
+            ],
+            [
+              "R09",
+              "overnight dementia care Scottsdale",
+              "Not seen",
+              "18",
+              "None"
+            ],
+            [
+              "R10",
+              "weekend respite care Scottsdale",
+              "Not seen",
+              "Not seen",
+              "None"
+            ],
+            [
+              "R11",
+              "short-shift respite care Scottsdale",
+              "Not seen",
+              "Not seen",
+              "None"
+            ],
+            [
+              "R12",
+              "24-hour home care Scottsdale",
+              "Not seen",
+              "20",
+              "None"
+            ]
+          ],
+          "widths": [
+            0.082,
+            0.446,
+            0.152,
+            0.164,
+            0.156
+          ]
+        },
+        {
+          "kind": "body",
+          "text": "In this example, the website is top 10 for 2 of 12 searches and Maps is top 10 for 3 of 12. For the three dementia queries (R04–R06), Google web finds only the general Services page. The site is not seen for R09–R11: overnight or short-shift and weekend respite."
+        },
+        {
+          "kind": "note",
+          "text": "Illustrative snapshot: central Scottsdale, AZ; mobile; English. “Not seen” means not in the first 20 on that surface, not unindexed. In a live audit record date, device, location, depth, ranking URL and matched listing."
+        },
+        {
+          "kind": "subhead",
+          "text": "Maps changes with the search location"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Example query",
+            "Central",
+            "North",
+            "South"
+          ],
+          "widths": [
+            0.52,
+            0.16,
+            0.16,
+            0.16
+          ],
+          "rows": [
+            [
+              "R04 · In-home dementia care",
+              "8",
+              "13",
+              "Not seen"
+            ],
+            [
+              "R07 · Respite care",
+              "13",
+              "Not seen",
+              "16"
+            ],
+            [
+              "R09 · Overnight dementia care",
+              "18",
+              "Not seen",
+              "Not seen"
+            ]
+          ]
+        },
+        {
+          "kind": "note",
+          "text": "Simulated positions. Use the same reference points when retesting. A wider service area on the listing does not guarantee visibility at each point."
+        }
+      ]
     },
     {
-      "provider": "Wellby",
-      "service": "Respite care",
-      "url": "https://www.wellbyhealth.com/en/locations/scottsdale/respite-care",
-      "evidence": "Answers questions about a one-off weekend and awake overnight coverage. Says most respite starts with a four-hour minimum."
+      "kicker": "03 / Rankings continued · simulated",
+      "title": "AI answers by question",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "16 unbranded prompts × 3 AI surfaces × 2 repeats = 96 simulated answers. A brand mention and a link to the agency’s site are counted separately."
+        },
+        {
+          "kind": "cards",
+          "cards": [
+            [
+              "25%",
+              "AI visibility",
+              "24 of 96 answers name Sonoran Path."
+            ],
+            [
+              "25%",
+              "Share of voice",
+              "24 of 96 tracked brand mentions, across the agency and two fictional peers."
+            ],
+            [
+              "5 / 96",
+              "Website citations",
+              "Answers that link to the agency’s site."
+            ]
+          ]
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "ID",
+            "Example prompt",
+            "Named",
+            "Linked"
+          ],
+          "rows": [
+            [
+              "A01",
+              "Who offers in-home dementia care in Scottsdale?",
+              "4/6",
+              "2/6"
+            ],
+            [
+              "A02",
+              "Which Scottsdale agencies offer non-medical Alzheimer’s care?",
+              "3/6",
+              "1/6"
+            ],
+            [
+              "A03",
+              "Who helps with dementia routines and personal care at home?",
+              "3/6",
+              "1/6"
+            ],
+            [
+              "A04",
+              "Can I get a consistent dementia caregiver in Scottsdale?",
+              "2/6",
+              "0/6"
+            ],
+            [
+              "A05",
+              "Who offers awake overnight dementia care in Scottsdale?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A06",
+              "Where can I get one weekend of respite care in Scottsdale?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A07",
+              "Who can help with evening dementia care at home?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A08",
+              "Are short overnight respite shifts available in Scottsdale?",
+              "0/6",
+              "0/6"
+            ],
+            [
+              "A09",
+              "How do I arrange a first in-home dementia care visit in Scottsdale?",
+              "2/6",
+              "1/6"
+            ],
+            [
+              "A10",
+              "What should I tell a care coordinator before the first visit?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A11",
+              "Can a Scottsdale agency match a caregiver before care starts?",
+              "2/6",
+              "0/6"
+            ],
+            [
+              "A12",
+              "Can I try dementia home care for one afternoon in Scottsdale?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A13",
+              "What are minimum visit hours for dementia home care in Scottsdale?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A14",
+              "How much does in-home respite care cost in Scottsdale?",
+              "1/6",
+              "0/6"
+            ],
+            [
+              "A15",
+              "How do I compare non-medical dementia care rates in Scottsdale?",
+              "0/6",
+              "0/6"
+            ],
+            [
+              "A16",
+              "Can I book occasional respite instead of weekly visits?",
+              "1/6",
+              "0/6"
+            ]
+          ],
+          "widths": [
+            0.082,
+            0.7,
+            0.108,
+            0.11
+          ]
+        },
+        {
+          "kind": "note",
+          "text": "Broad dementia (A01–A04): 12/24 named, 4/24 linked. Overnight and weekends (A05–A08): 3/24 named, 0/24 linked. These are illustrative counts, not a forecast."
+        }
+      ]
     },
     {
-      "provider": "Heritage Home Care",
-      "service": "Respite care",
-      "url": "https://www.heritagehomecareaz.com/respite-care/",
-      "evidence": "Walks families through dates, routines, cost and family updates. Discusses one-time and recurring help without promising staff availability."
+      "kicker": "03 / Rankings continued · simulated",
+      "title": "AI answers by engine",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "AI surface",
+            "Agency named",
+            "Agency site linked"
+          ],
+          "rows": [
+            [
+              "ChatGPT",
+              "11 / 32",
+              "3 / 32"
+            ],
+            [
+              "Google AI Overviews",
+              "8 / 32",
+              "2 / 32"
+            ],
+            [
+              "Bing AI Mode",
+              "5 / 32",
+              "0 / 32"
+            ]
+          ],
+          "widths": [
+            0.48,
+            0.22,
+            0.3
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Check the original answer and its source"
+        },
+        {
+          "kind": "example",
+          "title": "ChatGPT",
+          "question": "Who offers in-home dementia care in Scottsdale?",
+          "excerpt": "Sonoran Path Home Care is one option to ask about in-home dementia support in Scottsdale.",
+          "source": "sonoranpath.example/dementia-care",
+          "named": true,
+          "cited": true,
+          "note": "The answer names the correct agency and the source link points to its own domain."
+        },
+        {
+          "kind": "example",
+          "title": "Google AI Overviews",
+          "question": "Who offers awake overnight dementia care at home in Scottsdale?",
+          "excerpt": "Desert Lantern Care is an option to ask about for awake overnight support.",
+          "source": "desertlantern.example/overnight-care",
+          "named": false,
+          "cited": false,
+          "note": "The answer names and links a fictional competitor, not Sonoran Path."
+        },
+        {
+          "kind": "example",
+          "title": "Bing AI Mode",
+          "question": "Which Scottsdale agencies offer non-medical care for someone with Alzheimer’s?",
+          "excerpt": "Sonoran Path Home Care is one Scottsdale provider families could contact about non-medical support.",
+          "source": "No source link shown",
+          "named": true,
+          "cited": false,
+          "note": "The agency name appears, but the answer does not link to the agency website."
+        },
+        {
+          "kind": "note",
+          "text": "Excerpts and .example links are invented. A live check stores prompt, engine, date, setup, answer and exact links. Track “no AI answer” and failed runs separately from answers that omit the brand. AI results are not organic or Maps rankings."
+        }
+      ]
+    },
+    {
+      "kicker": "04 / What to publish",
+      "title": "Strategic Content Gaps",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "Start with the questions families need answered before they call. Each idea below connects a real provider example to a gap in the simulated rankings or AI results. It does not predict a ranking lift."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Question families ask",
+            "Evidence and gap",
+            "What to publish"
+          ],
+          "rows": [
+            [
+              "Can you help at home with dementia?",
+              "R04–R06 lead only to Services. Heritage and Seniors Helping Seniors explain routines, fit and next steps.",
+              "Create /services/dementia-care/. Explain visit tasks, how caregivers are matched, areas served and the first call."
+            ],
+            [
+              "Can you cover a night or weekend?",
+              "R09–R11 are outside the web top 20. A05–A08 produce no site links. Wellby explains awake shifts; Heritage explains handoff.",
+              "Create or expand /services/respite-care/. List actual shifts, minimums, notice and how to check availability."
+            ],
+            [
+              "What does it cost? Can I start small?",
+              "A13–A16 have 3/24 mentions and no site links. Heritage states visit and weekly minimums.",
+              "Add a cost and minimums section. Explain what affects a quote. Use only rates the agency approves."
+            ],
+            [
+              "What happens after I call?",
+              "A09–A12 have 6/24 mentions and one site link. Heritage and Seniors Helping Seniors outline how care starts.",
+              "Add a first-visit checklist. Link it from the dementia page and from Contact."
+            ]
+          ],
+          "widths": [
+            0.23,
+            0.36,
+            0.41
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Example opening for the dementia care page"
+        },
+        {
+          "kind": "body",
+          "text": "“Tell us which hours are hardest to cover and what your loved one needs during that time. We’ll explain what a caregiver can help with at home and check whether we can cover those hours.”"
+        },
+        {
+          "kind": "note",
+          "text": "Suggested button: Ask about care hours. Confirm staffing, visit lengths and prices before publishing. Skip neighborhood pages that repeat the same information."
+        }
+      ]
+    },
+    {
+      "kicker": "05 / Illustrative findings and owner checks",
+      "title": "Business Profile & Technical SEO",
+      "blocks": [
+        {
+          "kind": "lead",
+          "text": "Fix confirmed blockers before evaluating a new page. The examples below are checks to run, not results from a real crawl or account."
+        },
+        {
+          "kind": "subhead",
+          "text": "Google Business Profile (the Maps listing)"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Example status",
+            "What to check or fix"
+          ],
+          "rows": [
+            [
+              "Illustrative: respite missing; hours disagree",
+              "Confirm what the agency actually offers. Add respite if available, match staffed phone hours to the site and verify the main category, phone and website. Add holiday hours as needed."
+            ],
+            [
+              "Public checks: reviews and local listings",
+              "Check review recency and replies, recent photos, and consistent name, phone and URL in relevant directories. Look for real referral links instead of buying listings."
+            ],
+            [
+              "Owner access needed",
+              "Confirm verification, service areas and address eligibility. Hide the address if customers don’t visit it. Record available profile calls and website clicks; don’t treat them as bookings."
+            ]
+          ],
+          "widths": [
+            0.3,
+            0.7
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Can Google find and use the page?"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Example status",
+            "Fix and verification"
+          ],
+          "rows": [
+            [
+              "Illustrative: 2 links to a retired URL",
+              "Update internal links. Redirect the old URL only when a relevant replacement exists. Recrawl and confirm the destination returns HTTP 200."
+            ],
+            [
+              "Illustrative: 1 care page points to Services as the preferred URL",
+              "Use Search Console to inspect index status and Google’s chosen URL. Check for unintended noindex or crawl blocks. Align the canonical URL, sitemap and internal links."
+            ],
+            [
+              "Check: hard to find from Services",
+              "Make the service page reachable on mobile through a crawlable link. Check the title, main heading, rendered copy and sitemap entry."
+            ],
+            [
+              "Check: slow page or broken inquiry path",
+              "Use real-user Core Web Vitals where available and a lab test to diagnose. Test the phone link and form on mobile. Check that any structured data matches visible content."
+            ]
+          ],
+          "widths": [
+            0.3,
+            0.7
+          ]
+        },
+        {
+          "kind": "note",
+          "text": "A crawlable page is not necessarily indexed. Google’s AI features use the usual search fundamentals; they do not require special AI schema."
+        }
+      ]
+    },
+    {
+      "kicker": "06 / What to do and how to check it",
+      "title": "Recommended Actions",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "When / owner",
+            "Action",
+            "Check it worked"
+          ],
+          "rows": [
+            [
+              "Week 1 · Web lead",
+              "Check index status and repair broken paths or the wrong preferred URL if found. Save a 12-query Google and Maps baseline, a 16-prompt AI baseline, and current site performance.",
+              "URL Inspection and a recrawl show the intended page and working path."
+            ],
+            [
+              "Weeks 1–2 · Care lead + writer",
+              "Publish the dementia page with visit tasks, minimums and first-call steps. Link to it from Services.",
+              "Check indexing, then impressions and clicks for R04–R06 and answer coverage for A01–A04."
+            ],
+            [
+              "Weeks 2–3 · Care lead + writer",
+              "Update respite with confirmed overnight or weekend coverage, notice and minimums. Add cost and first-visit answers.",
+              "Retest R09–R11 and A05–A08; track mentions and links separately. Track calls and forms that start on those pages."
+            ],
+            [
+              "Weeks 2–4 · Listing owner",
+              "Confirm Business Profile details, service area and website link.",
+              "Compare available Business Profile interactions and matched-location Maps checks."
+            ]
+          ],
+          "widths": [
+            0.2,
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Check again after 30 days"
+        },
+        {
+          "kind": "body",
+          "text": "Once the pages are indexed, compare equal time periods. Keep search setup, AI prompts, engines and tracked peers fixed. Lead with Search Console impressions and clicks, not position alone. Separate search exposure, AI links and completed inquiries. If counts are low, report direction without claiming the changes caused it."
+        },
+        {
+          "kind": "subhead",
+          "text": "References for the audit method"
+        },
+        {
+          "kind": "links",
+          "items": [
+            {
+              "text": "Google local rankings",
+              "url": "https://support.google.com/business/answer/7091"
+            },
+            {
+              "text": "Business Profile service areas",
+              "url": "https://support.google.com/business/answer/9157481"
+            },
+            {
+              "text": "Google SEO Starter Guide",
+              "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+            },
+            {
+              "text": "URL Inspection",
+              "url": "https://support.google.com/webmasters/answer/9012289"
+            },
+            {
+              "text": "Search Console performance",
+              "url": "https://support.google.com/webmasters/answer/17010961"
+            },
+            {
+              "text": "Core Web Vitals",
+              "url": "https://developers.google.com/search/docs/appearance/core-web-vitals"
+            },
+            {
+              "text": "Google AI features",
+              "url": "https://developers.google.com/search/docs/appearance/ai-features"
+            },
+            {
+              "text": "Elmo metric definitions",
+              "url": "https://github.com/elmohq/elmo#how-elmo-measures-ai-visibility"
+            }
+          ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Want a review of your website?",
+          "pdfOnly": true
+        },
+        {
+          "kind": "links",
+          "items": [
+            {
+              "text": "Request a local search review",
+              "url": "https://caliperworks.com/industries/home-care-agencies/#search-review"
+            },
+            {
+              "text": "Book a discovery call",
+              "url": "https://app.cal.com/caliperworks/30min"
+            }
+          ],
+          "pdfOnly": true
+        }
+      ]
     }
   ],
-  "comparison": "The three dementia pages explain the service, but each makes a different decision easier: weekly coverage, overnight options or caregiver fit. Both respite pages focus on the handoff. Wellby answers schedule questions directly; Heritage shows what information to bring and what to confirm. Put the schedule answers on the page where families are already deciding whether to call.",
-  "baseline": "Assume Sonoran Path mentions dementia support in a list of services, with no dedicated page, scheduling details or clear handoff to respite care. This is an example starting point, not a finding about a real website.",
-  "plan": [
-    {
-      "name": "Publish one dementia care page",
-      "detail": "Use /services/dementia-care/ and name Scottsdale in the title. Near the top, explain what a visit can include, where you serve, the minimum visit (if any) and how the first call works. Link to it from Services."
-    },
-    {
-      "name": "Give respite its own page if you offer it",
-      "detail": "Answer whether you can cover one afternoon, a weekend or an overnight. State what the caregiver can help with while family is away, and link the two pages. Confirm actual staffing and minimums before publishing."
+  "simulation": {
+    "engines": [
+      "ChatGPT",
+      "Google AI Overviews",
+      "Bing AI Mode"
+    ],
+    "repeats": 2,
+    "cells": "Per prompt, each engine cell is [brand mentions, answers with site link].",
+    "promptCounts": [
+      [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ],
+    "trackedBrandMentions": {
+      "Sonoran Path": 24,
+      "Example peer A": 42,
+      "Example peer B": 30
     }
-  ],
-  "draftTitle": "In-home dementia care in Scottsdale",
-  "draftCopy": "Tell us which hours are hardest to cover and what your loved one needs during that time. We’ll explain what a caregiver can help with at home and check whether we can cover those hours.",
-  "draftButton": "Ask about care hours",
-  "measurement": "Once the page is indexed, check impressions and clicks for relevant queries to that URL in Search Console. Separately track calls and forms that start from the page. Compare equal periods and report low counts as directional."
+  }
 }

@@ -1,6 +1,7 @@
 ---
 import type { UseCase } from '../../data/site';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SeoAuditFeature from '../../components/SeoAuditFeature.astro';
 import SectionCta from '../../components/SectionCta.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
@@ -48,6 +49,8 @@ const structuredData = breadcrumbSchema([
         </div>
       </div>
     </section>
+
+    {useCase.slug === 'local-visibility-growth' && <SeoAuditFeature heading="See how a search gap becomes a page plan" intro="The sample shows how we compare what families find, what competitors answer, and which page would help most." />}
 
     <section class="px-6 py-20 md:py-28">
       <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">

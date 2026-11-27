@@ -3,84 +3,100 @@ import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Layout from '../../../layouts/Layout.astro';
+import { calEmbed, createMailto } from '../../../data/site';
 import report from '../../../data/homeCareSample.json';
 import { gapReviewSources, homeCareReviewLabel, homeCareSampleHref } from '../../../lib/gap-review.js';
 import { breadcrumbSchema } from '../../../lib/seo';
 
-const homeCareHref = '/industries/home-care-agencies/';
+const bookingHref = new URL(calEmbed.link, calEmbed.origin).href;
+const emailHref = createMailto('Local SEO review');
 const pdfHref = '/reports/scottsdale-home-care-search-sample.pdf';
 const reviewCta = { href: gapReviewSources.homeCare, label: homeCareReviewLabel };
 const crumbs = [
   { href: '/', label: 'Home' },
-  { href: homeCareHref, label: 'Home Care Agencies' },
+  { href: '/industries/home-care-agencies/', label: 'Home Care Agencies' },
   { href: homeCareSampleHref, label: 'Sample report' },
 ];
 const structuredData = breadcrumbSchema(crumbs.map(({ href, label }) => ({ name: label, path: href })));
 ---
 <Layout
-  title="Sample Local Search Report for a Home Care Agency | Caliperworks"
-  description="Download a two-page home care search review comparing five real Scottsdale service pages. See the source links, findings and draft page copy."
+  title="Sample Local SEO Audit for Home Care Agencies | Caliperworks"
+  description="See an executive summary, real Scottsdale competitor research, simulated Google and AI visibility results, and a prioritized content and technical plan."
   canonicalPath={homeCareSampleHref}
   structuredData={structuredData}
   hideCalEmbed
 >
   <SiteHeader reviewCta={reviewCta} />
-  <main class="bg-[#fbfaf7] px-6 py-12 text-slate-950 md:py-20">
-    <article class="mx-auto max-w-3xl">
+  <main class="bg-[#fbfaf7] px-5 py-12 text-slate-950 sm:px-6 md:py-20">
+    <article class="mx-auto max-w-4xl">
       <Breadcrumbs items={crumbs} />
-      <header class="mt-10 border-b border-slate-300 pb-9">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Sample local search report</p>
+      <header class="mt-10 border-b border-slate-300 pb-8">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Sample audit · {report.date}</p>
         <h1 class="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">{report.title}</h1>
-        <p class="mt-4 text-lg leading-7 text-slate-700">{report.scope}</p>
-        <a href={pdfHref} class="mt-5 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900">Open sample report (PDF)</a>
-        <p class="mt-2 text-sm text-slate-600">2 pages · Research reviewed {report.date}</p>
+        <p class="mt-4 text-base leading-7 text-slate-700">The competitor research is real. The example agency, rankings and AI results are simulated.</p>
+        <a href={pdfHref} class="mt-5 inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900">Open sample audit (PDF, {report.pages.length} pages)</a>
       </header>
 
-      <section class="mt-9 border border-slate-300 bg-[#f2f6fb] p-6 md:p-8" aria-labelledby="first-change">
-        <h2 id="first-change" class="text-2xl font-semibold tracking-tight">The first change we’d make</h2>
-        <p class="mt-3 leading-7 text-slate-700">{report.summary}</p>
-      </section>
-
-      <section class="mt-10" aria-labelledby="comparison">
-        <h2 id="comparison" class="text-2xl font-semibold tracking-tight">What the published pages answer</h2>
-        <ul class="mt-4 divide-y divide-slate-200 border-y border-slate-200">
-          {report.pages.map((page) => (
-            <li class="py-4 leading-7 text-slate-700">
-              <a href={page.url} class="font-semibold text-blue-800 underline underline-offset-4">{page.provider}: {page.service}</a>
-              <p>{page.evidence}</p>
-            </li>
+      {report.pages.map((page, i) => (
+        <section class="mt-10 border-b border-slate-300 pb-8" aria-labelledby={`audit-part-${i}`}>
+          <p class="text-xs font-bold uppercase tracking-[0.13em] text-blue-700">{page.kicker}</p>
+          <h2 id={`audit-part-${i}`} class="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">{page.title}</h2>
+          {page.blocks.filter((b) => !('pdfOnly' in b && b.pdfOnly)).map((b) => (
+            b.kind === 'table' && b.headers && b.rows ? (
+              <div class="mt-4 overflow-x-auto" tabindex="0" role="region" aria-label={page.title + ': ' + b.headers.join(', ')}>
+                <table class="w-full min-w-[34rem] border-collapse text-left text-sm leading-6">
+                  <thead class="bg-[#edf4fb] text-slate-900"><tr>{b.headers.map((h) => <th scope="col" class="px-3 py-2">{h}</th>)}</tr></thead>
+                  <tbody>{b.rows.map((row) => (
+                    <tr class="border-b border-slate-200 align-top even:bg-white">
+                      {row.map((cell, j) => j === 0 ? (
+                        <th scope="row" class="px-3 py-2 font-semibold">{typeof cell === 'string' ? cell : <a href={cell.url} class="text-blue-800 underline underline-offset-4">{cell.text}</a>}</th>
+                      ) : (
+                        <td class="px-3 py-2">{typeof cell === 'string' ? cell : <a href={cell.url} class="text-blue-800 underline underline-offset-4">{cell.text}</a>}</td>
+                      ))}
+                    </tr>
+                  ))}</tbody>
+                </table>
+              </div>
+            ) : b.kind === 'cards' && b.cards ? (
+              <dl class="mt-4 grid gap-3 sm:grid-cols-3">
+                {b.cards.map(([value, label, detail]) => (
+                  <div class="rounded-lg bg-[#edf4fb] p-4">
+                    <dt class="text-sm font-bold text-blue-800">{label}</dt><dd class="text-2xl font-semibold">{value}</dd>
+                    <dd class="mt-1 text-sm leading-5 text-slate-600">{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : b.kind === 'example' ? (
+              <div class="mt-5 border-t border-slate-200 pt-4">
+                <h4 class="font-semibold">{b.title}</h4>
+                <p class="mt-1 text-sm text-slate-600">Prompt: {b.question}</p>
+                <blockquote class="mt-2 leading-7">“{b.excerpt}”</blockquote>
+                <p class="mt-2 break-words text-sm text-slate-600">Shown source: {b.source}</p>
+                <p class="mt-2 text-sm font-semibold text-blue-800">Brand named: {b.named ? 'Yes' : 'No'} · Agency site linked: {b.cited ? 'Yes' : 'No'}</p>
+                <p class="mt-1 text-sm text-slate-600">{b.note}</p>
+              </div>
+            ) : b.kind === 'links' && b.items ? (
+              <ul class="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+                {b.items.map((link) => <li><a href={link.url} class="font-semibold text-blue-800 underline underline-offset-4">{link.text}</a></li>)}
+              </ul>
+            ) : b.kind === 'subhead' ? (
+              <h3 class="mt-6 text-lg font-semibold">{b.text}</h3>
+            ) : (
+              <p class:list={['mt-3', b.kind === 'note' ? 'text-sm leading-6 text-slate-600' : 'leading-7 text-slate-800', b.kind === 'lead' && 'text-lg']}>{b.text}</p>
+            )
           ))}
-        </ul>
-        <p class="mt-4 leading-7 text-slate-700">{report.comparison}</p>
-      </section>
+        </section>
+      ))}
 
-      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="draft">
-        <h2 id="draft" class="text-2xl font-semibold tracking-tight">What Sonoran Path could publish</h2>
-        <p class="mt-3 leading-7 text-slate-700">{report.baseline}</p>
-        <ol class="mt-4 list-decimal space-y-3 pl-5 leading-7 text-slate-700">
-          {report.plan.map((item) => <li><strong>{item.name}.</strong> {item.detail}</li>)}
-        </ol>
-        <dl class="mt-5 space-y-3 leading-7 text-slate-700">
-          <div><dt class="font-semibold text-slate-950">Page title</dt><dd>{report.draftTitle}</dd></div>
-          <div><dt class="font-semibold text-slate-950">Opening</dt><dd>{report.draftCopy}</dd></div>
-          <div><dt class="font-semibold text-slate-950">Button</dt><dd>{report.draftButton}</dd></div>
-        </dl>
+      <section class="mt-9 rounded-xl border border-slate-300 bg-[#edf4fb] p-6 md:p-9" aria-labelledby="next-step">
+        <h2 id="next-step" class="text-2xl font-semibold tracking-tight sm:text-3xl">Find out what to fix first on your site</h2>
+        <p class="mt-3 max-w-2xl leading-7 text-slate-700">Send us your website. We’ll email a short review of what families find, what your pages leave unanswered, and the first change we’d make. If you’d rather talk, book a discovery call.</p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a href={gapReviewSources.homeCare} class="inline-flex rounded-lg bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeCareReviewLabel}</a>
+          <a href={bookingHref} class="text-sm font-bold text-blue-800 underline underline-offset-4">Book a discovery call</a>
+          <a href={emailHref} class="text-sm font-bold text-blue-800 underline underline-offset-4">Email us</a>
+        </div>
       </section>
-
-      <section class="mt-10 border-t border-slate-300 pt-8" aria-labelledby="method">
-        <h2 id="method" class="text-2xl font-semibold tracking-tight">How we did the review</h2>
-        <ul class="mt-3 list-disc space-y-1 pl-5 leading-7 text-slate-700">
-          {report.queries.map((query) => <li>{query}</li>)}
-        </ul>
-        <p class="mt-4 leading-7 text-slate-700">{report.limits}</p>
-        <h3 class="mt-5 text-lg font-semibold">How we’d check whether it helped</h3>
-        <p class="mt-2 leading-7 text-slate-700">{report.measurement}</p>
-      </section>
-
-      <div class="mt-12 border-t border-slate-300 pt-7">
-        <p class="mb-4 text-sm leading-6 text-slate-600">Want a review of your own website? Send us the link and we’ll reply by email.</p>
-        <a href={gapReviewSources.homeCare} class="inline-flex rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeCareReviewLabel}</a>
-      </div>
     </article>
   </main>
   <SiteFooter reviewCta={reviewCta} />

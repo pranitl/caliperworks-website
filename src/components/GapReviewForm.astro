@@ -1,6 +1,6 @@
 ---
 import { createMailto } from '../data/site';
-import { homeCareReviewLabel, homeCareSampleHref } from '../lib/gap-review.js';
+import { homeCareReviewLabel, homeCareSampleHref, homeCareSampleLabel } from '../lib/gap-review.js';
 
 interface Props {
   deliverables: readonly string[];
@@ -21,7 +21,7 @@ const inputClass = 'w-full rounded-lg border border-slate-300 bg-[#fbfaf7] px-4 
     <div class="mt-8 border-t border-slate-300">
       {deliverables.map((deliverable, index) => <div class="border-b border-slate-300 py-4 text-base leading-7 text-slate-700">{String(index + 1).padStart(2, '0')}&nbsp;&nbsp;{deliverable}</div>)}
     </div>
-    {isHomeCare && <a href={homeCareSampleHref} class="mt-5 inline-flex text-sm font-bold text-blue-800 underline underline-offset-4">Read a sample report</a>}
+    {isHomeCare && <a href={homeCareSampleHref} class="mt-5 inline-flex text-sm font-bold text-blue-800 underline underline-offset-4">{homeCareSampleLabel}</a>}
   </div>
 
   <div class="border border-slate-300 bg-white p-7 md:p-9">
