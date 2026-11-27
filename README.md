@@ -97,3 +97,15 @@ Reusable landing content should live outside `src/pages/` so Astro does not expo
 The proposed service-specific notice is at `/privacy/firstlight-care-planner/`. It describes the deployed care planner’s input processing, browser-local resource answers, brief downloads, consultation links and infrastructure metadata. The page disables the optional Cal.com embed and uses the existing site shell.
 
 Before publishing, the service owner should review the stated technical/support roles and provider disclosures. After approval and production publication, verify the live page and update the care planner’s listing privacy URL to `https://caliperworks.com/privacy/firstlight-care-planner/`. The separate care-planner repository owns that listing and its hosted `/privacy` route.
+
+## Home-care search review
+
+The home-care industry page and the homepage reuse the gap-review form and Pages Function.
+The home-care form asks for one care service and city, and the notification and email fallback
+identify the page the request came from.
+
+Run `npm run validate:gap-review` for the request, routing, and fallback checks with mocked
+Telegram. Before merging, use the Cloudflare Pages preview with test-only Telegram configuration:
+submit one labeled test request from the home-care page and check the service, city and source
+in the test chat. In a preview without the Telegram secrets, check that the form offers a
+pre-filled email instead of showing success. Do not send a test from production.
