@@ -68,6 +68,8 @@ The report page and downloadable PDF use reviewed public evidence in
 The renderer does not fetch sources or produce comparative findings. Review the
 source pages, date the observations, and keep fictional agency assumptions
 separate. This sample does not measure Google organic or Maps positions.
+Its AEO section uses explicitly simulated counts modeled on Elmo definitions;
+do not transfer metrics, account URLs or brand names from private exports.
 
 ## Personalized Search Briefs
 

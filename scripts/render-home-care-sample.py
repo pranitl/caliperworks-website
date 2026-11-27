@@ -47,7 +47,7 @@ def rule(pdf, y):
     pdf.setStrokeColor(RULE)
     pdf.line(M, y, M + W, y)
 
-def frame(pdf, page):
+def frame(pdf, page, pages):
     pdf.setFillColor(BLUE)
     pdf.rect(M, 750, 9, 9, fill=1, stroke=0)
     text(pdf, "CALIPERWORKS", M + 16, 760, size=10, leading=12, bold=True)
@@ -59,7 +59,7 @@ def frame(pdf, page):
     pdf.drawText(text_footer)
     pdf.setFont("Vera-Bold", 8)
     pdf.setFillColor(BLUE)
-    pdf.drawRightString(M + W, 29, f"0{page} / 02")
+    pdf.drawRightString(M + W, 29, f"{page:02d} / {pages:02d}")
 
 def render(data, output):
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -70,7 +70,8 @@ def render(data, output):
     pdf.setAuthor("CaliperWorks")
     pdf.setCreator("CaliperWorks")
     pdf.setSubject("Sample local search review with linked primary sources")
-    frame(pdf, 1)
+    pages = 3 if data.get("aeo") else 2
+    frame(pdf, 1, pages)
     label(pdf, f"MARKET REVIEW  /  {data['date'].upper()}", M, 724)
     y = text(pdf, data["title"], M, 703, size=30, leading=34, bold=True) - 11
     y = text(pdf, data["scope"], M, y, size=10, leading=14, color=MUTED) - 18
@@ -95,7 +96,7 @@ def render(data, output):
     text(pdf, data["comparison"], M, y-12, size=10.5, leading=14)
     pdf.showPage()
 
-    frame(pdf, 2)
+    frame(pdf, 2, pages)
     label(pdf, "PAGE PLAN  /  FICTIONAL AGENCY", M, 724)
     y = text(pdf, "What Sonoran Path could publish", M, 703, size=27, leading=32, bold=True) - 12
     y = text(pdf, data["baseline"], M, y, size=10.5, leading=15, color=MUTED) - 20
@@ -119,7 +120,56 @@ def render(data, output):
         y = text(pdf, f"• {query}", M, y, size=9, leading=12, color=MUTED) - 4
     text(pdf, data["limits"], M, y-6, size=9, leading=12, color=MUTED)
     pdf.showPage()
+    if data.get("aeo"):
+        render_aeo(pdf, data["aeo"], pages)
     pdf.save()
+
+
+def render_aeo(pdf, data, pages):
+    frame(pdf, 3, pages)
+    label(pdf, data["label"].upper(), M, 724)
+    y = text(pdf, data["title"], M, 703, size=27, leading=32, bold=True) - 10
+    y = text(pdf, data["scope"], M, y, size=10.5, leading=15, color=MUTED) - 7
+    per_prompt = len(data["engines"]) * data["repeats"]
+    prompts = data["prompts"]
+    total = len(prompts) * per_prompt
+    mentions = sum(p["mentions"] for p in prompts)
+    tracked = mentions + sum(p["competitorMentions"] for p in prompts)
+    citations = sum(p["ownCitations"] for p in prompts)
+    setup = f'{len(prompts)} prompts × {len(data["engines"])} engines × {data["repeats"]} repeats = {total} simulated answers. Example engines: ' + ", ".join(data["engines"]) + "."
+    y = text(pdf, setup, M, y, size=9.5, leading=13, color=MUTED) - 14
+    cards = [
+        (f"{mentions/total:.0%}", "AI visibility", f"{mentions}/{total} answers named you"),
+        (f"{mentions/tracked:.0%}", "Share of voice", f"{mentions}/{tracked} tracked brand mentions"),
+        (f"{citations}/{total}", "Website citations", "Answers that linked to your site"),
+    ]
+    for i, (value, name, detail) in enumerate(cards):
+        x = M + 174*i
+        pdf.setFillColor(PALE)
+        pdf.roundRect(x, y-70, 168, 70, 7, fill=1, stroke=0)
+        v = text(pdf, value, x+10, y-7, width=148, size=19, leading=23, bold=True)
+        v = text(pdf, name, x+10, v-1, width=148, size=9.5, leading=12, bold=True)
+        text(pdf, detail, x+10, v-3, width=148, size=8, leading=10, color=MUTED)
+    y -= 88
+    y = text(pdf, "Which questions expose the gap?", M, y, size=16, leading=21, bold=True) - 8
+    label(pdf, "EXAMPLE PROMPT", M+5, y)
+    label(pdf, "MENTIONED", M+349, y)
+    label(pdf, "SITE CITED", M+440, y)
+    y -= 15
+    for p in prompts:
+        rule(pdf, y)
+        y -= 7
+        down = text(pdf, p["question"], M+5, y, width=327, size=9.5, leading=13)
+        text(pdf, f'{p["mentions"]}/{per_prompt}', M+349, y, width=80, size=9.5, leading=13)
+        text(pdf, f'{p["ownCitations"]}/{per_prompt}', M+440, y, width=70, size=9.5, leading=13)
+        y = down-7
+    rule(pdf, y)
+    y = text(pdf, data["finding"], M, y-12, size=10.4, leading=14, bold=True) - 8
+    y = text(pdf, data["action"], M, y, size=10.4, leading=14) - 8
+    y = text(pdf, data["retest"], M, y, size=10.2, leading=14, color=MUTED) - 8
+    link = f'<a href={quoteattr(data["methodUrl"])} color="#1754A2"><u>Elmo metric definitions</u></a>'
+    text(pdf, link, M, y, width=W, markup=True, size=9, leading=12)
+    pdf.showPage()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)

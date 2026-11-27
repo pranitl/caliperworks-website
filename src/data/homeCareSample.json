@@ -55,5 +55,46 @@
   "draftTitle": "In-home dementia care in Scottsdale",
   "draftCopy": "Tell us which hours are hardest to cover and what your loved one needs during that time. We’ll explain what a caregiver can help with at home and check whether we can cover those hours.",
   "draftButton": "Ask about care hours",
-  "measurement": "Once the page is indexed, check impressions and clicks for relevant queries to that URL in Search Console. Separately track calls and forms that start from the page. Compare equal periods and report low counts as directional."
+  "measurement": "Once the page is indexed, check impressions and clicks for relevant queries to that URL in Search Console. Separately track calls and forms that start from the page. Compare equal periods and report low counts as directional.",
+  "aeo": {
+    "title": "Where AI answers mention you",
+    "label": "Simulated AEO example",
+    "scope": "These figures are invented for Sonoran Path and two unnamed example competitors. No live AI answers were collected. The public website research on pages 1–2 is real.",
+    "engines": [
+      "ChatGPT",
+      "Gemini",
+      "Perplexity"
+    ],
+    "repeats": 2,
+    "prompts": [
+      {
+        "question": "Who offers in-home dementia care in Scottsdale?",
+        "mentions": 4,
+        "competitorMentions": 7,
+        "ownCitations": 2
+      },
+      {
+        "question": "Which Scottsdale agencies offer non-medical care for someone with Alzheimer’s?",
+        "mentions": 3,
+        "competitorMentions": 7,
+        "ownCitations": 1
+      },
+      {
+        "question": "Who offers awake overnight dementia care at home in Scottsdale?",
+        "mentions": 1,
+        "competitorMentions": 7,
+        "ownCitations": 0
+      },
+      {
+        "question": "Where can I find a one-off weekend respite caregiver in Scottsdale?",
+        "mentions": 1,
+        "competitorMentions": 6,
+        "ownCitations": 0
+      }
+    ],
+    "finding": "The example agency appears in 7 of 12 answers to broad dementia-care questions but only 2 of 12 about overnight or weekend coverage. None of the 12 scheduling answers links to its website.",
+    "action": "If you offer overnight or weekend care, publish which shifts you cover, any visit minimum, and how families can check availability. Link that information from the dementia care page. The real provider pages on page 1 show what this looks like.",
+    "retest": "After the pages are indexed, repeat the same prompts on the same engines. Compare mentions and direct website citations on the two scheduling questions first. Keep the tracked competitors fixed.",
+    "methodUrl": "https://github.com/elmohq/elmo#how-elmo-measures-ai-visibility"
+  }
 }
