@@ -765,6 +765,25 @@
               "url": "https://github.com/elmohq/elmo#how-elmo-measures-ai-visibility"
             }
           ]
+        },
+        {
+          "kind": "subhead",
+          "text": "Want a review of your website?",
+          "pdfOnly": true
+        },
+        {
+          "kind": "links",
+          "items": [
+            {
+              "text": "Request a local search review",
+              "url": "https://caliperworks.com/industries/home-care-agencies/#search-review"
+            },
+            {
+              "text": "Book a discovery call",
+              "url": "https://app.cal.com/caliperworks/30min"
+            }
+          ],
+          "pdfOnly": true
         }
       ]
     }

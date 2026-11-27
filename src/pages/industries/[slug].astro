@@ -15,7 +15,7 @@ import {
   serviceMap,
 } from '../../data/site';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo';
-import { homeCareReviewLabel, homeCareSampleHref } from '../../lib/gap-review.js';
+import { homeCareReviewLabel, homeCareSampleHref, homeCareSampleLabel } from '../../lib/gap-review.js';
 
 export function getStaticPaths() {
   return industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
@@ -47,7 +47,7 @@ const structuredData = [
             {isHomeCare && (
               <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href="#search-review" class="inline-flex rounded-lg bg-blue-700 px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-slate-900">{homeCareReviewLabel}</a>
-                <a href={homeCareSampleHref} class="text-sm font-bold text-blue-800 underline underline-offset-4">Read a sample report</a>
+                <a href={homeCareSampleHref} class="text-sm font-bold text-blue-800 underline underline-offset-4">{homeCareSampleLabel}</a>
               </div>
             )}
           </div>
@@ -143,9 +143,9 @@ const structuredData = [
       <section id="search-review" class="scroll-mt-24 border-y border-slate-200 bg-[#f2f6fb] px-6 py-20 md:py-24" aria-label="Home-care search review">
         <div class="mx-auto max-w-7xl">
           <GapReviewForm variant="home-care" deliverables={[
-            'The Google searches we checked and what showed up.',
-            'A question your website could answer more clearly.',
-            'The first change we’d make, with an example.',
+            'What showed up when we searched for a care service you offer.',
+            'What other providers answer that your website leaves unclear.',
+            'The first page or fix we’d prioritize, with an example.',
           ]} />
         </div>
       </section>

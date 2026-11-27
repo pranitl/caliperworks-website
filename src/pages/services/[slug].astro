@@ -1,6 +1,7 @@
 ---
 import type { Service } from '../../data/site';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SeoAuditFeature from '../../components/SeoAuditFeature.astro';
 import SectionCta from '../../components/SectionCta.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
@@ -51,6 +52,8 @@ const structuredData = [
         </div>
       </div>
     </section>
+
+    {isPackaged && <SeoAuditFeature heading="See how we decide what to fix first" intro="The sample shows how we use competitor pages, local search results, and site checks to decide what to publish or repair first." />}
 
     <section class="px-6 py-20 md:py-28">
       <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">

@@ -6,7 +6,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import Layout from '../../layouts/Layout.astro';
 import { caseStudies, caseStudyHref, industryHref, industryMap, serviceHref, serviceMap } from '../../data/site';
-import { gapReviewSources, homeCareReviewLabel, homeCareSampleHref } from '../../lib/gap-review.js';
+import { gapReviewSources, homeCareReviewLabel, homeCareSampleHref, homeCareSampleLabel } from '../../lib/gap-review.js';
 import { breadcrumbSchema } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -57,9 +57,9 @@ const structuredData = breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'C
       {isFirstLight ? (
         <SectionCta
           headline="See what families find when they look for your agency."
-          body="Send us your website. We’ll email a short report on what families find on Google and what we’d change first."
+          body="See how we turn search and competitor research into a list of pages to improve. For a review of your own agency, send us your website and we’ll email what families find and what we’d fix first."
           primaryCta={{ kind: 'link', label: homeCareReviewLabel, href: gapReviewSources.homeCare }}
-          secondaryCta={{ kind: 'link', label: 'Read a sample report', href: homeCareSampleHref }}
+          secondaryCta={{ kind: 'link', label: homeCareSampleLabel, href: homeCareSampleHref }}
         />
       ) : (
         <SectionCta headline="See whether the same underlying constraint exists in your business." body="Start with the gap review and we will identify the closest relevant lesson, the important differences, and the first practical next step." />

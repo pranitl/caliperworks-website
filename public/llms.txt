@@ -28,6 +28,10 @@ Agent guidance:
 - [Voice coverage](https://caliperworks.com/services/voice-agents/): Handle routine calls during busy periods, lunch breaks, or after hours, capture details, and route or book the next step.
 - [Local SEO and growth assets](https://caliperworks.com/services/seo-and-ads-automation/): Build service pages, location pages, landing pages, and optimization workflows around qualified local demand.
 
+## Sample audit
+
+- [Home-care local SEO audit](https://caliperworks.com/industries/home-care-agencies/sample-report/): Real Scottsdale competitor research, simulated Google and AI findings, and a prioritized plan for content, Business Profile, and site fixes.
+
 ## Optional
 
 - [FirstLight planner privacy](https://caliperworks.com/privacy/firstlight-care-planner/): Data handling for the separately hosted FirstLight Boston Northwest care planner.
