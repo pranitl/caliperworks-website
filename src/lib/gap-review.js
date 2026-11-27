@@ -3,4 +3,5 @@ export const gapReviewSources = {
   homeCare: '/industries/home-care-agencies/#search-review',
 };
 
-export const homeCareReviewLabel = 'Request a home-care search review';
+export const homeCareReviewLabel = 'Request a local search review';
+export const homeCareSampleHref = '/industries/home-care-agencies/sample-report/';

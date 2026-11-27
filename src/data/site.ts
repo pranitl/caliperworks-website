@@ -1,3 +1,5 @@
+import { homeCareSampleHref } from '../lib/gap-review.js';
+
 export interface FaqEntry {
   question: string;
   answer: string;
@@ -355,21 +357,21 @@ export const industries: Industry[] = [
     teaser: 'Help local families find the care you offer and make it easier for them to reach your team.',
     metaTitle: 'Local SEO for Home Care Agencies | Caliperworks',
     metaDescription:
-      'See where families searching for in-home care in your market might miss your agency. Request a written local search review for one service in one city.',
-    heroTitle: 'Help local families find your home-care agency and request care.',
+      'Get a short report on how families find your home care agency on Google, what they see on your website, and what to change first.',
+    heroTitle: 'Can local families find your home care agency on Google?',
     heroDescription:
-      'Pick one care service and one city. We’ll review what families see when they search, where your site leaves questions unanswered, and what you could fix first. We’ll send it in writing. No call required.',
+      'Send us your website. We’ll email a short report on what families find when they search for care near them, what your site is missing, and what we’d change first. No call needed.',
     summary:
-      'Families often start with a specific need, like dementia care at home, and look for providers near them. The right service page should answer their questions and make it clear how to reach your team.',
+      'A family looking for dementia care wants to know whether you serve their town, what a visit includes, and who to call.',
     painPoints: [
-      'Families search for a specific kind of care in a specific community, but your website gives them only a general list of services.',
-      'A page that ranks can still leave families unsure whether you serve their town, what care you offer, or how to get started.',
-      'Once a family reaches out, an unanswered call or slow follow-up can undo the work it took to get found.',
+      'A family searches for dementia care near home. Your site lists dementia care in a bullet, but there’s no page answering their questions.',
+      'A family lands on your site but can’t tell whether you serve their town or what happens when they call.',
+      'A family calls during a shift change and reaches voicemail. Who calls them back?',
     ],
     automations: [
-      'Review the search results for a priority care service and city to see what families find today.',
-      'Identify what an existing service or location page could answer better, or where a new page would help.',
-      'If intake also needs work, add call coverage or routing so inquiries reach the right person.',
+      'Look at the Google results for a care service you offer in an area you serve.',
+      'Compare your site with the pages families are likely to find and flag one change worth making first.',
+      'Check how a family would reach your team from that page.',
     ],
     relatedServices: ['seo-and-ads-automation', 'voice-agents', 'ai-process-audits'],
     relatedCaseStudies: ['home-care-agency-seo-growth'],
@@ -377,17 +379,17 @@ export const industries: Industry[] = [
       {
         question: 'What will I get in the home-care search review?',
         answer:
-          'A written review of one service in one city, with a gap we found and a practical first step. There’s no call or obligation.',
+          'A short report by email: the searches we checked, what your site leaves unanswered, and the first change we’d make. You don’t have to book a call.',
       },
       {
         question: 'What if my franchisor controls our website?',
         answer:
-          'Tell us what your local office can change. We can separate changes you can make from those that would need approval.',
+          'You can still ask for a review. We’ll point out which changes your local office could make and which to take to corporate.',
       },
       {
         question: 'Can I request a review for a multi-location agency?',
         answer:
-          'Yes. Start with one market and one care service so the review stays specific to what families in that area see.',
+          'Yes. If there’s a branch you want us to look at, mention it in the form. Otherwise, we’ll pick a starting point from your website.',
       },
     ],
   },
@@ -723,6 +725,7 @@ export function caseStudyHref(slug: string) {
 }
 
 export const publicRoutes = [
+  homeCareSampleHref,
   '/',
   '/privacy/firstlight-care-planner/',
   '/use-cases/',

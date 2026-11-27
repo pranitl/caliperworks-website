@@ -17,7 +17,7 @@ const post = (body, secrets = env, requestOrigin = origin) => onRequestPost({
   env: secrets,
 });
 
-test('home-care requests reach Telegram with their service, city and source page', async (t) => {
+test('home-care requests include the optional focus and source page', async (t) => {
   const telegram = t.mock.method(globalThis, 'fetch', async () => Response.json({ ok: true }));
   const response = await post(target);
   assert.equal(response.status, 200);
@@ -27,9 +27,24 @@ test('home-care requests reach Telegram with their service, city and source page
   assert.match(url, /api\.telegram\.org\/bottest-token\/sendMessage$/);
   const message = JSON.parse(body);
   assert.equal(message.chat_id, 'test-chat');
-  assert.ok(message.text.includes('Service and city: Dementia care in Scottsdale, AZ'));
+  assert.ok(message.text.includes('Review focus: Dementia care in Scottsdale, AZ'));
   assert.ok(message.text.includes('Source: ' + origin + homeCarePath));
   assert.doesNotMatch(message.text, /Primary constraint/);
+});
+
+test('a website and work email are enough for a home-care review', async (t) => {
+  const telegram = t.mock.method(globalThis, 'fetch', async () => Response.json({ ok: true }));
+  const { name, serviceAndCity, ...essentials } = target;
+  const response = await post(essentials);
+  assert.equal(response.status, 200);
+  const message = JSON.parse(telegram.mock.calls[0].arguments[1].body).text;
+  assert.ok(message.includes('Review focus: Use the agency website to choose a starting point.'));
+  assert.doesNotMatch(message, /Name:/);
+  const fallback = await post(essentials, {});
+  assert.equal(fallback.status, 503);
+  const link = new URL((await fallback.json()).fallbackUrl);
+  assert.match(link.searchParams.get('body'), /Work email: owner@example.com/);
+  assert.match(link.searchParams.get('body'), /Website: agency.example/);
 });
 
 test('homepage stays compatible with payloads that omit the source', async (t) => {
@@ -59,7 +74,8 @@ test('mocked delivery errors and missing configuration give a populated mailto, 
 
 test('invalid and cross-origin requests do not reach Telegram', async (t) => {
   const telegram = t.mock.method(globalThis, 'fetch');
-  assert.equal((await post({ ...target, serviceAndCity: ' ' })).status, 400);
+  assert.equal((await post({ ...target, website: ' ' })).status, 400);
+  assert.equal((await post({ ...base, constraint: ' ' })).status, 400);
   assert.equal((await post({ ...target, source: 'https://elsewhere.example' })).status, 400);
   assert.equal((await post(null)).status, 400);
   assert.equal((await post(target, env, 'https://elsewhere.example')).status, 403);

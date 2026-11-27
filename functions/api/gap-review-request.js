@@ -37,28 +37,28 @@ export async function onRequestPost({ request, env }) {
   if (source !== 'home' && source !== 'homeCare') return json({ error: 'Invalid review source.' }, 400);
   const isHomeCare = source === 'homeCare';
   const detail = isHomeCare ? clean(body.serviceAndCity, 160) : clean(body.constraint, 80);
-  const detailLabel = isHomeCare ? 'Service and city' : 'Primary constraint';
+  const detailLabel = isHomeCare ? 'Review focus' : 'Primary constraint';
   const sourceUrl = new URL(gapReviewSources[source], url.origin).href;
   const startedAt = Number(body.startedAt || 0);
   const elapsed = Date.now() - startedAt;
 
-  if (name.length < 2) return json({ error: 'Please enter your name.' }, 400);
+  if (!isHomeCare && name.length < 2) return json({ error: 'Please enter your name.' }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: 'Please enter a valid work email.' }, 400);
   if (website.length < 3) return json({ error: 'Please enter your website.' }, 400);
-  if (!detail) return json({ error: isHomeCare ? 'Please enter a care service and city.' : 'Please choose the closest constraint.' }, 400);
+  if (!isHomeCare && !detail) return json({ error: 'Please choose the closest constraint.' }, 400);
   if (!Number.isFinite(elapsed) || elapsed < 1_500 || elapsed > 86_400_000) {
     return json({ error: 'Please reload the page and try again.' }, 400);
   }
 
   const subject = isHomeCare ? 'Caliperworks Home-Care Search Review' : 'Caliperworks Gap Review Request';
   const offer = isHomeCare
-    ? 'Written local search review for one care service and one city.'
+    ? 'Email report on what families find on Google and what to change first.'
     : 'First material gap, evidence to check, and recommended starting path.';
   const requestDetails = [
-    `Name: ${name}`,
+    ...(!isHomeCare || name ? [`Name: ${name}`] : []),
     `Work email: ${email}`,
     `Website: ${website}`,
-    `${detailLabel}: ${detail}`,
+    `${detailLabel}: ${detail || 'Use the agency website to choose a starting point.'}`,
     `Source: ${sourceUrl}`,
   ];
   const fallbackUrl = createFallbackUrl(subject, offer, requestDetails);

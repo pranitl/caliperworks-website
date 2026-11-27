@@ -58,6 +58,8 @@ Avoid copy that sounds inflated or pushy.
 - Avoid guarantees unless they are literally true and supportable.
 - Avoid vague AI claims that are not tied to a business workflow.
 
+For a final copy pass, use [Peter Yang’s no-ai-slop checklist](https://github.com/petergyang/no-ai-slop/blob/000650b156983f5159695b441477f4e63b25dc85/skills/no-ai-slop/SKILL.md) as an editing reference. Keep the site’s direct tone. Say what the reader gets and what the button does. Swap vague claims for concrete examples, cut lines another agency could use unchanged, and label examples and results accurately.
+
 ## Personalized Search Briefs
 
 Account-specific QR destinations live at `/search-brief/[slug]/`. Their content is defined in
@@ -101,11 +103,12 @@ Before publishing, the service owner should review the stated technical/support 
 ## Home-care search review
 
 The home-care industry page and the homepage reuse the gap-review form and Pages Function.
-The home-care form asks for one care service and city, and the notification and email fallback
-identify the page the request came from.
+The home-care form asks for the agency website and a work email. A service or market focus
+is optional. The notification and email fallback identify the page the request came from.
+The linked sample report uses a fictional agency and does not present live search results.
 
 Run `npm run validate:gap-review` for the request, routing, and fallback checks with mocked
 Telegram. Before merging, use the Cloudflare Pages preview with test-only Telegram configuration:
-submit one labeled test request from the home-care page and check the service, city and source
+submit one labeled test request from the home-care page and check the optional focus and source
 in the test chat. In a preview without the Telegram secrets, check that the form offers a
 pre-filled email instead of showing success. Do not send a test from production.
