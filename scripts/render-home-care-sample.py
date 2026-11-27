@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the public sample PDF from reviewed evidence. Requires reportlab."""
+"""Render the reviewed public sample audit. Requires ReportLab."""
 import argparse
 import json
 import os
@@ -9,212 +9,134 @@ from xml.sax.saxutils import escape, quoteattr
 
 import reportlab
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.enums import TA_LEFT
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
-INK = colors.HexColor("#14243A")
-MUTED = colors.HexColor("#4A5B70")
-BLUE = colors.HexColor("#1754A2")
-RULE = colors.HexColor("#CBD7E4")
-PALE = colors.HexColor("#EDF4FB")
-M = 48
-W = 516
 FONT_DIR = Path(reportlab.__file__).resolve().parent / "fonts"
 pdfmetrics.registerFont(TTFont("Vera", str(FONT_DIR / "Vera.ttf")))
 pdfmetrics.registerFont(TTFont("Vera-Bold", str(FONT_DIR / "VeraBd.ttf")))
+INK, MUTED, BLUE, RULE, PALE = map(colors.HexColor, ["#14243A", "#4A5B70", "#1754A2", "#CBD7E4", "#EDF4FB"])
+M, W = 45, 522
 
-def text(pdf, value, x, top, width=W, size=11, leading=15, color=INK, bold=False, markup=False):
-    style = ParagraphStyle("report", fontName="Vera-Bold" if bold else "Vera",
-                           fontSize=size, leading=leading, textColor=color, alignment=TA_LEFT,
-                           splitLongWords=False)
-    para = Paragraph(value if markup else escape(value), style)
-    _, h = para.wrap(width, 700)
-    if top - h < 52:
-        raise ValueError(f"Page overflow: {value[:60]}")
-    para.drawOn(pdf, x, top - h)
-    return top - h
+def rich(value):
+    if isinstance(value, dict):
+        return f'<a href={quoteattr(value["url"])} color="#1754A2"><u>{escape(value["text"])}</u></a>'
+    return escape(value)
 
-def label(pdf, value, x, top):
-    return text(pdf, value, x, top, size=9, leading=12, color=BLUE, bold=True)
+def paragraph(value, width, size, leading, color=INK, bold=False, markup=False):
+    style = ParagraphStyle("audit", fontName="Vera-Bold" if bold else "Vera",
+                           fontSize=size, leading=leading, textColor=color)
+    p = Paragraph(value if markup else rich(value), style)
+    _, h = p.wrap(width, 792)
+    return p, h
 
-def rule(pdf, y):
+def write(pdf, value, x, y, width=W, size=10.5, leading=15, color=INK, bold=False, markup=False):
+    p, h = paragraph(value, width, size, leading, color, bold, markup)
+    if y-h < 49:
+        raise ValueError(f"Page overflow at {value}")
+    p.drawOn(pdf, x, y-h)
+    return y-h
+
+def line(pdf, y):
     pdf.setStrokeColor(RULE)
-    pdf.line(M, y, M + W, y)
+    pdf.line(M, y, M+W, y)
 
-def frame(pdf, page, pages):
+def table(pdf, b, y):
+    widths = [w*W for w in b["widths"]]
+    assert abs(sum(widths)-W)<0.1
+    dense = len(b["rows"])>10
+    pad = 4 if dense else 7
+    for i, row in enumerate([b["headers"], *b["rows"]]):
+        assert len(row)==len(widths)
+        parts = [paragraph(v, w-13, 8.5 if dense else 9.2, 11.3 if dense else 13, BLUE if i==0 else INK, i==0)
+                 for v,w in zip(row,widths)]
+        h=max(p[1] for p in parts)+pad*2
+        if y-h<49:
+            raise ValueError(f"Table overflows at {row}")
+        if i % 2 == 0:
+            pdf.setFillColor(PALE)
+            pdf.rect(M,y-h,W,h,fill=1,stroke=0)
+        x=M
+        for (p,ph),w in zip(parts,widths):
+            p.drawOn(pdf,x+6,y-pad-ph)
+            x+=w
+        y-=h
+        line(pdf,y)
+    return y-12
+
+def frame(pdf, n, total):
     pdf.setFillColor(BLUE)
-    pdf.rect(M, 750, 9, 9, fill=1, stroke=0)
-    text(pdf, "CALIPERWORKS", M + 16, 760, size=10, leading=12, bold=True)
-    rule(pdf, 46)
-    text_footer = pdf.beginText(M, 29)
-    text_footer.setFont("Vera", 8)
-    text_footer.setFillColor(MUTED)
-    text_footer.textLine("SAMPLE LOCAL SEARCH REVIEW   |   CALIPERWORKS.COM")
-    pdf.drawText(text_footer)
-    pdf.setFont("Vera-Bold", 8)
-    pdf.setFillColor(BLUE)
-    pdf.drawRightString(M + W, 29, f"{page:02d} / {pages:02d}")
+    pdf.rect(M,750,8,8,fill=1,stroke=0)
+    write(pdf,"CALIPERWORKS",M+14,760,size=10,leading=12,bold=True)
+    pdf.setFont("Vera",8)
+    pdf.setFillColor(MUTED)
+    pdf.drawRightString(M+W,751,"LOCAL SEO AUDIT  /  SAMPLE")
+    line(pdf,43)
+    pdf.drawString(M,27,"SCOTTSDALE HOME CARE  /  CALIPERWORKS.COM")
+    pdf.drawRightString(M+W,27,f"{n:02d} / {total:02d}")
+
+def block(pdf,b,y):
+    k=b["kind"]
+    if k=="table":
+        return table(pdf,b,y)
+    if k=="cards":
+        for i,(v,name,detail) in enumerate(b["cards"]):
+            col=(W-14)/3
+            x=M+(col+7)*i
+            pdf.setFillColor(PALE)
+            pdf.roundRect(x,y-78,col,78,7,fill=1,stroke=0)
+            q=write(pdf,v,x+9,y-7,width=col-18,size=20,leading=24,bold=True)
+            q=write(pdf,name,x+9,q-1,width=col-18,size=8.5,leading=11,bold=True,color=BLUE)
+            write(pdf,detail,x+9,q-3,width=col-18,size=8.1,leading=10.4,color=MUTED)
+        return y-95
+    if k=="example":
+        line(pdf,y)
+        y=write(pdf,b["title"],M,y-7,size=11,leading=14,bold=True)
+        y=write(pdf,"Prompt: "+b["question"],M,y-2,size=8.6,leading=11,color=MUTED)
+        y=write(pdf,"“"+b["excerpt"]+"”",M,y-3,size=9.5,leading=13)
+        y=write(pdf,"Shown source: "+b["source"],M,y-2,size=8.4,leading=11,color=MUTED)
+        score=f'Brand named: {"Yes" if b["named"] else "No"}  |  Agency site linked: {"Yes" if b["cited"] else "No"}'
+        y=write(pdf,score,M,y-2,size=8.7,leading=12,bold=True,color=BLUE)
+        return write(pdf,b["note"],M,y-2,size=8.5,leading=11,color=MUTED)-9
+    if k=="links":
+        for i in range(0,len(b["items"]),2):
+            floors=[write(pdf,it,M+261*j,y,width=248,size=9,leading=12)
+                    for j,it in enumerate(b["items"][i:i+2])]
+            y=min(floors)-4
+        return y
+    style={
+        "lead": (12,17,INK,False,15),
+        "subhead": (13,17,INK,True,6),
+        "body": (10.5,15,INK,False,12),
+        "note": (9,12.5,MUTED,False,8),
+    }
+    size,leading,color,bold,gap=style[k]
+    return write(pdf,b["text"],M,y,size=size,leading=leading,color=color,bold=bold)-gap
 
 def render(data, output):
-    output.parent.mkdir(parents=True, exist_ok=True)
-    source_date = datetime.strptime(data["date"], "%B %d, %Y").replace(tzinfo=timezone.utc)
-    os.environ["SOURCE_DATE_EPOCH"] = str(int(source_date.timestamp()))
-    pdf = canvas.Canvas(str(output), pagesize=letter, invariant=True)
-    pdf.setTitle("CaliperWorks | " + data["title"])
-    pdf.setAuthor("CaliperWorks")
-    pdf.setCreator("CaliperWorks")
-    pdf.setSubject("Sample local search review with linked primary sources")
-    pages = 4 if data.get("aeo") else 2
-    frame(pdf, 1, pages)
-    label(pdf, f"MARKET REVIEW  /  {data['date'].upper()}", M, 724)
-    y = text(pdf, data["title"], M, 703, size=30, leading=34, bold=True) - 11
-    y = text(pdf, data["scope"], M, y, size=10, leading=14, color=MUTED) - 18
-    pdf.setFillColor(PALE)
-    pdf.roundRect(M, y-91, W, 91, 8, fill=1, stroke=0)
-    label(pdf, f'REAL WEBSITE EVIDENCE / {len(data["pages"])} PAGES', M+15, y-10)
-    d = text(pdf, data["evidenceHighlight"], M+15, y-26, width=W-30, size=10, leading=14)
-    if data.get("aeo"):
-        label(pdf, "SIMULATED AI FINDING / NOT A LIVE RESULT", M+15, d-6)
-        text(pdf, "7 of 12 broad-care answers named the agency vs. 2 of 12 scheduling answers.", M+15, d-21, width=W-30, size=9.5, leading=13)
-    y -= 105
-    y = text(pdf, "What the published pages answer", M, y, size=19, leading=24, bold=True) - 10
-    label(pdf, "PROVIDER / PAGE", M+8, y)
-    label(pdf, "WHAT WE FOUND ON THE PAGE", M+169, y)
-    y -= 17
-    for i, page in enumerate(data["pages"], 1):
-        rule(pdf, y)
-        y -= 7
-        link = f'<a href={quoteattr(page["url"])} color="#1754A2"><u>[{i}] {escape(page["provider"])}</u></a>'
-        next_left = text(pdf, link, M+8, y, width=151, size=9.5, leading=12, bold=True, markup=True)
-        next_left = text(pdf, page["service"], M+8, next_left-2, width=151, size=9, leading=11, color=MUTED)
-        next_right = text(pdf, page["evidence"], M+169, y, width=W-177, size=9.7, leading=13)
-        y = min(next_left, next_right)-8
-    rule(pdf, y)
-    text(pdf, data["comparison"], M, y-12, size=10.5, leading=14)
-    pdf.showPage()
-
-    if data.get("aeo"):
-        render_aeo(pdf, data["aeo"], pages)
-        render_examples(pdf, data["aeo"], pages)
-    frame(pdf, pages, pages)
-    label(pdf, "PAGE PLAN  /  FICTIONAL AGENCY", M, 724)
-    y = text(pdf, "What Sonoran Path could publish", M, 703, size=27, leading=32, bold=True) - 12
-    y = text(pdf, data["baseline"], M, y, size=10.5, leading=15, color=MUTED) - 20
-    for i, item in enumerate(data["plan"], 1):
-        label(pdf, f"0{i}", M, y-3)
-        y = text(pdf, item["name"], M+33, y, width=W-33, size=14, leading=18, bold=True) - 4
-        y = text(pdf, item["detail"], M+33, y, width=W-33) - 14
-    pdf.setFillColor(PALE)
-    pdf.roundRect(M, y-121, W, 121, 8, fill=1, stroke=0)
-    label(pdf, "DRAFT FOR THE DEMENTIA PAGE", M+15, y-12)
-    d = text(pdf, data["draftTitle"], M+15, y-29, width=W-30, size=15, leading=19, bold=True) - 3
-    d = text(pdf, data["draftCopy"], M+15, d, width=W-30, size=10.5, leading=14) - 5
-    text(pdf, "Button: " + data["draftButton"], M+15, d, width=W-30, size=10, leading=12, bold=True, color=BLUE)
-    y -= 140
-    y = text(pdf, "How we’d check whether it helped", M, y, size=14, leading=19, bold=True) - 5
-    y = text(pdf, data["measurement"], M, y, size=10.5, leading=14) - 17
-    rule(pdf, y)
-    y -= 12
-    y = label(pdf, "SEARCHES USED TO FIND THE PAGES", M, y) - 3
-    for query in data["queries"]:
-        y = text(pdf, f"• {query}", M, y, size=9, leading=12, color=MUTED) - 4
-    text(pdf, data["limits"], M, y-6, size=9, leading=12, color=MUTED)
-    pdf.showPage()
+    output.parent.mkdir(parents=True,exist_ok=True)
+    date=datetime.strptime(data["date"],"%B %d, %Y").replace(tzinfo=timezone.utc)
+    os.environ["SOURCE_DATE_EPOCH"]=str(int(date.timestamp()))
+    pdf=canvas.Canvas(str(output),pagesize=letter,invariant=True)
+    pdf.setTitle(data["title"]); pdf.setAuthor("CaliperWorks"); pdf.setCreator("CaliperWorks")
+    pdf.setSubject("Sample local SEO audit with real competitor research and simulated metrics")
+    for n,page in enumerate(data["pages"],1):
+        frame(pdf,n,len(data["pages"]))
+        write(pdf,page["kicker"].upper(),M,723,size=9,leading=12,color=BLUE,bold=True)
+        y=write(pdf,page["title"],M,703,size=27,leading=33,bold=True)-13
+        for item in page["blocks"]:
+            y=block(pdf,item,y)
+        pdf.showPage()
     pdf.save()
 
-
-def render_aeo(pdf, data, pages):
-    frame(pdf, 2, pages)
-    label(pdf, data["label"].upper(), M, 724)
-    y = text(pdf, data["title"], M, 703, size=27, leading=32, bold=True) - 10
-    y = text(pdf, data["scope"], M, y, size=10.5, leading=15, color=MUTED) - 7
-    per_prompt = len(data["engines"]) * data["repeats"]
-    prompts = data["prompts"]
-    total = len(prompts) * per_prompt
-    mentions = sum(c["mentions"] for p in prompts for c in p["results"])
-    tracked = mentions + sum(p["competitorMentions"] for p in prompts)
-    citations = sum(c["ownCitations"] for p in prompts for c in p["results"])
-    setup = f'{len(prompts)} prompts × {len(data["engines"])} engines × {data["repeats"]} repeats = {total} simulated answers. Example engines: ' + ", ".join(data["engines"]) + "."
-    y = text(pdf, setup, M, y, size=9.5, leading=13, color=MUTED) - 14
-    cards = [
-        (f"{mentions/total:.0%}", "AI visibility", f"{mentions}/{total} answers named you"),
-        (f"{mentions/tracked:.0%}", "Share of voice", f"{mentions}/{tracked} tracked brand mentions"),
-        (f"{citations}/{total}", "Website citations", "Answers that linked to your site"),
-    ]
-    for i, (value, name, detail) in enumerate(cards):
-        x = M + 174*i
-        pdf.setFillColor(PALE)
-        pdf.roundRect(x, y-70, 168, 70, 7, fill=1, stroke=0)
-        v = text(pdf, value, x+10, y-7, width=148, size=19, leading=23, bold=True)
-        v = text(pdf, name, x+10, v-1, width=148, size=9.5, leading=12, bold=True)
-        text(pdf, detail, x+10, v-3, width=148, size=8, leading=10, color=MUTED)
-    y -= 86
-    y = text(pdf, "By AI surface", M, y, size=15, leading=19, bold=True) - 5
-    label(pdf, "AI SURFACE", M+5, y)
-    label(pdf, "MENTIONED", M+349, y)
-    label(pdf, "SITE CITED", M+440, y)
-    y -= 15
-    for i, name in enumerate(data["engines"]):
-        rule(pdf, y)
-        y -= 5
-        den = len(prompts) * data["repeats"]
-        m = sum(p["results"][i]["mentions"] for p in prompts)
-        c = sum(p["results"][i]["ownCitations"] for p in prompts)
-        text(pdf, name, M+5, y, width=327, size=9.5, leading=13)
-        text(pdf, f"{m}/{den}", M+349, y, width=80, size=9.5, leading=13)
-        text(pdf, f"{c}/{den}", M+440, y, width=70, size=9.5, leading=13)
-        y -= 17
-    rule(pdf, y)
-    y -= 12
-    y = text(pdf, "Which questions expose the gap?", M, y, size=16, leading=21, bold=True) - 8
-    label(pdf, "EXAMPLE PROMPT", M+5, y)
-    label(pdf, "MENTIONED", M+349, y)
-    label(pdf, "SITE CITED", M+440, y)
-    y -= 15
-    for p in prompts:
-        rule(pdf, y)
-        y -= 7
-        down = text(pdf, p["question"], M+5, y, width=327, size=9.5, leading=13)
-        text(pdf, f'{sum(c["mentions"] for c in p["results"])}/{per_prompt}', M+349, y, width=80, size=9.5, leading=13)
-        text(pdf, f'{sum(c["ownCitations"] for c in p["results"])}/{per_prompt}', M+440, y, width=70, size=9.5, leading=13)
-        y = down-7
-    rule(pdf, y)
-    y = text(pdf, data["finding"], M, y-12, size=10.4, leading=14, bold=True) - 8
-
-    link = f'<a href={quoteattr(data["methodUrl"])} color="#1754A2"><u>Elmo metric definitions</u></a>'
-    text(pdf, link, M, y, width=W, markup=True, size=9, leading=12)
-    pdf.showPage()
-
-
-def render_examples(pdf, data, pages):
-    frame(pdf, 3, pages)
-    label(pdf, "SIMULATED RESULTS / VALIDATION EXAMPLES", M, 724)
-    y = text(pdf, "Check the answer and the link", M, 703, size=26, leading=31, bold=True) - 8
-    y = text(pdf, data["surfaceNote"], M, y, size=10, leading=14, color=MUTED) - 14
-    for example in data["examples"]:
-        rule(pdf, y)
-        y -= 10
-        y = text(pdf, data["engines"][example["engine"]], M, y, size=13, leading=17, bold=True) - 3
-        y = text(pdf, "Prompt: " + data["prompts"][example["prompt"]]["question"], M, y, size=9, leading=12, color=MUTED) - 4
-        y = text(pdf, "“" + example["excerpt"] + "”", M, y, size=10, leading=14) - 3
-        y = text(pdf, "Shown source: " + example["source"], M, y, size=9, leading=12, color=MUTED) - 4
-        named = "Yes" if example["brandNamed"] else "No"
-        linked = "Yes" if example["siteCited"] else "No"
-        y = text(pdf, f"Brand named: {named}   |   Agency site cited: {linked}", M, y, size=9.5, leading=13, color=BLUE, bold=True) - 3
-        y = text(pdf, example["note"], M, y, size=9, leading=12, color=MUTED) - 11
-    rule(pdf, y)
-    y = text(pdf, data["retest"], M, y-11, size=9.5, leading=13, color=MUTED)
-    pdf.showPage()
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=ROOT/"src/data/homeCareSample.json")
-    parser.add_argument("--output", type=Path, default=ROOT/"public/reports/scottsdale-home-care-search-sample.pdf")
-    args = parser.parse_args()
-    render(json.loads(args.input.read_text(encoding="utf-8")), args.output)
+if __name__=="__main__":
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input",type=Path,default=ROOT/"src/data/homeCareSample.json")
+    parser.add_argument("--output",type=Path,default=ROOT/"public/reports/scottsdale-home-care-search-sample.pdf")
+    args=parser.parse_args()
+    render(json.loads(args.input.read_text(encoding="utf-8")),args.output)
